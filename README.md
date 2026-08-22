@@ -14,6 +14,7 @@ Draft v0.2.2. The normative Core is stable; `schemas/` and `profiles/` are inher
 
 - [AMBER-Core-Specification.md](AMBER-Core-Specification.md) — the normative cross-domain core: purpose, definition, mechanism, 8 invariants, 8 boundaries, epistemic limits, naming review, adoption rules.
 - [protocols/distribution.md](protocols/distribution.md) — moving cases between hosts: the public/private channel split, pinned bundle construction, signed manifests, the public hash index, seal probes, run records, comparability.
+- [PLAN.md](PLAN.md) — status, milestones (case tooling, reference runner, oracles, statistics, public index), and open design questions.
 
 ## License
 
