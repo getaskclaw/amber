@@ -4,21 +4,32 @@ Status, milestones, and open design questions for turning the published
 specification into an executable evaluation. Companion to the Core
 Specification; where this file and Core conflict, Core wins.
 
-## Status (2026-08)
+## Status (2026-09)
 
-- **Published:** AMBER Core Specification v0.2.2; Distribution Protocol v0.2.
+- **Published:** AMBER Core Specification v0.2.2; Distribution Protocol v0.3
+  (v0.3 closes every finding left open by the review of the v0.2 publication:
+  detached manifest signature, enumerated redacted summary, leak-date
+  validity window, corrected verification matrix, `spec_sha256` byte
+  definition, Core citation fixes).
 - **Not yet published:** `schemas/`, `profiles/`, case-building tooling, and a
   reference runner. A conformant run is **not executable from this repository
   alone today** — this file exists to make that gap explicit and to sequence
   the work that closes it.
+- **Repository controls in place:** `.gitattributes` pins LF/UTF-8 so
+  `spec_sha256` is checkout-stable; CI checks relative links and spec-file
+  encoding; `CONTRIBUTING.md` states the no-case-content rule and the
+  revision policy.
 
 ## Milestones
 
 - **M1 — Case tooling.** The forge-neutral build script promised by
   `protocols/distribution.md` §3 (produces `base.bundle`, `oracle.pack`,
-  signed `manifest.yaml`); manifest JSON Schema + validator.
+  `manifest.yaml`, and the detached `manifest.yaml.sig`); manifest JSON
+  Schema + validator; the redacted-summary generator restricted to the
+  closed field set of Distribution §5.1.
   *Exit:* build a case from an arbitrary git repository; validator rejects
-  malformed manifests; bundle passes `git bundle verify`.
+  malformed manifests and summaries containing any excluded field; bundle
+  passes `git bundle verify`; signature verifies against the published key.
 - **M2 — Reference runner.** Fixed-harness candidate runner: an external
   agent runtime as the candidate scaffold, launched inside an isolated
   container (no default route; egress only through the manifest-declared
@@ -43,7 +54,9 @@ Raised by external review (2026-08); resolve in the milestone that owns them:
    identity and independence, but drift, blinding, and agreement mechanics
    for LLM judges are unspecified.
 2. **Index trust root** (M5): the index is single-producer-signed; key
-   rotation and third-party witnessing are unspecified.
+   rotation and third-party witnessing are unspecified. Distribution §5.1
+   now states where the key is published (next to the index) and explicitly
+   defers rotation and witnessing here.
 3. **Difficulty calibration** (M4): no guidance with teeth against
    saturation — a single easy case cannot discriminate (observed in pilot
    work: near-ceiling pass rates on an easy-medium repair case).
