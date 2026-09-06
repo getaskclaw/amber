@@ -1,0 +1,8 @@
+# Byte-stable checkouts. Distribution Protocol §2 pins results to the SHA-256
+# of the exact bytes of the Core specification (and the protocol self-hash to
+# this protocol's bytes). A checkout that rewrites line endings would change
+# those hashes silently, so every text file is normalized to LF everywhere,
+# regardless of the local core.autocrlf setting.
+* text=auto eol=lf
+*.md text eol=lf
+LICENSE text eol=lf
