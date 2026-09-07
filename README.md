@@ -27,6 +27,14 @@
 - [protocols/distribution.md](protocols/distribution.md) — 案件跨主机分发协议：公开/私有频道划分、固定构造的 git bundle、签名清单、公开哈希索引、密封探针、运行记录、可比性
 - [PLAN.md](PLAN.md) — 状态、里程碑（建案工具 → 参考运行器 → 评分与裁判 → 统计 → 公开索引）、待决设计问题
 
+## 周测成绩(结果仓库)
+
+成绩与题目分离发布:结果公开、题目永不公开。下列仓库按周发布全库实测(别名 + bundle 哈希对照本仓库公开哈希清单):
+
+- [amber-crof](https://github.com/getaskclaw/amber-crof) — CrofAI 在售模型周测
+- [amber-ollama](https://github.com/getaskclaw/amber-ollama) — Ollama Cloud 模型周测
+- [amber-gpt](https://github.com/getaskclaw/amber-gpt) — GPT 系模型 × 推理档位周测
+
 ## 许可
 
 Apache-2.0 — 见 [LICENSE](LICENSE)。
