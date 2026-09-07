@@ -35,6 +35,14 @@
 - [amber-ollama](https://github.com/getaskclaw/amber-ollama) — Ollama Cloud 模型周测
 - [amber-gpt](https://github.com/getaskclaw/amber-gpt) — GPT 系模型 × 推理档位周测
 
+**当前前三**(2026-W36,全库 21 案,effort=high):
+
+| # | 模型 @ 端点 | 通过 | 出处 |
+|---|---|---|---|
+| 1 | glm-5.3-flash @ Ollama Cloud | 15/21 | [amber-ollama W36](https://github.com/getaskclaw/amber-ollama/blob/main/results/2026-W36.md) |
+| 2 | qwen3.8-27b @ CrofAI | 14/21 | [amber-crof W36](https://github.com/getaskclaw/amber-crof/blob/main/results/2026-W36.md) |
+| 3 | deepseek-v4-flash-0731 @ CrofAI | 13/21 | 同上（并列：glm-5.3-flash @ CrofAI、deepseek-v4-flash:0731 @ Ollama Cloud) |
+
 ## 许可
 
 Apache-2.0 — 见 [LICENSE](LICENSE)。
