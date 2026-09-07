@@ -13,8 +13,8 @@ jobs:
     name: relative links resolve
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: lycheeverse/lychee-action@v2
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8 # v2
         with:
           # Offline: only local file targets and fragments are checked, so the
           # job cannot flake on external hosts and makes no network requests.
@@ -25,7 +25,7 @@ jobs:
     name: spec bytes are UTF-8 / LF / no BOM
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - name: check
         shell: bash
         run: |

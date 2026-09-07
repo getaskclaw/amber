@@ -19,6 +19,9 @@ Specification; where this file and Core conflict, Core wins.
   `spec_sha256` is checkout-stable; CI checks relative links and spec-file
   encoding; `CONTRIBUTING.md` states the no-case-content rule and the
   revision policy.
+- **Index instance live:** `hash-index/v2026-09.md` is the first published
+  index document (21 cases, alias + bundle/oracle hashes) — the data
+  instance of Distribution §4, ahead of the M5 signing/key tooling.
 
 ## Milestones
 

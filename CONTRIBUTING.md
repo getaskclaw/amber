@@ -36,7 +36,7 @@ A PR that changes a normative document must, in the same PR:
 `AMBER-Core-Specification.md` is pinned by `spec_sha256` in every Case Manifest (Distribution §2). **Every byte change to that file changes the hash** and breaks comparability between cases built before and after it. Consequences:
 
 - do not reformat, re-wrap, or "clean up" whitespace in Core without a versioned reason;
-- files are stored as UTF-8 with LF line endings and no BOM, enforced by `.gitattributes` — do not override it locally;
+- files are stored with LF line endings, enforced by `.gitattributes`; UTF-8 validity and the no-BOM rule are enforced by CI (`.github/workflows/docs.yml`) — do not override either locally;
 - when Core does change, expect producers to treat existing cases as pinned to the old hash; that is the design working, not a bug.
 
 Compute the hash of the current Core bytes with `sha256sum AMBER-Core-Specification.md` on a clean checkout.

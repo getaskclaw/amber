@@ -1,10 +1,10 @@
 # AMBER Distribution Protocol
 
-Draft v0.3, 2026-09-06. Companion to AMBER Core Specification v0.2.2. This protocol is intended to preserve Core invariants (§4) and boundaries (§5) without weakening; each revision is re-verified against the frozen Core before publication. Where this protocol and Core conflict, Core wins. This document follows Core's revision policy (patch = editorial, minor = normative addition or clarification).
+Draft v0.3, 2026-09-07. Companion to AMBER Core Specification v0.2.2. This protocol is intended to preserve Core invariants (§4) and boundaries (§5) without weakening; each revision is re-verified against the frozen Core before publication. Where this protocol and Core conflict, Core wins. This document follows Core's revision policy (patch = editorial, minor = normative addition or clarification).
 
 *v0.2, 2026-08-21. Incorporates every accepted correction from the structured review of the v0.1 draft: egress-scoped eligibility, transport-layer seal probe with scoped positive control, signed manifests, the public hash index, pinned bundle construction, the run-state split, and the explicit verification matrix.*
 
-*v0.3, 2026-09-06. Closes the post-publication review findings on v0.2: manifest signature made detached (`manifest.yaml.sig`) so coverage is well-defined (§3, §5.1); redacted manifest summary's field set enumerated (§5.1); leak-window runs routed to `pending_adjudication` and validity keyed to the leak date, not the retirement date (§6); verification matrix corrected — external consumers verify all three artifact hashes by value against the index and none by possession (§7.1); `spec_sha256` byte definition and computation fixed (§2); index described as content-free, not hash-only, with the public `cutoff_utc` disclosure recorded as a limit (§1, §4, §8); two Core miscitations corrected (§1, §8). Normative clarifications → minor bump.*
+*v0.3, 2026-09-07. Closes the post-publication review findings on v0.2: manifest signature made detached (`manifest.yaml.sig`) so coverage is well-defined (§3, §5.1); redacted manifest summary's field set enumerated (§5.1); leak-window runs routed to `pending_adjudication` and validity keyed to the leak date, not the retirement date (§6); verification matrix corrected — external consumers verify `spec_sha256` by possession and the `base.bundle` / `oracle.pack` hashes by value against the signed index (§7.1); `spec_sha256` byte definition and computation fixed (§2); index described as content-free, not hash-only, with the public `cutoff_utc` disclosure recorded as a limit (§1, §4, §8); two Core miscitations corrected (§1, §8). Review round on the v0.3 draft: comparability extended to `cutoff_utc` (§7); `index_version` defined as a property of the index, not an entry field (§4); the manifest records the leak check's result, not only its date (§3); run records asserted to external consumers must be producer-signed (§7, §7.1). Normative clarifications → minor bump.*
 
 ## 1. The split: public spec, private cases
 
@@ -21,7 +21,7 @@ Every Case Manifest records `spec_sha256` — the SHA-256 of the exact Core spec
 
 "Exact bytes" means the file as committed to the public channel: UTF-8, LF line endings, no byte-order mark, computed over the whole file (`sha256sum AMBER-Core-Specification.md`). The public repository enforces this encoding through `.gitattributes`; a checkout that rewrites line endings or re-encodes the file yields a different hash and must not be used as the pinning source. The same rule applies to the protocol self-hash recorded in the manifest (§3).
 
-## 3. Case package: three parts
+## 3. Case package: three artifacts, one detached signature
 
 A case is three artifacts plus the detached signature of the manifest, produced by one forge-neutral build script:
 
@@ -29,7 +29,7 @@ A case is three artifacts plus the detached signature of the manifest, produced 
 |---|---|---|
 | `base.bundle` | `git bundle create` of the source repository's history up to the cutoff commit | candidate-visible |
 | `oracle.pack` | post-cutoff commits/patch/tests, the preregistered rubric, evaluator materials | sealed |
-| `manifest.yaml` | provenance, `cutoff_utc`, the resolved cutoff commit, the time-to-topology mapping rule and its evidence class, the preregistered cutoff rule and its script-output hash, `spec_sha256`, sha256 of both artifacts, the declared `candidate_input_bundle` (Core §4.4), the available-information manifest (Core §5.2), the eligibility determination and its evidence class (§5), producer identity and signing-key identifier (§5), the leak-check procedure and its last run date, retirement state, and the sha256 of this protocol document | private |
+| `manifest.yaml` | provenance, `cutoff_utc`, the resolved cutoff commit, the time-to-topology mapping rule and its evidence class, the preregistered cutoff rule and its script-output hash, `spec_sha256`, sha256 of both artifacts, the declared `candidate_input_bundle` (Core §4.4), the available-information manifest (Core §5.2), the eligibility determination and its evidence class (§5), producer identity and signing-key identifier (§5), the leak-check procedure, its last run date, and its result (`passed` / `failed`), retirement state, and the sha256 of this protocol document | private |
 | `manifest.yaml.sig` | detached signature over the exact bytes of `manifest.yaml`, made with the key identified in the manifest (§5.1) | private |
 
 The signature is detached rather than embedded so that its coverage is unambiguous: it covers every byte of `manifest.yaml`, and verifying it needs no canonical re-serialization of YAML. Any change to the manifest — including to the artifact hashes it embeds — invalidates the signature.
@@ -50,6 +50,8 @@ The public channel carries an append-only, producer-signed case index. Each entr
 
 `case_id` · manifest sha256 · `base.bundle` sha256 · `oracle.pack` sha256 · `spec_sha256` · `cutoff_utc` · state (`active` / `retired` + date)
 
+The index itself carries a monotonically increasing `index_version` (an append-only sequence number or a head hash covering every entry to date). `index_version` is a property of the index, not an entry field; run records (§7) and redacted summaries (§5.1) cite the `index_version` of the index that carries the corresponding entry.
+
 Rules:
 
 - The index entry — including `oracle.pack` sha256 — is published **before the case's first run**. Runs predating publication are not Core results (Core §4.6: preregistration).
@@ -63,7 +65,7 @@ Rules:
 
 - The producer host builds the case from its own forge and transfers to the evaluation host: `base.bundle`, the **full `manifest.yaml`**, and its detached signature `manifest.yaml.sig` (§3). The evaluation host is trusted — it will hold `oracle.pack` in its sealed store — so redaction never applies to it. The signature covers every byte of `manifest.yaml`, which embeds both artifact hashes; the evaluation host verifies the signature against the producer's published key, then the bundle hash, before any run. Transfer is authenticated. The producer's public key is published in the public channel next to the index (§4), so the same key verifies both; key rotation and third-party witnessing are outside this protocol and tracked as an open design question of the index implementation.
 - The producer may additionally publish a **redacted manifest summary** for external parties who need provenance without private-channel access. Its field set is closed — exactly these fields, no others:
-  `case_id` · manifest sha256 · `base.bundle` sha256 · `oracle.pack` sha256 · `spec_sha256` · protocol sha256 · `cutoff_utc` · profile identifier · isolation class of the eligibility determination (`full_isolation` / `allowlisted`; never the allowlist itself) · construction parameters (git version, bundle format version, hash algorithm, bundle size) · producer identity and signing-key identifier · retirement state · `index_version` of the corresponding index entry.
+  `case_id` · manifest sha256 · `base.bundle` sha256 · `oracle.pack` sha256 · `spec_sha256` · protocol sha256 · `cutoff_utc` · profile identifier · isolation class of the eligibility determination (`full_isolation` / `allowlisted`; never the allowlist itself) · construction parameters (git version, bundle format version, hash algorithm, bundle size) · producer identity and signing-key identifier · retirement state · `index_version` of the index carrying this case's entry (§4).
   Everything else in the manifest is excluded, in particular: the resolved cutoff commit, source-identifying provenance, the time-to-topology evidence, the available-information manifest, `candidate_input_bundle`, oracle paths, the rubric, the cutoff rule and its script-output hash, and the leak-check procedure. The summary is itself signed (detached, same key). Its audience is external consumers — never the candidate, and never a substitute for the full manifest at the evaluation host.
 
 ### 5.2 Eligibility and isolation
@@ -93,9 +95,9 @@ Validity of earlier runs is keyed to the **leak date** — when the content beca
 
 ## 7. Run records and comparability
 
-Every run emits a structured record: manifest sha256, `index_version` and the retirement-check result, the seal-probe results (including the mechanism-level isolation check for full-isolation runs), candidate provider/model, per-criterion scores, the terminal state (Core §5.6), and sha256 of every artifact produced. Records are collected to the results store in the private channel; the public channel carries at most rubric-structure-free aggregates.
+Every run emits a structured record: manifest sha256, `index_version` and the retirement-check result, the seal-probe results (including the mechanism-level isolation check for full-isolation runs), candidate provider/model, per-criterion scores, the terminal state (Core §5.6), and sha256 of every artifact produced. Records are collected to the results store in the private channel; the public channel carries at most rubric-structure-free aggregates. A run record asserted to an external consumer must be signed by the producer (detached, same key as §5.1); by-value verification (§7.1) consumes only signed run records.
 
-Comparability across hosts requires equal `spec_sha256` AND equal `base.bundle` sha256 AND equal `oracle.pack` sha256 AND equal construction parameters (git version, bundle format version, hash algorithm) — same ruler, same exam; construction parameters plus hashes, never hashes alone.
+Comparability across hosts requires equal `spec_sha256` AND equal `cutoff_utc` AND equal `base.bundle` sha256 AND equal `oracle.pack` sha256 AND equal construction parameters (git version, bundle format version, hash algorithm) — same ruler, same exam; construction parameters plus hashes, never hashes alone. `cutoff_utc` is asserted directly rather than via manifest sha256 because manifests of the same exam legitimately drift (leak-check dates, retirement state) while the exam's information boundary does not.
 
 ### 7.1 Verification matrix
 
@@ -104,7 +106,7 @@ Two different verification strengths are in play. Verification **by possession**
 | Verifier | By possession | By value |
 |---|---|---|
 | Evaluation host | `spec_sha256`, `base.bundle` sha256, `oracle.pack` sha256, manifest signature — it holds all the bytes | — |
-| External result consumer | `spec_sha256` only (the Core specification is public) | `base.bundle` sha256 and `oracle.pack` sha256: run record against the signed index entry (§4) and, if published, the signed redacted summary (§5.1). It never holds the bundle or the oracle, so it can confirm that the hashes match, not that the bytes exist or are what the manifest says. |
+| External result consumer | `spec_sha256` only (the Core specification is public) | `base.bundle` sha256 and `oracle.pack` sha256: signed run record against the signed index entry (§4) and, if published, the signed redacted summary (§5.1). It never holds the bundle or the oracle, so it can confirm that the hashes match, not that the bytes exist or are what the manifest says. |
 
 ## 8. Honest limits
 
