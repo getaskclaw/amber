@@ -37,13 +37,15 @@
 - [amber-ollama](https://github.com/getaskclaw/amber-ollama) — Ollama Cloud 模型周测
 - [amber-gpt](https://github.com/getaskclaw/amber-gpt) — GPT 系模型 × 推理档位周测
 
-**当前前三**(2026-W36,全库 21 案,effort=high):
+**当前前三**(截至 2026-W37,公共 21 案子集¹,effort=high;GPT 系含 W37,其余为 W36 数据):
 
 | # | 模型 @ 端点 | 通过 | 出处 |
 |---|---|---|---|
 | 1 | glm-5.3-flash @ Ollama Cloud | 15/21（1 案待重判) | [amber-ollama W36](https://github.com/getaskclaw/amber-ollama/blob/main/results/2026-W36.md) |
-| 2 | qwen3.8-27b @ CrofAI | 14/21 | [amber-crof W36](https://github.com/getaskclaw/amber-crof/blob/main/results/2026-W36.md) |
-| 3 | deepseek-v4-flash-0731 @ CrofAI | 13/21 | 同上（并列：glm-5.3-flash @ CrofAI、deepseek-v4-flash:0731 @ Ollama Cloud) |
+| 2 | gpt-6-astra-900k @ OpenAI Codex | 14/21 | [amber-gpt W36](https://github.com/getaskclaw/amber-gpt/blob/main/results/2026-W36.md)（并列：qwen3.8-27b @ CrofAI,[amber-crof W36](https://github.com/getaskclaw/amber-crof/blob/main/results/2026-W36.md)) |
+| 3 | gpt-5.6-luna-900k @ OpenAI Codex | 13/21 | [amber-gpt W37](https://github.com/getaskclaw/amber-gpt/blob/main/results/2026-W37.md)（并列：deepseek-v4-flash-0731 @ CrofAI、glm-5.3-flash @ CrofAI、deepseek-v4-flash:0731 @ Ollama Cloud) |
+
+¹ 题集 2026-09-07 起为 23 案;Ollama/Crof 系尚未考新增 2 案,跨端对照统一用 21 案公共子集。luna W37 的 15/23 换算公共子集为 13/21。
 
 ## 许可
 
