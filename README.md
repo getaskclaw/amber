@@ -34,11 +34,12 @@
 成绩与题目分离发布:结果公开、题目永不公开。下列仓库按周发布全库实测(别名 + bundle 哈希对照本仓库[公开哈希索引](hash-index/v2026-09.md)):
 
 - [amber-crof](https://github.com/getaskclaw/amber-crof) — CrofAI 在售模型周测
+- [amber-deepseek](https://github.com/getaskclaw/amber-deepseek) — DeepSeek 官方 API 模型周测
 - [amber-devin](https://github.com/getaskclaw/amber-devin) — Devin 模型周测
 - [amber-ollama](https://github.com/getaskclaw/amber-ollama) — Ollama Cloud 模型周测
 - [amber-gpt](https://github.com/getaskclaw/amber-gpt) — GPT 系模型 × 推理档位周测
 
-**当前前三**(截至 2026-W37,公共 21 案子集¹,effort=high;GPT 系含 W37,其余为 W36 数据):
+**当前前三**(截至 2026-W37,公共 21 案子集¹,effort=high;GPT 系与 DeepSeek 官方道含 W37——DeepSeek 预览版首考 12/21 未入前三,其余为 W36 数据):
 
 | # | 模型 @ 端点 | 通过 | 出处 |
 |---|---|---|---|
