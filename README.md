@@ -25,7 +25,7 @@
 
 - [AMBER-Core-Specification.md](AMBER-Core-Specification.md) — 规范本体：目的、定义、机制、8 条不变量、8 条边界、认识论限制、命名评审、采用规则
 - [protocols/distribution.md](protocols/distribution.md) — 案件跨主机分发协议（v0.3）：公开/私有频道划分、固定构造的 git bundle、分离式签名清单、公开索引、密封探针、泄漏窗口的裁定规则、运行记录、可比性与验证矩阵
-- [hash-index/v2026-09.md](hash-index/v2026-09.md) — 公开哈希索引：当前评测题集(21 案)每案的别名 + bundle/oracle 双哈希;结果仓每期矩阵以此为准对照
+- [hash-index/v2026-09.md](hash-index/v2026-09.md) — 公开哈希索引：当前评测题集(23 案)每案的别名 + bundle/oracle 双哈希;结果仓每期矩阵以此为准对照
 - [PLAN.md](PLAN.md) — 状态、里程碑（建案工具 → 参考运行器 → 评分与裁判 → 统计 → 公开索引）、待决设计问题
 - [CONTRIBUTING.md](CONTRIBUTING.md) — 贡献规则：**本仓库绝不接收案件内容**、规范文档的版本与修订政策、Core 规范按字节哈希锁定的含义
 
@@ -34,6 +34,7 @@
 成绩与题目分离发布:结果公开、题目永不公开。下列仓库按周发布全库实测(别名 + bundle 哈希对照本仓库[公开哈希索引](hash-index/v2026-09.md)):
 
 - [amber-crof](https://github.com/getaskclaw/amber-crof) — CrofAI 在售模型周测
+- [amber-devin](https://github.com/getaskclaw/amber-devin) — Devin 模型周测
 - [amber-ollama](https://github.com/getaskclaw/amber-ollama) — Ollama Cloud 模型周测
 - [amber-gpt](https://github.com/getaskclaw/amber-gpt) — GPT 系模型 × 推理档位周测
 
