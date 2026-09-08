@@ -39,15 +39,15 @@
 - [amber-ollama](https://github.com/getaskclaw/amber-ollama) — Ollama Cloud 模型周测
 - [amber-gpt](https://github.com/getaskclaw/amber-gpt) — GPT 系模型 × 推理档位周测
 
-**当前前三**(截至 2026-W37,公共 21 案子集¹,effort=high;GPT 系与 DeepSeek 官方道含 W37——DeepSeek 预览版首考 12/21 未入前三,其余为 W36 数据):
+**当前前三**(截至 2026-W37,全库 23 案¹,effort=high):
 
 | # | 模型 @ 端点 | 通过 | 出处 |
 |---|---|---|---|
-| 1 | glm-5.3-flash @ Ollama Cloud | 15/21（1 案待重判) | [amber-ollama W36](https://github.com/getaskclaw/amber-ollama/blob/main/results/2026-W36.md) |
-| 2 | gpt-6-astra-900k @ OpenAI Codex | 14/21 | [amber-gpt W36](https://github.com/getaskclaw/amber-gpt/blob/main/results/2026-W36.md)（并列：qwen3.8-27b @ CrofAI,[amber-crof W36](https://github.com/getaskclaw/amber-crof/blob/main/results/2026-W36.md)) |
-| 3 | gpt-5.6-luna-900k @ OpenAI Codex | 13/21 | [amber-gpt W37](https://github.com/getaskclaw/amber-gpt/blob/main/results/2026-W37.md)（并列：deepseek-v4-flash-0731 @ CrofAI、glm-5.3-flash @ CrofAI、deepseek-v4-flash:0731 @ Ollama Cloud) |
+| 1 | glm-5.3-flash @ Ollama Cloud | 17/23（1 案待重判) | [amber-ollama W37](https://github.com/getaskclaw/amber-ollama/blob/main/results/2026-W37.md) |
+| 2 | gpt-6-astra-900k @ OpenAI Codex | 16/23 | [amber-gpt W37](https://github.com/getaskclaw/amber-gpt/blob/main/results/2026-W37.md)（并列:qwen3.8-27b @ CrofAI,[amber-crof W37](https://github.com/getaskclaw/amber-crof/blob/main/results/2026-W37.md)) |
+| 3 | gpt-5.6-luna-900k @ OpenAI Codex | 15/23 | [amber-gpt W37](https://github.com/getaskclaw/amber-gpt/blob/main/results/2026-W37.md)（并列:deepseek-v4-flash-0731 @ CrofAI、deepseek-v4-flash:0731 @ Ollama Cloud) |
 
-¹ 题集 2026-09-07 起为 23 案;Ollama/Crof 系尚未考新增 2 案,跨端对照统一用 21 案公共子集。luna W37 的 15/23 换算公共子集为 13/21。
+¹ 2026-09-08 起表头从 21 案公共子集翻到全库 23 案:CrofAI/Ollama/astra 三道已补考 09-07 新增 2 运维案(12/12 卷验脑+bundle 哈希全绿)。astra 的 16/23 = W36 -900k 14 案 + W37 裸 gpt-6-astra 补考 2 案(-900k 变体已被服务端收回,口径混合已在期文标注)。跌出/未入:glm-5.3-flash @ CrofAI 14/23(原 #3 并列)、devin swe-1-7-medium 14/23、deepseek-v4.1-flash-exp(预览,官方道)14/23、gpt-5.6-sol-900k 14/23。
 
 ## 许可
 
