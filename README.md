@@ -34,20 +34,22 @@
 成绩与题目分离发布:结果公开、题目永不公开。下列仓库按周发布全库实测(别名 + bundle 哈希对照本仓库[公开哈希索引](hash-index/v2026-09.md)):
 
 - [amber-crof](https://github.com/getaskclaw/amber-crof) — CrofAI 在售模型周测
+- [amber-commandcode](https://github.com/getaskclaw/amber-commandcode) — CommandCode 模型周测
 - [amber-deepseek](https://github.com/getaskclaw/amber-deepseek) — DeepSeek 官方 API 模型周测
 - [amber-devin](https://github.com/getaskclaw/amber-devin) — Devin 模型周测
 - [amber-ollama](https://github.com/getaskclaw/amber-ollama) — Ollama Cloud 模型周测
+- [amber-opencode](https://github.com/getaskclaw/amber-opencode) — OpenCode Go 模型周测
 - [amber-gpt](https://github.com/getaskclaw/amber-gpt) — GPT 系模型 × 推理档位周测
 
 **当前前三**(截至 2026-W37,全库 23 案¹,effort=high):
 
 | # | 模型 @ 端点 | 通过 | 出处 |
 |---|---|---|---|
-| 1 | glm-5.3-flash @ Ollama Cloud | 17/23（1 案待重判) | [amber-ollama W37](https://github.com/getaskclaw/amber-ollama/blob/main/results/2026-W37.md) |
-| 2 | gpt-6-astra-900k @ OpenAI Codex | 16/23 | [amber-gpt W37](https://github.com/getaskclaw/amber-gpt/blob/main/results/2026-W37.md)（并列:qwen3.8-27b @ CrofAI,[amber-crof W37](https://github.com/getaskclaw/amber-crof/blob/main/results/2026-W37.md)) |
+| 1 | glm-5.3-flash @ Ollama Cloud | 17/23（1 案待重判) | [amber-ollama W37](https://github.com/getaskclaw/amber-ollama/blob/main/results/2026-W37.md)（并列:deepseek-v4.1-flash @ CommandCode,[amber-commandcode W37](https://github.com/getaskclaw/amber-commandcode/blob/main/results/2026-W37.md)) |
+| 2 | gpt-6-astra-900k @ OpenAI Codex | 16/23 | [amber-gpt W37](https://github.com/getaskclaw/amber-gpt/blob/main/results/2026-W37.md)（并列:qwen3.8-27b @ CrofAI,[amber-crof W37](https://github.com/getaskclaw/amber-crof/blob/main/results/2026-W37.md);deepseek-flash @ OpenCode Go,[amber-opencode W37](https://github.com/getaskclaw/amber-opencode/blob/main/results/2026-W37.md)) |
 | 3 | gpt-5.6-luna-900k @ OpenAI Codex | 15/23 | [amber-gpt W37](https://github.com/getaskclaw/amber-gpt/blob/main/results/2026-W37.md)（并列:deepseek-v4-flash-0731 @ CrofAI、deepseek-v4-flash:0731 @ Ollama Cloud) |
 
-¹ 2026-09-08 起表头从 21 案公共子集翻到全库 23 案:CrofAI/Ollama/astra 三道已补考 09-07 新增 2 运维案(12/12 卷验脑+bundle 哈希全绿)。astra 的 16/23 = W36 -900k 14 案 + W37 裸 gpt-6-astra 补考 2 案(-900k 变体已被服务端收回,口径混合已在期文标注)。跌出/未入:glm-5.3-flash @ CrofAI 14/23(原 #3 并列)、devin swe-1-7-medium 14/23、deepseek-v4.1-flash-exp(预览,官方道)14/23、gpt-5.6-sol-900k 14/23。
+¹ 2026-09-08 起表头从 21 案公共子集翻到全库 23 案:CrofAI/Ollama/astra 三道已补考 09-07 新增 2 运维案(12/12 卷验脑+bundle 哈希全绿)。astra 的 16/23 = W36 -900k 14 案 + W37 裸 gpt-6-astra 补考 2 案(-900k 变体已被服务端收回,口径混合已在期文标注)。2026-09-10 新增两道:DeepSeek V4.1-Flash GA 当日,CommandCode / OpenCode Go 两转发道同日同档全库对拍(各 26/26 卷验脑全绿,成绩仓新开,见上表)。跌出/未入:glm-5.3-flash @ CrofAI 14/23(原 #3 并列)、devin swe-1-7-medium 14/23、deepseek-v4.1-flash-exp(预览,官方道)14/23、gpt-5.6-sol-900k 14/23。
 
 ## 许可
 
