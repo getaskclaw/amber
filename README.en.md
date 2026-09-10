@@ -89,7 +89,7 @@ Each issue is one `results/YYYY-Www.md` built around a matrix. Five keys:
 
 ## FAQ
 
-**If cases are private, why trust the scores?** Trust comes from the chain, not from showing the paper: clean-room profiles (no fallback chain), per-paper wire audits (every call reconciled; a substitute call voids the paper), a closing gate (zero pollution or nothing ships), and alias + hash publishing (you can verify the library is unchanged, case by case). Process verifiability compensates for case secrecy.
+**If cases are private, why trust the scores?** Trust comes from the chain, not from showing the paper: clean-room profiles (no fallback chain), per-paper wire audits (every call reconciled; a substitute call voids the paper), a closing gate (zero pollution or nothing ships), alias + hash publishing (you can verify the library is unchanged, case by case), and a per-issue harness pin (current runs: [Hermes](https://github.com/NousResearch/hermes-agent), version + upstream commit pinned in every issue). Process verifiability compensates for case secrecy.
 
 **Why keep cases private at all?** Public corpora get eaten by training data; scores inflate and become unauditable — the chronic disease of public benchmarks. Private cases make leak status checkable.
 
