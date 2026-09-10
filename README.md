@@ -45,7 +45,7 @@
 
 | # | 模型 @ 端点 | 通过 | 出处 |
 |---|---|---|---|
-| 1 | glm-5.3-flash @ Ollama Cloud | 17/23（1 案待重判) | [amber-ollama W37](https://github.com/getaskclaw/amber-ollama/blob/main/results/2026-W37.md)（并列:deepseek-v4.1-flash @ CommandCode,[amber-commandcode W37](https://github.com/getaskclaw/amber-commandcode/blob/main/results/2026-W37.md)) |
+| 1 | glm-5.3-flash @ Ollama Cloud | 17/23 | [amber-ollama W37](https://github.com/getaskclaw/amber-ollama/blob/main/results/2026-W37.md)（并列:deepseek-v4.1-flash @ CommandCode,[amber-commandcode W37](https://github.com/getaskclaw/amber-commandcode/blob/main/results/2026-W37.md)) |
 | 2 | gpt-6-astra-900k @ OpenAI Codex | 16/23 | [amber-gpt W37](https://github.com/getaskclaw/amber-gpt/blob/main/results/2026-W37.md)（并列:qwen3.8-27b @ CrofAI,[amber-crof W37](https://github.com/getaskclaw/amber-crof/blob/main/results/2026-W37.md);deepseek-flash @ OpenCode Go,[amber-opencode W37](https://github.com/getaskclaw/amber-opencode/blob/main/results/2026-W37.md)) |
 | 3 | gpt-5.6-luna-900k @ OpenAI Codex | 15/23 | [amber-gpt W37](https://github.com/getaskclaw/amber-gpt/blob/main/results/2026-W37.md)（并列:deepseek-v4-flash-0731 @ CrofAI、deepseek-v4-flash:0731 @ Ollama Cloud) |
 
