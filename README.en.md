@@ -14,23 +14,23 @@ A formal evaluation method: take a **real, auditable** historical incident and r
 
 **① Current top three** — the same model name on a different endpoint can be a different brain, so scores are recorded per endpoint × name:
 
-![Current top three 2026-W37](docs/images/top3-2026-w37.png)
+![Current top three 2026-W37](docs/images/top3-2026-w37.en.png)
 
 **② Completion profile: a tie is not a twin** — two lanes tied at #1, completely different nine-axis profiles (pin-level completion; negative d2 scores also graded):
 
-![Completion profile cc vs g53f](docs/images/completion-radar-cc-vs-g53f.png)
+![Completion profile cc vs g53f](docs/images/completion-radar-cc-vs-g53f.en.png)
 
 **③ What it is** — private case library + public scores: cases are never published, scores and hashes always are.
 
-![What is AMBER](docs/images/what-is-amber.png)
+![What is AMBER](docs/images/what-is-amber.en.png)
 
 **④ How a result is produced** — like an exam: sealed authoring, clean-room sitting, per-paper wire audit, redacted publishing, public verification.
 
-![How a result is produced](docs/images/trust-chain.png)
+![How a result is produced](docs/images/trust-chain.en.png)
 
 **⑤ A counterintuitive finding** — more thinking ≠ better scores: high is the sweet spot and top bands backfire (same law across four model families); on some models the band isn't even a score variable.
 
-![effort curves](docs/images/effort-curves-20260910.png)
+![effort curves](docs/images/effort-curves-20260910.en.png)
 
 Sources next to the PNGs in `docs/images/` (`.puml` for PlantUML, `.vega-lite.json` / `.vg.json` for Vega) — edit the source and re-render to update.
 

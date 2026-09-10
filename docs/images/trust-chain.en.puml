@@ -1,0 +1,31 @@
+@startuml
+skinparam backgroundColor #FAFEFE
+skinparam defaultFontName "Noto Sans CJK SC"
+skinparam shadowing false
+title How one issue's scores are forged: the exam analogy
+package "Paper prep (private, locked)" #FADBD8 {
+  [Real historical events\nrewound to pre-reveal] as kase
+  [Rubric frozen in advance\noracle self-scores] as oracle
+}
+package "Exam room (clean room)" #D6EAF8 {
+  [Candidate enters\nno outside help = no fallback] as exam
+  [Full proctoring record\nper-paper wire audit vs state.db] as monitor
+  [Closing gate\nzero pollution or nothing passes] as gate
+}
+package "Publish (redacted)" #D5F5E3 {
+  [Alias A-xxxxxxxx\n+ bundle hash] as aliasx
+  [Result repo\nscores / aggregates / verdicts] as pub
+}
+package "Anyone" #FDEBD0 {
+  [Check against the public hash index\nlibrary unswapped, scores reconcile] as verify
+}
+kase --> exam : only the info available at the time
+oracle ..> gate : rescored independently after closing
+exam --> monitor : every paper leaves a trace
+monitor --> gate : closing check
+gate --> aliasx : passing results redacted
+aliasx --> pub : one issue per term
+pub --> verify : readers verify hands-on
+note bottom of oracle : questions / oracle / transcripts never go public
+note bottom of exam : the brain is who it is\na substitute call voids the whole paper
+@enduml

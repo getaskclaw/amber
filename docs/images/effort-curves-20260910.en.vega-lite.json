@@ -1,0 +1,39 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {"text": ["effort curves: high is sweet, top bands backfire", "(three families, case-level pass rate %)"], "fontSize": 16, "anchor": "start"},
+  "data": {"values": [
+    {"effort": "low", "pct": 57.1, "model": "gpt-6-astra-900k (21 cases)"},
+    {"effort": "medium", "pct": 66.7, "model": "gpt-6-astra-900k (21 cases)"},
+    {"effort": "high", "pct": 66.7, "model": "gpt-6-astra-900k (21 cases)"},
+    {"effort": "xhigh", "pct": 47.6, "model": "gpt-6-astra-900k (21 cases)"},
+    {"effort": "max", "pct": 47.6, "model": "gpt-6-astra-900k (21 cases)"},
+    {"effort": "none", "pct": 73.9, "model": "deepseek-v4.1-flash @ cc (23 cases)"},
+    {"effort": "low", "pct": 65.2, "model": "deepseek-v4.1-flash @ cc (23 cases)"},
+    {"effort": "medium", "pct": 65.2, "model": "deepseek-v4.1-flash @ cc (23 cases)"},
+    {"effort": "high", "pct": 73.9, "model": "deepseek-v4.1-flash @ cc (23 cases)"},
+    {"effort": "xhigh", "pct": 65.2, "model": "deepseek-v4.1-flash @ cc (23 cases)"},
+    {"effort": "high", "pct": 73.9, "model": "glm-5.3-flash @ ollama (23 cases)"},
+    {"effort": "xhigh", "pct": 52.2, "model": "glm-5.3-flash @ ollama (23 cases)"}
+  ]},
+  "width": 640,
+  "height": 320,
+  "layer": [
+    {
+      "mark": {"type": "line", "strokeWidth": 2.5, "point": {"size": 70}},
+      "encoding": {
+        "x": {"field": "effort", "type": "ordinal", "sort": ["none", "low", "medium", "high", "xhigh", "max"], "axis": {"title": "reasoning effort", "labelAngle": 0}},
+        "y": {"field": "pct", "type": "quantitative", "scale": {"domain": [40, 85]}, "axis": {"title": "case-level pass rate (%)"}},
+        "color": {"field": "model", "type": "nominal", "scale": {"range": ["#00838F", "#E67E22", "#6A5ACD"]}, "legend": {"title": null, "labelLimit": 0, "labelFontSize": 11, "orient": "bottom"}}
+      }
+    },
+    {
+      "mark": {"type": "text", "dy": -10, "fontSize": 11, "color": "#555"},
+      "encoding": {
+        "x": {"field": "effort", "type": "ordinal", "sort": ["none", "low", "medium", "high", "xhigh", "max"]},
+        "y": {"field": "pct", "type": "quantitative"},
+        "text": {"field": "pct", "type": "quantitative", "format": ".0f"},
+        "detail": {"field": "model", "type": "nominal"}
+      }
+    }
+  ]
+}

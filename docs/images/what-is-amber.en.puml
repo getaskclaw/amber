@@ -1,0 +1,25 @@
+@startmindmap
+skinparam backgroundColor #FAFEFE
+skinparam defaultFontName "Noto Sans CJK SC"
+skinparam shadowing false
+title What is AMBER, in one picture
+*[#00BCD4] AMBER\nsealed-in-amber\nreplay evaluation
+**[#B2EBF2] Exam room\n(how it's run)
+*** Real historical scenes\nrewound to "before the reveal"
+*** Clean room: no outside help\n(no fallback chain)
+*** Per-paper wire audit\n(reconciled with state.db)
+*** Closing gate: zero pollution\nor nothing enters the ledger
+left side
+**[#FADBD8] Private side\n(never public)
+*** 23 cases / 26 papers
+*** Questions / oracle / transcripts
+*** Internal case IDs & variant names
+**[#D5F5E3] Public side\n(always public)
+*** amber repo\nspec + public hash index
+*** Seven result repos\n(by vendor / endpoint)
+*** Alias A-xxxxxxxx\n+ bundle hash
+**[#FFF9C4] Readers\n(what you can check)
+*** Scores / aggregates / speed / verdicts
+*** Pinned per issue: model ID, band,\nUTC window, harness version
+*** Bundle-hash cross-index\n= library unchanged
+@endmindmap
