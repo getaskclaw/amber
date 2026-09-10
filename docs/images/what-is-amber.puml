@@ -1,0 +1,25 @@
+@startmindmap
+skinparam backgroundColor #FAFEFE
+skinparam defaultFontName "Noto Sans CJK SC"
+skinparam shadowing false
+title AMBER 是什么:一张图
+*[#00BCD4] AMBER\n琥珀式封存回放评测
+**[#B2EBF2] 考场(怎么考)
+*** 真实历史现场\n还原到「答案揭晓前」
+*** 净室:无外援\n(无 fallback 链)
+*** 逐卷验脑\n(state.db 对账)
+*** 收卷闸:零污染才入库
+left side
+**[#FADBD8] 私有面(永不公开)
+*** 23 案 / 26 卷题库
+*** 题目 / oracle / transcript
+*** 内部案号与变体名
+**[#D5F5E3] 公开面(永远公开)
+*** amber-eval\n规范 + 公开哈希索引
+*** 七个结果仓\n(按厂商/端点分)
+*** 别名 A-xxxxxxxx\n+ bundle 哈希
+**[#FFF9C4] 读者(能核对什么)
+*** 分数 / 聚合 / 速度 / 裁决
+*** 每期钉:模型 ID、档位、\nUTC 窗、harness 版本
+*** bundle 哈希对照索引\n= 题集未变
+@endmindmap

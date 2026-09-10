@@ -1,0 +1,31 @@
+@startuml
+skinparam backgroundColor #FAFEFE
+skinparam defaultFontName "Noto Sans CJK SC"
+skinparam shadowing false
+title 一期成绩怎么炼成:考试比喻
+package "出卷(私有,锁起来)" #FADBD8 {
+  [真实历史事件\n还原到揭晓前] as kase
+  [评分标准预先冻结\noracle 自算分] as oracle
+}
+package "考场(净室)" #D6EAF8 {
+  [考生入场\n无外援 = 无 fallback] as exam
+  [监考全程录像\n逐卷验脑 state.db] as monitor
+  [收卷闸\n零污染才放行] as gate
+}
+package "发布(脱敏)" #D5F5E3 {
+  [别名 A-xxxxxxxx\n+ bundle 哈希] as aliasx
+  [结果仓\n分数 / 聚合 / 裁决] as pub
+}
+package "任何人" #FDEBD0 {
+  [按公开哈希索引核对\n题集没换、分数可对] as verify
+}
+kase --> exam : 只给当时可得的信息
+oracle ..> gate : 判分在收卷后独立重算
+exam --> monitor : 每一卷留痕
+monitor --> gate : 收卷检查
+gate --> aliasx : 合格成绩脱敏
+aliasx --> pub : 每期一篇
+pub --> verify : 读者动手核对
+note bottom of oracle : 题目 / oracle / transcript 永不公开
+note bottom of exam : 脑子是谁就是谁\n替身调用 = 整卷作废
+@enduml

@@ -1,0 +1,34 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {"text": "AMBER 当前前三(2026-W37,全库 23 案,effort=high)", "fontSize": 16, "anchor": "start"},
+  "data": {"values": [
+    {"lane": "glm-5.3-flash @ Ollama Cloud", "pass": 17, "rank": "#1 并列"},
+    {"lane": "deepseek-v4.1-flash @ CommandCode", "pass": 17, "rank": "#1 并列"},
+    {"lane": "gpt-6-astra-900k @ OpenAI Codex", "pass": 16, "rank": "#2 并列"},
+    {"lane": "qwen3.8-27b @ CrofAI", "pass": 16, "rank": "#2 并列"},
+    {"lane": "deepseek-flash @ OpenCode Go", "pass": 16, "rank": "#2 并列"},
+    {"lane": "gpt-5.6-luna-900k @ OpenAI Codex", "pass": 15, "rank": "#3 并列"},
+    {"lane": "deepseek-v4-flash-0731 @ CrofAI", "pass": 15, "rank": "#3 并列"},
+    {"lane": "deepseek-v4-flash:0731 @ Ollama Cloud", "pass": 15, "rank": "#3 并列"}
+  ]},
+  "width": 620,
+  "height": 280,
+  "layer": [
+    {
+      "mark": {"type": "bar", "cornerRadiusEnd": 3, "height": 20},
+      "encoding": {
+        "y": {"field": "lane", "type": "nominal", "sort": "-x", "axis": {"labelFontSize": 12, "labelLimit": 0, "title": null}},
+        "x": {"field": "pass", "type": "quantitative", "scale": {"domain": [0, 23]}, "axis": {"title": "通过案数(/ 23)", "grid": true}},
+        "color": {"field": "rank", "type": "nominal", "scale": {"range": ["#00838F", "#26C6DA", "#A5E8F0"]}, "legend": {"title": "名次"}}
+      }
+    },
+    {
+      "mark": {"type": "text", "align": "left", "dx": 4, "fontSize": 12, "color": "#006064"},
+      "encoding": {
+        "y": {"field": "lane", "type": "nominal", "sort": "-x"},
+        "x": {"field": "pass", "type": "quantitative"},
+        "text": {"field": "pass", "type": "quantitative"}
+      }
+    }
+  ]
+}
