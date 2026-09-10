@@ -1,0 +1,1016 @@
+{
+ "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+ "title": {
+  "text": [
+   "output tokens x case pass rate: same high band, 17x apart in thinking budget",
+   "(circles = W37 board lanes; dashed diamonds = same-model effort ladders; tokens are a cost proxy, not $)"
+  ],
+  "fontSize": 16,
+  "anchor": "start"
+ },
+ "data": {
+  "values": [
+   {
+    "kind": "board",
+    "label": "g53f @ ollama",
+    "family": "glm",
+    "tokens": 840000,
+    "pct": 73.9,
+    "align": "left",
+    "baseline": "middle",
+    "dx": 10,
+    "dy": 0
+   },
+   {
+    "kind": "board",
+    "label": "v4.1f @ cc",
+    "family": "deepseek",
+    "tokens": 640000,
+    "pct": 73.9,
+    "align": "right",
+    "baseline": "middle",
+    "dx": -10,
+    "dy": 0
+   },
+   {
+    "kind": "board",
+    "label": "v4.1f @ ocgo",
+    "family": "deepseek",
+    "tokens": 720000,
+    "pct": 69.6,
+    "align": "left",
+    "baseline": "bottom",
+    "dx": 8,
+    "dy": -5
+   },
+   {
+    "kind": "board",
+    "label": "v4.1f @ ds",
+    "family": "deepseek",
+    "tokens": 820000,
+    "pct": 69.6,
+    "align": "left",
+    "baseline": "top",
+    "dx": 8,
+    "dy": 5
+   },
+   {
+    "kind": "board",
+    "label": "qwen3.8 @ crof",
+    "family": "qwen",
+    "tokens": 690000,
+    "pct": 69.6,
+    "align": "right",
+    "baseline": "top",
+    "dx": -8,
+    "dy": 6
+   },
+   {
+    "kind": "board",
+    "label": "astra-900k (h)",
+    "family": "gpt",
+    "tokens": 147000,
+    "pct": 69.6,
+    "align": "center",
+    "baseline": "bottom",
+    "dx": 0,
+    "dy": -10
+   },
+   {
+    "kind": "board",
+    "label": "luna-900k (h)",
+    "family": "gpt",
+    "tokens": 239000,
+    "pct": 65.2,
+    "align": "left",
+    "baseline": "top",
+    "dx": 8,
+    "dy": 10
+   },
+   {
+    "kind": "board",
+    "label": "0731 @ ollama",
+    "family": "deepseek",
+    "tokens": 2500000,
+    "pct": 65.2,
+    "align": "right",
+    "baseline": "bottom",
+    "dx": -8,
+    "dy": -8
+   },
+   {
+    "kind": "board",
+    "label": "0731 @ crof",
+    "family": "deepseek",
+    "tokens": 690000,
+    "pct": 65.2,
+    "align": "left",
+    "baseline": "top",
+    "dx": 10,
+    "dy": 2
+   },
+   {
+    "kind": "board",
+    "label": "sol-900k (h)",
+    "family": "gpt",
+    "tokens": 175000,
+    "pct": 60.9,
+    "align": "right",
+    "baseline": "top",
+    "dx": -8,
+    "dy": 10
+   },
+   {
+    "kind": "board",
+    "label": "v4.1f-exp @ ds",
+    "family": "deepseek",
+    "tokens": 1070000,
+    "pct": 60.9,
+    "align": "right",
+    "baseline": "top",
+    "dx": -8,
+    "dy": 6
+   },
+   {
+    "kind": "board",
+    "label": "g53f @ crof",
+    "family": "glm",
+    "tokens": 1380000,
+    "pct": 60.9,
+    "align": "left",
+    "baseline": "bottom",
+    "dx": 8,
+    "dy": -6
+   },
+   {
+    "kind": "ladder",
+    "label": "astra-900k",
+    "family": "gpt",
+    "tokens": 77000,
+    "pct": 57.1,
+    "band": "low",
+    "series": "astra-900k"
+   },
+   {
+    "kind": "ladder",
+    "label": "astra-900k",
+    "family": "gpt",
+    "tokens": 81000,
+    "pct": 66.7,
+    "band": "medium",
+    "series": "astra-900k"
+   },
+   {
+    "kind": "ladder",
+    "label": "astra-900k",
+    "family": "gpt",
+    "tokens": 147000,
+    "pct": 66.7,
+    "band": "high",
+    "series": "astra-900k"
+   },
+   {
+    "kind": "ladder",
+    "label": "astra-900k",
+    "family": "gpt",
+    "tokens": 225000,
+    "pct": 47.6,
+    "band": "xhigh",
+    "series": "astra-900k"
+   },
+   {
+    "kind": "ladder",
+    "label": "astra-900k",
+    "family": "gpt",
+    "tokens": 195000,
+    "pct": 47.6,
+    "band": "max",
+    "series": "astra-900k"
+   },
+   {
+    "kind": "ladder",
+    "label": "luna-900k",
+    "family": "gpt",
+    "tokens": 104000,
+    "pct": 65.2,
+    "band": "medium",
+    "series": "luna-900k"
+   },
+   {
+    "kind": "ladder",
+    "label": "luna-900k",
+    "family": "gpt",
+    "tokens": 239000,
+    "pct": 65.2,
+    "band": "high",
+    "series": "luna-900k"
+   },
+   {
+    "kind": "ladder",
+    "label": "luna-900k",
+    "family": "gpt",
+    "tokens": 303000,
+    "pct": 65.2,
+    "band": "xhigh",
+    "series": "luna-900k"
+   },
+   {
+    "kind": "ladder",
+    "label": "sol-900k",
+    "family": "gpt",
+    "tokens": 204000,
+    "pct": 60.9,
+    "band": "medium",
+    "series": "sol-900k"
+   },
+   {
+    "kind": "ladder",
+    "label": "sol-900k",
+    "family": "gpt",
+    "tokens": 175000,
+    "pct": 60.9,
+    "band": "high",
+    "series": "sol-900k"
+   }
+  ]
+ },
+ "width": 700,
+ "height": 380,
+ "layer": [
+  {
+   "data": {
+    "values": [
+     {
+      "kind": "ladder",
+      "label": "astra-900k",
+      "family": "gpt",
+      "tokens": 77000,
+      "pct": 57.1,
+      "band": "low",
+      "series": "astra-900k"
+     },
+     {
+      "kind": "ladder",
+      "label": "astra-900k",
+      "family": "gpt",
+      "tokens": 81000,
+      "pct": 66.7,
+      "band": "medium",
+      "series": "astra-900k"
+     },
+     {
+      "kind": "ladder",
+      "label": "astra-900k",
+      "family": "gpt",
+      "tokens": 147000,
+      "pct": 66.7,
+      "band": "high",
+      "series": "astra-900k"
+     },
+     {
+      "kind": "ladder",
+      "label": "astra-900k",
+      "family": "gpt",
+      "tokens": 225000,
+      "pct": 47.6,
+      "band": "xhigh",
+      "series": "astra-900k"
+     },
+     {
+      "kind": "ladder",
+      "label": "astra-900k",
+      "family": "gpt",
+      "tokens": 195000,
+      "pct": 47.6,
+      "band": "max",
+      "series": "astra-900k"
+     },
+     {
+      "kind": "ladder",
+      "label": "luna-900k",
+      "family": "gpt",
+      "tokens": 104000,
+      "pct": 65.2,
+      "band": "medium",
+      "series": "luna-900k"
+     },
+     {
+      "kind": "ladder",
+      "label": "luna-900k",
+      "family": "gpt",
+      "tokens": 239000,
+      "pct": 65.2,
+      "band": "high",
+      "series": "luna-900k"
+     },
+     {
+      "kind": "ladder",
+      "label": "luna-900k",
+      "family": "gpt",
+      "tokens": 303000,
+      "pct": 65.2,
+      "band": "xhigh",
+      "series": "luna-900k"
+     },
+     {
+      "kind": "ladder",
+      "label": "sol-900k",
+      "family": "gpt",
+      "tokens": 204000,
+      "pct": 60.9,
+      "band": "medium",
+      "series": "sol-900k"
+     },
+     {
+      "kind": "ladder",
+      "label": "sol-900k",
+      "family": "gpt",
+      "tokens": 175000,
+      "pct": 60.9,
+      "band": "high",
+      "series": "sol-900k"
+     }
+    ]
+   },
+   "mark": {
+    "type": "line",
+    "strokeWidth": 2,
+    "strokeDash": [
+     4,
+     3
+    ],
+    "opacity": 0.7
+   },
+   "encoding": {
+    "x": {
+     "field": "tokens",
+     "type": "quantitative",
+     "scale": {
+      "type": "log",
+      "domain": [
+       60000,
+       4000000
+      ]
+     },
+     "axis": {
+      "format": "~s",
+      "values": [
+       100000,
+       200000,
+       500000,
+       1000000,
+       2000000
+      ],
+      "labelFlush": false
+     }
+    },
+    "y": {
+     "field": "pct",
+     "type": "quantitative",
+     "scale": {
+      "domain": [
+       44,
+       80
+      ]
+     }
+    },
+    "color": {
+     "field": "family",
+     "type": "nominal"
+    },
+    "detail": {
+     "field": "series",
+     "type": "nominal"
+    }
+   }
+  },
+  {
+   "mark": {
+    "type": "point",
+    "size": 110,
+    "filled": true,
+    "opacity": 1
+   },
+   "encoding": {
+    "x": {
+     "field": "tokens",
+     "type": "quantitative",
+     "scale": {
+      "type": "log",
+      "domain": [
+       60000,
+       4000000
+      ]
+     },
+     "axis": {
+      "format": "~s",
+      "values": [
+       100000,
+       200000,
+       500000,
+       1000000,
+       2000000
+      ],
+      "labelFlush": false,
+      "title": "full-library output tokens (log)"
+     }
+    },
+    "y": {
+     "field": "pct",
+     "type": "quantitative",
+     "scale": {
+      "domain": [
+       44,
+       80
+      ]
+     },
+     "axis": {
+      "title": "case-level pass rate (%)"
+     }
+    },
+    "color": {
+     "field": "family",
+     "type": "nominal",
+     "scale": {
+      "domain": [
+       "deepseek",
+       "gpt",
+       "glm",
+       "qwen"
+      ],
+      "range": [
+       "#00838F",
+       "#6A5ACD",
+       "#E67E22",
+       "#8D6E63"
+      ]
+     },
+     "legend": {
+      "title": null,
+      "orient": "bottom"
+     }
+    },
+    "shape": {
+     "field": "kind",
+     "type": "nominal",
+     "scale": {
+      "domain": [
+       "board",
+       "ladder"
+      ],
+      "range": [
+       "circle",
+       "diamond"
+      ]
+     },
+     "legend": null
+    }
+   }
+  },
+  {
+   "data": {
+    "values": [
+     {
+      "kind": "board",
+      "label": "v4.1f @ cc",
+      "family": "deepseek",
+      "tokens": 640000,
+      "pct": 73.9,
+      "align": "right",
+      "baseline": "middle",
+      "dx": -10,
+      "dy": 0
+     }
+    ]
+   },
+   "mark": {
+    "type": "text",
+    "fontSize": 10,
+    "color": "#333",
+    "align": "right",
+    "baseline": "middle"
+   },
+   "encoding": {
+    "x": {
+     "field": "tokens",
+     "type": "quantitative",
+     "scale": {
+      "type": "log",
+      "domain": [
+       60000,
+       4000000
+      ]
+     },
+     "axis": {
+      "format": "~s",
+      "values": [
+       100000,
+       200000,
+       500000,
+       1000000,
+       2000000
+      ],
+      "labelFlush": false
+     }
+    },
+    "y": {
+     "field": "pct",
+     "type": "quantitative",
+     "scale": {
+      "domain": [
+       44,
+       80
+      ]
+     }
+    },
+    "text": {
+     "field": "label",
+     "type": "nominal"
+    },
+    "dx": {
+     "field": "dx",
+     "type": "quantitative"
+    },
+    "dy": {
+     "field": "dy",
+     "type": "quantitative"
+    }
+   }
+  },
+  {
+   "data": {
+    "values": [
+     {
+      "kind": "board",
+      "label": "g53f @ ollama",
+      "family": "glm",
+      "tokens": 840000,
+      "pct": 73.9,
+      "align": "left",
+      "baseline": "middle",
+      "dx": 10,
+      "dy": 0
+     }
+    ]
+   },
+   "mark": {
+    "type": "text",
+    "fontSize": 10,
+    "color": "#333",
+    "align": "left",
+    "baseline": "middle"
+   },
+   "encoding": {
+    "x": {
+     "field": "tokens",
+     "type": "quantitative",
+     "scale": {
+      "type": "log",
+      "domain": [
+       60000,
+       4000000
+      ]
+     },
+     "axis": {
+      "format": "~s",
+      "values": [
+       100000,
+       200000,
+       500000,
+       1000000,
+       2000000
+      ],
+      "labelFlush": false
+     }
+    },
+    "y": {
+     "field": "pct",
+     "type": "quantitative",
+     "scale": {
+      "domain": [
+       44,
+       80
+      ]
+     }
+    },
+    "text": {
+     "field": "label",
+     "type": "nominal"
+    },
+    "dx": {
+     "field": "dx",
+     "type": "quantitative"
+    },
+    "dy": {
+     "field": "dy",
+     "type": "quantitative"
+    }
+   }
+  },
+  {
+   "data": {
+    "values": [
+     {
+      "kind": "board",
+      "label": "v4.1f @ ocgo",
+      "family": "deepseek",
+      "tokens": 720000,
+      "pct": 69.6,
+      "align": "left",
+      "baseline": "bottom",
+      "dx": 8,
+      "dy": -5
+     },
+     {
+      "kind": "board",
+      "label": "g53f @ crof",
+      "family": "glm",
+      "tokens": 1380000,
+      "pct": 60.9,
+      "align": "left",
+      "baseline": "bottom",
+      "dx": 8,
+      "dy": -6
+     }
+    ]
+   },
+   "mark": {
+    "type": "text",
+    "fontSize": 10,
+    "color": "#333",
+    "align": "left",
+    "baseline": "bottom"
+   },
+   "encoding": {
+    "x": {
+     "field": "tokens",
+     "type": "quantitative",
+     "scale": {
+      "type": "log",
+      "domain": [
+       60000,
+       4000000
+      ]
+     },
+     "axis": {
+      "format": "~s",
+      "values": [
+       100000,
+       200000,
+       500000,
+       1000000,
+       2000000
+      ],
+      "labelFlush": false
+     }
+    },
+    "y": {
+     "field": "pct",
+     "type": "quantitative",
+     "scale": {
+      "domain": [
+       44,
+       80
+      ]
+     }
+    },
+    "text": {
+     "field": "label",
+     "type": "nominal"
+    },
+    "dx": {
+     "field": "dx",
+     "type": "quantitative"
+    },
+    "dy": {
+     "field": "dy",
+     "type": "quantitative"
+    }
+   }
+  },
+  {
+   "data": {
+    "values": [
+     {
+      "kind": "board",
+      "label": "v4.1f @ ds",
+      "family": "deepseek",
+      "tokens": 820000,
+      "pct": 69.6,
+      "align": "left",
+      "baseline": "top",
+      "dx": 8,
+      "dy": 5
+     },
+     {
+      "kind": "board",
+      "label": "luna-900k (h)",
+      "family": "gpt",
+      "tokens": 239000,
+      "pct": 65.2,
+      "align": "left",
+      "baseline": "top",
+      "dx": 8,
+      "dy": 10
+     },
+     {
+      "kind": "board",
+      "label": "0731 @ crof",
+      "family": "deepseek",
+      "tokens": 690000,
+      "pct": 65.2,
+      "align": "left",
+      "baseline": "top",
+      "dx": 10,
+      "dy": 2
+     }
+    ]
+   },
+   "mark": {
+    "type": "text",
+    "fontSize": 10,
+    "color": "#333",
+    "align": "left",
+    "baseline": "top"
+   },
+   "encoding": {
+    "x": {
+     "field": "tokens",
+     "type": "quantitative",
+     "scale": {
+      "type": "log",
+      "domain": [
+       60000,
+       4000000
+      ]
+     },
+     "axis": {
+      "format": "~s",
+      "values": [
+       100000,
+       200000,
+       500000,
+       1000000,
+       2000000
+      ],
+      "labelFlush": false
+     }
+    },
+    "y": {
+     "field": "pct",
+     "type": "quantitative",
+     "scale": {
+      "domain": [
+       44,
+       80
+      ]
+     }
+    },
+    "text": {
+     "field": "label",
+     "type": "nominal"
+    },
+    "dx": {
+     "field": "dx",
+     "type": "quantitative"
+    },
+    "dy": {
+     "field": "dy",
+     "type": "quantitative"
+    }
+   }
+  },
+  {
+   "data": {
+    "values": [
+     {
+      "kind": "board",
+      "label": "qwen3.8 @ crof",
+      "family": "qwen",
+      "tokens": 690000,
+      "pct": 69.6,
+      "align": "right",
+      "baseline": "top",
+      "dx": -8,
+      "dy": 6
+     },
+     {
+      "kind": "board",
+      "label": "sol-900k (h)",
+      "family": "gpt",
+      "tokens": 175000,
+      "pct": 60.9,
+      "align": "right",
+      "baseline": "top",
+      "dx": -8,
+      "dy": 10
+     },
+     {
+      "kind": "board",
+      "label": "v4.1f-exp @ ds",
+      "family": "deepseek",
+      "tokens": 1070000,
+      "pct": 60.9,
+      "align": "right",
+      "baseline": "top",
+      "dx": -8,
+      "dy": 6
+     }
+    ]
+   },
+   "mark": {
+    "type": "text",
+    "fontSize": 10,
+    "color": "#333",
+    "align": "right",
+    "baseline": "top"
+   },
+   "encoding": {
+    "x": {
+     "field": "tokens",
+     "type": "quantitative",
+     "scale": {
+      "type": "log",
+      "domain": [
+       60000,
+       4000000
+      ]
+     },
+     "axis": {
+      "format": "~s",
+      "values": [
+       100000,
+       200000,
+       500000,
+       1000000,
+       2000000
+      ],
+      "labelFlush": false
+     }
+    },
+    "y": {
+     "field": "pct",
+     "type": "quantitative",
+     "scale": {
+      "domain": [
+       44,
+       80
+      ]
+     }
+    },
+    "text": {
+     "field": "label",
+     "type": "nominal"
+    },
+    "dx": {
+     "field": "dx",
+     "type": "quantitative"
+    },
+    "dy": {
+     "field": "dy",
+     "type": "quantitative"
+    }
+   }
+  },
+  {
+   "data": {
+    "values": [
+     {
+      "kind": "board",
+      "label": "astra-900k (h)",
+      "family": "gpt",
+      "tokens": 147000,
+      "pct": 69.6,
+      "align": "center",
+      "baseline": "bottom",
+      "dx": 0,
+      "dy": -10
+     }
+    ]
+   },
+   "mark": {
+    "type": "text",
+    "fontSize": 10,
+    "color": "#333",
+    "align": "center",
+    "baseline": "bottom"
+   },
+   "encoding": {
+    "x": {
+     "field": "tokens",
+     "type": "quantitative",
+     "scale": {
+      "type": "log",
+      "domain": [
+       60000,
+       4000000
+      ]
+     },
+     "axis": {
+      "format": "~s",
+      "values": [
+       100000,
+       200000,
+       500000,
+       1000000,
+       2000000
+      ],
+      "labelFlush": false
+     }
+    },
+    "y": {
+     "field": "pct",
+     "type": "quantitative",
+     "scale": {
+      "domain": [
+       44,
+       80
+      ]
+     }
+    },
+    "text": {
+     "field": "label",
+     "type": "nominal"
+    },
+    "dx": {
+     "field": "dx",
+     "type": "quantitative"
+    },
+    "dy": {
+     "field": "dy",
+     "type": "quantitative"
+    }
+   }
+  },
+  {
+   "data": {
+    "values": [
+     {
+      "kind": "board",
+      "label": "0731 @ ollama",
+      "family": "deepseek",
+      "tokens": 2500000,
+      "pct": 65.2,
+      "align": "right",
+      "baseline": "bottom",
+      "dx": -8,
+      "dy": -8
+     }
+    ]
+   },
+   "mark": {
+    "type": "text",
+    "fontSize": 10,
+    "color": "#333",
+    "align": "right",
+    "baseline": "bottom"
+   },
+   "encoding": {
+    "x": {
+     "field": "tokens",
+     "type": "quantitative",
+     "scale": {
+      "type": "log",
+      "domain": [
+       60000,
+       4000000
+      ]
+     },
+     "axis": {
+      "format": "~s",
+      "values": [
+       100000,
+       200000,
+       500000,
+       1000000,
+       2000000
+      ],
+      "labelFlush": false
+     }
+    },
+    "y": {
+     "field": "pct",
+     "type": "quantitative",
+     "scale": {
+      "domain": [
+       44,
+       80
+      ]
+     }
+    },
+    "text": {
+     "field": "label",
+     "type": "nominal"
+    },
+    "dx": {
+     "field": "dx",
+     "type": "quantitative"
+    },
+    "dy": {
+     "field": "dy",
+     "type": "quantitative"
+    }
+   }
+  }
+ ]
+}

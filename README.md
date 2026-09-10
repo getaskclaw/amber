@@ -28,9 +28,13 @@
 
 ![一期成绩怎么炼成](docs/images/trust-chain.png)
 
-**⑤ 一个反直觉发现** —— 「想更久 ≠ 考更好」：high 档是甜点，顶档反噬（四个模型家族同一条规律）；有的模型，档位根本不是成绩变量。
+**⑤ 一个反直觉发现，但有边界** —— 已测家族里「想更久 ≠ 考更好」：high 档是甜点，顶档反噬（图中三家族）。是经验规律，不是定律：swe-2 的档线单调向上（medium 15 < high 16，见 [amber-devin W37](https://github.com/getaskclaw/amber-devin/blob/main/results/2026-W37.md)）；也有的模型全档随机带，选档按成本和速度，不按分。
 
 ![effort 曲线](docs/images/effort-curves-20260910.png)
+
+**⑥ 分数 × 思考预算** —— 同 high 档、同全库，输出 token 账单跨 17 倍（147K vs 2.5M），分数却差不过一案（各道 token 数出自其期文）。横轴是 token 不是美元：各家计费混杂（订阅道没有边际价；devin 道不上报用量，swe-2 不上这张图）。家族内部，更多 token 没换来分（luna 平线、astra 顶档反噬）；家族之间形状各异——所以 ⑤ 只是经验规律。
+
+![分数 × 思考预算 W37](docs/images/score-vs-tokens-2026-w37.png)
 
 图的源文件（PlantUML 的 `.puml`、Vega 的 `.vega-lite.json` / `.vg.json`）就放在 PNG 同目录，改图 = 改源文件再渲染。
 

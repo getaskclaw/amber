@@ -28,9 +28,13 @@ A formal evaluation method. Take a **real, auditable** historical incident and r
 
 ![How a result is produced](docs/images/trust-chain.en.png)
 
-**⑤ A counterintuitive finding** — more thinking ≠ better scores: high is the sweet spot, top bands backfire (the same law holds across four model families); on some models the band doesn't even move the score.
+**⑤ A counterintuitive finding, with limits** — on the families measured so far, high is the sweet spot and top bands backfire (three families plotted). A pattern, not a law: swe-2's band curve is monotone upward (medium 15 < high 16, [amber-devin W37](https://github.com/getaskclaw/amber-devin/blob/main/results/2026-W37.md)), and on some models the band barely moves the score — pick your band by cost and speed, not score.
 
 ![effort curves](docs/images/effort-curves-20260910.en.png)
+
+**⑥ Score vs thinking budget** — same band (high), same library, and the output-token bill spans 17× (147K vs 2.5M) for scores within a case of each other (token totals from each lane's published issue). The axis is tokens, not dollars: billing is mixed (subscription lanes have no marginal price; the devin lane reports no usage at all, so swe-2 sits this one out). Within a family, more tokens bought no score (luna flat; astra's top bands lose four cases); across families the shape varies — which is why ⑤ is a pattern, not a law.
+
+![score vs thinking budget W37](docs/images/score-vs-tokens-2026-w37.en.png)
 
 Chart sources (`.puml` for PlantUML, `.vega-lite.json` / `.vg.json` for Vega) sit next to the PNGs in `docs/images/` — edit a source, re-render, done.
 
