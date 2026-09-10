@@ -28,6 +28,10 @@ A formal evaluation method: take a **real, auditable** historical incident and r
 
 ![How a result is produced](docs/images/trust-chain.png)
 
+**⑤ A counterintuitive finding** — more thinking ≠ better scores: high is the sweet spot and top bands backfire (same law across four model families); on some models the band isn't even a score variable.
+
+![effort curves](docs/images/effort-curves-20260910.png)
+
 Sources next to the PNGs in `docs/images/` (`.puml` for PlantUML, `.vega-lite.json` / `.vg.json` for Vega) — edit the source and re-render to update.
 
 ## Why

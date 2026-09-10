@@ -28,6 +28,10 @@
 
 ![一期成绩怎么炼成](docs/images/trust-chain.png)
 
+**⑤ 一个反直觉发现** —— 「想更久 ≠ 考更好」：high 档是甜点、顶档反噬（四个模型家族同律）；有的模型档位根本不是成绩变量。
+
+![effort 曲线](docs/images/effort-curves-20260910.png)
+
 图源与重生成：`.puml`（PlantUML）与 `.vega-lite.json` / `.vg.json`（Vega）与 PNG 同目录，改数据改字直接改源再渲染。
 
 ## 为什么需要它
