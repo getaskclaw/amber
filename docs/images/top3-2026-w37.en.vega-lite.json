@@ -1,15 +1,16 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": {"text": "AMBER current top three (2026-W37, full 23-case library, effort=high)", "fontSize": 16, "anchor": "start"},
+  "background": "white",
+  "title": {"text": "AMBER current top three (2026-W37, full 23-case library)", "fontSize": 16, "anchor": "start"},
   "data": {"values": [
-    {"lane": "glm-5.3-flash @ Ollama Cloud", "pass": 17, "rank": "#1 tie"},
-    {"lane": "deepseek-v4.1-flash @ CommandCode", "pass": 17, "rank": "#1 tie"},
-    {"lane": "gpt-6-astra-900k @ OpenAI Codex", "pass": 16, "rank": "#2 tie"},
-    {"lane": "qwen3.8-27b @ CrofAI", "pass": 16, "rank": "#2 tie"},
-    {"lane": "deepseek-flash @ OpenCode Go", "pass": 16, "rank": "#2 tie"},
-    {"lane": "gpt-5.6-luna-900k @ OpenAI Codex", "pass": 15, "rank": "#3 tie"},
-    {"lane": "deepseek-v4-flash-0731 @ CrofAI", "pass": 15, "rank": "#3 tie"},
-    {"lane": "deepseek-v4-flash:0731 @ Ollama Cloud", "pass": 15, "rank": "#3 tie"}
+    {"lane": "swe-2-max @ Devin", "pass": 18, "rank": "#1"},
+    {"lane": "glm-5.3-flash @ Ollama Cloud", "pass": 17, "rank": "#2 tie"},
+    {"lane": "deepseek-v4.1-flash @ CommandCode", "pass": 17, "rank": "#2 tie"},
+    {"lane": "gpt-6-astra-900k @ OpenAI Codex", "pass": 16, "rank": "#3 tie"},
+    {"lane": "qwen3.8-27b @ CrofAI", "pass": 16, "rank": "#3 tie"},
+    {"lane": "deepseek-flash @ OpenCode Go", "pass": 16, "rank": "#3 tie"},
+    {"lane": "deepseek-v4.1-flash @ DeepSeek official", "pass": 16, "rank": "#3 tie"},
+    {"lane": "swe-2-high @ Devin", "pass": 16, "rank": "#3 tie"}
   ]},
   "width": 620,
   "height": 280,

@@ -1,0 +1,43 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": "white",
+  "title": {"text": ["effort 曲线：顶档反噬是家族剧本，不是定律", "（四家族，案级通过率 %；swe-2 档线单调到底）"], "fontSize": 16, "anchor": "start"},
+  "data": {"values": [
+    {"effort": "low", "pct": 57.1, "model": "gpt-6-astra-900k（21 案）"},
+    {"effort": "medium", "pct": 66.7, "model": "gpt-6-astra-900k（21 案）"},
+    {"effort": "high", "pct": 66.7, "model": "gpt-6-astra-900k（21 案）"},
+    {"effort": "xhigh", "pct": 47.6, "model": "gpt-6-astra-900k（21 案）"},
+    {"effort": "max", "pct": 47.6, "model": "gpt-6-astra-900k（21 案）"},
+    {"effort": "none", "pct": 73.9, "model": "deepseek-v4.1-flash @ cc（23 案）"},
+    {"effort": "low", "pct": 65.2, "model": "deepseek-v4.1-flash @ cc（23 案）"},
+    {"effort": "medium", "pct": 65.2, "model": "deepseek-v4.1-flash @ cc（23 案）"},
+    {"effort": "high", "pct": 73.9, "model": "deepseek-v4.1-flash @ cc（23 案）"},
+    {"effort": "xhigh", "pct": 65.2, "model": "deepseek-v4.1-flash @ cc（23 案）"},
+    {"effort": "high", "pct": 73.9, "model": "glm-5.3-flash @ ollama（23 案）"},
+    {"effort": "xhigh", "pct": 52.2, "model": "glm-5.3-flash @ ollama（23 案）"},
+    {"effort": "medium", "pct": 65.2, "model": "swe-2 @ devin（23 案）"},
+    {"effort": "high", "pct": 69.6, "model": "swe-2 @ devin（23 案）"},
+    {"effort": "max", "pct": 78.3, "model": "swe-2 @ devin（23 案）"}
+  ]},
+  "width": 640,
+  "height": 320,
+  "layer": [
+    {
+      "mark": {"type": "line", "strokeWidth": 2.5, "point": {"size": 70, "opacity": 1}},
+      "encoding": {
+        "x": {"field": "effort", "type": "ordinal", "sort": ["none", "low", "medium", "high", "xhigh", "max"], "axis": {"title": "reasoning effort", "labelAngle": 0}},
+        "y": {"field": "pct", "type": "quantitative", "scale": {"domain": [40, 85]}, "axis": {"title": "案级通过率（%）"}},
+        "color": {"field": "model", "type": "nominal", "scale": {"range": ["#00838F", "#E67E22", "#6A5ACD", "#8D6E63"]}, "legend": {"title": null, "labelLimit": 0, "orient": "bottom"}}
+      }
+    },
+    {
+      "mark": {"type": "text", "dy": -10, "fontSize": 11, "color": "#555"},
+      "encoding": {
+        "x": {"field": "effort", "type": "ordinal", "sort": ["none", "low", "medium", "high", "xhigh", "max"]},
+        "y": {"field": "pct", "type": "quantitative"},
+        "text": {"field": "pct", "type": "quantitative", "format": ".0f"},
+        "detail": {"field": "model", "type": "nominal"}
+      }
+    }
+  ]
+}

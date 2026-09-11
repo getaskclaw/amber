@@ -16,7 +16,7 @@ A formal evaluation method. Take a **real, auditable** historical incident and r
 
 ![Current top three 2026-W37](docs/images/top3-2026-w37.en.png)
 
-**② Completion profile: a tie is not a twin** — two lanes tied at #1 with completely different nine-axis profiles (pin-level completion; negative d2 scores still count):
+**② Completion profile: same score, different shape** — two lanes tied at 17/23 with completely different nine-axis profiles (pin-level completion; negative d2 scores still count):
 
 ![Completion profile cc vs g53f](docs/images/completion-radar-cc-vs-g53f.en.png)
 
@@ -28,9 +28,9 @@ A formal evaluation method. Take a **real, auditable** historical incident and r
 
 ![How a result is produced](docs/images/trust-chain.en.png)
 
-**⑤ A counterintuitive finding, with limits** — on the families measured so far, high is the sweet spot and top bands backfire (three families plotted). A pattern, not a law: swe-2's band curve is monotone upward (medium 15 < high 16, [amber-devin W37](https://github.com/getaskclaw/amber-devin/blob/main/results/2026-W37.md)), and on some models the band barely moves the score — pick your band by cost and speed, not score.
+**⑤ A counterintuitive finding, with limits** — on the families measured so far, high is the sweet spot and top bands backfire (three of the four families plotted). A pattern, not a law: swe-2's band curve is monotone to the top (medium 15 < high 16 < max 18, [amber-devin W37](https://github.com/getaskclaw/amber-devin/blob/main/results/2026-W37.md)), and on some models the band barely moves the score — pick your band by cost and speed, not score.
 
-![effort curves](docs/images/effort-curves-20260910.en.png)
+![effort curves](docs/images/effort-curves-20260911.en.png)
 
 **⑥ Score vs thinking budget** — same band (high), same library, and the output-token bill spans 17× (147K vs 2.5M) for scores within a case of each other (token totals from each lane's published issue). The axis is tokens, not dollars: billing is mixed (subscription lanes have no marginal price; the devin lane reports no usage at all, so swe-2 sits this one out). Within a family, more tokens bought no score (luna flat; astra's top bands lose four cases); across families the shape varies — which is why ⑤ is a pattern, not a law.
 
@@ -71,15 +71,17 @@ Scores and cases are published separately: results are public, cases never are. 
 - [amber-opencode](https://github.com/getaskclaw/amber-opencode) — OpenCode Go models
 - [amber-gpt](https://github.com/getaskclaw/amber-gpt) — GPT-family models × reasoning-effort bands
 
-**Current top three** (as of 2026-W37, full 23-case library¹, effort=high):
+**Current top three** (as of 2026-W37, full 23-case library¹):
 
 | # | model @ endpoint | pass | source |
 |---|---|---|---|
-| 1 | glm-5.3-flash @ Ollama Cloud | 17/23 | [amber-ollama W37](https://github.com/getaskclaw/amber-ollama/blob/main/results/2026-W37.md) (tied: deepseek-v4.1-flash @ CommandCode, [amber-commandcode W37](https://github.com/getaskclaw/amber-commandcode/blob/main/results/2026-W37.md)) |
-| 2 | gpt-6-astra-900k @ OpenAI Codex | 16/23 | [amber-gpt W37](https://github.com/getaskclaw/amber-gpt/blob/main/results/2026-W37.md) (tied: qwen3.8-27b @ CrofAI, [amber-crof W37](https://github.com/getaskclaw/amber-crof/blob/main/results/2026-W37.md); deepseek-flash @ OpenCode Go, [amber-opencode W37](https://github.com/getaskclaw/amber-opencode/blob/main/results/2026-W37.md); deepseek-flash @ DeepSeek official, [amber-deepseek W37](https://github.com/getaskclaw/amber-deepseek/blob/main/results/2026-W37.md)) |
-| 3 | gpt-5.6-luna-900k @ OpenAI Codex | 15/23 | [amber-gpt W37](https://github.com/getaskclaw/amber-gpt/blob/main/results/2026-W37.md) (tied: deepseek-v4-flash-0731 @ CrofAI, deepseek-v4-flash:0731 @ Ollama Cloud) |
+| 1 | swe-2-max @ Devin | 18/23 | [amber-devin W37](https://github.com/getaskclaw/amber-devin/blob/main/results/2026-W37.md) |
+| 2 | glm-5.3-flash @ Ollama Cloud | 17/23 | [amber-ollama W37](https://github.com/getaskclaw/amber-ollama/blob/main/results/2026-W37.md) (tied: deepseek-v4.1-flash @ CommandCode, [amber-commandcode W37](https://github.com/getaskclaw/amber-commandcode/blob/main/results/2026-W37.md)) |
+| 3 | gpt-6-astra-900k @ OpenAI Codex | 16/23 | [amber-gpt W37](https://github.com/getaskclaw/amber-gpt/blob/main/results/2026-W37.md) (tied: qwen3.8-27b @ CrofAI, [amber-crof W37](https://github.com/getaskclaw/amber-crof/blob/main/results/2026-W37.md); deepseek-flash @ OpenCode Go, [amber-opencode W37](https://github.com/getaskclaw/amber-opencode/blob/main/results/2026-W37.md); deepseek-flash @ DeepSeek official, [amber-deepseek W37](https://github.com/getaskclaw/amber-deepseek/blob/main/results/2026-W37.md); swe-2-high @ Devin, [amber-devin W37](https://github.com/getaskclaw/amber-devin/blob/main/results/2026-W37.md)) |
 
-¹ Since 2026-09-08 the board runs on the full 23-case library: CrofAI/Ollama/astra sat makeup runs of the 2 ops cases added 09-07 (12/12 papers wire- and hash-verified). astra's 16/23 = W36 -900k 14 cases + a W37 makeup on bare gpt-6-astra (the -900k variant was revoked server-side; the mixed lineage is noted in the issue). Added 2026-09-10: a three-lane duel on DeepSeek V4.1-Flash's GA day — the CommandCode and OpenCode Go relays plus the official DeepSeek API, same day, same band, full library (26/26 papers wire-verified each; CommandCode 17/23 joins the #1 tie, OpenCode Go and the official lane 16/23 join #2 — result repos in the table). Out / not in: glm-5.3-flash @ CrofAI 14/23 (former #3 tie), devin swe-1-7-medium 14/23, deepseek-v4.1-flash-exp (preview, official lane) 14/23, gpt-5.6-sol-900k 14/23.
+Not yet on the board: Fable, kimi-k3 and friends — this week's token budget didn't stretch to their exam fees; they sit the library as soon as the budget lands, and scores publish with the next issue.
+
+¹ Since 2026-09-08 the board runs on the full 23-case library: CrofAI/Ollama/astra sat makeup runs of the 2 ops cases added 09-07 (12/12 papers wire- and hash-verified). astra's 16/23 = W36 -900k 14 cases + a W37 makeup on bare gpt-6-astra (the -900k variant was revoked server-side; the mixed lineage is noted in the issue). Added 2026-09-10: a three-lane duel on DeepSeek V4.1-Flash's GA day — the CommandCode and OpenCode Go relays plus the official DeepSeek API, same day, same band, full library (26/26 papers wire-verified each; CommandCode 17/23 joins the #1 tie, OpenCode Go and the official lane 16/23 join #2 — result repos in the table). Added 2026-09-11: swe-2-max @ Devin takes the board at 18/23 (16/21 on the public 21-case subset) — band curve monotone to the top (medium 15 < high 16 < max 18), the first-ever OPS 6/6 sweep, at ~5 h wall clock, roughly 4× the previous leader's (25/25 sessioned rows wire-verified, hashes 26/26 against the public index); swe-2-high 16/23 joins the #3 tie. The devin lane's harness does not forward effort — the true band is the UID suffix — and the lane reports no token usage. Out / not in: glm-5.3-flash @ CrofAI 14/23 (former #3 tie), devin swe-1-7-medium 14/23, deepseek-v4.1-flash-exp (preview, official lane) 14/23, gpt-5.6-sol-900k 14/23, gpt-5.6-luna-900k 15/23, deepseek-v4-flash-0731 @ CrofAI 15/23, deepseek-v4-flash:0731 @ Ollama Cloud 15/23 (former #3 tie), swe-2-medium 15/23 (best-ever vision 4.0).
 
 ## How to read a results matrix
 

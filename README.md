@@ -16,7 +16,7 @@
 
 ![当前前三 2026-W37](docs/images/top3-2026-w37.png)
 
-**② 完成度画像：并列 ≠ 同款** —— 两家并列 #1，九轴画像完全不同（钉级完成度；d2 拿了负分也照记）：
+**② 完成度画像：同分 ≠ 同款** —— 两家 17/23 同分，九轴画像完全不同（钉级完成度；d2 拿了负分也照记）：
 
 ![完成度画像 cc vs g53f](docs/images/completion-radar-cc-vs-g53f.png)
 
@@ -28,9 +28,9 @@
 
 ![一期成绩怎么炼成](docs/images/trust-chain.png)
 
-**⑤ 一个反直觉发现，但有边界** —— 已测家族里「想更久 ≠ 考更好」：high 档是甜点，顶档反噬（图中三家族）。是经验规律，不是定律：swe-2 的档线单调向上（medium 15 < high 16，见 [amber-devin W37](https://github.com/getaskclaw/amber-devin/blob/main/results/2026-W37.md)）；也有的模型全档随机带，选档按成本和速度，不按分。
+**⑤ 一个反直觉发现，但有边界** —— 已测家族里「想更久 ≠ 考更好」：high 档是甜点，顶档反噬（图中四家族其三）。是经验规律，不是定律：swe-2 的档线单调到底（medium 15 < high 16 < max 18，见 [amber-devin W37](https://github.com/getaskclaw/amber-devin/blob/main/results/2026-W37.md)）；也有的模型全档随机带，选档按成本和速度，不按分。
 
-![effort 曲线](docs/images/effort-curves-20260910.png)
+![effort 曲线](docs/images/effort-curves-20260911.png)
 
 **⑥ 分数 × 思考预算** —— 同 high 档、同全库，输出 token 账单跨 17 倍（147K vs 2.5M），分数却差不过一案（各道 token 数出自其期文）。横轴是 token 不是美元：各家计费混杂（订阅道没有边际价；devin 道不上报用量，swe-2 不上这张图）。家族内部，更多 token 没换来分（luna 平线、astra 顶档反噬）；家族之间形状各异——所以 ⑤ 只是经验规律。
 
@@ -71,15 +71,17 @@
 - [amber-opencode](https://github.com/getaskclaw/amber-opencode) — OpenCode Go 模型周测
 - [amber-gpt](https://github.com/getaskclaw/amber-gpt) — GPT 系模型 × 推理档位周测
 
-**当前前三**（截至 2026-W37，全库 23 案¹，effort=high）：
+**当前前三**（截至 2026-W37，全库 23 案¹）：
 
 | # | 模型 @ 端点 | 通过 | 出处 |
 |---|---|---|---|
-| 1 | glm-5.3-flash @ Ollama Cloud | 17/23 | [amber-ollama W37](https://github.com/getaskclaw/amber-ollama/blob/main/results/2026-W37.md)（并列：deepseek-v4.1-flash @ CommandCode，[amber-commandcode W37](https://github.com/getaskclaw/amber-commandcode/blob/main/results/2026-W37.md)） |
-| 2 | gpt-6-astra-900k @ OpenAI Codex | 16/23 | [amber-gpt W37](https://github.com/getaskclaw/amber-gpt/blob/main/results/2026-W37.md)（并列：qwen3.8-27b @ CrofAI，[amber-crof W37](https://github.com/getaskclaw/amber-crof/blob/main/results/2026-W37.md)；deepseek-flash @ OpenCode Go，[amber-opencode W37](https://github.com/getaskclaw/amber-opencode/blob/main/results/2026-W37.md)；deepseek-flash @ DeepSeek 官方，[amber-deepseek W37](https://github.com/getaskclaw/amber-deepseek/blob/main/results/2026-W37.md)） |
-| 3 | gpt-5.6-luna-900k @ OpenAI Codex | 15/23 | [amber-gpt W37](https://github.com/getaskclaw/amber-gpt/blob/main/results/2026-W37.md)（并列：deepseek-v4-flash-0731 @ CrofAI、deepseek-v4-flash:0731 @ Ollama Cloud） |
+| 1 | swe-2-max @ Devin | 18/23 | [amber-devin W37](https://github.com/getaskclaw/amber-devin/blob/main/results/2026-W37.md) |
+| 2 | glm-5.3-flash @ Ollama Cloud | 17/23 | [amber-ollama W37](https://github.com/getaskclaw/amber-ollama/blob/main/results/2026-W37.md)（并列：deepseek-v4.1-flash @ CommandCode，[amber-commandcode W37](https://github.com/getaskclaw/amber-commandcode/blob/main/results/2026-W37.md)） |
+| 3 | gpt-6-astra-900k @ OpenAI Codex | 16/23 | [amber-gpt W37](https://github.com/getaskclaw/amber-gpt/blob/main/results/2026-W37.md)（并列：qwen3.8-27b @ CrofAI，[amber-crof W37](https://github.com/getaskclaw/amber-crof/blob/main/results/2026-W37.md)；deepseek-flash @ OpenCode Go，[amber-opencode W37](https://github.com/getaskclaw/amber-opencode/blob/main/results/2026-W37.md)；deepseek-flash @ DeepSeek 官方，[amber-deepseek W37](https://github.com/getaskclaw/amber-deepseek/blob/main/results/2026-W37.md)；swe-2-high @ Devin，[amber-devin W37](https://github.com/getaskclaw/amber-devin/blob/main/results/2026-W37.md)） |
 
-¹ 2026-09-08 起，榜单口径从 21 案公共子集切换为全库 23 案：CrofAI / Ollama / astra 三条道已补考 09-07 新增的 2 个运维案（12/12 卷验脑 + bundle 哈希全绿）。astra 的 16/23 = W36 -900k 的 14 案 + W37 裸 gpt-6-astra 补考 2 案（-900k 变体已被服务端收回，口径混合已在期文中标注）。2026-09-10 新增：DeepSeek V4.1-Flash GA 当日三车道对拍——CommandCode / OpenCode Go 两条转发道与 DeepSeek 官方道，同日同档全库（各 26/26 卷验脑全绿；CommandCode 17/23 进入 #1 并列，OpenCode Go 与官方道 16/23 进入 #2 并列，成绩仓见上表）。跌出 / 未入：glm-5.3-flash @ CrofAI 14/23（原 #3 并列）、devin swe-1-7-medium 14/23、deepseek-v4.1-flash-exp（预览，官方道）14/23、gpt-5.6-sol-900k 14/23。
+暂未参评：Fable、kimi-k3 等模型因 token 考费不足，本期未送上考场；考费到位即补考，成绩随期发布。
+
+¹ 2026-09-08 起，榜单口径从 21 案公共子集切换为全库 23 案：CrofAI / Ollama / astra 三条道已补考 09-07 新增的 2 个运维案（12/12 卷验脑 + bundle 哈希全绿）。astra 的 16/23 = W36 -900k 的 14 案 + W37 裸 gpt-6-astra 补考 2 案（-900k 变体已被服务端收回，口径混合已在期文中标注）。2026-09-10 新增：DeepSeek V4.1-Flash GA 当日三车道对拍——CommandCode / OpenCode Go 两条转发道与 DeepSeek 官方道，同日同档全库（各 26/26 卷验脑全绿；CommandCode 17/23 进入 #1 并列，OpenCode Go 与官方道 16/23 进入 #2 并列，成绩仓见上表）。2026-09-11 新增：swe-2-max @ Devin 18/23（公共 21 案子集 16/21）登顶——档线 medium 15 < high 16 < max 18 单调到底、OPS 面史上首个 6/6 全清，墙钟约 5 小时 ≈ 前任榜首的 4 倍（25/25 会话行验脑、哈希 26/26 对公开索引）；swe-2-high 16/23 入 #3 并列。Devin 道 harness 不转发 effort，真实档 = UID 后缀；该道不上报 token 用量。跌出 / 未入：glm-5.3-flash @ CrofAI 14/23（原 #3 并列）、devin swe-1-7-medium 14/23、deepseek-v4.1-flash-exp（预览，官方道）14/23、gpt-5.6-sol-900k 14/23、gpt-5.6-luna-900k 15/23、deepseek-v4-flash-0731 @ CrofAI 15/23、deepseek-v4-flash:0731 @ Ollama Cloud 15/23（原 #3 并列）、swe-2-medium 15/23（视觉案 4.0 史上最高）。
 
 ## 怎么读一期成绩（结果仓矩阵）
 

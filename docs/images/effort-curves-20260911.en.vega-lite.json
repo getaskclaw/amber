@@ -1,6 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": {"text": ["effort curves: high is sweet, top bands backfire", "(three families, case-level pass rate %)"], "fontSize": 16, "anchor": "start"},
+  "background": "white",
+  "title": {"text": ["effort curves: top-band backlash is a family script, not a law", "(four families, case-level pass rate %; swe-2 monotone to the top)"], "fontSize": 16, "anchor": "start"},
   "data": {"values": [
     {"effort": "low", "pct": 57.1, "model": "gpt-6-astra-900k (21 cases)"},
     {"effort": "medium", "pct": 66.7, "model": "gpt-6-astra-900k (21 cases)"},
@@ -13,17 +14,20 @@
     {"effort": "high", "pct": 73.9, "model": "deepseek-v4.1-flash @ cc (23 cases)"},
     {"effort": "xhigh", "pct": 65.2, "model": "deepseek-v4.1-flash @ cc (23 cases)"},
     {"effort": "high", "pct": 73.9, "model": "glm-5.3-flash @ ollama (23 cases)"},
-    {"effort": "xhigh", "pct": 52.2, "model": "glm-5.3-flash @ ollama (23 cases)"}
+    {"effort": "xhigh", "pct": 52.2, "model": "glm-5.3-flash @ ollama (23 cases)"},
+    {"effort": "medium", "pct": 65.2, "model": "swe-2 @ devin (23 cases)"},
+    {"effort": "high", "pct": 69.6, "model": "swe-2 @ devin (23 cases)"},
+    {"effort": "max", "pct": 78.3, "model": "swe-2 @ devin (23 cases)"}
   ]},
   "width": 640,
   "height": 320,
   "layer": [
     {
-      "mark": {"type": "line", "strokeWidth": 2.5, "point": {"size": 70}},
+      "mark": {"type": "line", "strokeWidth": 2.5, "point": {"size": 70, "opacity": 1}},
       "encoding": {
         "x": {"field": "effort", "type": "ordinal", "sort": ["none", "low", "medium", "high", "xhigh", "max"], "axis": {"title": "reasoning effort", "labelAngle": 0}},
         "y": {"field": "pct", "type": "quantitative", "scale": {"domain": [40, 85]}, "axis": {"title": "case-level pass rate (%)"}},
-        "color": {"field": "model", "type": "nominal", "scale": {"range": ["#00838F", "#E67E22", "#6A5ACD"]}, "legend": {"title": null, "labelLimit": 0, "labelFontSize": 11, "orient": "bottom"}}
+        "color": {"field": "model", "type": "nominal", "scale": {"range": ["#00838F", "#E67E22", "#6A5ACD", "#8D6E63"]}, "legend": {"title": null, "labelLimit": 0, "orient": "bottom"}}
       }
     },
     {
