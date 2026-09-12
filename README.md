@@ -36,6 +36,10 @@
 
 ![分数 × 思考预算 W37](docs/images/score-vs-tokens-2026-w37.png)
 
+**⑦ 高 TPS 只在简单题上成立** —— 同一题库、逐题耗时（log 轴）：厂商的高 TPS 是简单题上的吐字速度，难题想得多，吐字当场变慢，耗时跟着翻倍。点=一题，横线=中位数；题号匿名（编号对照留私域，逐点数据见 [wallclock-2026-w37.csv](docs/data/wallclock-2026-w37.csv)）。已测家族里，swe-2 档越高越慢但破题越多（medium 84s → max 280s，中位数）；v4.1-flash 顶档反噬（中位 68s 反掉两案）。形状因家族而异——这只是已测家族的样子，不是定律。
+
+![高 TPS 只在简单题上成立 W37](docs/images/wallclock-strip-2026-w37.png?v=20260911)
+
 图的源文件（PlantUML 的 `.puml`、Vega 的 `.vega-lite.json` / `.vg.json`）就放在 PNG 同目录，改图 = 改源文件再渲染。
 
 ## 为什么需要它

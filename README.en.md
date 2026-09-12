@@ -36,6 +36,10 @@ A formal evaluation method. Take a **real, auditable** historical incident and r
 
 ![score vs thinking budget W37](docs/images/score-vs-tokens-2026-w37.en.png)
 
+**⑦ High TPS only holds on easy problems** — same library, per-problem wall time (log axis): a vendor's high TPS is decode speed measured on easy problems, and hard problems mean more thinking, slower effective decoding, and ballooning wall time. Dot = one problem, bar = median; problem IDs are anonymized (the mapping stays private; per-point data in [wallclock-2026-w37.csv](docs/data/wallclock-2026-w37.csv)). On the families measured so far, swe-2 gets slower with each higher band yet solves more (median 84 s → 280 s), while v4.1-flash backfires at the top band (68 s median, two fewer solves). Shapes vary by family — a pattern on these families, not a law.
+
+![High TPS only holds on easy problems](docs/images/wallclock-strip-2026-w37.en.png?v=20260911)
+
 Chart sources (`.puml` for PlantUML, `.vega-lite.json` / `.vg.json` for Vega) sit next to the PNGs in `docs/images/` — edit a source, re-render, done.
 
 ## Why
