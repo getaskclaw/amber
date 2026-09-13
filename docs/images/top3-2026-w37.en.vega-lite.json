@@ -6,6 +6,7 @@
     {"lane": "swe-2-max @ Devin", "pass": 18, "rank": "#1"},
     {"lane": "glm-5.3-flash @ Ollama Cloud", "pass": 17, "rank": "#2 tie"},
     {"lane": "deepseek-v4.1-flash @ CommandCode", "pass": 17, "rank": "#2 tie"},
+    {"lane": "deepseek-v4.1-flash @ Ollama Cloud", "pass": 17, "rank": "#2 tie"},
     {"lane": "hy4-preview-f @ WorkBuddy", "pass": 17, "rank": "#2 tie"},
     {"lane": "gpt-6-astra-900k @ OpenAI Codex", "pass": 16, "rank": "#3 tie"},
     {"lane": "qwen3.8-27b @ CrofAI", "pass": 16, "rank": "#3 tie"},
