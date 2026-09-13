@@ -16,9 +16,9 @@ A formal evaluation method. Take a **real, auditable** historical incident and r
 
 ![Current top three 2026-W37](docs/images/top3-2026-w37.en.png?v=20260913)
 
-**② Completion profile: same score, different shape** — four lanes now tied at 17/23, all four plotted on the same nine axes — same score, four different shapes (pin-level completion; negative d2 scores still count):
+**② Completion profile: same score, different shape** — four lanes now tied at 17/23; nine-axis completion matrix side by side — same score, four different shapes (pin-level completion; negative d2 scores still count):
 
-![Completion profile, four-way 17/23 tie](docs/images/completion-radar-4way-17.en.png)
+![Completion matrix, four-way 17/23 tie](docs/images/completion-matrix-4way-17.en.png)
 
 **③ What it is** — a private case library plus public scores: the cases never go public, the scores and hashes always do.
 
