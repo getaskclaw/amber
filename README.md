@@ -77,7 +77,7 @@
 - [docs/instability-memo-2026-09-14.md](docs/instability-memo-2026-09-14.md) — $0 历史漂移证据 memo：900 个已发布矩阵格、31 个规范臂（转载列已标记），证明「分数快照 ≠ 稳定性」
 - [docs/stage0-flip-analysis-2026-09-14.md](docs/stage0-flip-analysis-2026-09-14.md) — stage-0 翻转清单：17 条漂移/恢复事件（矩阵派生 + 散文标注），含 stage-1 筛查候选
 - [docs/stage1-v001-screen-20260915.md](docs/stage1-v001-screen-20260915.md) — 首个设计型稳定性数据：`A-ea80d793` × `glm-5.3-flash@ollama` n=20 同臂复跑，8/20 过（~40%，判决纪律 20/20 稳定）——边界格案例须报分数分布而非二元翻转
-- [docs/stage1-reqdrift-screen-20260915.md](docs/stage1-reqdrift-screen-20260915.md) — `A-0676097b` × `luna-high` n=5 复跑：3/5 过，回归在同一坐席复现两次且同为两个变体——漂移/矛盾分类边界案；协议新增多变体逐变体向量与 no-deliverable 分列
+- [docs/stage1-reqdrift-screen-20260915.md](docs/stage1-reqdrift-screen-20260915.md) — `A-0676097b` × `luna-high` n=5 复跑：3/5 过，回归在同一坐席复现两次且同为两个变体（变体名留私域）——升级分类边界案；协议新增多变体逐变体向量与 no-deliverable 分列
 - [hash-index/v2026-09.md](hash-index/v2026-09.md) — 公开哈希索引：当前题集（23 案）每案的别名 + bundle/oracle 双哈希；结果仓每期矩阵以此为准对照
 - [PLAN.md](PLAN.md) — 状态、里程碑（建案工具 → 参考运行器 → 评分与裁判 → 统计 → 公开索引）、待决设计问题
 - [CONTRIBUTING.md](CONTRIBUTING.md) — 贡献规则：**本仓库绝不接收案件内容**、规范文档的版本与修订政策、Core 规范按字节哈希锁定的含义
