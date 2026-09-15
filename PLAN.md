@@ -11,6 +11,9 @@ Specification; where this file and Core conflict, Core wins.
   detached manifest signature, enumerated redacted summary, leak-date
   validity window, corrected verification matrix, `spec_sha256` byte
   definition, Core citation fixes).
+- **Draft under review:** Stability Protocol v0.1
+  (`protocols/stability.md`) and the $0 historical-drift memo
+  (`docs/instability-memo-2026-09-14.md`) that motivates it.
 - **Not yet published:** `schemas/`, `profiles/`, case-building tooling, and a
   reference runner. A conformant run is **not executable from this repository
   alone today** — this file exists to make that gap explicit and to sequence
@@ -47,7 +50,8 @@ Specification; where this file and Core conflict, Core wins.
   test); LLM-judge protocol covering judge pinning, blinding, and drift
   checks — expected to become its own document under `protocols/`.
 - **M4 — Statistics protocol.** Repeated runs, paired comparison, and
-  reporting rules, as a companion document under `protocols/`.
+  reporting rules, drafted as `protocols/stability.md` v0.1; still needs
+  review before publication.
 - **M5 — Public index bootstrap.** Reference implementation of the
   append-only signed index (Distribution §4), including key management and
   rotation.
