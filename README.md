@@ -2,7 +2,7 @@
 
 `封进琥珀，重做当时的题。`
 
-**题集** 23 案 / 26 卷 · **规范** v0.2.2（草案） · **哈希索引** [v2026-09](hash-index/v2026-09.md) · **成绩仓** × 8 · **纪律** 只发分数，不发题
+**题集** 23 案 / 26 卷 · **规范** v0.2.2（草案） · **哈希索引** [v2026-09](hash-index/v2026-09.md) · **成绩仓** × 9 · **纪律** 只发分数，不发题
 
 *English readers: the normative documents are in English — start with [AMBER-Core-Specification.md](AMBER-Core-Specification.md); repo orientation in English: [README.en.md](README.en.md).*
 
@@ -42,7 +42,7 @@
 
 ![一期成绩怎么炼成](docs/images/trust-chain.png)
 
-**⑤ 一个反直觉发现，但有边界** —— 已测家族里「想更久 ≠ 考更好」：high 档是甜点，顶档反噬（图中四家族其三）。是经验规律，不是定律：swe-2 的档线单调到底（medium 15 < high 16 < max 18，见 [amber-devin W37](https://github.com/getaskclaw/amber-devin/blob/main/results/2026-W37.md)）；也有的模型全档随机带，选档按成本和速度，不按分；WorkBuddy 道本期只考了 high 一档，尚无曲线可画。
+**⑤ 一个反直觉发现，但有边界** —— 已测家族里「想更久 ≠ 考更好」：high 档是甜点，顶档反噬（图中四家族其三）。是经验规律，不是定律：swe-2 的档线单调到底（medium 15 < high 16 < max 18，见 [amber-devin W37](https://github.com/getaskclaw/amber-devin/blob/main/results/2026-W37.md)）；也有的模型全档随机带，选档按成本和速度，不按分；WorkBuddy 道与 Kimi 道目前只考了 high 一档，尚无曲线可画。
 
 ![effort 曲线](docs/images/effort-curves-20260911.png)
 

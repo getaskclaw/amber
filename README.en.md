@@ -2,7 +2,7 @@
 
 `Seal the scene in amber. Retake the exam of that moment.`
 
-**Library** 23 cases / 26 papers · **Spec** v0.2.2 (draft) · **Hash index** [v2026-09](hash-index/v2026-09.md) · **Result repos** × 8 · **Rule** scores always public, cases never
+**Library** 23 cases / 26 papers · **Spec** v0.2.2 (draft) · **Hash index** [v2026-09](hash-index/v2026-09.md) · **Result repos** × 9 · **Rule** scores always public, cases never
 
 中文说明：[README.md](README.md). The normative document is [AMBER-Core-Specification.md](AMBER-Core-Specification.md).
 
@@ -42,7 +42,7 @@ A formal evaluation method. Take a **real, auditable** historical incident and r
 
 ![How a result is produced](docs/images/trust-chain.en.png)
 
-**⑤ A counterintuitive finding, with limits** — on the families measured so far, high is the sweet spot and top bands backfire (three of the four families plotted). A pattern, not a law: swe-2's band curve is monotone to the top (medium 15 < high 16 < max 18, [amber-devin W37](https://github.com/getaskclaw/amber-devin/blob/main/results/2026-W37.md)), and on some models the band barely moves the score — pick your band by cost and speed, not score; the WorkBuddy lane only has a high-band score so far, no curve to plot.
+**⑤ A counterintuitive finding, with limits** — on the families measured so far, high is the sweet spot and top bands backfire (three of the four families plotted). A pattern, not a law: swe-2's band curve is monotone to the top (medium 15 < high 16 < max 18, [amber-devin W37](https://github.com/getaskclaw/amber-devin/blob/main/results/2026-W37.md)), and on some models the band barely moves the score — pick your band by cost and speed, not score; the WorkBuddy and Kimi lanes only have high-band scores so far, no curve to plot.
 
 ![effort curves](docs/images/effort-curves-20260911.en.png)
 
