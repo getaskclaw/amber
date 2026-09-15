@@ -14,9 +14,9 @@
 
 **① 当前榜首** —— **swe-2-max @ Devin，18/23**（2026-W37，全库 23 案，档线 medium 15 < high 16 < max 18）。同名模型换个端点，可能就是另一个脑：成绩一律按「端点 × 名字」记。
 
-![当前前三 2026-W37](docs/images/top3-2026-w37.png?v=20260913)
+![当前前三 2026-W38](docs/images/top3-2026-w38.png?v=20260915)
 
-**② 完成度画像：同分 ≠ 同款** —— 17/23 现在是四家并列；九轴完成度矩阵同场对照，同分四种形状（钉级完成度；d2 拿了负分也照记）：
+**② 完成度画像：同分 ≠ 同款** —— 17/23 现在是五家并列；九轴完成度矩阵先对照其中四家（W37 期，k3 的九轴画像随 W38 补进），同分四种形状（钉级完成度；d2 拿了负分也照记）：
 
 ![完成度矩阵 四家 17/23 并列](docs/images/completion-matrix-4way-17.png)
 
@@ -73,6 +73,11 @@
 
 - [AMBER-Core-Specification.md](AMBER-Core-Specification.md) — 规范本体：目的、定义、机制、8 条不变量、8 条边界、认识论限制、命名评审、采用规则
 - [protocols/distribution.md](protocols/distribution.md) — 案件跨主机分发协议（v0.3）：公开/私有频道划分、固定构造的 git bundle、分离式签名清单、公开索引、密封探针、泄漏窗口的裁定规则、运行记录、可比性与验证矩阵
+- [protocols/stability.md](protocols/stability.md) — 稳定性协议草案（v0.1）：同臂复跑、失败后恢复率、副作用计数、基建废卷分列、样本量按决策反推
+- [docs/instability-memo-2026-09-14.md](docs/instability-memo-2026-09-14.md) — $0 历史漂移证据 memo：900 个已发布矩阵格、31 个规范臂（转载列已标记），证明「分数快照 ≠ 稳定性」
+- [docs/stage0-flip-analysis-2026-09-14.md](docs/stage0-flip-analysis-2026-09-14.md) — stage-0 翻转清单：17 条漂移/恢复事件（矩阵派生 + 散文标注），含 stage-1 筛查候选
+- [docs/stage1-v001-screen-20260915.md](docs/stage1-v001-screen-20260915.md) — 首个设计型稳定性数据：`A-ea80d793` × `glm-5.3-flash@ollama` n=20 同臂复跑，8/20 过（~40%，判决纪律 20/20 稳定）——边界格案例须报分数分布而非二元翻转
+- [docs/stage1-reqdrift-screen-20260915.md](docs/stage1-reqdrift-screen-20260915.md) — `A-0676097b` × `luna-high` n=5 复跑：3/5 过，回归在同一坐席复现两次且同为两个变体——漂移/矛盾分类边界案；协议新增多变体逐变体向量与 no-deliverable 分列
 - [hash-index/v2026-09.md](hash-index/v2026-09.md) — 公开哈希索引：当前题集（23 案）每案的别名 + bundle/oracle 双哈希；结果仓每期矩阵以此为准对照
 - [PLAN.md](PLAN.md) — 状态、里程碑（建案工具 → 参考运行器 → 评分与裁判 → 统计 → 公开索引）、待决设计问题
 - [CONTRIBUTING.md](CONTRIBUTING.md) — 贡献规则：**本仓库绝不接收案件内容**、规范文档的版本与修订政策、Core 规范按字节哈希锁定的含义
@@ -85,22 +90,23 @@
 - [amber-commandcode](https://github.com/getaskclaw/amber-commandcode) — CommandCode 模型周测
 - [amber-deepseek](https://github.com/getaskclaw/amber-deepseek) — DeepSeek 官方 API 模型周测
 - [amber-devin](https://github.com/getaskclaw/amber-devin) — Devin 模型周测
+- [amber-kimi](https://github.com/getaskclaw/amber-kimi) — Kimi 官方 coding 端点模型周测
 - [amber-ollama](https://github.com/getaskclaw/amber-ollama) — Ollama Cloud 模型周测
 - [amber-opencode](https://github.com/getaskclaw/amber-opencode) — OpenCode Go 模型周测
 - [amber-gpt](https://github.com/getaskclaw/amber-gpt) — GPT 系模型 × 推理档位周测
 - [amber-workbuddy](https://github.com/getaskclaw/amber-workbuddy) — WorkBuddy（CodeBuddy）ACP 通道模型周测
 
-**当前前三**（截至 2026-W37，全库 23 案¹）：
+**当前前三**（截至 2026-W38，全库 23 案¹）：
 
 | # | 模型 @ 端点 | 通过 | 出处 |
 |---|---|---|---|
 | 1 | swe-2-max @ Devin | 18/23 | [amber-devin W37](https://github.com/getaskclaw/amber-devin/blob/main/results/2026-W37.md) |
-| 2 | glm-5.3-flash @ Ollama Cloud | 17/23 | [amber-ollama W37](https://github.com/getaskclaw/amber-ollama/blob/main/results/2026-W37.md)（并列：deepseek-v4.1-flash @ CommandCode，[amber-commandcode W37](https://github.com/getaskclaw/amber-commandcode/blob/main/results/2026-W37.md)；deepseek-v4.1-flash @ Ollama Cloud，[amber-ollama W37 Addendum 09-11](https://github.com/getaskclaw/amber-ollama/blob/main/results/2026-W37.md)；hy4-preview-f @ WorkBuddy，[amber-workbuddy W37](https://github.com/getaskclaw/amber-workbuddy/blob/main/results/2026-W37.md)） |
+| 2 | glm-5.3-flash @ Ollama Cloud | 17/23 | [amber-ollama W37](https://github.com/getaskclaw/amber-ollama/blob/main/results/2026-W37.md)（并列：deepseek-v4.1-flash @ CommandCode，[amber-commandcode W37](https://github.com/getaskclaw/amber-commandcode/blob/main/results/2026-W37.md)；deepseek-v4.1-flash @ Ollama Cloud，[amber-ollama W37 Addendum 09-11](https://github.com/getaskclaw/amber-ollama/blob/main/results/2026-W37.md)；hy4-preview-f @ WorkBuddy，[amber-workbuddy W37](https://github.com/getaskclaw/amber-workbuddy/blob/main/results/2026-W37.md)；k3 @ Kimi 官方 coding 端点，[amber-kimi W38](https://github.com/getaskclaw/amber-kimi/blob/main/results/2026-W38.md)） |
 | 3 | gpt-6-astra-900k @ OpenAI Codex | 16/23 | [amber-gpt W37](https://github.com/getaskclaw/amber-gpt/blob/main/results/2026-W37.md)（并列：qwen3.8-27b @ CrofAI，[amber-crof W37](https://github.com/getaskclaw/amber-crof/blob/main/results/2026-W37.md)；deepseek-flash @ OpenCode Go，[amber-opencode W37](https://github.com/getaskclaw/amber-opencode/blob/main/results/2026-W37.md)；deepseek-flash @ DeepSeek 官方，[amber-deepseek W37](https://github.com/getaskclaw/amber-deepseek/blob/main/results/2026-W37.md)；swe-2-high @ Devin，[amber-devin W37](https://github.com/getaskclaw/amber-devin/blob/main/results/2026-W37.md)） |
 
-暂未参评：Fable、kimi-k3 等模型因 token 考费不足，本期未送上考场；考费到位即补考，成绩随期发布。
+暂未参评：Fable 等模型因 token 考费不足，本期未送上考场；考费到位即补考，成绩随期发布。（kimi-k3 已于 2026-09-15 首考入榜，见上表 #2 并列。）
 
-¹ 2026-09-08 起，榜单口径从 21 案公共子集切换为全库 23 案：CrofAI / Ollama / astra 三条道已补考 09-07 新增的 2 个运维案（12/12 卷验脑 + bundle 哈希全绿）。astra 的 16/23 = W36 -900k 的 14 案 + W37 裸 gpt-6-astra 补考 2 案（-900k 变体已被服务端收回，口径混合已在期文中标注）。2026-09-10 新增：DeepSeek V4.1-Flash GA 当日三车道对拍——CommandCode / OpenCode Go 两条转发道与 DeepSeek 官方道，同日同档全库（各 26/26 卷验脑全绿；CommandCode 17/23 进入 #2 并列，OpenCode Go 与官方道 16/23 进入 #3 并列，成绩仓见上表）。2026-09-11 新增：deepseek-v4.1-flash @ Ollama Cloud 首考 17/23 入 #2 并列（同日复测 glm-5.3-flash 16/23，落在已知抖动带内；amber-ollama W37 Addendum）；swe-2-max @ Devin 18/23（公共 21 案子集 16/21）登顶——档线 medium 15 < high 16 < max 18 单调到底、OPS 面 6/6 全清（道内唯一；全场非首——gpt luna 与 ollama g53f 更早），墙钟约 5 小时 ≈ 前任榜首的 4 倍（25/25 会话行验脑、哈希 26/26 对公开索引）；swe-2-high 16/23 入 #3 并列。Devin 道 harness 不转发 effort，真实档 = UID 后缀；该道不上报 token 用量。跌出 / 未入：glm-5.3-flash @ CrofAI 14/23（原 #3 并列）、devin swe-1-7-medium 14/23、deepseek-v4.1-flash-exp（预览，官方道）14/23、gpt-5.6-sol-900k 14/23、gpt-5.6-luna-900k 15/23、deepseek-v4-flash-0731 @ CrofAI 15/23、deepseek-v4-flash:0731 @ Ollama Cloud 15/23（原 #3 并列）、swe-2-medium 15/23（视觉案 4.0 史上最高）、swe-2-low 15/23（与 medium 同分不同画像——保住 A-442d4aab 7/7 与 A-a317e74b 7/15 两个重判断案，丢运维考古案；2026-09-12 Addendum，26/26 验脑、23/23 哈希对公开索引）、deepseek-v4.1-flash @ WorkBuddy 15/23（见下）。2026-09-12 补：gpt-5.6-luna-900k 第三遍 high 15/23（挂科名单跨日 ±2 漂移，前三构成不变；sol 应 owner 要求暂停，9/26 未记分）。 2026-09-13 新增：WorkBuddy ACP 通道 W37 首考双模型——hy4-preview-f 17/23 入 #2 并列（OPS 6/6 全清、A-d9b79b46 12/12 满分；A-a317e74b 主跑撞 1800s 帽、3600s 帽补考 14/15 并列该案已发布第二高分，唯一过案为 crof q38 的 15/15）；deepseek-v4.1-flash 15/23 未入前三，但交出 A-be92627f 9/9——该案史上首个过案、核验面第二席（此前 15+ 条已发布成绩无一过案，最高 8/9；核验面首破为 crof q38 的 A-a317e74b 15/15）。验脑：82/82 usage 行全在钉住车道，V001 两卷走 direct-acp 旁路（manifest 标注 `runner`）；23/23 哈希对公开索引。车道特性：token 用量不回传、effort 经 ACP set_config_option 侧通道钉入、原生工具面为 bypassPermissions。hy3 应 owner 要求中止，未记分。
+¹ 2026-09-08 起，榜单口径从 21 案公共子集切换为全库 23 案：CrofAI / Ollama / astra 三条道已补考 09-07 新增的 2 个运维案（12/12 卷验脑 + bundle 哈希全绿）。astra 的 16/23 = W36 -900k 的 14 案 + W37 裸 gpt-6-astra 补考 2 案（-900k 变体已被服务端收回，口径混合已在期文中标注）。2026-09-10 新增：DeepSeek V4.1-Flash GA 当日三车道对拍——CommandCode / OpenCode Go 两条转发道与 DeepSeek 官方道，同日同档全库（各 26/26 卷验脑全绿；CommandCode 17/23 进入 #2 并列，OpenCode Go 与官方道 16/23 进入 #3 并列，成绩仓见上表）。2026-09-11 新增：deepseek-v4.1-flash @ Ollama Cloud 首考 17/23 入 #2 并列（同日复测 glm-5.3-flash 16/23，落在已知抖动带内；amber-ollama W37 Addendum）；swe-2-max @ Devin 18/23（公共 21 案子集 16/21）登顶——档线 medium 15 < high 16 < max 18 单调到底、OPS 面 6/6 全清（道内唯一；全场非首——gpt luna 与 ollama g53f 更早），墙钟约 5 小时 ≈ 前任榜首的 4 倍（25/25 会话行验脑、哈希 26/26 对公开索引）；swe-2-high 16/23 入 #3 并列。Devin 道 harness 不转发 effort，真实档 = UID 后缀；该道不上报 token 用量。跌出 / 未入：glm-5.3-flash @ CrofAI 14/23（原 #3 并列）、devin swe-1-7-medium 14/23、deepseek-v4.1-flash-exp（预览，官方道）14/23、gpt-5.6-sol-900k 14/23、gpt-5.6-luna-900k 15/23、deepseek-v4-flash-0731 @ CrofAI 15/23、deepseek-v4-flash:0731 @ Ollama Cloud 15/23（原 #3 并列）、swe-2-medium 15/23（视觉案 4.0 史上最高）、swe-2-low 15/23（与 medium 同分不同画像——保住 A-442d4aab 7/7 与 A-a317e74b 7/15 两个重判断案，丢运维考古案；2026-09-12 Addendum，26/26 验脑、23/23 哈希对公开索引）、deepseek-v4.1-flash @ WorkBuddy 15/23（见下）。2026-09-12 补：gpt-5.6-luna-900k 第三遍 high 15/23（挂科名单跨日 ±2 漂移，前三构成不变；sol 应 owner 要求暂停，9/26 未记分）。 2026-09-13 新增：WorkBuddy ACP 通道 W37 首考双模型——hy4-preview-f 17/23 入 #2 并列（OPS 6/6 全清、A-d9b79b46 12/12 满分；A-a317e74b 主跑撞 1800s 帽、3600s 帽补考 14/15 并列该案已发布第二高分，唯一过案为 crof q38 的 15/15）；deepseek-v4.1-flash 15/23 未入前三，但交出 A-be92627f 9/9——该案史上首个过案、核验面第二席（此前 15+ 条已发布成绩无一过案，最高 8/9；核验面首破为 crof q38 的 A-a317e74b 15/15）。验脑：82/82 usage 行全在钉住车道，V001 两卷走 direct-acp 旁路（manifest 标注 `runner`）；23/23 哈希对公开索引。车道特性：token 用量不回传、effort 经 ACP set_config_option 侧通道钉入、原生工具面为 bypassPermissions。hy3 应 owner 要求中止，未记分。2026-09-15 新增：k3 @ Kimi 官方 coding 端点首考 17/23（公共 21 案子集 15/21）入 #2 并列——编码面 5/6（硬区分器 A-442d4aab 7/7 与 A-569dbe0d 10/10 双满分）、OPS 面 6/6 全清、视觉骑线案 A-ea80d793 3.0 过线；核验面 0/3、A-d9b79b46 交付缺文件、A-cdc3d11a -2。26/26 会话行核验 (k3, kimi-coding) 零替身、23/23 哈希对公开索引；26 卷墙钟 sum 约 2.8 小时（[amber-kimi W38](https://github.com/getaskclaw/amber-kimi/blob/main/results/2026-W38.md)）。
 
 ## 怎么读一期成绩（结果仓矩阵）
 
