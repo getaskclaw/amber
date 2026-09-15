@@ -40,7 +40,7 @@ A formal evaluation method. Take a **real, auditable** historical incident and r
 
 **④ How a result is produced** — it works like an exam: papers sealed at authoring, sat in a clean room, audited paper by paper, published redacted, checkable by anyone.
 
-![How a result is produced](docs/images/trust-chain.en.png?v=20260915)
+![How a result is produced](docs/images/trust-chain.en.png?v=20260915b)
 
 **⑤ A counterintuitive finding, with limits** — on the families measured so far, high is the sweet spot and top bands backfire (three of the four families plotted). A pattern, not a law: swe-2's band curve is monotone to the top (medium 15 < high 16 < max 18, [amber-devin W37](https://github.com/getaskclaw/amber-devin/blob/main/results/2026-W37.md)), and on some models the band barely moves the score — pick your band by cost and speed, not score; the WorkBuddy and Kimi lanes only have high-band scores so far, no curve to plot.
 

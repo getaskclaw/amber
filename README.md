@@ -40,7 +40,7 @@
 
 **④ 一期成绩怎么炼成** —— 像一场考试：出卷封存、净室应考、逐卷验脑、脱敏发布、人人可核对。
 
-![一期成绩怎么炼成](docs/images/trust-chain.png?v=20260915)
+![一期成绩怎么炼成](docs/images/trust-chain.png?v=20260915b)
 
 **⑤ 一个反直觉发现，但有边界** —— 已测家族里「想更久 ≠ 考更好」：high 档是甜点，顶档反噬（图中四家族其三）。是经验规律，不是定律：swe-2 的档线单调到底（medium 15 < high 16 < max 18，见 [amber-devin W37](https://github.com/getaskclaw/amber-devin/blob/main/results/2026-W37.md)）；也有的模型全档随机带，选档按成本和速度，不按分；WorkBuddy 道与 Kimi 道目前只考了 high 一档，尚无曲线可画。
 
