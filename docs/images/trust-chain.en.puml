@@ -3,6 +3,7 @@ skinparam backgroundColor #FAFEFE
 skinparam defaultFontName "Noto Sans CJK SC"
 skinparam shadowing false
 title How one issue's scores are forged: the exam analogy
+left to right direction
 package "Paper prep (private, locked)" #FADBD8 {
   [Real historical events\nrewound to pre-reveal] as kase
   [Rubric frozen in advance\noracle self-scores] as oracle

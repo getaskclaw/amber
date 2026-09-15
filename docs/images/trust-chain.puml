@@ -3,6 +3,7 @@ skinparam backgroundColor #FAFEFE
 skinparam defaultFontName "Noto Sans CJK SC"
 skinparam shadowing false
 title 一期成绩怎么炼成:考试比喻
+left to right direction
 package "出卷(私有,锁起来)" #FADBD8 {
   [真实历史事件\n还原到揭晓前] as kase
   [评分标准预先冻结\noracle 自算分] as oracle
