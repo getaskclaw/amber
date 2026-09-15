@@ -16,9 +16,9 @@ A formal evaluation method. Take a **real, auditable** historical incident and r
 
 ![Current top three 2026-W38](docs/images/top3-2026-w38.en.png?v=20260915)
 
-**② Completion profile: same score, different shape** — five lanes now tied at 17/23; nine-axis completion matrix for four of them first (W37-era; k3's nine-axis profile lands with W38) — same score, four different shapes (pin-level completion; negative d2 scores still count):
+**② Completion profile: same score, different shape** — five lanes now tied at 17/23; nine-axis completion matrix, all five side by side — same score, five different shapes (pin-level completion; negative d2 scores still count). The new k3 row at a glance: an empty dot on UI (the incomplete-deliverable case), attribution below the top pair, vision tied for best with glm-5.3-flash:
 
-![Completion matrix, four-way 17/23 tie](docs/images/completion-matrix-4way-17.en.png)
+![Completion matrix, five-way 17/23 tie](docs/images/completion-matrix-5way-17.en.png)
 
 > **The nine axes, in plain language** — each cell is the lane's completion (0–1) across that facet's cases; pin-scored cases fold in by pins:
 >
