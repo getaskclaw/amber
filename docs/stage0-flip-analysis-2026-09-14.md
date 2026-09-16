@@ -60,7 +60,7 @@ Every other arm in the matrix has exactly one observation per case. Their cells 
 | `luna-high@codex` | r1/r2 → r3 | 8 → 8 | −`A-ea80d793` +`A-0676097b`; headline pinned at 15/23 all three runs |
 | `luna-medium@codex` | W37 → 09-12 | 8 → 9 | +1 case, **case id unpublished** — evidence gap |
 
-Stable-fail sets (fail in every observation): `glm-5.3-flash@ollama` = {`87c472cb`, `a317e74b`, `be92627f`, `cdc3d11a`, `d511f9e8`, `d9b79b46`} (6); `luna-high` = same 6 + `A-47eea242` (7). These are the cheapest stage-1 screen members — a single recovery in n=5 already falsifies "stable fail".
+Stable-fail sets (fail in every observation): `glm-5.3-flash@ollama` = {`87c472cb`, `a317e74b`, `be92627f`, `cdc3d11a`, `d511f9e8`, `d9b79b46`} (6); `luna-high` = same 6 + `A-47eea242` (7). These are the cheapest stage-1 screen members — a single recovery in n=5 already falsifies "stable fail". **glm set screened 2026-09-15 (n=5, two billing accounts, same arm): five cases keep the label (A-87c472cb/A-d511f9e8 partials glued; A-a317e74b needs a 3600 s cap to finish); `d9b79b46` (A-d9b79b46) label torn — stage-2 n=20 complete: 6/20 pass ≈30%, Wilson [14.5%, 51.9%] (stage-1's 3/4 over-read; binary-only trust at n=5). See `stage1-sfail-screen-20260915.md`.**
 
 ## 6. What this does and does not show
 
