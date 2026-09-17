@@ -16,9 +16,9 @@ A formal evaluation method. Take a **real, auditable** historical incident and r
 
 ![Current top three 2026-W38](docs/images/top3-2026-w38.en.png?v=20260916)
 
-**② Completion profile: same score, different shape** — five lanes now tied at 17/23; nine-axis completion matrix, all five side by side — same score, five different shapes (pin-level completion; negative d2 scores still count). The new k3 row at a glance: an empty dot on UI (the incomplete-deliverable case), attribution below the top pair, vision tied for best with glm-5.3-flash. Added 09-16, the doubao 16/23 row: full marks on all four construction axes (coding/delivery/ops/requirements), level with the leaders — but empty dots on UI and vision, review at a third, and both verification axes (attribution/defense) harness-walled ∅, plotted 0 pending the makeup run — the most lopsided shape on the field. Negative d2 is floored at 0; raw values in [amber-doubao W38](https://github.com/getaskclaw/amber-doubao/blob/main/results/2026-W38.md):
+**② Completion profile: same score, different shape** — five lanes now tied at 17/23; nine-axis completion matrix, all five side by side — same score, five different shapes (pin-level completion; negative d2 scores still count). The new k3 row at a glance: an empty dot on UI (the incomplete-deliverable case), attribution below the top pair, vision tied for best with glm-5.3-flash. Added 09-16, the doubao 16/23 row: full marks on all four construction axes (coding/delivery/ops/requirements), level with the leaders — but empty dots on UI and vision, review at a third — the most lopsided shape on the field. Its two verification axes (attribution/defense) were harness-walled in the main sweep and landed real scores in a 3600s makeup (0.47 / 0.50 — low but real; [amber-doubao W38 addendum](https://github.com/getaskclaw/amber-doubao/blob/main/results/2026-W38.md)). Negative d2 is floored at 0:
 
-![Completion matrix, five-way 17/23 tie + doubao 16/23](docs/images/completion-matrix-6way.en.png?v=20260916)
+![Completion matrix, five-way 17/23 tie + doubao 16/23](docs/images/completion-matrix-6way.en.png?v=20260916b)
 
 > **The nine axes, in plain language** — each cell is the lane's completion (0–1) across that facet's cases; pin-scored cases fold in by pins:
 >

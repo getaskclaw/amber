@@ -4,7 +4,7 @@
   "height": 340,
   "title": {
     "text": "五家 17/23 + doubao 16/23：九轴完成度矩阵（21 案子集）",
-    "subtitle": "点越大 = 该面完成度越高；doubao 核验两轴（归因/防御）为考墙 ∅ 暂记 0，补考后更新",
+    "subtitle": "点越大 = 该面完成度越高；doubao 核验两轴为 3600s 补考真值（addendum 1）",
     "fontSize": 15,
     "subtitleFontSize": 11
   },
@@ -250,12 +250,12 @@
           {
             "key": "防御",
             "lane": "doubao-seed-evolving @ 火山方舟 Agent Plan",
-            "value": 0.0
+            "value": 0.5
           },
           {
             "key": "归因",
             "lane": "doubao-seed-evolving @ 火山方舟 Agent Plan",
-            "value": 0.0
+            "value": 0.467
           },
           {
             "key": "审查",
@@ -612,12 +612,12 @@
           {
             "key": "防御",
             "lane": "doubao-seed-evolving @ 火山方舟 Agent Plan",
-            "value": 0.0
+            "value": 0.5
           },
           {
             "key": "归因",
             "lane": "doubao-seed-evolving @ 火山方舟 Agent Plan",
-            "value": 0.0
+            "value": 0.467
           },
           {
             "key": "审查",

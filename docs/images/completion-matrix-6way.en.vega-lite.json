@@ -4,7 +4,7 @@
   "height": 340,
   "title": {
     "text": "Five-way 17/23 tie + doubao 16/23: nine-axis completion matrix (21-case subset)",
-    "subtitle": "bigger dot = higher completion; doubao attribution/defense are harness-walled (∅), plotted 0 pending makeup",
+    "subtitle": "bigger dot = higher completion; doubao verification axes = real scores from the 3600s makeup (addendum 1)",
     "fontSize": 15,
     "subtitleFontSize": 11
   },
@@ -250,12 +250,12 @@
           {
             "key": "Defense",
             "lane": "doubao-seed-evolving @ Ark Agent Plan",
-            "value": 0.0
+            "value": 0.5
           },
           {
             "key": "Attribution",
             "lane": "doubao-seed-evolving @ Ark Agent Plan",
-            "value": 0.0
+            "value": 0.467
           },
           {
             "key": "Review",
@@ -612,12 +612,12 @@
           {
             "key": "Defense",
             "lane": "doubao-seed-evolving @ Ark Agent Plan",
-            "value": 0.0
+            "value": 0.5
           },
           {
             "key": "Attribution",
             "lane": "doubao-seed-evolving @ Ark Agent Plan",
-            "value": 0.0
+            "value": 0.467
           },
           {
             "key": "Review",
