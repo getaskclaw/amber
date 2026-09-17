@@ -1,8 +1,10 @@
 # AMBER Stability Protocol
 
-Draft v0.1, 2026-09-14. Companion to AMBER Core Specification v0.2.2 and Distribution Protocol v0.3. Where this protocol and Core conflict, Core wins. This protocol adds repeat-run statistics and reporting rules; it does not change case validity, scoring, terminal states, or the public/private split.
+Draft v0.2, 2026-09-15. Companion to AMBER Core Specification v0.2.2 and Distribution Protocol v0.3. Where this protocol and Core conflict, Core wins. This protocol adds repeat-run statistics and reporting rules; it does not change case validity, scoring, terminal states, or the public/private split.
 
 *v0.1, 2026-09-14. Initial draft prompted by external review: headline scores are capability snapshots, while operational stability needs separate, bounded evidence.*
+
+*v0.2, 2026-09-15. Cost reality: designed reruns are budget-gated (billing account + tier named up front); quota windows are a first-class cost alongside dollars; stage-1 screens carry binary verdicts only — measured stage-1 rates over-read (75% at n=4 shrank to 30% at n=20); invalid causes (`harness_timeout`/`billing_exhausted`/`infrastructure_missing`/`model_delivery_budget_burn`) and `driver_exception` taxed separately. Source: `docs/stage1-sfail-screen-20260915.md`.*
 
 ## 1. Purpose
 
@@ -22,6 +24,9 @@ The two measurements must not be merged. A headline `N/M` remains the primary ca
 - **Fail-set delta**: the symmetric difference between two runs' failed-case sets. Report both directions: fail→pass recoveries and pass→fail regressions.
 - **Side effect**: a candidate-caused effect outside the declared task contract, defined by the evaluation profile before the run. Side effects are counted separately from task outcome.
 - **Boundary margin**: for partial-credit cases, the distance between an arm's modal score and the pass threshold. When the gate sits on the arm's modal score, binary pass/fail flips on scoring noise without any capability change — the stable quantities are the score distribution and the per-criterion hit vector, and a binary flip on such a case must not be reported as instability. Binary verdicts are only meaningful stability evidence for arms whose modal score is far from the gate. (First measured instance: `A-ea80d793` × `glm-5.3-flash@ollama`, `docs/stage1-v001-screen-20260915.md` — 20/20 stable verdict discipline, hit count 1–3/5 against a hits≥3 gate → binary flipped 8/20.)
+
+- **Billing account**: the credential paying for the runs. It is NOT an arm component when endpoint, served model, band, and harness are unchanged — it is the payment pipe. Swapping billing accounts mid-screen is permitted but must be disclosed per trial (account fingerprint, never the key).
+- **Window-share cost**: the fraction of a subscription quota window (e.g., a provider's 5-hour session window or 7-day weekly window) consumed by a screen. A burned window is a real cost even when the marginal dollar cost is zero — it starves every other use of that account. Report window-share alongside token counts.
 
 ## 3. Arm identity and comparability
 
@@ -57,6 +62,10 @@ Cells reprinted across reports (cross-vendor comparison columns, digest tables, 
 
 For each case whose primary valid outcome is a failure, run `n = 5` same-arm repeat trials. `n` counts **valid** trials: `invalid_infrastructure` attempts are reported separately and do not consume the budget. Multi-variant cases repeat all scored variants for a case-level trial; paper-level repeats may be reported separately but must not be called case-level.
 
+**Budget gate (v0.2)**: designed reruns spend prepaid quota. Every designed screen needs explicit owner budget approval before firing, naming the billing account and its tier. Bench-dedicated accounts are preferred; production-fallback accounts (shared with operational lanes) require per-use owner sign-off, and the screen must state its expected window-share before starting. The default stability spend is $0 observational mining: §4.1 historical audits plus organic fleet traffic (weekly library runs, repeated operational jobs) mined for repeat observations.
+
+**Binary-only at n=5**: stage 1 reports only the binary verdict — `no_recovery_observed` vs `recovery_capable`. Never report a stage-1 recovery *rate*: on 2026-09-15 `A-d9b79b46` screened 3/4 (75%) and landed 6/20 (30%) at stage 2.
+
 Interpretation:
 
 - `0/5` recoveries: report `no_recovery_observed(n=5)`. This is a screen, not proof of a stable failure.
@@ -70,6 +79,8 @@ Escalate a screened case to `n = 20` total valid trials (the stage-1 trials coun
 
 - stage 1 observed at least one recovery; or
 - the case is decision-critical enough that a bounded statement is worth the spend.
+
+Escalation passes through the same §4.2 budget gate.
 
 Interpretation:
 
@@ -96,7 +107,12 @@ When a result will be used to rank arms, publish the uncertainty interval or the
 Use Core terminal states exactly.
 
 - `valid_task_success` and `valid_task_failure` count in task-outcome denominators.
-- `invalid_infrastructure` is excluded from task-outcome denominators and reported in its own column. A later makeup run may replace the infrastructure attempt operationally, but the invalid count remains visible.
+- `invalid_infrastructure` is excluded from task-outcome denominators and reported in its own column. A later makeup run may replace the infrastructure attempt operationally, but the invalid count remains visible. Within `invalid_infrastructure`, record the cause:
+  - `infrastructure_missing` — a runtime dependency was absent (e.g., a missing browser binary); fix the environment, then rerun the oracle on the same candidate where possible so the attempt still yields a task outcome;
+  - `harness_timeout` — the candidate was killed at the cap; owed a doubled-cap makeup per the infra-rerun discipline (per-case cap tables beat one global cap: measured 2026-09-15, `A-a317e74b` needed 3600 s where 1800 s capped 3 of 6 attempts);
+  - `billing_exhausted` — quota death; **abort the screen immediately**, never convert it into further five-second attempts that masquerade as completed rounds;
+  - `model_delivery_budget_burn` — model-side over-run, counted per the profile's delivery rules.
+- `driver_exception` is not a trial at all: the harness itself crashed (e.g., the runner binary missing from `PATH`). Excluded from every denominator; purge from aggregates, keeping raw records as `.bak` for audit.
 - `protocol_violation` is reported separately; it is not a flaky failure mode.
 - `pending_adjudication` is non-terminal and excluded until adjudicated.
 - Missing or owed trials are reported as missing/owed, never silently treated as failures or passes.
@@ -115,7 +131,9 @@ Per repeated case, record at least:
 - invalid/owed reason where applicable;
 - side-effect count and side-effect class;
 - workspace/environment reset identifier;
-- token/cost fields when available, otherwise wall clock.
+- token/cost fields when available, otherwise wall clock;
+- billing-account fingerprint (never the key) and account tier (bench-dedicated / production-fallback);
+- window-share consumed: tokens plus, for windowed subscriptions, the share of the session/weekly window burned;
 
 Per arm, publish aggregates:
 
@@ -148,6 +166,7 @@ A model-name match across endpoints is not pairing. Endpoint differences are par
 - Recovery-after-fail is conditional on the primary fail set and has selection bias by construction.
 - Repeats are not perfectly iid: provider behavior, model snapshots, harness versions, and date/time can drift. Sequential repeats on one endpoint can also be time-correlated — check whether failures cluster in the run order before reading them as independent draws (observed: `A-0676097b` screen failed only in rounds 4–5 of 5).
 - A bounded `n` can bound an unobserved rate; it cannot prove impossibility.
+- A stage-1 recovery rate over-reads: small screens inflate — measured 2026-09-15, 3/4 (75%) at stage 1 became 6/20 (30%) at stage 2. Quote rates only from stage-2-sized samples.
 - Same-day replication does not establish cross-day stability.
 - A stable score can hide a drifting fail set; report both.
 - Stability under one isolation/egress or tool surface does not transfer to another without evidence.

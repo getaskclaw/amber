@@ -62,11 +62,16 @@
         "lane": "swe-2-high @ Devin",
         "pass": 16,
         "rank": "#3 tie"
+      },
+      {
+        "lane": "doubao-seed-evolving @ Ark Agent Plan",
+        "pass": 16,
+        "rank": "#3 tie"
       }
     ]
   },
   "width": 620,
-  "height": 340,
+  "height": 368,
   "layer": [
     {
       "mark": {

@@ -14,7 +14,7 @@ A formal evaluation method. Take a **real, auditable** historical incident and r
 
 **① Current leader** — **swe-2-max @ Devin, 18/23** (2026-W37, full 23-case library; band curve medium 15 < high 16 < max 18). The same model name on a different endpoint can be a different brain, so we record scores per endpoint × name:
 
-![Current top three 2026-W38](docs/images/top3-2026-w38.en.png?v=20260915)
+![Current top three 2026-W38](docs/images/top3-2026-w38.en.png?v=20260916)
 
 **② Completion profile: same score, different shape** — five lanes now tied at 17/23; nine-axis completion matrix, all five side by side — same score, five different shapes (pin-level completion; negative d2 scores still count). The new k3 row at a glance: an empty dot on UI (the incomplete-deliverable case), attribution below the top pair, vision tied for best with glm-5.3-flash:
 
