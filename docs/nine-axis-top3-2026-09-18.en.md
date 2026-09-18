@@ -32,10 +32,10 @@
 
 | Rank | Model @ endpoint | Completion | Vendor |
 |---|---|---|---|
-| 1 | swe-2-low @ Devin | 0.722 (**single run, not re-measured** — excluded from routing conclusions until then) | Devin |
+| 1 | swe-2-high @ Devin (originally labeled swe-2-low — [correction 2026-09-18](corrections-2026-09-18.en.md): that id does not exist; the run was actually a high re-run) | 0.722 (**single run, not re-measured** — excluded from routing conclusions until then) | Devin |
 | 2 | tie: glm-5.3-flash @ Ollama Cloud / deepseek-v4.1-flash @ Ollama Cloud | 0.667 | Zhipu, DeepSeek |
 
-Worth stating plainly: swe-2-low sits at the bottom of the overall ladder yet posts its family's best review score — judgment faces and construction faces do not correlate.
+Worth stating plainly: swe-2-high is not at the top of the overall ladder yet posts its family's best review score at 0.722 — judgment faces and construction faces do not correlate. (This row was originally attributed to swe-2-low; the conclusion stands, the attribution is corrected.)
 
 ### Vision — spot defects in real screenshots (1 defect-hunt case)
 

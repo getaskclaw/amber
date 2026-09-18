@@ -11,7 +11,7 @@ A-a317e74b,verify,gpt-5.6-luna-900k@openai-codex:high,3,severity_drift,W37 matri
 A-ea80d793,vision,frontier-anchor@openai-codex:high,3,status_flip,clean-wire reruns: fail 2.0 / fail -2 / pass 3.0,mixed,cross_day,prose,amber-ollama/results/2026-W36.md [errata]; amber-crof W36 errata
 A-8c909d0a,ops,swe-1-7-medium@devin,2,infra_rerun,invalid_infrastructure (38.5 s ACP drop) -> same-day makeup valid pass,recovery,same_day,prose,"amber-devin/results/2026-W37.md [harness notes, prose]"
 A-8c909d0a,ops,swe-2-max@devin,2,infra_rerun,invalid_infrastructure (49 s ACP drop) -> makeup valid pass,recovery,same_day,prose,"amber-devin/results/2026-W37.md [harness notes, prose]"
-A-a317e74b,verify,swe-2-low@devin,3,infra_rerun,invalid_infrastructure x2 (v0.21.2 ACP stall) -> terminal-lane makeup valid fail 7/15,recovery_of_valid_score,same_day,prose,"amber-devin/results/2026-W37.md [harness notes, prose]"
+A-a317e74b,verify,"swe-2-high@devin (rerun, orig. swe-2-low)",3,infra_rerun,invalid_infrastructure x2 (v0.21.2 ACP stall) -> terminal-lane makeup valid fail 7/15,recovery_of_valid_score,same_day,prose,"amber-devin/results/2026-W37.md [harness notes, prose]"
 A-a317e74b,verify,swe-2-max@devin,4,infra_rerun,"1800 s cap timeout x2 + 3600 s cap makeup timeout x2 -> owed, not scored",no_recovery,same_day,prose,"amber-devin/results/2026-W37.md [harness notes, prose]"
 (6 papers),delivery-contract,glm-5-2@devin,3,reproduction,"delivery failure reproduced on 2 same-day makeup replays - stable defect, not sampling luck",stable,same_day,prose,"amber-devin/results/2026-W37.md [harness notes, prose]"
 A-a317e74b,verify,hy4-preview-f@workbuddy,2,infra_rerun,invalid -> retry valid fail 14/15,recovery_of_valid_score,same_day,prose,amber-workbuddy/results/2026-W37.md [prose]

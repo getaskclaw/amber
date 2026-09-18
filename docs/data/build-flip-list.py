@@ -128,7 +128,9 @@ emit("A-8c909d0a", "ops", "swe-1-7-medium@devin", 2, "infra_rerun",
 emit("A-8c909d0a", "ops", "swe-2-max@devin", 2, "infra_rerun",
      "invalid_infrastructure (49 s ACP drop) -> makeup valid pass",
      "recovery", "same_day", "prose", SRC_D37)
-emit("A-a317e74b", "verify", "swe-2-low@devin", 3, "infra_rerun",
+# 2026-09-18 correction: lane originally labeled swe-2-low@devin was actually a
+# swe-2-high rerun (silent server-side fallback; docs/corrections-2026-09-18.md).
+emit("A-a317e74b", "verify", "swe-2-high@devin (rerun, orig. swe-2-low)", 3, "infra_rerun",
      "invalid_infrastructure x2 (v0.21.2 ACP stall) -> terminal-lane makeup "
      "valid fail 7/15", "recovery_of_valid_score", "same_day", "prose", SRC_D37)
 emit("A-a317e74b", "verify", "swe-2-max@devin", 4, "infra_rerun",

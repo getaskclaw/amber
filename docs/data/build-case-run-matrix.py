@@ -115,7 +115,10 @@ SPECS = [
         "swe-2-high": ("swe-2-high@devin", "primary", 0),
         "swe-2-medium": ("swe-2-medium@devin", "primary", 0),
         "swe-2-max": ("swe-2-max@devin", "primary", 0),
-        "swe-2-low": ("swe-2-low@devin", "primary", 0),
+        # 2026-09-18 correction: the W37 column historically labeled "swe-2-low"
+        # was a silent server-side fallback — the resolved model was swe-2-high
+        # (see docs/corrections-2026-09-18.md). Emitted as a high rerun.
+        "swe-2-low": ("swe-2-high@devin", "rerun", 1),
     }),
 ]
 
