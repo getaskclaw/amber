@@ -4,6 +4,8 @@
 
 **Library** 23 cases / 26 papers · **Spec** v0.2.2 (draft) · **Hash index** [v2026-09](hash-index/v2026-09.md) · **Result repos** × 11 · **Rule** scores always public, cases never
 
+> ⚠️ **[Correction 2026-09-18](docs/corrections-2026-09-18.en.md)**: published "swe-2-low @ Devin" results were actually **swe-2-high** — that model id does not exist; the server silently routed to its default band. The medium 15 < high 16 < max 18 ladder is unaffected.
+
 中文说明：[README.md](README.md). The normative document is [AMBER-Core-Specification.md](AMBER-Core-Specification.md).
 
 ## What this is
