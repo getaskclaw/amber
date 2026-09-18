@@ -339,7 +339,8 @@
      4,
      3
     ],
-    "opacity": 0.7
+    "opacity": 0.7,
+    "tooltip": true
    },
    "encoding": {
     "x": {
@@ -389,7 +390,8 @@
     "type": "point",
     "size": 110,
     "filled": true,
-    "opacity": 1
+    "opacity": 1,
+    "tooltip": true
    },
    "encoding": {
     "x": {

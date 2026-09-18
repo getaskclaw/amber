@@ -418,7 +418,8 @@
     "filled": true,
     "opacity": 0.95,
     "stroke": "#bbb",
-    "strokeWidth": 1
+    "strokeWidth": 1,
+    "tooltip": true
    }
   },
   {

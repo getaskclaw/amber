@@ -139,7 +139,8 @@
     "cornerRadiusEnd": 3,
     "height": 20,
     "stroke": "#00414A",
-    "strokeWidth": 0.75
+    "strokeWidth": 0.75,
+    "tooltip": true
    },
    "encoding": {
     "y": {
