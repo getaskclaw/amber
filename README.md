@@ -2,7 +2,7 @@
 
 `封进琥珀，重做当时的题。`
 
-**题集** 23 案 / 26 卷 · **规范** v0.2.2（草案） · **哈希索引** [v2026-09](hash-index/v2026-09.md) · **成绩仓** × 9 · **纪律** 只发分数，不发题
+**题集** 23 案 / 26 卷 · **规范** v0.2.2（草案） · **哈希索引** [v2026-09](hash-index/v2026-09.md) · **成绩仓** × 11 · **纪律** 只发分数，不发题
 
 *English readers: the normative documents are in English — start with [AMBER-Core-Specification.md](AMBER-Core-Specification.md); repo orientation in English: [README.en.md](README.en.md).*
 
@@ -14,7 +14,7 @@
 
 **① 当前榜首** —— **swe-2-max @ Devin，18/23**（2026-W37，全库 23 案，档线 medium 15 < high 16 < max 18）。同名模型换个端点，可能就是另一个脑：成绩一律按「端点 × 名字」记。
 
-![当前前五 2026-W38](docs/images/top5-2026-w38.png?v=20260917)
+![当前前五 2026-W38](docs/images/top5-2026-w38.png?v=20260917b)
 
 **② 完成度画像：同分 ≠ 同款** —— 17/23 现在是五家并列；九轴完成度矩阵五家同场，同分五种形状（钉级完成度；d2 拿了负分也照记）。新补的 k3 行一眼读：UI 是空点（交付缺文件那案）、归因低于头部两家、视觉与 glm-5.3-flash 并列最高。09-16 再补 doubao 16/23 行：施工四轴（编码/交付/运维/需求）满格与头部对齐，但 UI/视觉空点、审查仅三分之一——形状是同场最偏科的一条；核验两轴（归因/防御）初扫考墙 ∅，3600s 补考落到真值 0.47/0.50（低分但真实，见 [amber-doubao W38 addendum](https://github.com/getaskclaw/amber-doubao/blob/main/results/2026-W38.md)）；d2 负分按 0 落点。09-17 再补 gp27b 14/23 行（Qwen3.8-27B @ goldenpotato 社区自部署）：偏科比 doubao 更极端——施工组四轴贴着头部（编码 0.83 / 交付满 / 运维 0.97 / 需求满），审查/视觉/UI 三轴全零，归因/防御落在全场最低档；NVFP4 激进量化在动手面无损，在判断面全灭（[amber-goldenpotato W38](https://github.com/getaskclaw/amber-goldenpotato/blob/main/results/2026-W38.md)）：
 
@@ -36,7 +36,7 @@
 
 **③ 它是什么** —— 私有题库 + 公开成绩：题目永不公开，分数与哈希永远可查。
 
-![AMBER 是什么](docs/images/what-is-amber.png)
+![AMBER 是什么](docs/images/what-is-amber.png?v=20260917)
 
 **④ 一期成绩怎么炼成** —— 像一场考试：出卷封存、净室应考、逐卷验脑、脱敏发布、人人可核对。
 

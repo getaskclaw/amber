@@ -155,11 +155,144 @@
    }
   },
   {
+   "transform": [
+    {
+     "filter": "datum.model == \"gpt-6-astra-900k (21 cases)\""
+    }
+   ],
    "mark": {
     "type": "text",
-    "dy": -10,
     "fontSize": 11,
-    "color": "#555"
+    "color": "#555",
+    "align": "left",
+    "dx": 6,
+    "dy": -14
+   },
+   "encoding": {
+    "x": {
+     "field": "effort",
+     "type": "ordinal",
+     "sort": [
+      "none",
+      "low",
+      "medium",
+      "high",
+      "xhigh",
+      "max"
+     ]
+    },
+    "y": {
+     "field": "pct",
+     "type": "quantitative"
+    },
+    "text": {
+     "field": "pct",
+     "type": "quantitative",
+     "format": ".0f"
+    },
+    "detail": {
+     "field": "model",
+     "type": "nominal"
+    }
+   }
+  },
+  {
+   "transform": [
+    {
+     "filter": "datum.model == \"deepseek-v4.1-flash @ cc (23 cases)\""
+    }
+   ],
+   "mark": {
+    "type": "text",
+    "fontSize": 11,
+    "color": "#555",
+    "align": "left",
+    "dx": 6,
+    "dy": 12
+   },
+   "encoding": {
+    "x": {
+     "field": "effort",
+     "type": "ordinal",
+     "sort": [
+      "none",
+      "low",
+      "medium",
+      "high",
+      "xhigh",
+      "max"
+     ]
+    },
+    "y": {
+     "field": "pct",
+     "type": "quantitative"
+    },
+    "text": {
+     "field": "pct",
+     "type": "quantitative",
+     "format": ".0f"
+    },
+    "detail": {
+     "field": "model",
+     "type": "nominal"
+    }
+   }
+  },
+  {
+   "transform": [
+    {
+     "filter": "datum.model == \"glm-5.3-flash @ ollama (23 cases)\""
+    }
+   ],
+   "mark": {
+    "type": "text",
+    "fontSize": 11,
+    "color": "#555",
+    "align": "left",
+    "dx": 6,
+    "dy": -24
+   },
+   "encoding": {
+    "x": {
+     "field": "effort",
+     "type": "ordinal",
+     "sort": [
+      "none",
+      "low",
+      "medium",
+      "high",
+      "xhigh",
+      "max"
+     ]
+    },
+    "y": {
+     "field": "pct",
+     "type": "quantitative"
+    },
+    "text": {
+     "field": "pct",
+     "type": "quantitative",
+     "format": ".0f"
+    },
+    "detail": {
+     "field": "model",
+     "type": "nominal"
+    }
+   }
+  },
+  {
+   "transform": [
+    {
+     "filter": "datum.model == \"swe-2 @ devin (23 cases)\""
+    }
+   ],
+   "mark": {
+    "type": "text",
+    "fontSize": 11,
+    "color": "#555",
+    "align": "left",
+    "dx": 6,
+    "dy": 22
    },
    "encoding": {
     "x": {

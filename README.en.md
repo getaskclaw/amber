@@ -2,7 +2,7 @@
 
 `Seal the scene in amber. Retake the exam of that moment.`
 
-**Library** 23 cases / 26 papers · **Spec** v0.2.2 (draft) · **Hash index** [v2026-09](hash-index/v2026-09.md) · **Result repos** × 9 · **Rule** scores always public, cases never
+**Library** 23 cases / 26 papers · **Spec** v0.2.2 (draft) · **Hash index** [v2026-09](hash-index/v2026-09.md) · **Result repos** × 11 · **Rule** scores always public, cases never
 
 中文说明：[README.md](README.md). The normative document is [AMBER-Core-Specification.md](AMBER-Core-Specification.md).
 
@@ -14,7 +14,7 @@ A formal evaluation method. Take a **real, auditable** historical incident and r
 
 **① Current leader** — **swe-2-max @ Devin, 18/23** (2026-W37, full 23-case library; band curve medium 15 < high 16 < max 18). The same model name on a different endpoint can be a different brain, so we record scores per endpoint × name:
 
-![Current top five 2026-W38](docs/images/top5-2026-w38.en.png?v=20260917)
+![Current top five 2026-W38](docs/images/top5-2026-w38.en.png?v=20260917b)
 
 **② Completion profile: same score, different shape** — five lanes now tied at 17/23; nine-axis completion matrix, all five side by side — same score, five different shapes (pin-level completion; negative d2 scores still count). The new k3 row at a glance: an empty dot on UI (the incomplete-deliverable case), attribution below the top pair, vision tied for best with glm-5.3-flash. Added 09-16, the doubao 16/23 row: full marks on all four construction axes (coding/delivery/ops/requirements), level with the leaders — but empty dots on UI and vision, review at a third — the most lopsided shape on the field. Its two verification axes (attribution/defense) were harness-walled in the main sweep and landed real scores in a 3600s makeup (0.47 / 0.50 — low but real; [amber-doubao W38 addendum](https://github.com/getaskclaw/amber-doubao/blob/main/results/2026-W38.md)). Negative d2 is floored at 0. Added 09-17, the gp27b 14/23 row (Qwen3.8-27B @ goldenpotato community self-hosted): an even more lopsided shape than doubao — construction group at the leaders' level (coding 0.83 / delivery full / ops 0.97 / requirements full) while review/vision/UI sit at absolute zero and attribution/defense at the field's bottom band; aggressive NVFP4 quantization cost nothing on the hands-on faces and everything on the judgment faces ([amber-goldenpotato W38](https://github.com/getaskclaw/amber-goldenpotato/blob/main/results/2026-W38.md)):
 
@@ -36,7 +36,7 @@ A formal evaluation method. Take a **real, auditable** historical incident and r
 
 **③ What it is** — a private case library plus public scores: the cases never go public, the scores and hashes always do.
 
-![What is AMBER](docs/images/what-is-amber.en.png)
+![What is AMBER](docs/images/what-is-amber.en.png?v=20260917)
 
 **④ How a result is produced** — it works like an exam: papers sealed at authoring, sat in a clean room, audited paper by paper, published redacted, checkable by anyone.
 

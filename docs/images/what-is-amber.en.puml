@@ -16,7 +16,7 @@ left side
 *** Internal case IDs & variant names
 **[#D5F5E3] Public side\n(always public)
 *** amber repo\nspec + public hash index
-*** Seven result repos\n(by vendor / endpoint)
+*** Eleven result repos\n(by vendor / endpoint)
 *** Alias A-xxxxxxxx\n+ bundle hash
 **[#FFF9C4] Readers\n(what you can check)
 *** Scores / aggregates / speed / verdicts
