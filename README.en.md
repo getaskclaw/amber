@@ -16,7 +16,7 @@ A formal evaluation method. Take a **real, auditable** historical incident and r
 
 ![Current top five 2026-W38](docs/images/top5-2026-w38.en.png?v=20260917b)
 
-**② Completion profile: same score, different shape** — five lanes now tied at 17/23; nine-axis completion matrix, all five side by side — same score, five different shapes (pin-level completion; negative d2 scores still count). The new k3 row at a glance: an empty dot on UI (the incomplete-deliverable case), attribution below the top pair, vision tied for best with glm-5.3-flash. Added 09-16, the doubao 16/23 row: full marks on all four construction axes (coding/delivery/ops/requirements), level with the leaders — but empty dots on UI and vision, review at a third — the most lopsided shape on the field. Its two verification axes (attribution/defense) were harness-walled in the main sweep and landed real scores in a 3600s makeup (0.47 / 0.50 — low but real; [amber-doubao W38 addendum](https://github.com/getaskclaw/amber-doubao/blob/main/results/2026-W38.md)). Negative d2 is floored at 0. Added 09-17, the gp27b 14/23 row (Qwen3.8-27B @ goldenpotato community self-hosted): an even more lopsided shape than doubao — construction group at the leaders' level (coding 0.83 / delivery full / ops 0.97 / requirements full) while review/vision/UI sit at absolute zero and attribution/defense at the field's bottom band; aggressive NVFP4 quantization cost nothing on the hands-on faces and everything on the judgment faces ([amber-goldenpotato W38](https://github.com/getaskclaw/amber-goldenpotato/blob/main/results/2026-W38.md)):
+**② Completion profile: same score, different shape** — five lanes now tied at 17/23; nine-axis completion matrix, all five side by side — same score, five different shapes (pin-level completion; negative defect-hunt scores still count). The new k3 row at a glance: an empty dot on UI (the incomplete-deliverable case), attribution below the top pair, vision tied for best with glm-5.3-flash. Added 09-16, the doubao 16/23 row: full marks on all four construction axes (coding/delivery/ops/requirements), level with the leaders — but empty dots on UI and vision, review at a third — the most lopsided shape on the field. Its two verification axes (attribution/defense) were harness-walled in the main sweep and landed real scores in a 3600s makeup (0.47 / 0.50 — low but real; [amber-doubao W38 addendum](https://github.com/getaskclaw/amber-doubao/blob/main/results/2026-W38.md)). Negative defect-hunt scores are floored at 0. Added 09-17, the gp27b 14/23 row (Qwen3.8-27B @ goldenpotato community self-hosted): an even more lopsided shape than doubao — construction group at the leaders' level (coding 0.83 / delivery full / ops 0.97 / requirements full) while review/vision/UI sit at absolute zero and attribution/defense at the field's bottom band; aggressive NVFP4 quantization cost nothing on the hands-on faces and everything on the judgment faces ([amber-goldenpotato W38](https://github.com/getaskclaw/amber-goldenpotato/blob/main/results/2026-W38.md)):
 
 ![Completion matrix, five-way 17/23 tie + doubao 16/23 + gp27b 14/23](docs/images/completion-matrix-7way.en.png?v=20260917)
 
@@ -26,11 +26,11 @@ A formal evaluation method. Take a **real, auditable** historical incident and r
 - **Delivery** · done ≠ handed in: no artifact means 0, however good the plan (1 case)
 - **Defense** · night-shift guard: plug every hole in the validator without turning away legit input (mean of 2 cases)
 - **Attribution** · a doctor matching symptoms to causes: pin each defect to the right root cause (1 case, 15 pins)
-- **Review** · be the inspector: find real defects in someone's deliverable — misses and false alarms both cost, and the score can go negative (2 cases, d2)
+- **Review** · be the inspector: find real defects in someone's deliverable — misses and false alarms both cost, and the score can go negative (2 cases, defect-hunt score)
 - **Ops** · follow the runbook: backups, cutovers, reconciliation — no skipped steps (mean of 6 cases)
 - **Requirements** · the client asked for A, not B — ship A (1 case)
 - **UI** · build the page to the mock, pin-level acceptance (1 case, 12 pins)
-- **Vision** · spot defects in real screenshots: overlaps, cropping, missing legends — did it actually see them (1 case, d2)
+- **Vision** · spot defects in real screenshots: overlaps, cropping, missing legends — did it actually see them (1 case, defect-hunt score)
 
 Axes grow with the library: each new case family can add a column — extend this list the same way.
 
@@ -119,7 +119,7 @@ Every issue is a single `results/YYYY-Www.md` built around a matrix. Five things
 - **Alias (A-xxxxxxxx)** — the case's public handle. Internal case numbers never appear, so scores can't be reverse-engineered into case content.
 - **bundle_sha** — the content hash of the case bundle. Match it against the [hash index](hash-index/v2026-09.md): identical means the library hasn't changed.
 - **✓ / ✗ (case level)** — the pass line is "all required checks green": 8/9 still fails — a defense that leaks one pin leaks.
-- **d2 (review/vision cases)** — hits − false positives − flattery − verdict penalty. Positive is hard; negative is common.
+- **Defect-hunt score (review/vision cases)** — hits − false positives − flattery − verdict penalty. Positive is hard; negative is common. (The column in result-repo matrices is labeled `d2`; same ruler.)
 - **Comparability trio** — compare only at the same effort band and same library version, and read the date; the same model name on another endpoint may be another brain. One day's number is a snapshot, not a law.
 
 ## FAQ
