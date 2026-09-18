@@ -119,7 +119,7 @@ Every issue is a single `results/YYYY-Www.md` built around a matrix. Five things
 - **Alias (A-xxxxxxxx)** — the case's public handle. Internal case numbers never appear, so scores can't be reverse-engineered into case content.
 - **bundle_sha** — the content hash of the case bundle. Match it against the [hash index](hash-index/v2026-09.md): identical means the library hasn't changed.
 - **✓ / ✗ (case level)** — the pass line is "all required checks green": 8/9 still fails — a defense that leaks one pin leaks.
-- **Defect-hunt score (review/vision cases)** — hits − false positives − flattery − verdict penalty. Positive is hard; negative is common. (The column in result-repo matrices is labeled `d2`; same ruler.)
+- **Defect-hunt score (review/vision cases)** — hits − false positives − flattery − verdict penalty. Positive is hard; negative is common. (Published result-repo write-ups and charts label it `d2`; same ruler.)
 - **Comparability trio** — compare only at the same effort band and same library version, and read the date; the same model name on another endpoint may be another brain. One day's number is a snapshot, not a law.
 
 ## FAQ
