@@ -18,7 +18,7 @@ A formal evaluation method. Take a **real, auditable** historical incident and r
 
 **② Completion profile: same score, different shape** — five lanes now tied at 17/23; nine-axis completion matrix, all five side by side — same score, five different shapes (pin-level completion; negative defect-hunt scores still count). The new k3 row at a glance: an empty dot on UI (the incomplete-deliverable case), attribution below the top pair, vision tied for best with glm-5.3-flash. Added 09-16, the doubao 16/23 row: full marks on all four construction axes (coding/delivery/ops/requirements), level with the leaders — but empty dots on UI and vision, review at a third — the most lopsided shape on the field. Its two verification axes (attribution/defense) were harness-walled in the main sweep and landed real scores in a 3600s makeup (0.47 / 0.50 — low but real; [amber-doubao W38 addendum](https://github.com/getaskclaw/amber-doubao/blob/main/results/2026-W38.md)). Negative defect-hunt scores are floored at 0. Added 09-17, the gp27b 14/23 row (Qwen3.8-27B @ goldenpotato community self-hosted): an even more lopsided shape than doubao — construction group at the leaders' level (coding 0.83 / delivery full / ops 0.97 / requirements full) while review/vision/UI sit at absolute zero and attribution/defense at the field's bottom band; aggressive NVFP4 quantization cost nothing on the hands-on faces and everything on the judgment faces ([amber-goldenpotato W38](https://github.com/getaskclaw/amber-goldenpotato/blob/main/results/2026-W38.md)):
 
-![Completion matrix, five-way 17/23 tie + doubao 16/23 + gp27b 14/23](docs/images/completion-matrix-7way.en.png?v=20260917)
+![Completion matrix, five-way 17/23 tie + doubao 16/23 + gp27b 14/23](docs/images/completion-matrix-7way.en.png?v=20260918)
 
 **The nine axes, in plain language** — each cell is the lane's completion (0–1) across that axis's cases; pin-scored cases fold in by pins:
 
@@ -50,7 +50,7 @@ Who tops each axis? Recomputed across 40 published lanes: [Nine-axis podium 2026
 
 **⑥ Score vs thinking budget** — same band (high), same library, and the output-token bill spans 17× (147K vs 2.5M) for scores within a case of each other (token totals from each lane's published issue). The axis is tokens, not dollars: billing is mixed (subscription lanes have no marginal price; the devin and workbuddy lanes report no usage at all, so swe-2 and the wb pair sit this one out). Within a family, more tokens bought no score (luna flat; astra's top bands lose four cases); across families the shape varies — which is why ⑤ is a pattern, not a law.
 
-![score vs thinking budget W37](docs/images/score-vs-tokens-2026-w37.en.png)
+![score vs thinking budget W37](docs/images/score-vs-tokens-2026-w37.en.png?v=20260918)
 
 **⑦ High TPS only holds on easy problems** — same library, per-problem wall time (log axis): a vendor's high TPS is decode speed measured on easy problems, and hard problems mean more thinking, slower effective decoding, and ballooning wall time. Dot = one problem, bar = median; problem IDs are anonymized (the mapping stays private; per-point data in [wallclock-2026-w37.csv](docs/data/wallclock-2026-w37.csv)). On the families measured so far, swe-2 gets slower with each higher band yet solves more (median 82 s → 280 s), while v4.1-flash backfires at the top band (68 s median, two fewer solves). Shapes vary by family — a pattern on these families, not a law.
 
