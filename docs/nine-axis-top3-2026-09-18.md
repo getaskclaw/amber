@@ -9,6 +9,7 @@
 - 同一「模型 @ 端点」多档、多跑的，取该车道已发布的最佳一趟
 - 复算锚点与已发布值核对一致（例：doubao 核验两轴 0.47 / 0.50、gp27b 施工 0.83 / 运维 0.97）
 - 已知限制：跨周快照、21→23 案口径过渡、单跑车道的抖动未复测（逐项在下文标注）
+- **「厂商」栏 = 标称模型的厂商，@ 后为官道或转发渠道；对标称道不作身份背书。** 特别是 CrofAI：2026-09-13 ktibow 的 [wire 级取证](https://kendell.dev/blog/crofaifalse)指其为 OpenRouter 套壳、多款在售模型指纹指向完全不同的上游；我们自己的[行为指纹分析](https://github.com/getaskclaw/amber-crof/blob/main/docs/model-identity-cosine-2026-09.md)独立旁证了这一点（crof `glm-5.3-flash` 三度量下都最像 `deepseek-v4.1-flash @ ollama`；`qwen3.8-27b` 可疑未坐实）。下文凡 CrofAI 车道一律带 ⚠，其成绩真实有效，但「它是谁」未被证实
 
 ## 有区分度的四轴
 
@@ -24,7 +25,7 @@
 
 | 名次 | 模型 @ 端点 | 完成度 | 厂商 |
 |---|---|---|---|
-| 1 | qwen3.8-27b @ CrofAI | **1.000**（全场唯一 15/15） | 阿里 Qwen |
+| 1 | qwen3.8-27b @ CrofAI ⚠ | **1.000**（全场唯一 15/15） | **标称**阿里 Qwen——身份未坐实：行为指纹最像 DeepSeek 0731 道（[指纹分析](https://github.com/getaskclaw/amber-crof/blob/main/docs/model-identity-cosine-2026-09.md)） |
 | 2 | glm-5.3-flash @ Ollama Cloud / gpt-6-astra @ OpenAI Codex / hy4-preview-f @ WorkBuddy（并列） | 0.933 | 智谱、OpenAI、WorkBuddy 通道 |
 
 ### 审查 · 当验收官挑错（2 案找茬分均分）
@@ -49,7 +50,7 @@
 - **交付**：满分 1.000 并列 29 条车道（反向信息才有价值：零交付的当场出局）
 - **运维**：满分并列 14 条车道（swe-2-max、k3、doubao-seed-evolving、gpt-5.6-luna、hy4-preview-f、DeepSeek 各道等）
 - **需求**：满分并列约 26 条车道
-- **UI**：满分并列 12 条车道（swe-2 全系、gpt-6-astra、gpt-5.6-sol/luna-max、glm-5.3-flash @ CrofAI、deepseek-v4.1-flash 两道、hy4-preview-f、glm-5-2 @ Devin）
+- **UI**：满分并列 12 条车道（swe-2 全系、gpt-6-astra、gpt-5.6-sol/luna-max、glm-5.3-flash @ CrofAI ⚠、deepseek-v4.1-flash 两道、hy4-preview-f、glm-5-2 @ Devin）
 
 ## 读法提醒
 
