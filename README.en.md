@@ -34,6 +34,8 @@ A formal evaluation method. Take a **real, auditable** historical incident and r
 
 Axes grow with the library: each new case family can add a column — extend this list the same way.
 
+Who tops each axis? Recomputed across 40 published lanes: [Nine-axis podium 2026-09-18](docs/nine-axis-top3-2026-09-18.en.md) — only defense/attribution/review/vision actually rank the field, the four champions belong to four different vendors, and the overall board leader wins none of them.
+
 **③ What it is** — a private case library plus public scores: the cases never go public, the scores and hashes always do.
 
 ![What is AMBER](docs/images/what-is-amber.en.png?v=20260917)
