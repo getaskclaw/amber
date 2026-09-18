@@ -44,7 +44,7 @@ A formal evaluation method. Take a **real, auditable** historical incident and r
 
 **⑤ A counterintuitive finding, with limits** — on the families measured so far, high is the sweet spot and top bands backfire (three of the four families plotted). A pattern, not a law: swe-2's band curve is monotone to the top (medium 15 < high 16 < max 18, [amber-devin W37](https://github.com/getaskclaw/amber-devin/blob/main/results/2026-W37.md)), and on some models the band barely moves the score — pick your band by cost and speed, not score; the WorkBuddy and Kimi lanes only have high-band scores so far, no curve to plot.
 
-![effort curves](docs/images/effort-curves-20260911.en.png)
+![effort curves](docs/images/effort-curves-20260911.en.png?v=20260917)
 
 **⑥ Score vs thinking budget** — same band (high), same library, and the output-token bill spans 17× (147K vs 2.5M) for scores within a case of each other (token totals from each lane's published issue). The axis is tokens, not dollars: billing is mixed (subscription lanes have no marginal price; the devin and workbuddy lanes report no usage at all, so swe-2 and the wb pair sit this one out). Within a family, more tokens bought no score (luna flat; astra's top bands lose four cases); across families the shape varies — which is why ⑤ is a pattern, not a law.
 

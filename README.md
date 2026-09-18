@@ -44,7 +44,7 @@
 
 **⑤ 一个反直觉发现，但有边界** —— 已测家族里「想更久 ≠ 考更好」：high 档是甜点，顶档反噬（图中四家族其三）。是经验规律，不是定律：swe-2 的档线单调到底（medium 15 < high 16 < max 18，见 [amber-devin W37](https://github.com/getaskclaw/amber-devin/blob/main/results/2026-W37.md)）；k3 是平线家族（low 15 ≈ high 17，差 2 案其一为骑线案抖动，token/墙钟约为 high 一半——选档按成本和速度，见 [amber-kimi W38](https://github.com/getaskclaw/amber-kimi/blob/main/results/2026-W38.md)）；也有的模型全档随机带，选档按成本和速度，不按分；WorkBuddy 道目前只考了 high 一档，尚无曲线可画。
 
-![effort 曲线](docs/images/effort-curves-20260911.png)
+![effort 曲线](docs/images/effort-curves-20260911.png?v=20260917)
 
 **⑥ 分数 × 思考预算** —— 同 high 档、同全库，输出 token 账单跨 17 倍（147K vs 2.5M），分数却差不过一案（各道 token 数出自其期文）。横轴是 token 不是美元：各家计费混杂（订阅道没有边际价；devin 与 workbuddy 道都不上报用量，swe-2 与 wb 双模不上这张图）。家族内部，更多 token 没换来分（luna 平线、astra 顶档反噬）；家族之间形状各异——所以 ⑤ 只是经验规律。
 
