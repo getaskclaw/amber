@@ -351,6 +351,11 @@
             "key": "Convergence",
             "lane": "Qwen3.8-27B @ goldenpotato self-hosted",
             "value": 1.0
+          },
+          {
+            "key": "Convergence",
+            "lane": "hy4-preview-f @ WorkBuddy",
+            "value": 1.0
           }
         ]
       },
@@ -789,6 +794,11 @@
           {
             "key": "Convergence",
             "lane": "Qwen3.8-27B @ goldenpotato self-hosted",
+            "value": 1.0
+          },
+          {
+            "key": "Convergence",
+            "lane": "hy4-preview-f @ WorkBuddy",
             "value": 1.0
           }
         ]

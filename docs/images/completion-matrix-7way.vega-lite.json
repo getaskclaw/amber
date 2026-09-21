@@ -351,6 +351,11 @@
             "key": "收敛",
             "lane": "Qwen3.8-27B @ goldenpotato 自部署",
             "value": 1.0
+          },
+          {
+            "key": "收敛",
+            "lane": "hy4-preview-f @ WorkBuddy",
+            "value": 1.0
           }
         ]
       },
@@ -789,6 +794,11 @@
           {
             "key": "收敛",
             "lane": "Qwen3.8-27B @ goldenpotato 自部署",
+            "value": 1.0
+          },
+          {
+            "key": "收敛",
+            "lane": "hy4-preview-f @ WorkBuddy",
             "value": 1.0
           }
         ]
