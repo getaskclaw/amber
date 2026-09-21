@@ -346,6 +346,11 @@
             "key": "Convergence",
             "lane": "doubao-seed-evolving @ Ark Agent Plan",
             "value": 1.0
+          },
+          {
+            "key": "Convergence",
+            "lane": "Qwen3.8-27B @ goldenpotato self-hosted",
+            "value": 1.0
           }
         ]
       },
@@ -779,6 +784,11 @@
           {
             "key": "Convergence",
             "lane": "doubao-seed-evolving @ Ark Agent Plan",
+            "value": 1.0
+          },
+          {
+            "key": "Convergence",
+            "lane": "Qwen3.8-27B @ goldenpotato self-hosted",
             "value": 1.0
           }
         ]

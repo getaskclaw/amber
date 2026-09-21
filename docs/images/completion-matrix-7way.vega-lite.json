@@ -4,7 +4,7 @@
   "height": 372,
   "title": {
     "text": "五家 17/23 + doubao 16/23 + gp27b 14/23：十轴完成度矩阵（21 案子集）",
-    "subtitle": "点越大 = 该面完成度越高；doubao 核验两轴为 3600s 补考真值（addendum 1）；gp27b = 社区自部署端点一次性快照（effort 旋钮实证无效，按端点默认档记）；收敛轴空白 = 该道未考（不是零分）",
+    "subtitle": "点越大 = 该面完成度越高；doubao 核验两轴为 3600s 补考真值（addendum 1）；gp27b = 社区自部署端点（effort 旋钮实证无效，按端点默认档记）；收敛轴空白 = 该道未考（不是零分）",
     "fontSize": 15,
     "subtitleFontSize": 11
   },
@@ -345,6 +345,11 @@
           {
             "key": "收敛",
             "lane": "doubao-seed-evolving @ 火山方舟 Agent Plan",
+            "value": 1.0
+          },
+          {
+            "key": "收敛",
+            "lane": "Qwen3.8-27B @ goldenpotato 自部署",
             "value": 1.0
           }
         ]
@@ -779,6 +784,11 @@
           {
             "key": "收敛",
             "lane": "doubao-seed-evolving @ 火山方舟 Agent Plan",
+            "value": 1.0
+          },
+          {
+            "key": "收敛",
+            "lane": "Qwen3.8-27B @ goldenpotato 自部署",
             "value": 1.0
           }
         ]
