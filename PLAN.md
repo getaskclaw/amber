@@ -14,10 +14,17 @@ Specification; where this file and Core conflict, Core wins.
 - **Draft under review:** Stability Protocol v0.1
   (`protocols/stability.md`) and the $0 historical-drift memo
   (`docs/instability-memo-2026-09-14.md`) that motivates it.
-- **Not yet published:** `schemas/`, `profiles/`, case-building tooling, and a
-  reference runner. A conformant run is **not executable from this repository
-  alone today** — this file exists to make that gap explicit and to sequence
-  the work that closes it.
+- **Not yet published:** `profiles/`, the rest of the case tooling (the
+  forge-neutral build script of Distribution §3 and the redacted-summary
+  generator), and a reference runner. A conformant run is **not executable from
+  this repository alone today** — this file exists to make that gap explicit and
+  to sequence the work that closes it.
+- **Landed:** the first M1 slice — `schemas/manifest.schema.json` (the manifest
+  contents enumerated in Distribution §3/§3.1, object closed at every level),
+  `tools/validate_manifest.py` (schema validation plus the §5.1 closed field set
+  for redacted summaries), `schemas/shre-amber-mapping.md` (Core §9.3), and
+  regression fixtures under `schemas/examples/`. The build script, the
+  redacted-summary generator, and the signature/key tooling remain open.
 - **Repository controls in place:** `.gitattributes` pins LF/UTF-8 so
   `spec_sha256` is checkout-stable; CI checks relative links and spec-file
   encoding; `CONTRIBUTING.md` states the no-case-content rule and the
@@ -71,7 +78,11 @@ Raised by external review (2026-08); resolve in the milestone that owns them:
    saturation — a single easy case cannot discriminate (observed in pilot
    work: near-ceiling pass rates on an easy-medium repair case).
 4. **Transition identifiers** (M1): the SHRE→AMBER identifier mapping
-   required by Core §9.3 must ship together with `schemas/`.
+   required by Core §9.3 now ships as `schemas/shre-amber-mapping.md`. The
+   mapping is complete at identifier-class level; the per-instance entries
+   that need the unpublished run-record schemas or the private-channel case
+   correspondence remain TBD there, so this question stays open until those
+   artefacts land.
 
 ## Non-goals
 

@@ -1,0 +1,251 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/getaskclaw/amber/main/schemas/manifest.schema.json",
+  "title": "AMBER Case Manifest",
+  "description": "JSON Schema for the AMBER Case Manifest (protocols/distribution.md §3). The manifest is the control-plane record of a case: it is private-channel material and is never candidate-visible (Distribution §1, Core §2). Every field below is taken from the Distribution Protocol's own enumeration of the manifest's contents — §3 (provenance, cutoff_utc, the resolved cutoff commit, the time-to-topology mapping rule and its evidence class, the preregistered cutoff rule and its script-output hash, spec_sha256, the sha256 of both artifacts, the declared candidate_input_bundle, the available-information manifest, the eligibility determination and its evidence class, producer identity and signing-key identifier, the leak-check procedure / last run date / result, retirement state, and the sha256 of the protocol document), §3.1 (construction parameters: git version, bundle format version, hash algorithm, bundle size), §3.2 (cutoff semantics), and §5.1/§5.2 (profile identifier, isolation class, egress allowlist). No field is invented here. The object is closed (additionalProperties: false) at the top level and inside the enumerated blocks: a field that is not one of the enumerated contents means the schema and the protocol disagree, and the protocol wins — adding a field is a protocol revision (CONTRIBUTING, Documents and how they change). Note: manifest sha256 and index_version are deliberately absent — Distribution §4 makes index_version a property of the index, not an entry or manifest field, and the manifest's own sha256 is computed over the manifest bytes and carried by the index (§4) and the redacted summary (§5.1). The digest and UTC patterns are the protocol's own: §2 fixes SHA-256 over exact bytes; Core §4.2 and Distribution §3.2 require cutoff_utc in UTC at second-or-finer precision.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "case_id",
+    "profile",
+    "provenance",
+    "cutoff_utc",
+    "cutoff_commit",
+    "time_to_topology",
+    "cutoff_rule",
+    "spec_sha256",
+    "protocol_sha256",
+    "artifacts",
+    "construction",
+    "candidate_input_bundle",
+    "available_information_manifest",
+    "eligibility",
+    "producer",
+    "leak_check",
+    "retirement"
+  ],
+  "properties": {
+    "schema_version": {
+      "description": "Machine-readable schema identifier. Core §9.4: machine-readable identifiers change only with an explicit schema-version bump, never silently. This is the first AMBER manifest schema; it is versioned under the AMBER name (see schemas/shre-amber-mapping.md).",
+      "type": "string",
+      "const": "amber-manifest-0.1"
+    },
+    "case_id": {
+      "description": "The case's identifier. Distribution §4 carries case_id in every index entry and §5.1 carries it in the redacted summary; the published handle is the stable hash-derived alias (hash-index/v2026-09.md). Internal case numbers are private-channel identifiers and never appear publicly.",
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$"
+    },
+    "profile": {
+      "description": "Profile identifier (Distribution §5.1 closed summary field set). Profiles may strengthen Core, never weaken sealing, audit, preregistration or data controls (Core §5.7).",
+      "type": "string",
+      "minLength": 1
+    },
+    "provenance": {
+      "description": "Source-identifying provenance (Distribution §3). The protocol does not fix this block's internal shape, so the schema requires a non-empty object and leaves the contents open. It is excluded from the redacted summary (Distribution §5.1).",
+      "type": "object",
+      "minProperties": 1
+    },
+    "cutoff_utc": {
+      "description": "The exact cutoff timestamp, UTC, second-or-finer precision (Distribution §3, §3.2; Core §4.2, invariant 2). The pattern enforces UTC ('Z') and at least whole seconds; 'format' is supplied for external validators.",
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(\\.[0-9]+)?Z$"
+    },
+    "cutoff_commit": {
+      "description": "The resolved cutoff commit (Distribution §3, §3.2). Committer dates never suffice as the mapping's evidence on their own. Excluded from the redacted summary (Distribution §5.1).",
+      "type": "string",
+      "pattern": "^[0-9a-f]{7,64}$"
+    },
+    "time_to_topology": {
+      "description": "The time-to-topology mapping rule and its evidence class (Distribution §3, §3.2). The protocol names 'forge push log' and 'event log' as examples, not as a closed set, so evidence_class is required to be a non-empty string rather than an enumeration. Excluded from the redacted summary (Distribution §5.1).",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rule", "evidence_class"],
+      "properties": {
+        "rule": {
+          "description": "The rule that maps the cutoff instant to a point in the source topology.",
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence_class": {
+          "description": "The class of evidence backing the mapping (Distribution §3.2 names 'forge push log' and 'event log' as examples).",
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "cutoff_rule": {
+      "description": "The preregistered cutoff rule and the hash of its script output (Distribution §3). Preregistration is a Core §4.6 requirement. Excluded from the redacted summary (Distribution §5.1).",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rule", "script_output_sha256"],
+      "properties": {
+        "rule": {
+          "description": "The preregistered rule that fixed the cutoff before any candidate output was viewed (Core §4.6).",
+          "type": "string",
+          "minLength": 1
+        },
+        "script_output_sha256": {
+          "description": "SHA-256 of the cutoff rule script's output (Distribution §3).",
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "spec_sha256": {
+      "description": "SHA-256 of the exact Core specification bytes (Distribution §2, §3) — UTF-8, LF, no BOM, whole file. Cross-host results are comparable only when this matches; pinning to a version string is a comparability failure.",
+      "$ref": "#/$defs/sha256"
+    },
+    "protocol_sha256": {
+      "description": "SHA-256 of the Distribution Protocol document itself (Distribution §3, applying its own §2 byte rule).",
+      "$ref": "#/$defs/sha256"
+    },
+    "artifacts": {
+      "description": "SHA-256 of both case artifacts (Distribution §3). The signature covers every byte of the manifest, so a change to either hash invalidates the detached signature (Distribution §3).",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["base_bundle_sha256", "oracle_pack_sha256"],
+      "properties": {
+        "base_bundle_sha256": {
+          "description": "SHA-256 of base.bundle — the git bundle of the source history up to the cutoff commit (Distribution §3, §3.1). Candidate-visible artifact.",
+          "$ref": "#/$defs/sha256"
+        },
+        "oracle_pack_sha256": {
+          "description": "SHA-256 of oracle.pack — post-cutoff commits/patch/tests, the preregistered rubric and evaluator materials (Distribution §3). Sealed artifact; its hash is published in the index before the first run (§4).",
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "construction": {
+      "description": "Pinned bundle construction parameters (Distribution §3.1; §5.1 places these in the redacted summary's closed field set; §7 makes them part of comparability). The protocol does not close the scalar types beyond the bundle size, so 'bundle_format_version' accepts the integer git reports or its string form, and 'hash_algorithm' is a non-empty string.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["git_version", "bundle_format_version", "hash_algorithm", "bundle_size"],
+      "properties": {
+        "git_version": {
+          "description": "The git version used to build the bundle (Distribution §3.1).",
+          "type": "string",
+          "minLength": 1
+        },
+        "bundle_format_version": {
+          "description": "The git bundle format version (Distribution §3.1).",
+          "type": ["integer", "string"]
+        },
+        "hash_algorithm": {
+          "description": "The hash algorithm recorded for the bundle construction (Distribution §3.1). Core §2 fixes SHA-256 for the artifact digests; git's own object hash algorithm is recorded here for the bundle.",
+          "type": "string",
+          "minLength": 1
+        },
+        "bundle_size": {
+          "description": "The bundle size (Distribution §3.1).",
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "candidate_input_bundle": {
+      "description": "The declared Candidate Input Bundle (Core §4.4 invariant 4; Distribution §3): everything the candidate receives, declared separately from this control-plane manifest. Excluded from the redacted summary (Distribution §5.1).",
+      "type": "string",
+      "minLength": 1
+    },
+    "available_information_manifest": {
+      "description": "The available-information manifest (Core §5.2 boundary 2; Distribution §3): what was knowable at the cutoff. Excluded from the redacted summary (Distribution §5.1).",
+      "type": "string",
+      "minLength": 1
+    },
+    "eligibility": {
+      "description": "The eligibility determination and its evidence class (Distribution §3, §5.2), plus the manifest-declared egress allowlist (§5.2). A publicly reachable source qualifies only under full isolation with an empty allowlist — the validator enforces that pairing.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["isolation_class", "evidence_class", "egress_allowlist"],
+      "properties": {
+        "isolation_class": {
+          "description": "Distribution §5.1 closes these values for the redacted summary and §5.2 for the manifest: full_isolation or allowlisted. Never the allowlist itself.",
+          "type": "string",
+          "enum": ["full_isolation", "allowlisted"]
+        },
+        "evidence_class": {
+          "description": "The class of evidence backing the eligibility determination, mirroring the cutoff mapping's evidence class (Distribution §5.2).",
+          "type": "string",
+          "minLength": 1
+        },
+        "egress_allowlist": {
+          "description": "The manifest-declared egress allowlist (Distribution §5.2). Empty for full-isolation runs; for allowlisted runs every entry is an explicitly declared destination.",
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "producer": {
+      "description": "Producer identity and signing-key identifier (Distribution §3, §5, §5.1). The key that signs manifest.yaml.sig is identified here, and the same key is published next to the index (§5.1).",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["identity", "signing_key_id"],
+      "properties": {
+        "identity": {
+          "description": "The producer's identity (Distribution §5.1).",
+          "type": "string",
+          "minLength": 1
+        },
+        "signing_key_id": {
+          "description": "Identifier of the key used to sign manifest.yaml.sig (Distribution §3, §5.1).",
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "leak_check": {
+      "description": "The leak-check procedure, its last run date, and its result (Distribution §3, §6). The manifest records the result, not only the date; §6 keys the validity of earlier runs to the leak date and falls back to the last leak check recorded as passed when the leak date cannot be established. Excluded from the redacted summary (Distribution §5.1).",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["procedure", "last_run_date", "result"],
+      "properties": {
+        "procedure": {
+          "description": "The leak-check procedure (Distribution §3).",
+          "type": "string",
+          "minLength": 1
+        },
+        "last_run_date": {
+          "description": "The date the leak check was last run (Distribution §3). An ISO 8601 date, optionally with a UTC time.",
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}(T[0-9]{2}:[0-9]{2}:[0-9]{2}(\\.[0-9]+)?Z)?$"
+        },
+        "result": {
+          "description": "The leak check's result (Distribution §3).",
+          "type": "string",
+          "enum": ["passed", "failed"]
+        }
+      }
+    },
+    "retirement": {
+      "description": "Retirement state (Distribution §3, §4). The index entry carries state as active or retired plus a date (§4); the manifest records the state, and the date is carried where retirement was recorded.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state"],
+      "properties": {
+        "state": {
+          "description": "Distribution §4 closes these values: active or retired.",
+          "type": "string",
+          "enum": ["active", "retired"]
+        },
+        "date": {
+          "description": "The retirement date, when retirement has been recorded (Distribution §4). Null while the case is active.",
+          "type": ["string", "null"],
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}(T[0-9]{2}:[0-9]{2}:[0-9]{2}(\\.[0-9]+)?Z)?$"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "description": "A lowercase hexadecimal SHA-256 (Distribution §2).",
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  }
+}

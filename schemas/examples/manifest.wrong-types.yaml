@@ -1,0 +1,58 @@
+# Example Case Manifest -- synthetic placeholders, no case content.
+# Fixture for tools/validate_manifest.py; mirrors the contents Distribution
+# Protocol v0.3 section 3 enumerates plus the construction parameters of 3.1.
+# Malformed on purpose: a non-UTC cutoff, a truncated cutoff commit, an
+# artifacts block that is an array rather than a mapping, a string
+# bundle_size, an isolation class outside the two the protocol names, a
+# leak-check result outside passed/failed, a retirement state outside
+# active/retired, and non-digest hashes.
+schema_version: amber-manifest-0.1
+case_id: A-example-0001
+profile: dotnet-software-engineering
+
+provenance:
+  source_event: restricted://events/example-0001
+  source_type: historical_event
+
+cutoff_utc: 2026-01-15 00:00:00 +08:00
+cutoff_commit: abc123
+
+time_to_topology:
+  rule: cutoff-commit-mapped-through-the-forge-push-log
+  evidence_class: forge_push_log
+
+cutoff_rule:
+  rule: newest-commit-at-or-before-cutoff_utc
+  script_output_sha256: not-a-sha256
+
+spec_sha256: not-a-sha256
+protocol_sha256: not-a-sha256
+
+artifacts: []
+
+construction:
+  git_version: "2.43.0"
+  bundle_format_version: 3
+  hash_algorithm: sha256
+  bundle_size: "1048576"
+
+candidate_input_bundle: restricted://candidate-input/example-0001
+available_information_manifest: restricted://available-information/example-0001
+
+eligibility:
+  isolation_class: isolated
+  evidence_class: mechanism_level_isolation_check
+  egress_allowlist: []
+
+producer:
+  identity: example-producer
+  signing_key_id: example-key-0001
+
+leak_check:
+  procedure: restricted://leak-check/example-0001
+  last_run_date: 2026-02-01
+  result: maybe
+
+retirement:
+  state: paused
+  date: null

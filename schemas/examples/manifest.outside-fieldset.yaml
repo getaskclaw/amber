@@ -1,0 +1,64 @@
+# Example Case Manifest -- synthetic placeholders, no case content.
+# Fixture for tools/validate_manifest.py; mirrors the contents Distribution
+# Protocol v0.3 section 3 enumerates plus the construction parameters of 3.1.
+# Malformed on purpose: fields the protocol does not enumerate (a rubric path,
+# an oracle path, the allowlist itself, a state note), plus a full_isolation
+# determination declaring a non-empty allowlist.
+schema_version: amber-manifest-0.1
+case_id: A-example-0001
+profile: dotnet-software-engineering
+
+provenance:
+  source_event: restricted://events/example-0001
+  source_type: historical_event
+
+cutoff_utc: 2026-01-15T00:00:00Z
+cutoff_commit: 0123456789abcdef0123456789abcdef01234567
+
+time_to_topology:
+  rule: cutoff-commit-mapped-through-the-forge-push-log
+  evidence_class: forge_push_log
+
+cutoff_rule:
+  rule: newest-commit-at-or-before-cutoff_utc
+  script_output_sha256: e429218602061d84050781b240f670fc3b475d5da89db7c9305d6ece365add94
+
+rubric_path: restricted://rubric/example-0001
+oracle_path: restricted://oracle/example-0001
+spec_sha256: b8af845c080e8f29237246ede030bd05f9cd0caec99e64cabfa34b2b22b15577
+protocol_sha256: e1c3033925a8d56a66fb9e4e0f7c41c4a02d5239bf9db8d98431b5321cf49cde
+
+artifacts:
+  base_bundle_sha256: 19ef69a72fcd8753f93fd6454d9cbf38f36697fd17e4d7d0b384a4a27b024f0c
+  oracle_pack_sha256: aec335f1b79dc4a483615ae579fb7b894482823ce117649a9f95fe820a9adb01
+
+construction:
+  git_version: "2.43.0"
+  bundle_format_version: 3
+  hash_algorithm: sha256
+  bundle_size: 1048576
+
+candidate_input_bundle: restricted://candidate-input/example-0001
+available_information_manifest: restricted://available-information/example-0001
+
+eligibility:
+  isolation_class: full_isolation
+  evidence_class: mechanism_level_isolation_check
+  allowlist:
+    - https://example.invalid
+  egress_allowlist:
+    - https://example.invalid
+
+producer:
+  identity: example-producer
+  signing_key_id: example-key-0001
+
+leak_check:
+  procedure: restricted://leak-check/example-0001
+  last_run_date: 2026-02-01
+  result: passed
+
+retirement:
+  state: active
+  leaked_from: example-channel
+  date: null

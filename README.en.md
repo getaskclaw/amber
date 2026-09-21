@@ -71,7 +71,28 @@ Public benchmarks are frozen, public corpora: training contamination is rampant 
 
 ## Status
 
-Draft v0.2.2. The Core spec is stable; `schemas/`, `profiles/`, and the case-building/runner tooling are **not yet published**, so you can't execute a compliant run from this repo alone yet. Roadmap and milestones: [PLAN.md](PLAN.md).
+Draft v0.2.2. The Core spec is stable; `profiles/` and the case-building/runner tooling are **not yet published**, so you can't execute a compliant run from this repo alone yet. Roadmap and milestones: [PLAN.md](PLAN.md).
+
+`schemas/` has started landing: the Case Manifest JSON Schema, its validator, and the SHRE→AMBER identifier mapping Core §9.3 requires (see below).
+
+## Manifest schema and validator
+
+The Case Manifest is the control-plane record: private-channel material, never candidate-visible (Distribution §1, Core §2). Its field set is taken **entirely from the protocol text**: `protocols/distribution.md` §3 (provenance, `cutoff_utc`, the resolved cutoff commit, the time-to-topology mapping rule and its evidence class, the preregistered cutoff rule and its script-output hash, `spec_sha256`, the sha256 of both artifacts, the declared `candidate_input_bundle`, the available-information manifest, the eligibility determination and its evidence class, producer identity and signing-key identifier, the leak-check procedure / last run date / result, retirement state, and the sha256 of the protocol document), §3.1 (construction parameters: git version, bundle format version, hash algorithm, bundle size), §3.2, §5.1, §5.2. **No field is invented.**
+
+- [schemas/manifest.schema.json](schemas/manifest.schema.json) — the manifest JSON Schema (2020-12); the top level and every field block are closed (`additionalProperties: false`), so a field the protocol does not enumerate is an error.
+- [tools/validate_manifest.py](tools/validate_manifest.py) — the validator. It checks the manifest against the schema and additionally rejects any **redacted manifest summary** carrying a field outside the closed set of Distribution §5.1.
+- [schemas/shre-amber-mapping.md](schemas/shre-amber-mapping.md) — the `shre`↔`amber` identifier mapping required by Core §9.3; anything unmappable from public material is marked TBD with the missing artefact named.
+- [schemas/examples/](schemas/examples/) — regression fixtures: one valid manifest, three malformed manifests (missing required fields / wrong types and enum values / fields outside the enumerated set) and one redacted summary carrying an excluded field.
+
+Usage (YAML and JSON are both accepted):
+
+```bash
+python3 tools/validate_manifest.py schemas/examples/manifest.valid.yaml        # passes, exit code 0
+python3 tools/validate_manifest.py schemas/examples/manifest.wrong-types.yaml  # fails, exit code 1 + the offending fields on stderr
+python3 tools/validate_manifest.py schemas/examples/summary.invalid-fieldset.yaml   # redacted summary with an excluded field
+```
+
+Exit codes: **0** valid; **1** invalid (schema, closed-set, or cross-field violation); **2** unreadable/unparseable, undetectable kind, or schema load failure. JSON input is dependency-free; YAML uses PyYAML when it is installed and otherwise falls back to a bundled conservative parser that *refuses* structures it cannot read safely (anchors, aliases, folded scalars) instead of guessing. Install PyYAML with `python3 -m pip install pyyaml` or `uv run --with pyyaml python3 tools/validate_manifest.py <file>`.
 
 ## Contents
 
@@ -85,6 +106,7 @@ Draft v0.2.2. The Core spec is stable; `schemas/`, `profiles/`, and the case-bui
 - [docs/stage1-sfail-screen-20260915.md](docs/stage1-sfail-screen-20260915.md) — six-case stable-fail set × `glm-5.3-flash@ollama` n=5 screen: five cases keep the label with zero recoveries (A-87c472cb/A-d511f9e8 partials glued), **A-d9b79b46 goes 3/4 pass — label torn** (stage-2 n=20 complete: 6/20 ≈30% combined, Wilson [14.5%, 51.9%] — the n=5 screen's 75% over-read; only the binary verdict is trustworthy at n=5); A-a317e74b needs a 3600 s cap to finish — protocol gains per-case timeout table and abort-on-billing
 - [docs/nine-axis-top3-2026-09-18.en.md](docs/nine-axis-top3-2026-09-18.en.md) — nine-axis podium (40 lanes recomputed): only defense/attribution/review/vision discriminate, and the four champions belong to four different vendors; the other five axes are saturated at the top
 - [hash-index/v2026-09.md](hash-index/v2026-09.md) — the public hash index: alias + bundle/oracle dual hashes for every case in the current library (23 cases); every results-repo matrix is checked against it
+- [schemas/manifest.schema.json](schemas/manifest.schema.json) · [tools/validate_manifest.py](tools/validate_manifest.py) · [schemas/shre-amber-mapping.md](schemas/shre-amber-mapping.md) — the Case Manifest JSON Schema, its validator (including the closed-set Distribution §5.1 redacted-summary check), and the SHRE→AMBER identifier mapping
 - [PLAN.md](PLAN.md) — status, milestones (case tooling → reference runner → scoring/adjudication → statistics → public index), open design questions
 - [CONTRIBUTING.md](CONTRIBUTING.md) — contribution rules: **this repo never accepts case content**, document versioning and revision policy, what byte-hash-locking the Core spec means
 

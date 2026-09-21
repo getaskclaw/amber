@@ -1,0 +1,28 @@
+# Redacted manifest summary fixture -- Distribution Protocol v0.3 section 5.1.
+# Malformed on purpose: it carries the resolved cutoff commit (excluded) and a
+# free-text notes field (outside the closed field set).
+
+case_id: A-example-0001
+manifest_sha256: e89a1e815d0b8c62cc56465ef9bfb6ea128ce59fbac328567ad716fe4562a35d
+base_bundle_sha256: 19ef69a72fcd8753f93fd6454d9cbf38f36697fd17e4d7d0b384a4a27b024f0c
+oracle_pack_sha256: aec335f1b79dc4a483615ae579fb7b894482823ce117649a9f95fe820a9adb01
+spec_sha256: b8af845c080e8f29237246ede030bd05f9cd0caec99e64cabfa34b2b22b15577
+protocol_sha256: e1c3033925a8d56a66fb9e4e0f7c41c4a02d5239bf9db8d98431b5321cf49cde
+cutoff_utc: 2026-01-15T00:00:00Z
+profile: dotnet-software-engineering
+isolation_class: full_isolation
+construction:
+  git_version: "2.43.0"
+  bundle_format_version: 3
+  hash_algorithm: sha256
+  bundle_size: 1048576
+producer:
+  identity: example-producer
+  signing_key_id: example-key-0001
+retirement:
+  state: active
+  date: null
+index_version: 1
+
+cutoff_commit: 0123456789abcdef0123456789abcdef01234567
+notes: assembled by hand for the fixture
