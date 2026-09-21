@@ -1,0 +1,7 @@
+# Working files that contain INTERNAL case ids (BD-/BE-/OPS-/FTM-/REQ-...).
+# This directory lives inside the public-adjacent ~/2606/amber repo
+# ("本仓库绝不接收案件内容"). Only alias-only deliverables may be published.
+#
+# Publishable (no internal ids): attribution-W38.md, profile-lane-map-W38.md,
+#                                lane-registry.json, README.md, *.py
+hard-facts.jsonl

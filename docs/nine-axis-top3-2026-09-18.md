@@ -50,7 +50,7 @@
 - **交付**：满分 1.000 并列 29 条车道（反向信息才有价值：零交付的当场出局）
 - **运维**：满分并列 14 条车道（swe-2-max、k3、doubao-seed-evolving、gpt-5.6-luna、hy4-preview-f、DeepSeek 各道等）
 - **需求**：满分并列约 26 条车道
-- **UI**：满分并列 12 条车道（swe-2 全系、gpt-6-astra、gpt-5.6-sol/luna-max、glm-5.3-flash @ CrofAI ⚠、deepseek-v4.1-flash 两道、hy4-preview-f、glm-5-2 @ Devin）
+- **UI**：满分并列 12 条车道（swe-2 全系、~~gpt-6-astra~~（[2026-09-21 更正](corrections-2026-09-21.md)：该格系 fallback 替身交付，剔除）、gpt-5.6-sol/luna-max、glm-5.3-flash @ CrofAI ⚠、deepseek-v4.1-flash 两道、hy4-preview-f、glm-5-2 @ Devin）
 
 ## 读法提醒
 

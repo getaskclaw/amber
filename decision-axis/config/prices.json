@@ -1,0 +1,7 @@
+{
+  "_comment": "USD per 1M tokens, ollama-cloud 目录价。查不到可靠公开价时保持 null —— driver 宁可报 null 也不编造成本。来源与日期写在每个条目里。",
+  "glm-5.3-flash": {"input_per_1M": null, "output_per_1M": null,
+    "source": "ollama.com 模型页未公开目录价(2026-09-18 查)", "as_of": "2026-09-18"},
+  "deepseek-v4.1-flash": {"input_per_1M": null, "output_per_1M": null,
+    "source": "ollama.com 模型页未公开目录价(2026-09-18 查)", "as_of": "2026-09-18"}
+}

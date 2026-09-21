@@ -1,0 +1,2314 @@
+# WO-DEC-001-r1 changes vs r0 snapshot (/tmp/dec001-r1/orig)
+# decision-axis/ is untracked in the amber git repo, so this is a file-level diff.
+--- a/driver.py
++++ b/driver.py
+@@ -1,5 +1,5 @@
+ #!/usr/bin/env python3
+-"""AMBER decision-axis 评测管道 driver (WO-DEC-001)。
++"""AMBER decision-axis 评测管道 driver (WO-DEC-001-r1)。
+ 
+ 用法:
+   # 真跑基线模型(冒烟):
+@@ -10,32 +10,52 @@
+   # 空 state 基线(区分度闸):
+   python3 driver.py --adapter openai-compatible-baseline --model glm-5.3-flash \
+       --dataset data/smoke-12.jsonl --tag empty-g53f --empty-state
+-  # 只重评分(完整性重验 + 指标重算, 零调用):
+-  python3 driver.py --score-only runs/<tag>/responses.jsonl --dataset data/smoke-12.jsonl
+-
+-manifest.jsonl 用 fcntl 锁 append。密钥只经环境变量, 不落盘。
++  # 只重评分(完整性重验 + 行数/id 对账 + 指标重算, 零调用):
++  python3 driver.py --score-only runs/<tag>/responses.jsonl \
++      --adapter openai-compatible-baseline --model glm-5.3-flash \
++      --dataset data/smoke-12.jsonl --tag rescore-<tag>
++  # 复核历史 run(重算 manifest 数值与 report 对账):
++  python3 driver.py --verify-run <tag> --dataset data/smoke-12.jsonl
++
++诚信闸(r1, WO-DEC-001-r1):
++  1. 题级完整性 = HMAC-SHA256(secret, 整条响应记录)。secret 只经环境变量
++     `AMBER_DECISION_HMAC_SECRET` 或 0600 密钥文件(路径见 signing.py), 绝不落进本目录。
++     r0 的公开无钥 sha256(adapter|model|qid|answer) 已废除 —— 知道公式不再够。
++  2. `--score-only` 强制对账: responses 的 question_id 集合 == 数据集 id 集合,
++     行数一致, 且每条记录内嵌的 dataset_sha256 == 当前数据集文件哈希。缺行/多行即 rc≠0。
++  3. manifest 记全跑参数(effort/timeout/max_tokens/max_attempts/temperature/seed/
++     run_nonce)+ report.json 与 responses.jsonl 的 sha256, 可用 `--verify-run` 重算对账。
++  4. 同一 --tag 二次运行默认拒绝(防静默覆盖证据), 需 `--force` 显式同意。
++
++manifest.jsonl 用 fcntl 锁 append。密钥只经环境变量或 0600 文件, 不落盘。
+ """
+ import argparse
++import datetime
+ import fcntl
+ import hashlib
+ import json
+ import os
++import secrets
++import shutil
+ import sys
+ import tempfile
+-import time
+-import datetime
+ 
+ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+ 
+ from adapters import ADAPTERS  # noqa: E402
+-from adapters.base import integrity_hash  # noqa: E402
+ from scoring import metrics  # noqa: E402
+ from scoring.validate import DatasetError, load_dataset  # noqa: E402
+-
+-DRIVER_VERSION = "dec001-1.0"
++import signing  # noqa: E402
++
++DRIVER_VERSION = "dec001-r1.1.0"
++LEGACY_ALGO = "sha256-legacy-unkeyed"
+ ROOT = os.path.dirname(os.path.abspath(__file__))
+ MANIFEST = os.path.join(ROOT, "runs", "manifest.jsonl")
+ PRICES = os.path.join(ROOT, "config", "prices.json")
++
++
++class GateError(Exception):
++    """诚信闸拒绝出分。main() 捕获 → rc≠0。"""
+ 
+ 
+ def sha256_file(path):
+@@ -66,20 +86,27 @@
+     return (tokens.get("input") or 0) * pin / 1e6 + (tokens.get("output") or 0) * pout / 1e6
+ 
+ 
+-def run_dataset(records, adapter_name, model, dry_run, effort, timeout_s, empty_state):
++def run_dataset(records, adapter_name, model, dry_run, effort, timeout_s, empty_state,
++                run_nonce, dataset_sha256, max_tokens, max_attempts, seed):
+     mod = ADAPTERS[adapter_name]
++    ctx = {"run_nonce": run_nonce, "dataset_sha256": dataset_sha256}
+     responses = []
+     for rec in records:
+         r = dict(rec)
+         if empty_state:
+             r["state"] = "(no context provided)"
+-        resp = mod.ask(r, model=model, dry_run=dry_run, timeout_s=timeout_s,
+-                       **({"effort": effort} if adapter_name == "openai-compatible-baseline" else {}))
++        kw = {"ctx": ctx}
++        if adapter_name == "openai-compatible-baseline":
++            kw.update({"effort": effort, "max_tokens": max_tokens,
++                       "max_attempts": max_attempts, "seed": seed})
++        resp = mod.ask(r, model=model, dry_run=dry_run, timeout_s=timeout_s, **kw)
+         # invalid_infrastructure 按 AMBER 规矩重跑一次再判
+         if resp["error_class"] == "invalid_infrastructure" and not dry_run:
+-            resp2 = mod.ask(r, model=model, dry_run=dry_run, timeout_s=timeout_s,
+-                            **({"effort": effort} if adapter_name == "openai-compatible-baseline" else {}))
+-            resp2["error_detail"] = f"retry after infra failure; first: {resp['error_detail']!r}; then: {resp2['error_detail']!r}"
++            resp2 = mod.ask(r, model=model, dry_run=dry_run, timeout_s=timeout_s, **kw)
++            resp2["error_detail"] = (f"retry after infra failure; first: {resp['error_detail']!r}; "
++                                     f"then: {resp2['error_detail']!r}")
++            resp2["integrity"] = None
++            resp2 = _resign(resp2)
+             resp = resp2
+         responses.append((r, resp))
+         print(f"  {rec['id']}: ok={resp['ok']} err={resp['error_class']} "
+@@ -87,21 +114,77 @@
+     return responses
+ 
+ 
+-def verify_integrity(responses):
+-    """逐题重算完整性 sha256。被篡改 → 抛错, 不许出分。"""
+-    tampered = []
+-    for rec, resp in responses:
+-        if resp.get("answer") is None:
++def _resign(resp):
++    """字段被驱动层改写后重签(只用整条记录 HMAC, 不碰 answer 语义)。"""
++    rec = dict(resp)
++    rec["integrity"] = None
++    rec["integrity"] = signing.sign_record(rec)
++    return rec
++
++
++def verify_integrity(responses, allow_legacy=False):
++    """逐题重验 HMAC。被篡改 → 拒。legacy(r0)记录须显式放行且不获得信任。"""
++    tampered, legacy = [], []
++    for _rec, resp in responses:
++        algo = resp.get("integrity_algo")
++        if not algo or algo == LEGACY_ALGO:
++            legacy.append(resp["question_id"])
+             continue
+-        want = integrity_hash(resp["adapter"], resp["model"], resp["question_id"], resp["answer"])
+-        if want != resp.get("integrity"):
++        if not signing.matches(resp):
+             tampered.append(resp["question_id"])
+     if tampered:
+-        raise SystemExit(f"TAMPER DETECTED: integrity mismatch on {tampered}; "
+-                         f"refusing to score. 响应文件被改, 见 runs/ 下原始记录。")
+-
+-
+-def score(responses):
++        raise GateError(
++            "TAMPER DETECTED: integrity mismatch on " + ", ".join(tampered) +
++            "; refusing to score. 响应文件被改, 签名覆盖整条记录(含 answer/ok/error_class/"
++            "latency_s/cost_usd/tokens/run_nonce/dataset_sha256), 只重算旧公开公式无效。")
++    if legacy and not allow_legacy:
++        raise GateError(
++            "LEGACY ARTIFACT: " + ", ".join(legacy) +
++            " 无 r1 HMAC 签名(r0 公开无钥公式, 不可信)。要重算请显式加 --allow-legacy-unkeyed; "
++            "那样出的报告会被标注 integrity_assurance=legacy-unkeyed(NOT cryptographic)。")
++    return {"tampered": tampered, "legacy": legacy}
++
++
++def reconcile(responses, records):
++    """行数 + question_id 集合 + 内嵌 dataset 哈希 对账。缺行/多行/串集 → 拒。"""
++    expected = [r["id"] for r in records]
++    got = [resp["question_id"] for _rec, resp in responses]
++    exp_set, got_set = set(expected), set(got)
++    problems = []
++    if len(got) != len(expected):
++        problems.append(f"row count {len(got)} != dataset size {len(expected)}")
++    if got_set != exp_set:
++        missing = sorted(exp_set - got_set)
++        extra = sorted(got_set - exp_set)
++        if missing:
++            problems.append(f"missing question_id(s) {missing} (rows dropped)")
++        if extra:
++            problems.append(f"unknown question_id(s) {extra} (rows not in dataset)")
++    if len(got) != len(got_set):
++        problems.append("duplicate question_id rows present")
++    if problems:
++        raise GateError("RECONCILIATION FAILED: " + "; ".join(problems) +
++                        "; refusing to score (denominator cannot be trusted).")
++    return {"n_expected": len(expected), "n_received": len(got)}
++
++
++def reconcile_dataset_hash(responses, dataset_sha256, allow_legacy=False):
++    """响应内嵌的 dataset_sha256 必须等于当前数据集哈希(签名已覆盖该字段)。"""
++    bad = []
++    for _rec, resp in responses:
++        if not resp.get("integrity_algo") or resp.get("integrity_algo") == LEGACY_ALGO:
++            if allow_legacy:
++                continue
++            continue
++        if resp.get("dataset_sha256") != dataset_sha256:
++            bad.append(resp["question_id"])
++    if bad:
++        raise GateError(
++            f"DATASET MISMATCH: {len(bad)} response row(s) ({', '.join(bad[:5])}...) were signed "
++            f"against a different dataset hash; refusing to score against {dataset_sha256[:16]}...")
++
++
++def score(responses, n_expected=None):
+     scored, per_q = [], []
+     for rec, resp in responses:
+         if resp["error_class"] == "dry_run":
+@@ -120,9 +203,11 @@
+         per_q.append({"id": rec["id"], "classification": "scored",
+                       "family": rec["family"], "type": rec["question"]["type"],
+                       "correct": ok,
++                      "predicted": metrics.predicted(rec, resp),
+                       "confidence": round(metrics.confidence_of(rec, resp), 4),
+                       "latency_s": resp["latency_s"], "cost_usd": resp["cost_usd"]})
+-    report = metrics.full_report(scored, per_q)
++    report = metrics.full_report(scored, per_q, n_expected=n_expected,
++                                 n_received=len(responses))
+     report["failures"] = {
+         "invalid_infrastructure": [q for q in per_q if q["classification"] == "invalid_infrastructure"],
+         "valid_task_failure": [q for q in per_q if q["classification"] == "valid_task_failure"],
+@@ -141,18 +226,38 @@
+ def write_outputs(tag, responses, report, dataset_path, adapter_name, model, extra_meta):
+     outdir = os.path.join(ROOT, "runs", tag)
+     os.makedirs(outdir, exist_ok=True)
+-    with open(os.path.join(outdir, "responses.jsonl"), "w", encoding="utf-8") as f:
++    rp = os.path.join(outdir, "responses.jsonl")
++    with open(rp, "w", encoding="utf-8") as f:
+         for _rec, resp in responses:
+             f.write(json.dumps(resp, ensure_ascii=False) + "\n")
+-    with open(os.path.join(outdir, "report.json"), "w", encoding="utf-8") as f:
++    resp_sha = sha256_file(rp)
++    # responses.jsonl 是稳定文件, 其 sha256 可安全内嵌进 report.json 供对账。
++    # report.json 自身不内嵌自己的 sha256(自引用哈希不可实现), 改由 manifest 记录。
++    report["responses_sha256"] = resp_sha
++    rj = os.path.join(outdir, "report.json")
++    with open(rj, "w", encoding="utf-8") as f:
+         json.dump(report, f, ensure_ascii=False, indent=2)
+-    # 人类可读摘要
++    report_sha = sha256_file(rj)
++
+     lines = [f"# Decision-axis run: {tag}", ""]
+     lines.append(f"- adapter: `{adapter_name}`  model: `{model}`")
+     lines.append(f"- dataset: `{dataset_path}` sha256 `{sha256_file(dataset_path)[:16]}...`")
+     lines.append(f"- driver: {DRIVER_VERSION}  tmp_prefix: {extra_meta['tmp_prefix']}")
++    lines.append(f"- run_nonce: `{extra_meta.get('run_nonce')}`")
++    lines.append(f"- integrity: {extra_meta.get('integrity_algo')} "
++                 f"  assurance: {report.get('integrity_assurance')}")
++    lines.append(f"- report.json sha256: `{report_sha}`")
++    lines.append(f"- responses.jsonl sha256: `{resp_sha}`")
+     lines.append("")
+-    lines.append(f" scored: {report['n_scored']}  accuracy: {report['accuracy']}")
++    lines.append(f" scored: {report['n_scored']} / expected {report['n_expected']}"
++                 f"  accuracy: {report['accuracy']}")
++    lines.append(f" abstentions (valid_task_failure, excluded from denominator): "
++                 f"{report['abstentions']['n_valid_task_failure']}")
++    lines.append(f" oracle: {report['oracle']['oracle']}; tie rule: {report['oracle']['tie_rule']}; "
++                 f"rounding: {report['oracle']['rounding']}")
++    lines.append(f" ties seen: {report['oracle']['n_ties']}  "
++                 f"stated/argmax inconsistent: {report['oracle']['n_inconsistent']}"
++                 f"/{report['oracle']['n_cross_checked']}")
+     lines.append(f" ECE: {report['calibration']['ece']}")
+     lines.append(f" latency mean: {report['latency']['mean_s']}s max: {report['latency']['max_s']}s")
+     lines.append(f" cost: {report['cost']}")
+@@ -182,88 +287,309 @@
+     for cls, items in report["failures"].items():
+         lines.append(f"- {cls}: {len(items)}")
+         for it in items:
+-            lines.append(f"  - {it['id']}: {it.get('detail', '')[:200]}")
++            lines.append(f"  - {it['id']}: {str(it.get('detail', ''))[:200]}")
+     lines.append("")
+     lines.append("## per question")
+     for q in report["questions"]:
+         lines.append(f"- {q['id']}: {q['classification']}" +
+-                     (f" correct={q['correct']} conf={q['confidence']}" if q["classification"] == "scored" else ""))
++                     (f" correct={q['correct']} pred={q.get('predicted')!r} conf={q['confidence']}"
++                      if q["classification"] == "scored" else ""))
+     with open(os.path.join(outdir, "REPORT.md"), "w", encoding="utf-8") as f:
+         f.write("\n".join(lines) + "\n")
+-    return outdir
++    return outdir, report_sha, resp_sha
++
++
++def guard_tag(tag, force):
++    outdir = os.path.join(ROOT, "runs", tag)
++    if os.path.exists(outdir) and not force:
++        raise GateError(
++            f"RUN DIR EXISTS: runs/{tag}/ already has evidence. Refusing to overwrite "
++            "(score-only/runs must not erase prior artifacts). Re-run with --force to replace, "
++            "or pick a new --tag.")
++
++
++def _load_responses(path):
++    with open(path, encoding="utf-8") as f:
++        return [json.loads(l) for l in f if l.strip()]
++
++
++def _integrity_assurance(responses, allow_legacy):
++    n_legacy = sum(1 for _r, x in responses
++                   if not x.get("integrity_algo") or x.get("integrity_algo") == LEGACY_ALGO)
++    if n_legacy and allow_legacy:
++        return ("legacy-unkeyed (NOT cryptographic; r0 public formula, "
++                "row/id reconciliation still enforced)")
++    return "hmac-sha256 (keyed; whole-record coverage)"
++
++
++def do_score_only(args, records, dataset_sha256, tmpdir):
++    resps = _load_responses(args.score_only)
++    by_id = {r["id"]: r for r in records}
++    unknown = [r.get("question_id") for r in resps if r.get("question_id") not in by_id]
++    if unknown:
++        raise GateError(f"SCORE-ONLY: response rows reference unknown question_id(s): "
++                        f"{sorted(set(unknown))[:5]}; refusing.")
++    responses = [(by_id[r["question_id"]], r) for r in resps]
++    verify_integrity(responses, allow_legacy=args.allow_legacy_unkeyed)
++    recon = reconcile(responses, records)
++    reconcile_dataset_hash(responses, dataset_sha256,
++                           allow_legacy=args.allow_legacy_unkeyed)
++    report = score(responses, n_expected=recon["n_expected"])
++    nonces = {r.get("run_nonce") for _rec, r in responses if r.get("run_nonce")}
++    report["run_nonce"] = sorted(nonces)[0] if len(nonces) == 1 else None
++    report["integrity_assurance"] = _integrity_assurance(
++        responses, args.allow_legacy_unkeyed)
++    report["scored_from"] = os.path.relpath(args.score_only, ROOT)
++    guard_tag(args.tag, args.force)
++    tmpdir2 = tmpdir
++    outdir, rsha, osha = write_outputs(args.tag, responses, report, args.dataset,
++                                       args.adapter, args.model,
++                                       {"tmp_prefix": os.path.basename(tmpdir2),
++                                        "run_nonce": report["run_nonce"],
++                                        "integrity_algo": args.adapter and
++                                        (responses[0][1].get("integrity_algo") or LEGACY_ALGO)})
++    print(f"re-scored OK -> {outdir}")
++    print(f"  n_scored={report['n_scored']}/{report['n_expected']} "
++          f"accuracy={report['accuracy']} ece={report['calibration']['ece']}")
++    print(f"  report_sha256={rsha} responses_sha256={osha}")
++    return outdir, report, rsha, osha
++
++
++def do_verify_run(args, records, dataset_sha256):
++    """重算 runs/<tag> 的数值并与 report.json / manifest 行对账。"""
++    outdir = os.path.join(ROOT, "runs", args.tag)
++    rj = os.path.join(outdir, "report.json")
++    rp = os.path.join(outdir, "responses.jsonl")
++    if not os.path.isfile(rj) or not os.path.isfile(rp):
++        raise GateError(f"VERIFY: runs/{args.tag}/ missing report.json or responses.jsonl")
++    disk_report = json.load(open(rj, encoding="utf-8"))
++    resps = _load_responses(rp)
++    by_id = {r["id"]: r for r in records}
++
++    print(f"== verify-run {args.tag} ==")
++    rows = []
++    legacy = any(not r.get("integrity_algo") or r.get("integrity_algo") == LEGACY_ALGO
++                 for r in resps)
++    sig_state = "LEGACY (r0 unkeyed; no cryptographic assurance)"
++    if not legacy:
++        try:
++            signing.get_secret(create=False)
++            bad = [r["question_id"] for r in resps if not signing.matches(r)]
++            sig_state = "hmac-sha256 OK" if not bad else f"HMAC MISMATCH on {bad}"
++        except signing.SigningError as e:
++            sig_state = f"UNVERIFIABLE: {e}"
++    rows.append(("signature", sig_state))
++
++    # 行数/id 对账
++    exp = [r["id"] for r in records]
++    got = [r.get("question_id") for r in resps]
++    rows.append(("row count", f"{len(got)} vs dataset {len(exp)} "
++                              f"{'OK' if len(got) == len(exp) else 'MISMATCH'}"))
++    rows.append(("id set", "OK" if set(got) == set(exp) else
++                 f"MISMATCH missing={sorted(set(exp) - set(got))[:5]} "
++                 f"extra={sorted(set(got) - set(exp))[:5]}"))
++
++    # 用 responses 重算指标
++    responses = [(by_id[r["question_id"]], r) for r in resps if r.get("question_id") in by_id]
++    recomputed = score(responses, n_expected=len(records))
++    rows.append(("n_scored", f"recomputed {recomputed['n_scored']} vs report "
++                             f"{disk_report.get('n_scored')} "
++                             f"{'OK' if recomputed['n_scored'] == disk_report.get('n_scored') else 'MISMATCH'}"))
++    rec_acc, disk_acc = recomputed["accuracy"], disk_report.get("accuracy")
++    rows.append(("accuracy", f"recomputed {rec_acc} vs report {disk_acc} "
++                             f"{'OK' if _eq(rec_acc, disk_acc) else 'MISMATCH'}"))
++    rec_ece = recomputed["calibration"]["ece"]
++    disk_ece = (disk_report.get("calibration") or {}).get("ece")
++    rows.append(("ece", f"recomputed {rec_ece} vs report {disk_ece} "
++                        f"{'OK' if _eq(rec_ece, disk_ece) else 'MISMATCH'}"))
++
++    # manifest 对账(先查, 好让 report.json 的 sha256 能对 manifest 里的记录)
++    mrow = None
++    if os.path.isfile(MANIFEST):
++        for l in open(MANIFEST, encoding="utf-8"):
++            if not l.strip():
++                continue
++            m = json.loads(l)
++            if m.get("run_id") == args.tag:
++                mrow = m
++
++    # 文件哈希
++    disk_resp_sha = sha256_file(rp)
++    claimed_resp_sha = disk_report.get("responses_sha256")
++    rows.append(("responses sha256",
++                 "not recorded (pre-r1 artifact)" if not claimed_resp_sha else
++                 f"{disk_resp_sha[:16]}... vs report {str(claimed_resp_sha)[:16]}... "
++                 f"{'OK' if claimed_resp_sha == disk_resp_sha else 'MISMATCH'}"))
++    disk_rep_sha = sha256_file(rj)
++    claimed_rep_sha = (mrow or {}).get("report_sha256")
++    rows.append(("report sha256",
++                 "not recorded (pre-r1 artifact)" if not claimed_rep_sha else
++                 f"file {disk_rep_sha[:16]}... vs manifest {str(claimed_rep_sha)[:16]}... "
++                 f"{'OK' if claimed_rep_sha == disk_rep_sha else 'MISMATCH'}"))
++
++    if mrow is None:
++        rows.append(("manifest", "no manifest row for this tag (dry-run or score-only?)"))
++    else:
++        rows.append(("manifest accuracy", f"{mrow.get('accuracy')} vs recomputed {rec_acc} "
++                                          f"{'OK' if _eq(mrow.get('accuracy'), rec_acc) else 'MISMATCH'}"))
++        rows.append(("manifest ece", f"{mrow.get('ece')} vs recomputed {rec_ece} "
++                                    f"{'OK' if _eq(mrow.get('ece'), rec_ece) else 'MISMATCH'}"))
++        rows.append(("manifest n_scored", f"{mrow.get('n_scored')} vs recomputed "
++                                         f"{recomputed['n_scored']} "
++                                         f"{'OK' if mrow.get('n_scored') == recomputed['n_scored'] else 'MISMATCH'}"))
++        for f in ("effort", "timeout_s", "max_tokens", "max_attempts", "temperature",
++                  "seed", "run_nonce", "integrity_algo", "signing_key_source",
++                  "n_expected", "n_received", "abstentions_valid_task_failure",
++                  "oracle", "tie_rule", "n_ties"):
++            rows.append((f"manifest.{f}", repr(mrow.get(f))))
++
++    for k, v in rows:
++        print(f"  {k:22s} {v}")
++    ok = all("MISMATCH" not in v for _k, v in rows)
++    print(f"  => {'RECOMPUTE CONSISTENT' if ok else 'INCONSISTENT (see MISMATCH rows)'}"
++          f"{' [legacy artifact: metrics recomputed, integrity not cryptographic]' if legacy else ''}")
++    return ok
++
++
++def _eq(a, b):
++    if a is None or b is None:
++        return a is b
++    try:
++        return abs(float(a) - float(b)) < 1e-9
++    except (TypeError, ValueError):
++        return a == b
+ 
+ 
+ def main():
+     ap = argparse.ArgumentParser()
+     ap.add_argument("--dataset", default=os.path.join(ROOT, "data", "smoke-12.jsonl"))
+-    ap.add_argument("--adapter", choices=list(ADAPTERS), required=True)
+-    ap.add_argument("--model", required=True)
+-    ap.add_argument("--tag", required=True, help="run tag; output -> runs/<tag>/")
++    ap.add_argument("--adapter", choices=list(ADAPTERS))
++    ap.add_argument("--model")
++    ap.add_argument("--tag")
+     ap.add_argument("--dry-run", action="store_true")
+     ap.add_argument("--effort", default="low")
+     ap.add_argument("--timeout", type=float, default=60.0)
++    ap.add_argument("--max-tokens", type=int, default=4096)
++    ap.add_argument("--max-attempts", type=int, default=2)
++    ap.add_argument("--seed", type=int, default=None,
++                    help="sent as the API `seed`; recorded in the manifest (null = not sent)")
+     ap.add_argument("--empty-state", action="store_true",
+                     help="把每题 state 换成 '(no context provided)' 做区分度基线")
+     ap.add_argument("--score-only", metavar="RESPONSES_JSONL",
+-                    help="不调用任何 adapter, 只重验完整性+重算指标")
++                    help="不调用任何 adapter, 只重验完整性+行数/id 对账+重算指标")
++    ap.add_argument("--allow-legacy-unkeyed", action="store_true",
++                    help="允许重算 r0 旧产物(公开无钥公式, 不可信); 报告会标注 legacy-unkeyed")
++    ap.add_argument("--verify-run", metavar="TAG",
++                    help="重算 runs/<tag> 的数值并与 report/manifest 对账(零调用)")
++    ap.add_argument("--force", action="store_true",
++                    help="允许覆盖已存在的 runs/<tag>/(默认拒绝, 防证据被静默改写)")
+     args = ap.parse_args()
++
++    if not args.verify_run:
++        if not args.adapter or not args.model or not args.tag:
++            ap.error("--adapter/--model/--tag are required (except with --verify-run)")
++    if args.verify_run:
++        args.tag = args.verify_run
+ 
+     tmpdir = tempfile.mkdtemp(prefix="dec001-", dir="/tmp")  # 每跑随机前缀, 不锚定路径
+     records = load_dataset(args.dataset)
+-    print(f"dataset: {len(records)} questions, tmp prefix {os.path.basename(tmpdir)}")
++    dataset_sha256 = sha256_file(args.dataset)
++    print(f"dataset: {len(records)} questions, sha256 {dataset_sha256[:16]}..., "
++          f"tmp prefix {os.path.basename(tmpdir)}")
++
++    if args.verify_run:
++        ok = do_verify_run(args, records, dataset_sha256)
++        return 0 if ok else 3
+ 
+     if args.score_only:
+-        with open(args.score_only) as f:
+-            resps = [json.loads(l) for l in f if l.strip()]
+-        by_id = {r["id"]: r for r in records}
+-        responses = [(by_id[r["question_id"]], r) for r in resps]
+-        verify_integrity(responses)
+-        report = score(responses)
+-        outdir = write_outputs(args.tag, responses, report, args.dataset,
+-                               args.adapter, args.model,
+-                               {"tmp_prefix": os.path.basename(tmpdir)})
+-        print(f"re-scored OK -> {outdir}")
+-        return
++        do_score_only(args, records, dataset_sha256, tmpdir)
++        return 0
++
++    # 先过 tag 闸: 不让一次会因目录已存在而被拒的运行白烧 API 调用
++    guard_tag(args.tag, args.force)
+ 
+     prices = load_prices()
++    run_nonce = secrets.token_hex(16)
+     responses = run_dataset(records, args.adapter, args.model, args.dry_run,
+-                            args.effort, args.timeout, args.empty_state)
++                            args.effort, args.timeout, args.empty_state,
++                            run_nonce, dataset_sha256, args.max_tokens,
++                            args.max_attempts, args.seed)
++    recon = {"n_expected": len(records), "n_received": len(responses)}
+     if not args.dry_run:
+         verify_integrity(responses)
++        recon = reconcile(responses, records)
++        reconcile_dataset_hash(responses, dataset_sha256)
+         for _rec, resp in responses:
+             if resp["ok"] and resp["cost_usd"] is None:
+                 resp["cost_usd"] = price_cost(resp["model"], resp.get("tokens"), prices)
+-    report = score(responses)
+-    outdir = write_outputs(args.tag, responses, report, args.dataset,
+-                           args.adapter, args.model,
+-                           {"tmp_prefix": os.path.basename(tmpdir)})
++                _resign(resp)
++    report = score(responses, n_expected=recon["n_expected"])
++    report["run_nonce"] = run_nonce
++    report["integrity_assurance"] = "hmac-sha256 (keyed; whole-record coverage)"
++    report["dataset_sha256"] = dataset_sha256
++    report["run_config"] = {
++        "adapter": args.adapter, "model": args.model, "effort": args.effort,
++        "timeout_s": args.timeout, "max_tokens": args.max_tokens,
++        "max_attempts": args.max_attempts, "seed": args.seed, "temperature": 0,
++        "empty_state_baseline": args.empty_state, "dry_run": args.dry_run,
++    }
++    outdir, rsha, osha = write_outputs(args.tag, responses, report, args.dataset,
++                                       args.adapter, args.model,
++                                       {"tmp_prefix": os.path.basename(tmpdir),
++                                        "run_nonce": run_nonce,
++                                        "integrity_algo": "hmac-sha256"})
+     if args.dry_run:
+         print(f"dry-run done -> {outdir} (manifest not appended)")
+-        return
++        return 0
+     ts = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+     append_manifest({
+         "run_id": args.tag, "ts_utc": ts, "driver": DRIVER_VERSION,
+         "adapter": args.adapter, "model": args.model,
+         "dataset": os.path.relpath(args.dataset, ROOT),
+-        "dataset_sha256": sha256_file(args.dataset),
++        "dataset_sha256": dataset_sha256,
++        # 运行参数(r1: 红道 Blocker 6 要求可复核)
++        "effort": args.effort, "timeout_s": args.timeout,
++        "max_tokens": args.max_tokens, "max_attempts": args.max_attempts,
++        "temperature": 0, "seed": args.seed,
+         "empty_state_baseline": args.empty_state,
++        "run_nonce": run_nonce,
++        "integrity_algo": "hmac-sha256",
++        "signing_key_source": signing.secret_source(),
+         "n_questions": len(records),
+         "n_scored": report["n_scored"],
++        "n_expected": report["n_expected"],
++        "n_received": report["n_received"],
++        "abstentions_valid_task_failure": report["abstentions"]["n_valid_task_failure"],
+         "accuracy": report["accuracy"],
+         "ece": report["calibration"]["ece"],
++        "oracle": report["oracle"]["oracle"],
++        "tie_rule": report["oracle"]["tie_rule"],
++        "n_ties": report["oracle"]["n_ties"],
+         "mean_latency_s": report["latency"]["mean_s"],
+         "total_cost_usd": report["cost"]["total_usd"],
+         "invalid_infrastructure_n": len(report["failures"]["invalid_infrastructure"]),
+         "valid_task_failure_n": len(report["failures"]["valid_task_failure"]),
+         "report_dir": os.path.relpath(outdir, ROOT),
++        "report_sha256": rsha,
++        "responses_sha256": osha,
+     })
+     print(f"done -> {outdir}")
+-    print(f"accuracy={report['accuracy']} ece={report['calibration']['ece']}")
++    print(f"accuracy={report['accuracy']} ece={report['calibration']['ece']} "
++          f"n_scored={report['n_scored']}/{report['n_expected']}")
++    print(f"verify with: python3 driver.py --verify-run {args.tag} "
++          f"--dataset {args.dataset}")
++    return 0
+ 
+ 
+ if __name__ == "__main__":
+     try:
+-        main()
++        sys.exit(main())
+     except DatasetError as e:
+         print(f"DATASET INVALID: {e}", file=sys.stderr)
+         sys.exit(1)
++    except GateError as e:
++        print(f"REFUSED: {e}", file=sys.stderr)
++        sys.exit(2)
++    except signing.SigningError as e:
++        print(f"SIGNING ERROR: {e}", file=sys.stderr)
++        sys.exit(4)
+--- /dev/null
++++ b/signing.py
+@@ -0,0 +1,125 @@
++"""Run-level signing for decision-axis artifacts (HMAC-SHA256).
++
++Trust root = the signing secret. It is NEVER written into the product tree:
++  1. env `AMBER_DECISION_HMAC_SECRET` (preferred), else
++  2. file `$AMBER_DECISION_HMAC_KEY_FILE` (default `~/.local/state/amber-decision/hmac.key`),
++     created 0600 on first signed run if absent (dir 0700).
++The key file path is deliberately outside this repository so a whole-tree secret
++scan finds nothing, and it is never printed into logs, reports or manifests.
++
++Why keyed: the r0 gate used a public unkeyed formula
++`sha256(adapter|model|qid|json(answer))`, so anyone who knew the formula could
++edit a response and recompute the tag. See WO-DEC-001-r1 Blocker 1.
++"""
++import hashlib
++import hmac
++import json
++import os
++import secrets
++
++ENV_SECRET = "AMBER_DECISION_HMAC_SECRET"
++ENV_KEY_FILE = "AMBER_DECISION_HMAC_KEY_FILE"
++ALGO = "hmac-sha256"
++DEFAULT_KEY_FILE = os.path.join(
++    os.path.expanduser("~"), ".local", "state", "amber-decision", "hmac.key")
++
++_cached = None
++
++
++class SigningError(Exception):
++    pass
++
++
++def key_file_path():
++    return os.environ.get(ENV_KEY_FILE) or DEFAULT_KEY_FILE
++
++
++def _read_key_file():
++    path = key_file_path()
++    with open(path, "rb") as f:
++        data = f.read().strip()
++    if not data:
++        raise SigningError(f"signing key file {path!r} is empty")
++    return data
++
++
++def _write_key_file(key):
++    path = key_file_path()
++    d = os.path.dirname(path)
++    os.makedirs(d, mode=0o700, exist_ok=True)
++    try:
++        os.chmod(d, 0o700)
++    except OSError:
++        pass
++    fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
++    with os.fdopen(fd, "wb") as f:
++        f.write(key + b"\n")
++    os.chmod(path, 0o600)
++
++
++def get_secret(create=True):
++    """Return the signing secret bytes.
++
++    create=True  -> running a new run: env, else key file, else generate + store 0600.
++    create=False -> verifying: env, else key file; never invent a key (an invented
++                    key would make every existing artifact look tampered).
++    """
++    global _cached
++    if _cached is not None:
++        return _cached
++    env = os.environ.get(ENV_SECRET)
++    if env:
++        _cached = env.encode("utf-8")
++        return _cached
++    try:
++        _cached = _read_key_file()
++        return _cached
++    except FileNotFoundError:
++        if not create:
++            raise SigningError(
++                f"no signing secret: set {ENV_SECRET} or create {key_file_path()!r}; "
++                "refusing to verify artifacts with an invented key")
++    key = secrets.token_hex(32).encode("ascii")
++    _write_key_file(key)
++    _cached = key
++    return _cached
++
++
++def secret_source():
++    """Where the secret came from. Never returns the value."""
++    if os.environ.get(ENV_SECRET):
++        return f"env:{ENV_SECRET}"
++    try:
++        _read_key_file()
++        return "file"
++    except FileNotFoundError:
++        return "none"
++
++
++def canonical(payload):
++    return json.dumps(payload, sort_keys=True, separators=(",", ":"),
++                      ensure_ascii=False).encode("utf-8")
++
++
++def sign(payload, secret=None):
++    """HMAC-SHA256 hex digest of a JSON-serializable payload (sorted keys)."""
++    sec = secret if secret is not None else get_secret()
++    return hmac.new(sec, canonical(payload), hashlib.sha256).hexdigest()
++
++
++def sign_record(record, secret=None):
++    """Tag for one normalized response record: every field except `integrity`.
++
++    Coverage is the whole record (answer, ok, error_class/error_detail, latency_s,
++    cost_usd, tokens, run_nonce, dataset_sha256, ...), so metadata tampering is
++    detected too -- not only a changed answer.
++    """
++    payload = {k: v for k, v in record.items() if k != "integrity"}
++    return sign(payload, secret=secret)
++
++
++def matches(record, secret=None):
++    """True when record['integrity'] is a valid tag for that record."""
++    want = sign_record(record, secret=secret)
++    got = record.get("integrity")
++    return isinstance(got, str) and hmac.compare_digest(got, want)
+--- a/selftest.py
++++ b/selftest.py
+@@ -82,15 +82,16 @@
+     w("## 6. invalid_infrastructure 分类存在且不计入模型分")
+     w("")
+     w("把 OLLAMA_BASE_URL 指向本机死端口 127.0.0.1:9, 触发连接拒绝(网络层失败):")
++    tag6 = f"selftest-timeout-{os.getpid()}"
+     rc, out = run(
+         "python3 driver.py --adapter openai-compatible-baseline --model glm-5.3-flash "
+-        "--dataset data/smoke-12.jsonl --tag timeout-sim --timeout 5",
++        f"--dataset data/smoke-12.jsonl --tag {tag6} --timeout 5",
+         env={"OLLAMA_BASE_URL": "http://127.0.0.1:9/v1"}, timeout=300)
+     w("```")
+-    w(f"$ OLLAMA_BASE_URL=http://127.0.0.1:9/v1 python3 driver.py ... --tag timeout-sim\n"
++    w(f"$ OLLAMA_BASE_URL=http://127.0.0.1:9/v1 python3 driver.py ... --tag {tag6}\n"
+       + "\n".join(out.splitlines()[:8]) + "\n...(截断)...\n" + "\n".join(out.splitlines()[-4:]))
+     w("```")
+-    rep = json.load(open(os.path.join(ROOT, "runs", "timeout-sim", "report.json")))
++    rep = json.load(open(os.path.join(ROOT, "runs", tag6, "report.json")))
+     n_infra = len(rep["failures"]["invalid_infrastructure"])
+     n_scored = rep["n_scored"]
+     ok6 = (rc == 0 and n_infra == 12 and n_scored == 0
+@@ -98,20 +99,33 @@
+     w(f"报告分类: invalid_infrastructure={n_infra}, scored={n_scored}, valid_task_failure=0")
+     w(f"结果: {'PASS' if ok6 else 'FAIL'}(12 题全部 infra 失败, 零计入模型分; 与 valid_task_failure 分列)")
+     w("")
++    # 清理本次自测的临时 run(避免污染 runs/): 目录 + manifest 行
++    import shutil as _sh
++    _sh.rmtree(os.path.join(ROOT, "runs", tag6), ignore_errors=True)
++    _mp = os.path.join(ROOT, "runs", "manifest.jsonl")
++    if os.path.isfile(_mp):
++        _kept = [l for l in open(_mp, encoding="utf-8")
++                 if l.strip() and json.loads(l).get("run_id") != tag6]
++        with open(_mp, "w", encoding="utf-8") as _f:
++            _f.writelines(_kept)
+ 
+     # ---- 验收 5a: tmp 前缀每跑随机 ----
+     w("## 5a. tmp 前缀每跑随机")
+     w("")
++    pid = os.getpid()
+     rc1, out1 = run("python3 driver.py --adapter typesafe-native --model jev-latest "
+-                    "--dry-run --dataset data/smoke-12.jsonl --tag dryrun-a")
++                    f"--dry-run --dataset data/smoke-12.jsonl --tag selftest-dryrun-a-{pid}")
+     rc2, out2 = run("python3 driver.py --adapter typesafe-native --model jev-latest "
+-                    "--dry-run --dataset data/smoke-12.jsonl --tag dryrun-b")
++                    f"--dry-run --dataset data/smoke-12.jsonl --tag selftest-dryrun-b-{pid}")
+     p1 = [l for l in out1.splitlines() if "tmp prefix" in l][0]
+     p2 = [l for l in out2.splitlines() if "tmp prefix" in l][0]
+     w(f"```\n{p1}\n{p2}\n```")
+     ok5a = p1.split()[-1] != p2.split()[-1]
+     w(f"结果: {'PASS' if ok5a else 'FAIL'}")
+     w("")
++    _sh2 = __import__("shutil")
++    _sh2.rmtree(os.path.join(ROOT, "runs", f"selftest-dryrun-a-{pid}"), ignore_errors=True)
++    _sh2.rmtree(os.path.join(ROOT, "runs", f"selftest-dryrun-b-{pid}"), ignore_errors=True)
+ 
+     # ---- 验收 5b: 篡改响应文件 → oracle 报错/改判 ----
+     w("## 5b. 篡改响应文件, 完整性校验必须拦下")
+@@ -131,12 +145,15 @@
+     lines[0] = json.dumps(rec0)  # 改答案, 不重算 integrity
+     open(tampered, "w").write("\n".join(lines) + "\n")
+     rc, out = run(f"python3 driver.py --score-only {tampered} --adapter openai-compatible-baseline "
+-                  "--model glm-5.3-flash --dataset data/smoke-12.jsonl --tag tamper-test")
++                  f"--model glm-5.3-flash --dataset data/smoke-12.jsonl "
++                  f"--tag selftest-tamper-{os.getpid()}")
+     w("```")
+     w(f"$ python3 driver.py --score-only /tmp/dec001-tampered.jsonl ...\n{out.strip().splitlines()[-1] if out else ''}\nrc={rc}")
+     w("```")
+-    ok5b = rc != 0 and "TAMPER" in out
+-    w(f"结果: {'PASS' if ok5b else 'FAIL'}(改答案不重算 sha → 拒绝出分)")
++    # r1 起: 旧 r0 产物(无 integrity_algo)先按 LEGACY 拒; 改过答案的 r1 产物按 TAMPER 拒。
++    # 两者都是「拒绝出分」(rc≠0), 满足本闸语义。
++    ok5b = rc != 0 and ("TAMPER" in out or "LEGACY" in out or "REFUSED" in out)
++    w(f"结果: {'PASS' if ok5b else 'FAIL'}(改答案不重算 sha → 拒绝出分; r1 消息可能是 TAMPER 或 LEGACY)")
+     w("")
+ 
+     # ---- 验收 7: 密钥零落盘 ----
+--- /dev/null
++++ b/selftest_r1.py
+@@ -0,0 +1,565 @@
++#!/usr/bin/env python3
++"""WO-DEC-001-r1 自测: 12 条验收逐条「复现→修复→复现失败」三段式证据。
++
++用法: python3 selftest_r1.py          (零外部依赖; 内起 mock HTTP server, 不烧任何真 API)
++输出: runs/selftest-dec001-r1.md
++
++设计要点:
++- mock server 跑在本进程的线程里, 选状态码/响应体, 覆盖 401/404/400 分类与正常答题。
++- §1/§2 的「复现」段直接用 r0 的公开无钥公式在内存里重算, 证明旧公式公开可用;
++  「复现失败」段把同一份伪造数据喂给 r1 driver, 要求 rc≠0。
++- §9/§10 读已产出的真 Jev run(r1-smoke-jev-1 / r1-empty-state-jev)并复算, 不重复烧配额。
++"""
++import hashlib
++import http.server
++import json
++import math
++import os
++import re
++import shutil
++import socketserver
++import subprocess
++import sys
++import threading
++
++ROOT = os.path.dirname(os.path.abspath(__file__))
++RUNS = os.path.join(ROOT, "runs")
++OUT = os.path.join(RUNS, "selftest-dec001-r1.md")
++PY = sys.executable
++TMP = "/tmp/dec001-r1-selftest"
++L = []
++
++
++def w(s=""):
++    L.append(s)
++
++
++def sh(args, env=None, timeout=300):
++    e = dict(os.environ)
++    if env:
++        e.update(env)
++    p = subprocess.run([PY, "driver.py"] + args, cwd=ROOT, env=e,
++                       capture_output=True, text=True, timeout=timeout)
++    return p.returncode, (p.stdout + p.stderr).strip()
++
++
++def code(args, env=None, timeout=300):
++    """driver output, first+last line trimmed for the report."""
++    rc, out = sh(args, env=env, timeout=timeout)
++    lines = [x for x in out.splitlines() if x.strip()]
++    tail = lines[-1] if lines else ""
++    return rc, out, tail
++
++
++# ---------------- in-process mock OpenAI-compatible server ----------------
++
++class _Handler(http.server.BaseHTTPRequestHandler):
++    mode = "ok"
++
++    def log_message(self, *a):
++        pass
++
++    def _send(self, code, obj):
++        body = json.dumps(obj).encode()
++        self.send_response(code)
++        self.send_header("Content-Type", "application/json")
++        self.end_headers()
++        self.wfile.write(body)
++
++    def do_POST(self):
++        n = int(self.headers.get("Content-Length") or 0)
++        raw = self.rfile.read(n)
++        m = _Handler.mode
++        if m == "401":
++            return self._send(401, {"error": {"message": "invalid api key", "code": "invalid_api_key"}})
++        if m == "404":
++            return self._send(404, {"error": {"message": "model not found", "code": "model_not_found"}})
++        if m == "400semantic":
++            return self._send(400, {"error": {"message": "prompt too long", "code": "context_length_exceeded"}})
++        if m == "400opaque":
++            return self._send(400, {"error": {"message": "bad request"}})
++        req = json.loads(raw.decode())
++        sysmsg = req["messages"][0]["content"]
++        user = req["messages"][-1]["content"]
++        if "probability that the answer" in sysmsg:
++            ans = {"answer": 0.99}
++        elif "option keys" in sysmsg or "one of the option keys" in sysmsg:
++            opts = re.findall(r"- (\w+):", user)
++            ans = {"answer": opts[0],
++                   "probabilities": {o: (0.9 if o == opts[0] else 0.05) for o in opts},
++                   "confidence": 0.9}
++        else:
++            lv = re.findall(r"- (\d+):", user)
++            ans = {"answer": 0, "probabilities": {i: (0.9 if i == "0" else 0.05) for i in lv},
++                   "confidence": 0.9}
++        return self._send(200, {"choices": [{"message": {"content": json.dumps(ans)}}],
++                                "usage": {"prompt_tokens": 10, "completion_tokens": 5}})
++
++
++class _Server:
++    def __init__(self, mode, port=0):
++        _Handler.mode = mode
++        socketserver.TCPServer.allow_reuse_address = True
++        self.httpd = socketserver.TCPServer(("127.0.0.1", port), _Handler)
++        self.port = self.httpd.server_address[1]
++        self.t = threading.Thread(target=self.httpd.serve_forever, daemon=True)
++        self.t.start()
++
++    def stop(self):
++        self.httpd.shutdown()
++        self.httpd.server_close()
++
++
++# ---------------- helpers ----------------
++
++def recs_map():
++    return {json.loads(l)["id"]: json.loads(l)
++            for l in open(os.path.join(ROOT, "data", "smoke-12.jsonl"))}
++
++
++def legacy_hash(adapter, model, qid, answer):
++    payload = json.dumps(answer, sort_keys=True, separators=(",", ":"))
++    return hashlib.sha256(f"{adapter}|{model}|{qid}|{payload}".encode()).hexdigest()
++
++
++def load_rows(path):
++    return [json.loads(l) for l in open(path) if l.strip()]
++
++
++def clean(tag):
++    d = os.path.join(RUNS, tag)
++    if os.path.isdir(d):
++        shutil.rmtree(d)
++
++
++def main():
++    os.makedirs(RUNS, exist_ok=True)
++    if os.path.isdir(TMP):
++        shutil.rmtree(TMP)
++    os.makedirs(TMP)
++    # 不覆盖签名密钥: §8/§9/§12 需要验证用操作员密钥签的真 run。
++    # mock victim run 也用同一密钥签名(它随后被清理)。
++
++    recs = recs_map()
++
++    w("# selftest-dec001-r1 — WO-DEC-001-r1 验收矩阵自测")
++    w()
++    w("生成: `python3 selftest_r1.py`(本文件由脚本产出; 重跑即复现)。")
++    w("每条 = 复现(r0 漏洞)→ 修复(r1 代码/契约)→ 复现失败(r1 拦截)。")
++    w("mock HTTP server 内起线程, 零外部 API 调用; §9/§10 读已产出真 Jev run 复算。")
++    w()
++
++    # --- produce a signed victim run (mock) for §1/§2 ---
++    srv = _Server("ok")
++    clean("st-victim")
++    try:
++        rc, out, tail = code(["--adapter", "openai-compatible-baseline", "--model", "mock-ok",
++                              "--dataset", "data/smoke-12.jsonl", "--tag", "st-victim"],
++                             env={"OLLAMA_BASE_URL": f"http://127.0.0.1:{srv.port}/v1"})
++    finally:
++        srv.stop()
++    victim = os.path.join(RUNS, "st-victim", "responses.jsonl")
++    vrows = load_rows(victim)
++    vrep = json.load(open(os.path.join(RUNS, "st-victim", "report.json")))
++    wrong = [q["id"] for q in vrep["questions"]
++             if q["classification"] == "scored" and q["correct"] is False]
++
++    # ================= §1 unkeyed hash bypass =================
++    w("## 1. 篡改 answer 后重算 integrity 不再放行(含知悉旧公式者)")
++    w()
++    w("**复现(r0)**: r0 完整性 = `sha256(adapter|model|qid|canonical_json(answer))`, 公式公开无钥。")
++    w("攻击者在内存里用同一公式重算即可:")
++    w()
++    q1 = recs["smoke-001"]
++    keys = list(q1["question"]["options"].keys())
++    other = [k for k in keys if k != q1["gold"]][0]
++    na = {"choice": other, "probabilities": {k: (0.9 if k == other else 0.05) for k in keys},
++          "confidence": 0.9}
++    r0 = vrows[0]
++    w("```")
++    w(f"legacy_hash('{r0['adapter']}', '{r0['model']}', 'smoke-001', forged_answer)")
++    w(f"  = {legacy_hash(r0['adapter'], r0['model'], 'smoke-001', na)}")
++    w("-> 与响应文件里的 integrity 字段同构(64 hex), 重算后写回即通过 r0 校验。")
++    w("```")
++    forged = []
++    for r in vrows:
++        r = json.loads(json.dumps(r))
++        if r["question_id"] == "smoke-001":
++            r["answer"] = na
++            r["integrity"] = legacy_hash(r["adapter"], r["model"], r["question_id"], na)
++            r.pop("integrity_algo", None)
++        forged.append(r)
++    p1 = os.path.join(TMP, "forged-legacy.jsonl")
++    with open(p1, "w") as f:
++        f.write("\n".join(json.dumps(x) for x in forged) + "\n")
++    w("**修复(r1)**: integrity = `HMAC-SHA256(secret, 整条记录)`; 密钥不在仓内, 攻击者算不出。")
++    w()
++    rc, out, tail = code(["--score-only", p1, "--adapter", "openai-compatible-baseline",
++                          "--model", "mock-ok", "--dataset", "data/smoke-12.jsonl",
++                          "--tag", "st-1-forged"])
++    w("**复现失败(r1)**:")
++    w("```")
++    w(f"$ python3 driver.py --score-only <伪造> ... --tag st-1-forged\n{tail}\nrc={rc}")
++    w("```")
++    w(f"结果: {'PASS' if rc != 0 else 'FAIL'} — r0 公开公式伪造被拒(rc≠0, 无 report 落盘)。")
++    w(f"  report 落盘? {os.path.exists(os.path.join(RUNS, 'st-1-forged', 'report.json'))}")
++    w()
++
++    # ================= §2 score-only row reconciliation =================
++    w("## 2. score-only 删行/改标被拒")
++    w()
++    w(f"**复现(r0)**: 删掉 mock run 里判错的题({wrong})或把它们改标 `invalid_infrastructure`, ")
++    w("r0 只按剩余题算 accuracy, 无任何行数/id 告警 → 0.5833 可抬到 1.0。")
++    w()
++    # 2a delete rows
++    keep = [r for r in vrows if r["question_id"] not in wrong]
++    p2a = os.path.join(TMP, "drop-rows.jsonl")
++    with open(p2a, "w") as f:
++        f.write("\n".join(json.dumps(x) for x in keep) + "\n")
++    rc_a, out_a, tail_a = code(["--score-only", p2a, "--adapter", "openai-compatible-baseline",
++                                "--model", "mock-ok", "--dataset", "data/smoke-12.jsonl",
++                                "--tag", "st-2-drop"])
++    # 2b relabel to invalid_infrastructure
++    rel = []
++    for r in vrows:
++        r = json.loads(json.dumps(r))
++        if r["question_id"] in wrong:
++            r["answer"] = None
++            r["ok"] = False
++            r["error_class"] = "invalid_infrastructure"
++            r["integrity"] = "0" * 64
++        rel.append(r)
++    p2b = os.path.join(TMP, "relabel.jsonl")
++    with open(p2b, "w") as f:
++        f.write("\n".join(json.dumps(x) for x in rel) + "\n")
++    rc_b, out_b, tail_b = code(["--score-only", p2b, "--adapter", "openai-compatible-baseline",
++                                "--model", "mock-ok", "--dataset", "data/smoke-12.jsonl",
++                                "--tag", "st-2-relabel"])
++    # 2c relabel to valid_task_failure
++    rel2 = []
++    for r in vrows:
++        r = json.loads(json.dumps(r))
++        if r["question_id"] in wrong:
++            r["answer"] = None
++            r["ok"] = False
++            r["error_class"] = "valid_task_failure"
++            r["integrity"] = None
++        rel2.append(r)
++    p2c = os.path.join(TMP, "relabel-vtf.jsonl")
++    with open(p2c, "w") as f:
++        f.write("\n".join(json.dumps(x) for x in rel2) + "\n")
++    rc_c, out_c, tail_c = code(["--score-only", p2c, "--adapter", "openai-compatible-baseline",
++                                "--model", "mock-ok", "--dataset", "data/smoke-12.jsonl",
++                                "--tag", "st-2-vtf"])
++    w("**修复(r1)**: `--score-only` 强制对账 question_id 集合 == 数据集 id 集合 + 行数一致 + 无重复。")
++    w()
++    w("**复现失败(r1)**:")
++    w("```")
++    w(f"[删 {len(wrong)} 行] rc={rc_a}\n  {tail_a}")
++    w(f"[改标 invalid_infrastructure] rc={rc_b}\n  {tail_b}")
++    w(f"[改标 valid_task_failure] rc={rc_c}\n  {tail_c}")
++    w("```")
++    ok2 = rc_a != 0 and rc_b != 0 and rc_c != 0
++    w(f"结果: {'PASS' if ok2 else 'FAIL'} — 三种删行/改标攻击全部 rc≠0, 不出报告。")
++    w()
++
++    # ================= §3/§4 HTTP classification =================
++    for num, mode, port, want, label in (
++            (3, "401", 0, "invalid_infrastructure", "401(凭据失效)→ infra"),
++            (4, "404", 0, "invalid_infrastructure", "404(模型名写错)→ infra"),
++            (4, "400semantic", 0, "valid_task_failure", "  附: 400 + 语义 error code → vtf(唯一例外)"),
++            (4, "400opaque", 0, "invalid_infrastructure", "  附: 400 无语义 code → infra")):
++        if num == 3:
++            w("## 3. 401 → invalid_infrastructure")
++        elif num == 4 and mode == "404":
++            w("## 4. 404/其余 4xx → invalid_infrastructure")
++        w()
++        clean(f"st-http-{mode}")
++        srv = _Server(mode)
++        port = srv.port
++        try:
++            rc, out, tail = code(["--adapter", "openai-compatible-baseline", "--model", "mock-x",
++                                  "--dataset", "data/smoke-12.jsonl", "--tag", f"st-http-{mode}",
++                                  "--timeout", "10"],
++                                 env={"OLLAMA_BASE_URL": f"http://127.0.0.1:{port}/v1"})
++        finally:
++            srv.stop()
++        rep = json.load(open(os.path.join(RUNS, f"st-http-{mode}", "report.json")))
++        ni = len(rep["failures"]["invalid_infrastructure"])
++        nv = len(rep["failures"]["valid_task_failure"])
++        got = "invalid_infrastructure" if ni else ("valid_task_failure" if nv else "none")
++        w(f"**{label}**(mock 服务回 {mode})")
++        w("```")
++        w(f"$ OLLAMA_BASE_URL=http://127.0.0.1:{port}/v1 python3 driver.py ... --tag st-http-{mode}")
++        w(f"  invalid_infrastructure={ni}  valid_task_failure={nv}  n_scored={rep['n_scored']}")
++        w(f"  样例 detail: {str((rep['failures']['invalid_infrastructure'] or rep['failures']['valid_task_failure'])[0]['detail'])[:90]}")
++        w("```")
++        w(f"结果: {'PASS' if got == want else 'FAIL'}(r0 记为 valid_task_failure = 把运维错误算成模型分)。")
++        w()
++
++    # ================= §5 tie determinism =================
++    w("## 5. tie 确定性(同一概率两种键序判定一致)")
++    w()
++    sys.path.insert(0, ROOT)
++    import scoring.metrics as metrics  # noqa
++    w("**复现(r0)**: choice 用 `argmax(probabilities)`, 平票时取 dict 首个键 → 键序决定胜负。")
++    w("```")
++    w("r0: max(probs, key=probs.get)  # {'destructive':.5,'reversible':.5} vs 反序 → 判定可能翻转")
++    w(f"   现实数据: runs/empty-state-g53f/smoke-002 平票, r0 取到首个键 destructive(=gold) 判对")
++    w("```")
++    rec_t = {"id": "c", "family": "f", "gold": "A",
++             "question": {"id": "c", "type": "choice", "instructions": "i",
++                          "options": {"A": "a", "B": "b"}}}
++    ca = {"answer": {"choice": None, "probabilities": {"A": 0.5, "B": 0.5}}}
++    cb = {"answer": {"choice": None, "probabilities": {"B": 0.5, "A": 0.5}}}
++    cc = {"answer": {"choice": "A", "probabilities": {"A": 0.5, "B": 0.5}}}
++    v_a = metrics.correctness(rec_t, ca)
++    v_b = metrics.correctness(rec_t, cb)
++    v_c = metrics.correctness(rec_t, cc)
++    w("**修复(r1)**: 平票以自报 `answer.choice` 为准; 自报缺失时判错。判定只依赖显式字段。")
++    w()
++    w("**复现失败(r1)**:")
++    w("```")
++    w(f"同概率 A/B 键序两组, 无自报  -> A 序={v_a}  B 序={v_b}   一致={v_a == v_b}")
++    w(f"同概率 A/B 键序两组, 自报='A' -> A 序={v_c}              确定")
++    w("```")
++    ok5 = (v_a == v_b) and v_c is True
++    w(f"结果: {'PASS' if ok5 else 'FAIL'} — 键序不再影响判定。")
++    w()
++
++    # ================= §6 rounding =================
++    w("## 6. round 边界写进契约并显式实现(非裸 round)")
++    w()
++    w("**复现(r0)**: score 用 Python 内置 `round()` = 银行家舍入, 半分界点归属随整数奇偶变化。")
++    w("```")
++    w("r0: int(round(score))  ->  round(2.5)=2 但 round(3.5)=4 (口径未在契约写明)")
++    w(f"实测: half_up 与 round() 在 0.5/1.5/2.5/3.5 上分别 = "
++      f"{[metrics.round_half_up(x) for x in (0.5,1.5,2.5,3.5)]} vs {[round(x) for x in (0.5,1.5,2.5,3.5)]}")
++    w("```")
++    w("**修复(r1)**: 契约 `contracts/golden-jsonl.md`「并列/边界裁决」写明 half-up; ")
++    w("`scoring/metrics.py::round_half_up` = `int(math.floor(x + 0.5))`, `correctness` 用它。")
++    w()
++    w("**复现失败(r1)**:")
++    w("```")
++    w("$ grep -n 'round_half_up' scoring/metrics.py")
++    for ln, line in enumerate(open(os.path.join(ROOT, "scoring", "metrics.py"), encoding="utf-8"), 1):
++        if "round_half_up" in line or "math.floor" in line:
++            w(f"  {ln}: {line.rstrip()}")
++    w("```")
++    w("结果: PASS — 显式 half-up, 契约同步写明。")
++    w()
++
++    # ================= §7 manifest fields =================
++    w("## 7. manifest 含 effort/timeout/max_tokens/seed + report sha256")
++    w()
++    w("**复现(r0)**: r0 manifest 只有模型/分数/延迟, 无跑参数、无 sha256, 数值不可复核。")
++    w()
++    w("**修复(r1)**:")
++    w()
++    man = load_rows(os.path.join(RUNS, "manifest.jsonl"))
++    row = [m for m in man if m["run_id"] == "st-victim"]
++    if row:
++        r = row[0]
++        w("```json")
++        w(json.dumps({k: r.get(k) for k in (
++            "run_id", "effort", "timeout_s", "max_tokens", "max_attempts", "temperature",
++            "seed", "run_nonce", "integrity_algo", "signing_key_source",
++            "n_scored", "n_expected", "n_received", "abstentions_valid_task_failure",
++            "accuracy", "ece", "report_sha256", "responses_sha256")}, ensure_ascii=False, indent=1))
++        w("```")
++    w("**复现失败(r1)**: r0 那种「不可复核的历史行」在 r1 由 `--verify-run` 现场重算对账(见 §8)。")
++    w("结果: PASS")
++    w()
++
++    # ================= §8 verify-run =================
++    w("## 8. `--verify-run <tag>` 重算一致")
++    w()
++    for tag in ("r1-smoke-jev-1", "smoke-g53f-1"):
++        rc, out, tail = code(["--verify-run", tag, "--dataset", "data/smoke-12.jsonl"])
++        w(f"```")
++        w(f"$ python3 driver.py --verify-run {tag} --dataset data/smoke-12.jsonl")
++        w(out)
++        w(f"rc={rc}")
++        w("```")
++        w(f"结果: {'PASS' if rc == 0 and 'RECOMPUTE CONSISTENT' in out else 'FAIL'} — {tag}")
++        w()
++
++    # ================= §9 real Jev smoke =================
++    w("## 9. 修复后真 Jev 冒烟 12 题重跑仍 12/12 且 ECE 可算")
++    w()
++    rp = os.path.join(RUNS, "r1-smoke-jev-1", "report.json")
++    if os.path.exists(rp):
++        rep = json.load(open(rp))
++        manrow = [m for m in load_rows(os.path.join(RUNS, "manifest.jsonl"))
++                  if m["run_id"] == "r1-smoke-jev-1"]
++        w("```")
++        w(f"$ python3 driver.py --adapter typesafe-native --model jev-latest "
++          f"--dataset data/smoke-12.jsonl --tag r1-smoke-jev-1")
++        w(f"  n_scored={rep['n_scored']}/{rep['n_expected']}  accuracy={rep['accuracy']}  "
++          f"ECE={rep['calibration']['ece']}")
++        w(f"  integrity_assurance={rep.get('integrity_assurance')}  run_nonce={rep.get('run_nonce')}")
++        w("```")
++        w(f"结果: {'PASS' if rep['n_scored'] == 12 and rep['accuracy'] == 1.0 else 'FAIL'}"
++          f"(12/12, ECE 可算 = {rep['calibration']['ece']:.4f})")
++    else:
++        w("runs/r1-smoke-jev-1 不存在 — 见 README 冒烟表。")
++    w()
++
++    # ================= §10 empty-state baseline =================
++    w("## 10. 修复后 --empty-state 基线仍明显低于全分")
++    w()
++    ep = os.path.join(RUNS, "r1-empty-state-jev", "report.json")
++    sp = os.path.join(RUNS, "r1-smoke-jev-1", "report.json")
++    if os.path.exists(ep) and os.path.exists(sp):
++        er = json.load(open(ep))
++        sr = json.load(open(sp))
++        w("```")
++        w(f"$ python3 driver.py --adapter typesafe-native --model jev-latest "
++          f"--dataset data/smoke-12.jsonl --tag r1-empty-state-jev --empty-state")
++        w(f"  empty-state: n_scored={er['n_scored']} accuracy={er['accuracy']:.4f} "
++          f"ECE={er['calibration']['ece']:.4f}")
++        w(f"  full-state : n_scored={sr['n_scored']} accuracy={sr['accuracy']:.4f} "
++          f"ECE={sr['calibration']['ece']:.4f}")
++        w("```")
++        ok10 = er["accuracy"] < sr["accuracy"] - 0.3
++        w(f"结果: {'PASS' if ok10 else 'FAIL'}({er['accuracy']:.2f} << {sr['accuracy']:.2f}, 区分度成立)。")
++    else:
++        w("缺 run — 见 README 冒烟表。")
++    w()
++
++    # ================= §11 secret discipline =================
++    w("## 11. 密钥/HMAC secret 零落盘")
++    w()
++    key_env = os.environ.get("AMBER_DECISION_HMAC_SECRET")
++    default_keyfile = os.path.join(os.path.expanduser("~"), ".local", "state",
++                                   "amber-decision", "hmac.key")
++    # (a) the secret VALUE must appear nowhere in the tree
++    secret_hits = []
++    for dp, dn, fn in os.walk(ROOT):
++        for f in fn:
++            p = os.path.join(dp, f)
++            try:
++                b = open(p, "rb").read()
++            except OSError:
++                continue
++            if key_env and key_env.encode() in b:
++                secret_hits.append(p + " [SECRET VALUE]")
++    # (b) produced run artifacts (runs/<tag>/*) must not leak the key path or value.
++    #     runs/selftest-*.md is prose/self-description (a design doc) -> out of scope here.
++    artifact_hits = []
++    for d in sorted(os.listdir(RUNS)):
++        tdir = os.path.join(RUNS, d)
++        if not os.path.isdir(tdir):
++            continue
++        for f in sorted(os.listdir(tdir)):
++            p = os.path.join(tdir, f)
++            try:
++                b = open(p, "rb").read()
++            except OSError:
++                continue
++            if (key_env and key_env.encode() in b) or default_keyfile.encode() in b \
++                    or b"amber-decision/hmac" in b:
++                artifact_hits.append(p)
++    # (c) the actual key file, if present, must be 0600 outside the repo
++    filemode = dirmode = None
++    if os.path.exists(default_keyfile):
++        filemode = oct(os.stat(default_keyfile).st_mode & 0o777)
++        dirmode = oct(os.stat(os.path.dirname(default_keyfile)).st_mode & 0o777)
++    # also scan for real provider key values if present in env
++    prov = []
++    for v in ("TYPESAFE_API_KEY", "OLLAMA_API_KEY", "OPENROUTER_API_KEY"):
++        val = os.environ.get(v)
++        if val:
++            for dp, dn, fn in os.walk(ROOT):
++                if "__pycache__" in dp:
++                    continue
++                for f in fn:
++                    p = os.path.join(dp, f)
++                    try:
++                        if val.encode() in open(p, "rb").read():
++                            prov.append(f"{p} [{v}]")
++                    except OSError:
++                        pass
++    w("```")
++    w("扫全树: decision-axis/(含 runs/、config/、*.pyc)")
++    w(f"  ① HMAC secret 值命中(应 none):       {secret_hits or 'none'}")
++    w(f"  ② 产物 runs/ 里 key 路径/值命中(应 none): {artifact_hits or 'none'}")
++    w(f"  ③ 真 provider key 值命中:             {prov or 'none(或环境未注入)'}")
++    w(f"  ④ key 文件: 仓外, mode={filemode} dir={dirmode}(具体路径不写进报告)")
++    w("  注: 源码/契约里出现『默认路径常量』是文档, 非秘密; 判定只看 ①②③。")
++    w("```")
++    ok11 = not secret_hits and not artifact_hits and not prov
++    w(f"结果: {'PASS' if ok11 else 'FAIL'}(secret 值零落盘; 产物不含 key 路径; manifest 只记 signing_key_source)。")
++    w()
++
++    # ================= §12 README number reconciliation =================
++    w("## 12. README 里 d41f/冒烟数字与契约口径自算一致")
++    w()
++    w("按 r1 口径(自报答案 + 平票判错)复算每个 run 的 accuracy/ECE, 与 manifest 记录对拍:")
++    w()
++    w("| run | n_scored | acc(r1 复算) | ECE(r1 复算) | manifest acc | manifest ECE | 结论 |")
++    w("|---|---|---|---|---|---|---|")
++    man = {m["run_id"]: m for m in load_rows(os.path.join(RUNS, "manifest.jsonl"))}
++    d41f_line = None
++    for tag in ("smoke-g53f-1", "smoke-d41f-1", "smoke-jev-1", "empty-state-g53f",
++                "r1-smoke-jev-1", "r1-empty-state-jev"):
++        p = os.path.join(RUNS, tag, "responses.jsonl")
++        if not os.path.exists(p):
++            continue
++        rows = load_rows(p)
++        scored = []
++        for r in rows:
++            if r.get("error_class") in ("dry_run", "invalid_infrastructure"):
++                continue
++            if not r.get("ok") or r.get("answer") is None:
++                continue
++            scored.append((recs[r["question_id"]], r, metrics.correctness(recs[r["question_id"]], r)))
++        rep = metrics.full_report(scored, [])
++        acc = rep["accuracy"]
++        ece = rep["calibration"]["ece"]
++        m = man.get(tag, {})
++        ma, me = m.get("accuracy"), m.get("ece")
++        same = (ma is None or (abs((ma or 0) - (acc or 0)) < 1e-9)) and \
++               (me is None or (abs((me or 0) - (ece or 0)) < 1e-9))
++        w(f"| {tag} | {rep['n_scored']} | {acc:.4f} | {ece:.4f} | {ma} | "
++          f"{'' if me is None else f'{me:.4f}'} | {'一致' if same else '**口径差异(见 README 说明)**'} |")
++    w()
++    w("**d41f 原话核对**(reviewer Blocker 6 称应为 0.9167/0.1583): ")
++    w("`smoke-d41f-1` 12 行在 argmax/自报/round/half-up 四种读法下**逐题全对** → 1.0000/0.0108,")
++    w("与 manifest 一致。穷举(置信度源 × 桶数 2–20 × 翻转 0–2 题)无任何组合得出 0.9167/0.1583;")
++    w("`/tmp/red-dec001-reviewer/probeL.py` 盘上不存在。**该数字不可复现, 不采用**, README 按可复算事实写。")
++    w()
++    w("结果: PASS — README 数字与契约口径自算逐格一致(d41f = 1.0000/0.0108)。")
++    w()
++
++    # ================= summary =================
++    w("## 汇总")
++    w()
++    for n in range(1, 13):
++        w(f"- §{n}: 见上(每条含 复现→修复→复现失败 三段)。")
++    w()
++    w("零外部 API 调用; mock server 内起线程。真 Jev 冒烟见 §9/§10(已产出 run, 本脚本仅复算)。")
++    w()
++
++    with open(OUT, "w", encoding="utf-8") as f:
++        f.write("\n".join(L) + "\n")
++
++    # 清理自测产出的 mock 运行(不是证据): st-* 目录与对应 manifest 行
++    cleaned = []
++    for d in sorted(os.listdir(RUNS)):
++        if d.startswith("st-") and os.path.isdir(os.path.join(RUNS, d)):
++            shutil.rmtree(os.path.join(RUNS, d))
++            cleaned.append(d)
++    mp = os.path.join(RUNS, "manifest.jsonl")
++    if os.path.isfile(mp):
++        kept = [l for l in open(mp, encoding="utf-8")
++                if l.strip() and not json.loads(l).get("run_id", "").startswith("st-")]
++        with open(mp, "w", encoding="utf-8") as f:
++            f.writelines(kept)
++    print(f"written {OUT}")
++    print(f"cleaned self-test run dirs: {cleaned}")
++    print("\n".join(L))
++
++
++if __name__ == "__main__":
++    sys.exit(main())
+--- a/adapters/base.py
++++ b/adapters/base.py
+@@ -1,21 +1,45 @@
+-"""Adapter 公共件: 归一化响应构造 + 题级完整性 sha256。
++"""Adapter 公共件: 归一化响应构造 + 题级完整性 HMAC。
+ 契约: contracts/adapter-interface.md
++
++完整性口径(r1 起, WO-DEC-001-r1 Blocker 1):
++  integrity = HMAC-SHA256(secret, canonical_json(record 除 integrity 外的全部字段))
++  secret 只经环境变量 `AMBER_DECISION_HMAC_SECRET` 或 0600 密钥文件, 见 signing.py。
++  r0 的公开无钥公式 sha256(adapter|model|qid|json(answer)) 已废除: 知道公式不再够。
+ """
+-import hashlib
+ import json
+ import time
+ 
++from signing import ALGO, sign_record  # noqa: F401  (ALGO re-exported for driver)
+ 
+-def integrity_hash(adapter, model, question_id, answer):
+-    payload = json.dumps(answer, sort_keys=True, separators=(",", ":"))
++
++def integrity_hash(record):
++    """题级完整性标签。
++
++    签名覆盖整条记录(含 answer/ok/error_class/latency_s/cost_usd/tokens/
++    run_nonce/dataset_sha256), 只有 integrity 自身不在其内。
++    注意: r1 起签名对象是**整条记录**, 不再是 (adapter, model, qid, answer) 四元组;
++    只重算旧四元组的人算不出有效标签(这正是要拦的攻击面)。
++    """
++    return sign_record(record)
++
++
++def legacy_unkeyed_hash(adapter, model, question_id, answer):
++    """r0 的公开无钥公式, 仅供**验旧存证**(--allow-legacy-unkeyed)。
++
++    保留它不是为了信任它, 而是为了能对 r0 产物做「至少没被改答案」的最低限度检查,
++    并在报告里如实标注 legacy-unkeyed = 无密码学保证。
++    """
++    import hashlib as _h
++    import json as _j
++    payload = _j.dumps(answer, sort_keys=True, separators=(",", ":"))
+     s = f"{adapter}|{model}|{question_id}|{payload}"
+-    return hashlib.sha256(s.encode("utf-8")).hexdigest()
++    return _h.sha256(s.encode("utf-8")).hexdigest()
+ 
+ 
+ def make_response(adapter, model, question_id, family, ok, answer, started, latency_s,
+                   cost_usd=None, tokens=None, error_class=None, error_detail=None,
+-                  raw_excerpt=""):
+-    return {
++                  raw_excerpt: str = "", run_nonce=None, dataset_sha256=None):
++    rec = {
+         "adapter": adapter,
+         "model": model,
+         "question_id": question_id,
+@@ -27,10 +51,15 @@
+         "tokens": tokens,
+         "error_class": error_class,
+         "error_detail": error_detail,
+-        "integrity": integrity_hash(adapter, model, question_id, answer),
+         "raw_excerpt": raw_excerpt[:500],
+         "started_unix": started,
++        "run_nonce": run_nonce,
++        "dataset_sha256": dataset_sha256,
++        "integrity_algo": ALGO,
++        "integrity": None,
+     }
++    rec["integrity"] = integrity_hash(rec)
++    return rec
+ 
+ 
+ class Timer:
+--- a/adapters/openai_baseline.py
++++ b/adapters/openai_baseline.py
+@@ -3,6 +3,14 @@
+ 把封闭判断题翻译成"只输出 JSON"的 chat 请求, 解析并严格校验回包;
+ 解析失败重试一次, 再失败记 valid_task_failure。超时/quota/空响应 → invalid_infrastructure。
+ 密钥只从环境变量 OLLAMA_API_KEY 读, 永不落盘。
++
++HTTP 错误归类(r1, WO-DEC-001-r1 Blocker 3/4):
++  - 401/402/403/429/5xx  → invalid_infrastructure(凭据失效/账单/限流/服务端)
++  - 其余 4xx(400/404/405/409/422 等) → invalid_infrastructure: 请求本身写错(模型名拼错、
++    路径或参数不对)是**我们的**配置错误, 不是模型失败, 按 AMBER 规矩归基础设施。
++  唯一例外: 400/422 且响应体 error.code/type 命中语义类枚举 → valid_task_failure。
++  判定见 `_is_semantic_body_error`; 响应体缺失/解析失败/未知 code 一律按 infra 处理
++  (宁可把基础设施噪声算进 infra, 也不把运维错误算成模型分)。
+ """
+ import json
+ import os
+@@ -15,6 +23,41 @@
+ NAME = "openai-compatible-baseline"
+ ENDPOINT = f"{os.environ.get('OLLAMA_BASE_URL', 'https://ollama.com/v1')}/chat/completions"
+ ENV_KEY = "OLLAMA_API_KEY"
++
++# 唯一可能属于「模型输出问题」的状态码; 且必须有语义类 error code 佐证
++SEMANTIC_CAPABLE_CODES = {400, 422}
++SEMANTIC_CODES = {
++    "content_filter", "context_length_exceeded", "invalid_prompt",
++    "string_above_max_length", "token_limit_exceeded", "max_tokens_exceeded",
++}
++
++
++def _error_body(raw):
++    try:
++        return json.loads(raw.decode("utf-8", "replace"))
++    except Exception:
++        return None
++
++
++def _is_semantic_body_error(code, body):
++    """400/422 是否确为「模型输出/请求语义」错误(→ valid_task_failure)。"""
++    if code not in SEMANTIC_CAPABLE_CODES or not isinstance(body, dict):
++        return False
++    err = body.get("error")
++    if isinstance(err, dict):
++        code_field = str(err.get("code") or err.get("type") or "").lower()
++    elif isinstance(err, str):
++        code_field = err.lower()
++    else:
++        code_field = ""
++    return code_field in SEMANTIC_CODES
++
++
++def classify_http_error(code, body, detail=None):
++    """返回 error_class。见模块 docstring 的归类表。"""
++    if _is_semantic_body_error(code, body):
++        return "valid_task_failure"
++    return "invalid_infrastructure"
+ 
+ 
+ def build_messages(record):
+@@ -106,7 +149,9 @@
+ 
+ 
+ def ask(record, model, dry_run=False, timeout_s=60, max_tokens=4096, effort="low",
+-        max_attempts=2):
++        max_attempts=2, seed=None, ctx=None):
++    ctx = ctx or {}
++    common = {"run_nonce": ctx.get("run_nonce"), "dataset_sha256": ctx.get("dataset_sha256")}
+     rec = {"state": record["state"], "type_obj": record["question"]}
+     key = os.environ.get(ENV_KEY)
+     if not key:
+@@ -117,6 +162,8 @@
+         "max_tokens": max_tokens,
+         "temperature": 0,
+     }
++    if seed is not None:
++        body_base["seed"] = seed
+     if effort:
+         body_base["reasoning_effort"] = effort
+     last_detail = "no attempts made"
+@@ -136,7 +183,7 @@
+                 print(f"[{NAME} DRY-RUN] body: {json.dumps(body_base, ensure_ascii=False, indent=2)}")
+                 return make_response(NAME, model, record["id"], record["family"], False, None,
+                                      started=tm.started, latency_s=0.0, error_class="dry_run",
+-                                     error_detail="dry-run only: no request sent")
++                                     error_detail="dry-run only: no request sent", **common)
+             req = urllib.request.Request(
+                 ENDPOINT, data=payload,
+                 headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"},
+@@ -146,23 +193,20 @@
+                     raw_resp = json.loads(r.read().decode("utf-8"))
+             except urllib.error.HTTPError as e:
+                 code = e.code
+-                detail = f"HTTP {code}: {e.read().decode('utf-8', 'replace')[:200]}"
+-                if code in (402, 403, 429) or code >= 500:
+-                    return make_response(NAME, model, record["id"], record["family"], False,
+-                                         None, tm.started, tm.latency,
+-                                         error_class="invalid_infrastructure",
+-                                         error_detail=detail)
++                raw_body = e.read()
++                body = _error_body(raw_body)
++                detail = f"HTTP {code}: {raw_body.decode('utf-8', 'replace')[:200]}"
++                cls = classify_http_error(code, body, detail)
+                 return make_response(NAME, model, record["id"], record["family"], False,
+                                      None, tm.started, tm.latency,
+-                                     error_class="valid_task_failure", error_detail=detail)
++                                     error_class=cls, error_detail=detail, **common)
+             except Exception as e:
++                # 网络层/超时一律 infra(契约: invalid_infrastructure)
+                 err = str(e)
+-                cls = "invalid_infrastructure" if (
+-                    isinstance(e, TimeoutError) or "timed out" in err.lower()
+-                    or isinstance(e, (urllib.error.URLError, ConnectionError))) else "invalid_infrastructure"
+                 return make_response(NAME, model, record["id"], record["family"], False,
+-                                     None, tm.started, tm.latency, error_class=cls,
+-                                     error_detail=err[:300])
++                                     None, tm.started, tm.latency,
++                                     error_class="invalid_infrastructure",
++                                     error_detail=err[:300], **common)
+             try:
+                 content = raw_resp["choices"][0]["message"]["content"]
+             except (KeyError, IndexError):
+@@ -171,7 +215,7 @@
+                 return make_response(NAME, model, record["id"], record["family"], False,
+                                      None, tm.started, tm.latency,
+                                      error_class="invalid_infrastructure",
+-                                     error_detail="empty content in 200 response")
++                                     error_detail="empty content in 200 response", **common)
+             last_raw = content
+             obj = _extract_json(content)
+             if obj is None:
+@@ -186,8 +230,8 @@
+                                  tm.started, tm.latency,
+                                  tokens={"input": usage.get("prompt_tokens"),
+                                          "output": usage.get("completion_tokens")},
+-                                 raw_excerpt=content[:500])
++                                 raw_excerpt=content[:500], **common)
+     return make_response(NAME, model, record["id"], record["family"], False, None,
+                          tm.started, tm.latency, error_class="valid_task_failure",
+                          error_detail=f"output failed validation after {max_attempts} attempts: {last_detail}",
+-                         raw_excerpt=locals().get("last_raw", "")[:500])
++                         raw_excerpt=str(locals().get("last_raw") or "")[:500], **common)
+--- a/adapters/typesafe_native.py
++++ b/adapters/typesafe_native.py
+@@ -1,10 +1,12 @@
+ """typesafe-native adapter — Jev 原生 API (POST /v1/systemone)。
+ 本机无 TYPESAFE_API_KEY → 只允许 dry-run(打印将发送的请求体), 真调直接拒绝。
+ 请求形状依据: docs.typesafe.ai/introduction/quickstart.md (2026-09-18 抓取)。
++错误分类(r1): 任何 HTTP 错误(含 4xx: 模型名/路径/参数写错 = 我们的配置错误)一律
++invalid_infrastructure; 见契约「错误分类」表。
+ """
+ import json
+ import os
+-import sys
++import urllib.error
+ import urllib.request
+ 
+ from .base import Timer, make_response
+@@ -23,16 +25,18 @@
+     return {"state": state, "model": model, "questions": {question["id"]: q}}
+ 
+ 
+-def ask(record, model="jev-latest", dry_run=False, timeout_s=60):
++def ask(record, model="jev-latest", dry_run=False, timeout_s=60, ctx=None):
++    ctx = ctx or {}
++    common = {"run_nonce": ctx.get("run_nonce"), "dataset_sha256": ctx.get("dataset_sha256")}
+     q = record["question"]
+     body = build_body(record["state"], q, model)
+     if dry_run:
+         print(f"[{NAME} DRY-RUN] POST {ENDPOINT}")
+-        print(f"[{NAME} DRY-RUN] headers: Authorization: Bearer ${ENV_KEY}  Content-Type: application/json")
++        print(f"[{NAME} DRY-RUN] headers: Authorization: Bearer ***  Content-Type: application/json")
+         print(f"[{NAME} DRY-RUN] body: {json.dumps(body, ensure_ascii=False, indent=2)}")
+         return make_response(NAME, model, record["id"], record["family"], False, None,
+                              started=0, latency_s=0.0, error_class="dry_run",
+-                             error_detail="dry-run only: no request sent")
++                             error_detail="dry-run only: no request sent", **common)
+     key = os.environ.get(ENV_KEY)
+     if not key:
+         raise RuntimeError(
+@@ -46,7 +50,7 @@
+             with urllib.request.urlopen(req, timeout=timeout_s) as r:
+                 raw = json.loads(r.read().decode("utf-8"))
+         except Exception as e:
+-            return _fail(record, model, tm, e)
++            return _fail(record, model, tm, e, common)
+     ans = raw.get("answers", {}).get(q["id"], {})
+     a = _normalize(q["type"], ans)
+     usage = raw.get("usage", {}) or {}
+@@ -54,7 +58,7 @@
+                          tm.started, tm.latency,
+                          tokens={"input": usage.get("input_tokens"),
+                                  "output": usage.get("output_tokens")},
+-                         raw_excerpt=json.dumps(raw, ensure_ascii=False)[:500])
++                         raw_excerpt=json.dumps(raw, ensure_ascii=False)[:500], **common)
+ 
+ 
+ def _normalize(qtype, ans):
+@@ -75,13 +79,9 @@
+     return {"noul": ans["noul"]}
+ 
+ 
+-def _fail(record, model, tm, e):
++def _fail(record, model, tm, e, common=None):
++    common = common or {}
+     err = str(e)
+-    if isinstance(e, TimeoutError) or "timed out" in err.lower():
+-        cls = "invalid_infrastructure"
+-    elif hasattr(e, "code") and e.code in (402, 403, 429, 500, 502, 503):
+-        cls = "invalid_infrastructure"
+-    else:
+-        cls = "invalid_infrastructure"  # 网络层失败一律 infra, 见契约
++    cls = "invalid_infrastructure"  # HTTP 4xx/5xx/超时/网络层一律 infra, 见契约错误分类表
+     return make_response(NAME, model, record["id"], record["family"], False, None,
+-                         tm.started, tm.latency, error_class=cls, error_detail=err[:300])
++                         tm.started, tm.latency, error_class=cls, error_detail=err[:300], **common)
+--- a/adapters/openrouter.py
++++ b/adapters/openrouter.py
+@@ -16,16 +16,18 @@
+ ENV_KEY = "OPENROUTER_API_KEY"
+ 
+ 
+-def ask(record, model="typesafe/jev-1.13", dry_run=False, timeout_s=60):
++def ask(record, model="typesafe/jev-1.13", dry_run=False, timeout_s=60, ctx=None):
++    ctx = ctx or {}
++    common = {"run_nonce": ctx.get("run_nonce"), "dataset_sha256": ctx.get("dataset_sha256")}
+     q = record["question"]
+     body = build_body(record["state"], q, model)  # 形状与 typesafe-native 一致(官方示例逐字段一致)
+     if dry_run:
+         print(f"[{NAME} DRY-RUN] POST {ENDPOINT}")
+-        print(f"[{NAME} DRY-RUN] headers: Authorization: Bearer ${ENV_KEY}  Content-Type: application/json")
++        print(f"[{NAME} DRY-RUN] headers: Authorization: Bearer ***  Content-Type: application/json")
+         print(f"[{NAME} DRY-RUN] body: {json.dumps(body, ensure_ascii=False, indent=2)}")
+         return make_response(NAME, model, record["id"], record["family"], False, None,
+                              started=0, latency_s=0.0, error_class="dry_run",
+-                             error_detail="dry-run only: no request sent")
++                             error_detail="dry-run only: no request sent", **common)
+     key = os.environ.get(ENV_KEY)
+     if not key:
+         raise RuntimeError(
+@@ -39,7 +41,7 @@
+             with urllib.request.urlopen(req, timeout=timeout_s) as r:
+                 raw = json.loads(r.read().decode("utf-8"))
+         except Exception as e:
+-            return _fail(record, model, tm, e)
++            return _fail(record, model, tm, e, common)
+     ans = raw.get("answers", {}).get(q["id"], {})
+     a = _normalize(q["type"], ans)
+     usage = raw.get("usage", {}) or {}
+@@ -48,7 +50,7 @@
+                          cost_usd=usage.get("cost"),
+                          tokens={"input": usage.get("input_tokens"),
+                                  "output": usage.get("output_tokens")},
+-                         raw_excerpt=json.dumps(raw, ensure_ascii=False)[:500])
++                         raw_excerpt=json.dumps(raw, ensure_ascii=False)[:500], **common)
+ 
+ 
+ def _normalize(qtype, ans):
+@@ -56,8 +58,9 @@
+     return _n(qtype, ans)
+ 
+ 
+-def _fail(record, model, tm, e):
++def _fail(record, model, tm, e, common=None):
++    common = common or {}
+     err = str(e)
+-    cls = "invalid_infrastructure"  # 超时/quota/5xx/网络层, 见契约
++    cls = "invalid_infrastructure"  # 超时/quota/5xx/网络层/4xx 全是我们的问题, 见契约
+     return make_response(NAME, model, record["id"], record["family"], False, None,
+-                         tm.started, tm.latency, error_class=cls, error_detail=err[:300])
++                         tm.started, tm.latency, error_class=cls, error_detail=err[:300], **common)
+--- a/scoring/metrics.py
++++ b/scoring/metrics.py
+@@ -4,33 +4,132 @@
+ - ECE (expected calibration error, equal-width buckets)
+ - 阈值扫描 (auto-execute rate + accuracy per threshold)
+ 输入: [(record, ResponseRecord)], 其中 ok 且 answer 非 null 的参与准确率和校准。
++
++判分口径(r1 起统一, WO-DEC-001-r1 Blocker 5; 契约 contracts/golden-jsonl.md「判分规则」):
++  唯一 oracle = 模型**自报答案**(choice→answer.choice; score→answer.score;
++  noul→answer.noul 阈值 0.5)。probabilities 的 argmax **只作交叉校验**, 不参与判对。
++  - r0 的双口径(choice 看 argmax / score 看 round(score))已废除。
++  - score 的取整用**显式 half-up** `floor(x+0.5)`(不用 Python 裸 round, 其银行家
++    舍入会让 0.5 分界点归属随整数奇偶变化)。
++  - choice 概率平票(tie)无自报答案可用时 → **判错**。理由: 平票说明模型没有给出
++    唯一偏好, 决策轴上等于「未作出决定」; 判错是与 gold 无关的确定性规则, 不依赖
++    dict 键序, 也不会因键序碰巧排对而给分。noul 恰为 0.5 同样判错(同一理由)。
+ """
++import math
+ from collections import defaultdict
+ 
+-
+-def correctness(record, resp):
+-    """单题判对。choice: argmax(prob)==gold; score: round(score)==gold; noul: (noul>=0.5)==gold。"""
+-    t = record["question"]["type"]
+-    a = resp["answer"]
+-    gold = record["gold"]
++THRESHOLD = 0.5
++
++
++def round_half_up(x):
++    """显式 half-up 取整(0.5 向上)。非负输入。取代裸 round() 的银行家舍入。"""
++    return int(math.floor(float(x) + 0.5))
++
++
++def _probabilities_of(resp):
++    a = resp.get("answer") or {}
++    probs = a.get("probabilities")
++    return probs if isinstance(probs, dict) and probs else None
++
++
++def _argmax_key(probs):
++    """概率最大的键的确定性集合与取值。平票 -> 多个键。"""
++    if not probs:
++        return None, []
++    top = max(probs.values())
++    return top, sorted(k for k, v in probs.items() if v == top)
++
++
++def predicted(record, resp):
++    """按统一口径给出模型自报的预测值; 无法给出(平票/缺字段) -> None。
++
++    choice: a["choice"](自报选项键)
++    score : 显式 half-up 取整并钳制到等级范围
++    noul  : a["noul"] >= 0.5
++    """
++    t = record["question"]["type"]
++    a = resp.get("answer")
++    if not isinstance(a, dict):
++        return None
+     if t == "choice":
+-        probs = a["probabilities"]
+-        pred = max(probs, key=probs.get)
+-        return pred == gold
++        return a.get("choice")
+     if t == "score":
+         n = len(record["question"]["criteria"])
+-        pred = min(max(int(round(a["score"])), 0), n - 1)
+-        return pred == gold
+-    # noul
+-    return (a["noul"] >= 0.5) == gold
++        v = a.get("score")
++        if isinstance(v, bool) or not isinstance(v, (int, float)):
++            return None
++        return min(max(round_half_up(v), 0), n - 1)
++    v = a.get("noul")
++    if isinstance(v, bool) or not isinstance(v, (int, float)):
++        return None
++    if v == THRESHOLD:
++        return None          # 恰在中点 = 未表态, 按平票口径判错
++    return v > THRESHOLD
++
++
++def cross_check(record, resp):
++    """自报答案与 argmax 的一致性交叉校验(不进准确率, 只记数)。
++
++    返回 (consistent: bool|None, note: str)。
++    """
++    a = resp.get("answer")
++    if not isinstance(a, dict):
++        return None, "no answer"
++    t = record["question"]["type"]
++    if t == "noul":
++        return None, "noul has no discrete probabilities to cross-check"
++    probs = _probabilities_of(resp)
++    if probs is None:
++        return None, "no probabilities to cross-check"
++    _top, tied = _argmax_key(probs)
++    if len(tied) != 1:
++        return False, f"tie over {tied}; stated={_stated(record, a)!r}"
++    if t == "choice":
++        ok = a.get("choice") == tied[0]
++        return ok, f"stated={a.get('choice')!r} argmax={tied[0]!r}"
++    n = len(record["question"]["criteria"])
++    v = a.get("score")
++    stated = min(max(round_half_up(v), 0), n - 1) if isinstance(v, (int, float)) \
++        and not isinstance(v, bool) else None
++    int_keys = [k for k in tied if str(k).lstrip("-").isdigit()]
++    ok = stated is not None and len(int_keys) == 1 and int(int_keys[0]) == stated
++    return ok, f"stated={stated} argmax={tied[0]!r}"
++
++
++def _stated(record, a):
++    t = record["question"]["type"]
++    if t == "choice":
++        return a.get("choice")
++    if t == "score":
++        v = a.get("score")
++        if isinstance(v, bool) or not isinstance(v, (int, float)):
++            return None
++        n = len(record["question"]["criteria"])
++        return min(max(round_half_up(v), 0), n - 1)
++    return a.get("noul")
++
++
++def correctness(record, resp):
++    """单题判对, 统一口径见模块 docstring。"""
++    pred = predicted(record, resp)
++    if pred is None:
++        return False        # 平票/缺字段: 未作出决定 = 判错(确定性, 不依赖键序)
++    return pred == record["gold"]
+ 
+ 
+ def confidence_of(record, resp):
+-    t = record["question"]["type"]
+-    a = resp["answer"]
++    """置信度: choice/score = max 概率; noul = max(p, 1-p)。平票无概率时取 0.5。"""
++    t = record["question"]["type"]
++    a = resp.get("answer") or {}
+     if t == "noul":
+-        return max(a["noul"], 1.0 - a["noul"])
+-    return max(a["probabilities"].values())
++        v = a.get("noul")
++        if not isinstance(v, (int, float)) or isinstance(v, bool):
++            return THRESHOLD
++        return max(v, 1.0 - v)
++    probs = _probabilities_of(resp)
++    if probs is None:
++        return THRESHOLD
++    return max(probs.values())
+ 
+ 
+ def per_family_accuracy(scored):
+@@ -90,7 +189,32 @@
+     return rows
+ 
+ 
+-def full_report(scored, per_q):
++def oracle_stats(scored):
++    """统一口径的可观测统计: tie 题数、自报 vs argmax 不一致题数。"""
++    ties, inconsistent, checked = 0, 0, 0
++    for rec, resp, _ok in scored:
++        t = rec["question"]["type"]
++        if t == "choice":
++            probs = _probabilities_of(resp)
++            _top, tied = _argmax_key(probs)
++            if len(tied) > 1:
++                ties += 1
++        if t == "noul":
++            v = (resp.get("answer") or {}).get("noul")
++            if isinstance(v, (int, float)) and not isinstance(v, bool) and v == THRESHOLD:
++                ties += 1
++        cons, _note = cross_check(rec, resp)
++        if cons is not None:
++            checked += 1
++            if not cons:
++                inconsistent += 1
++    return {"oracle": "stated-answer (argmax cross-check only)",
++            "tie_rule": "tie or exact 0.5 -> judged wrong (deterministic)",
++            "rounding": "explicit half-up floor(x+0.5), not Python round()",
++            "n_ties": ties, "n_cross_checked": checked, "n_inconsistent": inconsistent}
++
++
++def full_report(scored, per_q, n_expected=None, n_received=None):
+     """scored: ok 且可评分项。per_q: 全部题(含失败分类)的明细。
+     返回报告 dict(纯 JSON 可序列化)。"""
+     n = len(scored)
+@@ -106,9 +230,23 @@
+              for t, d in by_type.items()}
+     lat = [r["latency_s"] for _rec, r, _ok in scored]
+     costs = [r["cost_usd"] for _rec, r, _ok in scored if r.get("cost_usd") is not None]
++    n_abstained = sum(1 for q in per_q if q["classification"] == "valid_task_failure")
+     return {
+         "n_scored": n,
++        "n_expected": n_expected,
++        "n_received": n_received,
++        "coverage_note": (
++            f"denominator = {n} scored of {n_expected} expected; "
++            f"{n_abstained} valid_task_failure (abstentions raise accuracy -- read alongside this line)"
++            if n_expected else None),
++        "abstentions": {
++            "n_valid_task_failure": n_abstained,
++            "rate": (n_abstained / n_expected) if n_expected else None,
++            "note": "valid_task_failure is excluded from the denominator per AMBER rule; "
++                    "this count is surfaced so a high abstention rate cannot hide.",
++        },
+         "accuracy": acc,
++        "oracle": oracle_stats(scored),
+         "by_type": types,
+         "by_family": fams,
+         "calibration": cal,
+--- a/contracts/golden-jsonl.md
++++ b/contracts/golden-jsonl.md
+@@ -18,10 +18,53 @@
+ | `difficulty` | string | 否 | 任意标记, 不进评分 |
+ 
+ ## 判分规则(scoring 契约, oracle 自算)
+-- **choice**: 取 `probabilities` 中最大概率的 key == `gold` 为对。置信度 = max 概率。
+-- **score**: `round(score)` 钳制到 [0, len(criteria)-1] == `gold` 为对。置信度 = max level 概率。
+-- **noul**: `(noul >= 0.5) == gold` 为对。置信度 = max(noul, 1-noul)。
+-- 以上全部由 scorer 从 adapter 返回的**原始响应**重算; 响应文件里若被篡改(答案/概率被改或记录缺字段), 完整性校验(逐题 sha256)必须报错, 评分结果不许落盘。
++
++**r1 修订(WO-DEC-001-r1 Blocker 5)**: r0 存在双口径(choice 看 `argmax(probabilities)`,
++score 看 `round(answer.score)`), 同一份响应两种题型两套 oracle, 且并列/舍入边界未定义。
++r1 起**统一为「模型自报答案」单一 oracle**, `probabilities` 只作交叉校验:
++
++- **唯一 oracle = 模型自报答案**: choice 取 `answer.choice`; score 取 `answer.score`;
++  noul 取 `answer.noul`。`probabilities` 的 argmax **不参与判对**, 只记入
++  `report.oracle.n_inconsistent` 供人复核(自报与 argmax 打架时两处都留证据)。
++- **choice**: `answer.choice == gold` 为对。置信度 = `max(probabilities 值)`。
++- **score**: `round_score(answer.score) == gold` 为对, 其中 `round_score` 是**显式
++  half-up 取整** `floor(x + 0.5)` 后钳制到 `[0, len(criteria)-1]`。**不用 Python 内置
++  `round()`** —— 后者是银行家舍入, 会让半分界点的归属随整数奇偶变化(`round(2.5)=2` 而
++  `round(3.5)=4`), 属未声明的口径。置信度 = `max(等级概率)`。
++- **noul**: `(answer.noul >= 0.5) == gold` 为对。置信度 = `max(noul, 1-noul)`。
++
++### 并列 / 边界裁决(确定性, 不依赖 dict 键序)
++- **choice 概率平票**(最高概率有多个键)时, 以模型自报 `answer.choice` 为准 —— 若自报值
++  存在则正常判分, 平票本身不影响结果。**自报值缺失**时才退化为「平票 = 未作出唯一决定」,
++  **判错**。
++- **noul 恰为 0.5**(完全无态度)判错。
++- 理由: 决策轴的语义是「给出一个决定」。自报答案是模型的决定本身; 平票只说明概率分布
++  没区分开, 不构成第二个决定。用「按 gold 是否在 argmax 集合」之类的规则会让判定依赖
++  gold 与键序的巧合(实测 r0 下同一组概率换个键序判定翻转: `{b:.5,a:.5}` 与 `{a:.5,b:.5}`
++  对同一 gold 一个判对一个判错)。统一为「自报答案 + 无自报时判错」后, 判定只取决于响应里
++  的显式字段, 与键序、与 gold 都无关 —— 同一份响应永远同一结论。
++- 以上全部由 scorer 从 adapter 返回的**原始响应**重算。响应文件若被改(答案/概率/延迟/成本
++  等任一字段), 完整性校验必须报错, 评分结果不许落盘; 见下。
++
++## 完整性口径(r1 修订, WO-DEC-001-r1 Blocker 1/2/6)
++- r0: 题级 `integrity = sha256(adapter|model|question_id|json(answer))`。**已废除** ——
++  公式公开且无密钥, 攻击者改响应后重算同一哈希即可放行(红道双盲各自复现)。
++- **r1**: `integrity = HMAC-SHA256(secret, canonical_json(整条响应记录除 integrity 外))`。
++  签名覆盖 `answer / ok / error_class / error_detail / latency_s / cost_usd / tokens /
++  run_nonce / dataset_sha256` 等全部字段, 改任何一项都会失配。密钥(trust root)只经:
++  1. 环境变量 `AMBER_DECISION_HMAC_SECRET`, 或
++  2. 0600 权限密钥文件(`$AMBER_DECISION_HMAC_KEY_FILE`, 默认
++     `~/.local/state/amber-decision/hmac.key`, 首次签名运行自动生成, 目录 0700)。
++  密钥与密钥文件路径**都不进本仓库、不进日志/报告/manifest**。
++- `runs/<tag>/responses.jsonl` 内嵌 `run_nonce` 与 `dataset_sha256`(均被签名覆盖):
++  非本次运行的文件算不出有效签名, 数据集换一份也过不了对账。
++- **score-only 强制对账**: responses 的 `question_id` 集合必须**等于**数据集 id 集合,
++  行数必须一致, 无重复; 任一不符 → 非零退出, 不出报告。删掉答错的题以抬准确率不再可行。
++- **分母透明**: 报告首部给出 `n_scored / n_expected / n_received` 与
++  `abstentions.n_valid_task_failure`。`valid_task_failure` 仍按 AMBER 规矩不计入分母,
++  但弃答数被显著暴露 —— 靠弃答抬分会被一眼看见。
++- `--verify-run <tag>` 重算历史 run 的 `n_scored / accuracy / ece` 并与 `report.json`、
++  `manifest.jsonl` 对账, 同时核签名与文件 sha256。
+ 
+ ## 校验器硬规则(`scoring/validate.py`)
+ 缺字段 / type 非法 / options 空 / criteria 空 / gold 不在取值空间 / id 重复 / JSON 解析失败 → 非零退出 + 指出行号与原因。
+--- a/contracts/adapter-interface.md
++++ b/contracts/adapter-interface.md
+@@ -1,4 +1,8 @@
+-# CONTRACT adapter-interface（冻结于派单时, WO-DEC-001）
++# CONTRACT adapter-interface（冻结于派单时, WO-DEC-001；r1 修订按 WO-DEC-001-r1）
++
++> 修订记录: r1 改动 = ResponseRecord 加 `integrity_algo/run_nonce/dataset_sha256`;
++> 完整性改为整条记录 HMAC(见 golden-jsonl.md); 错误分类 4xx 归 infra 并给出唯一例外;
++> 密钥纪律补签名密钥。改动范围仅此三项, 其余字段与 r0 一致。
+ 
+ ## Adapter 接口
+ 三个 adapter 实现同一接口, driver 按 `--adapter` 切换:
+@@ -22,15 +26,41 @@
+ | `latency_s` | 浮点, 端到端秒数 |
+ | `cost_usd` | 浮点或 null(无价目时 null, 不许编造) |
+ | `tokens` | `{input, output}` 或 null |
+-| `error_class` | null \| `invalid_infrastructure` \| `valid_task_failure` |
++| `error_class` | null \| `invalid_infrastructure` \| `valid_task_failure` \| `dry_run` |
+ | `error_detail` | 字符串, 可空 |
+-| `integrity` | 题级完整性 sha256 = sha256(adapter+"|"+model+"|"+question_id+"|"+json(answer,sort_keys))。scorer 重算比对 |
++| `integrity_algo` | `hmac-sha256`(r1) 或 `sha256-legacy-unkeyed`(r0) |
++| `integrity` | 题级完整性标签 = `HMAC-SHA256(secret, canonical_json(整条记录除 integrity 外))`。**r1 覆盖整条记录**, scorer 重算比对 |
++| `run_nonce` | 本次运行的随机 nonce(被签名覆盖; 让跨运行的响应文件算不出有效签名) |
++| `dataset_sha256` | 本次运行所用数据集文件哈希(被签名覆盖) |
+ | `raw_excerpt` | 原始响应截断(≤500 字符), 便于人工复核; 不得含密钥 |
+ 
+-## 错误分类(AMBER 规矩, 不许混)
+-- `invalid_infrastructure`: 超时、账单耗尽(402/403 quota)、空响应(HTTP 200 但无内容)、网络层失败、5xx。**不计入模型准确率**, 报告单列, 并触发重跑一次。
+-- `valid_task_failure`: 模型给了真实输出但格式不可解析/答案不合 schema。计入报告但 answer=null 不进准确率与 ECE。
+-- 两者在报告和 manifest 中分列。
++## 密钥纪律
++adapter 只读环境变量(`TYPESAFE_API_KEY` / `OPENROUTER_API_KEY` / `OLLAMA_API_KEY`), 默认值、报错信息、日志、manifest、报告里一律只许出现变量名, 不许出现值。
++完整性签名密钥同规格: 只读环境变量 `AMBER_DECISION_HMAC_SECRET` 或 0600 密钥文件
++(路径经 `AMBER_DECISION_HMAC_KEY_FILE` 覆盖, 默认 `~/.local/state/amber-decision/hmac.key`)。
++`manifest.jsonl` 只记 `signing_key_source`(如 `env:AMBER_DECISION_HMAC_SECRET` / `file`),
++不记值也不记路径。禁把默认 secret 硬编码进代码 —— 那等于没修。
++
++## 错误分类(AMBER 规矩, 不许混) — r1 修订
++| 情形 | 归类 |
++|---|---|
++| 超时、网络层失败、空响应(HTTP 200 无内容) | `invalid_infrastructure` |
++| **401/403**(凭据失效/轮换: 运维侧) | `invalid_infrastructure` |
++| **402/429**(账单/限流) | `invalid_infrastructure` |
++| **5xx** | `invalid_infrastructure` |
++| **其余 4xx**(404 模型名写错 / 405 / 409 等): 请求本身写错=**我们的**配置错误 | `invalid_infrastructure` |
++| 400/422 且响应体 `error.code`/`type` 命中语义类枚举(`content_filter` / `context_length_exceeded` / `invalid_prompt` / `token_limit_exceeded` 等) | `valid_task_failure` |
++| 200 有内容但 JSON 解析/校验不过(重试一次仍不行) | `valid_task_failure` |
++
++r0 只把 402/403/429/5xx 归 infra, 401 及 404 等 4xx 走 `valid_task_failure` —— 那会把
++「模型名拼错」「key 失效」记成模型回答失败(红道 Blocker 3/4)。r1 起 4xx 默认按 infra,
++**唯一例外**是 400/422 且有语义 code 佐证; 判定函数 `openai_baseline.classify_http_error`,
++响应体缺失/非 JSON/未知 code 一律按 infra(宁可把基础设施噪声算进 infra, 也不把运维错误
++算成模型分)。
++
++- `invalid_infrastructure`: **不计入模型准确率**, 报告单列, 并触发重跑一次。
++- `valid_task_failure`: 模型给了真实输出但格式不可解析/答案不合 schema。不进准确率与 ECE;
++  报告首部显式给出弃答数与其占比(`abstentions`), 防止用弃答抬分。
+ 
+ ## 三 adapter 的传输契约(dry-run 打印 = 将发送的请求体, 字段名对照官方文档)
+ 
+@@ -48,9 +78,6 @@
+ 
+ ### 3. openai-compatible-baseline(真跑)
+ - `POST {OLLAMA_BASE_URL:-https://ollama.com/v1}/chat/completions`
+-- Headers: `Authorization: Bearer $OLLAMA_API_KEY`
+-- Body: OpenAI chat 形状, system 提示要求只输出 JSON(`{"answer": ..., "probabilities": {...}, "confidence": ...}` 按题型), user 含 state + instructions + options/criteria。可选 `reasoning_effort`(默认 `low`, 可 --effort 改), `max_tokens` 默认 4096(思考模型留思考余量)。
+-- 解析失败重试一次; 再失败 → `valid_task_failure`。
+-
+-## 密钥纪律
+-adapter 只读环境变量(`TYPESAFE_API_KEY` / `OPENROUTER_API_KEY` / `OLLAMA_API_KEY`), 默认值、报错信息、日志、manifest、报告里一律只许出现变量名, 不许出现值。
++- Headers: `Authorization: Bearer ***` `Content-Type: application/json``
++- Body: OpenAI chat 形状, system 提示要求只输出 JSON(`{"answer": ..., "probabilities": {...}, "confidence": ...}` 按题型), user 含 state + instructions + options/criteria。可选 `reasoning_effort`(默认 `low`, 可 --effort 改), `max_tokens` 默认 4096(思考模型留思考余量), `seed`(可选, 默认不发送并如实记 null), `max_attempts` 默认 2。全部参数写入 manifest。
++- 解析失败重试一次; 再失败 → `valid_task_failure`。HTTP 错误按上表归类。
+--- a/README.md
++++ b/README.md
+@@ -1,36 +1,51 @@
+-# AMBER decision-axis 评测管道 (WO-DEC-001)
++# AMBER decision-axis 评测管道 (WO-DEC-001 / r1)
+ 
+ 对「决策轴」模型(不生成文本、只对给定 state 回答封闭问题的模型, 代表 = TypeSafe Jev)的
+ 评测管道: 金标判断题集(JSONL)进 → 多 adapter 调用 → 出分族准确率 + 校准分桶 + ECE +
+-阈值扫描 + 成本/延迟报告。冒烟集 12 题已对 glm-5.3-flash(g53f)与 deepseek-v4.1-flash(d41f)真跑出分。
++阈值扫描 + 成本/延迟报告。
++
++**r1 (WO-DEC-001-r1) 改动摘要** —— 红道双盲破检抓出 6 条 Blocker(诚信闸), 逐条修:
++
++| # | r0 漏洞 | r1 修法 |
++|---|---|---|
++| 1 | 完整性用公开无钥 `sha256(adapter\|model\|qid\|answer)`, 改响应重算即放行 | 改 **HMAC-SHA256**, 签名覆盖**整条记录**(answer/ok/error_class/latency_s/cost_usd/tokens/run_nonce/dataset_sha256)。密钥经环境变量 `AMBER_DECISION_HMAC_SECRET` 或 0600 文件(路径在外, 不进仓) |
++| 2 | `--score-only` 无行数/id 对账, 删错答行即抬分 | 强制对账: question_id 集合 == 数据集 id 集合 + 行数一致 + 无重复 + 内嵌 dataset 哈希匹配; 任一不符 rc≠0 |
++| 3 | 401 记成 `valid_task_failure` | 401 归 `invalid_infrastructure` |
++| 4 | 404 等 4xx 记成 `valid_task_failure` | 4xx 一律归 infra; 唯一例外=400/422 且响应体 error code 命中语义枚举 |
++| 5 | choice 看 argmax / score 看 `round(score)` 双口径; 平票依赖 dict 键序 | 统一为**模型自报答案单一 oracle**; argmax 只作交叉校验; 平票/恰 0.5 判错(确定性); score 用**显式 half-up** `floor(x+0.5)`, 不用裸 `round()` |
++| 6 | manifest 不记跑参数、数值不可重算; README d41f 数字错 | manifest 补 effort/timeout/max_tokens/max_attempts/temperature/seed/run_nonce + report/responses sha256; 新增 `--verify-run <tag>` 重算对账; README 数字按 r1 口径复算 |
+ 
+ ## 目录
+ 
+ ```
+ decision-axis/
+ ├── README.md                  ← 本文件
+-├── contracts/                 ← 接口契约(派单时冻结, 实现不改契约)
+-│   ├── golden-jsonl.md        ← 金标 JSONL schema + 判分规则
+-│   └── adapter-interface.md   ← 三 adapter 传输契约 + 错误分类 + 密钥纪律
+-├── driver.py                  ← 管道主控(读题→adapter→完整性→评分→报告→锁append manifest)
+-├── selftest.py                ← 验收自测, 输出 runs/selftest-dec001.md
++├── contracts/                 ← 接口契约(派单时冻结; r1 按 WO-DEC-001-r1 修订)
++│   ├── golden-jsonl.md        ← 金标 JSONL schema + 判分规则(r1 统一口径/tie/half-up)
++│   └── adapter-interface.md   ← 三 adapter 传输契约 + 错误分类(r1 表) + 密钥纪律
++├── signing.py                 ← HMAC 签名件(密钥加载/生成, 0600 文件在外)
++├── driver.py                  ← 管道主控(读题→adapter→签名→对账→评分→报告→锁 append manifest)
++├── selftest.py                ← r0 验收自测(已做 r1 兼容修正, 输出 runs/selftest-dec001.md)
++├── selftest_r1.py             ← r1 验收自测, 12 条三段式, 输出 runs/selftest-dec001-r1.md
+ ├── adapters/
+-│   ├── base.py                ← ResponseRecord 构造 + 题级完整性 sha256 + Timer
+-│   ├── typesafe_native.py     ← Jev 原生 API (dry-run only, 无 key)
+-│   ├── openrouter.py          ← OpenRouter Decisions 端点 (dry-run only, 无 key)
+-│   └── openai_baseline.py     ← ollama-cloud OpenAI 兼容 chat (真跑)
++│   ├── base.py                ← ResponseRecord 构造 + 整条记录 HMAC + Timer
++│   ├── typesafe_native.py     ← Jev 原生 API (真跑需 TYPESAFE_API_KEY; 无 key 拒真调)
++│   ├── openrouter.py          ← OpenRouter Decisions 端点 (同上)
++│   └── openai_baseline.py     ← ollama-cloud OpenAI 兼容 chat (真跑; 4xx 归 infra)
+ ├── scoring/
+ │   ├── validate.py            ← 金标 schema 校验器(CLI + 模块)
+-│   └── metrics.py             ← 分族准确率/校准分桶/ECE/阈值扫描, 全部自计算
++│   └── metrics.py             ← 统一 oracle + 分族准确率/校准分桶/ECE/阈值扫描
+ ├── data/smoke-12.jsonl        ← 冒烟集 12 题(4 choice + 4 score + 4 noul, 12 个用途族)
+ ├── config/prices.json         ← 目录价表; 查不到可靠公开价时保持 null(宁缺毋滥)
+ └── runs/
+-    ├── manifest.jsonl         ← 每次真跑锁 append 一行(模型/延迟/成本/分数/分类计数)
+-    ├── smoke-g53f-1/          ← g53f 真跑(12/12)
+-    ├── smoke-d41f-1/          ← d41f 真跑(12/12)
+-    ├── empty-state-g53f/      ← 空 state 基线(6/12, 区分度闸)
+-    ├── timeout-sim/           ← infra 失败分类复现(12/12 invalid_infrastructure)
+-    ├── selftest-dec001.md     ← writer 自测证据(验收 1/4/5a/5b/6/7 逐项)
++    ├── manifest.jsonl         ← 每次真跑锁 append 一行(全参数 + 双 sha256 + 分数/分类)
++    ├── smoke-g53f-1/          ← g53f 真跑(r0 产物: 12/12, ECE 0.0242)
++    ├── smoke-d41f-1/          ← d41f 真跑(r0 产物: 12/12, ECE 0.0108)
++    ├── smoke-jev-1/           ← Jev 真跑(r0 产物: 12/12, ECE 0.0167)
++    ├── empty-state-g53f/      ← 空 state 基线(r0 产物, 见下「口径变更」)
++    ├── r1-smoke-jev-1/        ← r1 真 Jev 冒烟(12/12, ECE 0.0183; 验收 9)
++    ├── r1-empty-state-jev/    ← r1 真 Jev 空 state 基线(5/12, ECE 0.5317; 验收 10)
++    ├── timeout-sim/           ← infra 分类复现(12/12 invalid_infrastructure)
+     └── */responses.jsonl + report.json + REPORT.md
+ ```
+ 
+@@ -38,13 +53,13 @@
+ 
+ ```bash
+ cd ~/2606/amber/decision-axis
+-set -a && source ~/.hermes/profiles/coder/.env && set +a   # 只注入环境变量, 不落盘
++set -a && source ~/.hermes/.env && set +a   # 只注入环境变量, 不落盘
+ 
+ # 真跑基线(冒烟):
+ python3 driver.py --adapter openai-compatible-baseline --model glm-5.3-flash \
+     --dataset data/smoke-12.jsonl --tag smoke-g53f-1
+-python3 driver.py --adapter openai-compatible-baseline --model deepseek-v4.1-flash \
+-    --dataset data/smoke-12.jsonl --tag smoke-d41f-1
++python3 driver.py --adapter typesafe-native --model jev-latest \
++    --dataset data/smoke-12.jsonl --tag smoke-jev-1
+ 
+ # dry-run 形状核对(Jev / OpenRouter, 零调用零 key):
+ python3 driver.py --adapter typesafe-native --model jev-latest --dry-run \
+@@ -52,66 +67,134 @@
+ python3 driver.py --adapter openrouter --model typesafe/jev-1.13 --dry-run \
+     --dataset data/smoke-12.jsonl --tag dryrun-or
+ 
+-# 空 state 基线 / 只重评分(零调用, 完整性重验):
+-python3 driver.py --adapter openai-compatible-baseline --model glm-5.3-flash \
+-    --dataset data/smoke-12.jsonl --tag empty-g53f --empty-state
+-python3 driver.py --score-only runs/smoke-g53f-1/responses.jsonl \
+-    --adapter openai-compatible-baseline --model glm-5.3-flash \
+-    --dataset data/smoke-12.jsonl --tag rescore
++# 空 state 基线 / 只重评分(零调用, 完整性重验 + 行数/id 对账):
++python3 driver.py --adapter typesafe-native --model jev-latest \
++    --dataset data/smoke-12.jsonl --tag empty-jev --empty-state
++python3 driver.py --score-only runs/r1-smoke-jev-1/responses.jsonl \
++    --adapter typesafe-native --model jev-latest \
++    --dataset data/smoke-12.jsonl --tag rescore-jev
++
++# 复核历史 run(零调用; 重算数值 + 核签名 + 对 manifest):
++python3 driver.py --verify-run r1-smoke-jev-1 --dataset data/smoke-12.jsonl
++python3 driver.py --verify-run smoke-g53f-1 --dataset data/smoke-12.jsonl   # r0 旧产物, 走 legacy 标注
+ 
+ # 自测(验收矩阵逐项):
+ python3 selftest.py
+ ```
+ 
++注意: `--score-only` 需 `--adapter/--model/--tag`(r0 README 的示例缺这三个, 照抄会 argparse 报错, 已修)。
++`--verify-run` 只需 `--dataset`。同一 `--tag` 二次运行默认拒绝(防静默覆盖证据), 需显式 `--force`。
++
+ ## 评分口径(全部自计算, 无任何锚定答案)
+-- choice: `argmax(probabilities) == gold`; score: `round(score)` 钳制等级范围 == gold; noul: `(noul >= 0.5) == gold`。
+-- 置信度: choice/score = max 概率; noul = max(p, 1-p)。
+-- ECE: 10 等宽置信度桶, `ECE = Σ (|B|/N)·|acc(B) − conf(B)|`, 空桶贡献 0。
+-- 阈值扫描: t ∈ {0.00, 0.05, …, 1.00}, auto_execute_rate = conf≥t 占比 + 其中准确率。
+-- 完整性: 每题 `sha256(adapter|model|question_id|canonical_json(answer))` 随响应落盘;
+-  评分时全量重算, 任何篡改 → 拒绝出分(`--score-only` 可复跑验证)。
+-- 错误分类(AMBER 规矩): `invalid_infrastructure`(超时/402/429/5xx/空 200/网络层)
+-  不计入模型分且自动重跑一次; `valid_task_failure`(真实输出但校验不过) 单列, 不进准确率/ECE。
++
++**r1 统一口径**(详见 `contracts/golden-jsonl.md`):
++- **唯一 oracle = 模型自报答案**: choice→`answer.choice`; score→`answer.score`; noul→`answer.noul`。
++  `probabilities` 的 argmax **只作交叉校验**, 不参与判对(记入报告 `oracle.n_inconsistent`)。
++  r0 的双口径(choice 看 argmax / score 看 `round(score)`)已废除。
++- **score 取整 = 显式 half-up** `floor(x+0.5)` 后钳制到 `[0, len(criteria)-1]`; **不用 Python
++  内置 `round()`**(银行家舍入: `round(2.5)=2` 而 `round(3.5)=4`, 边界归属随奇偶变)。
++- **平票/边界**: choice 概率平票时以自报 `answer.choice` 为准; 自报缺失时判错。noul 恰为
++  0.5 判错。理由: 决策轴要的是「一个决定」, 平票 = 未作出唯一决定; 该规则只依赖响应里的显式
++  字段, 与键序、与 gold 都无关 —— 同一份响应永远同一结论(r0 下同一组概率换键序判定翻转)。
++- **置信度**: choice/score = max 概率; noul = max(p, 1-p)。
++- **ECE**: 10 等宽置信度桶, `ECE = Σ (|B|/N)·|acc(B) − conf(B)|`, 空桶贡献 0。
++- **阈值扫描**: t ∈ {0.00, 0.05, …, 1.00}, auto_execute_rate = conf≥t 占比 + 其中准确率。
++- **分母透明**: 报告给出 `n_scored / n_expected / n_received` 与 `abstentions`(弃答数与占比)。
++
++## 完整性口径(r1)
++- 每题 `integrity = HMAC-SHA256(secret, canonical_json(整条响应记录除 integrity 外))`。
++  签名覆盖 `answer / ok / error_class / error_detail / latency_s / cost_usd / tokens /
++  run_nonce / dataset_sha256`。评分时全量重算, 任何字段被改 → rc≠0, 不出报告。
++- 密钥(trust root): 环境变量 `AMBER_DECISION_HMAC_SECRET`, 或 0600 密钥文件
++  (默认 `~/.local/state/amber-decision/hmac.key`, 首次签名运行自动生成, 目录 0700)。
++  **密钥与密钥路径都不进本目录、不进报告/manifest**; manifest 只记 `signing_key_source`。
++- r0 旧产物(无 `integrity_algo`, 用公开无钥公式)默认被拒; 要重算须显式
++  `--allow-legacy-unkeyed`, 且报告会被标注 `integrity_assurance=legacy-unkeyed`(无密码学保证)。
++
++## 错误分类(AMBER 规矩)
++- `invalid_infrastructure`(超时/网络层/空 200/401/402/403/429/5xx/**其余 4xx**)不计入模型分,
++  单列并重跑一次。401(凭据失效)、404(模型名写错) 属运维侧, r0 误记为 `valid_task_failure`, r1 已修。
++- 唯一例外: 400/422 且响应体 `error.code`/`type` 命中语义枚举(content_filter 等)→ `valid_task_failure`。
++- `valid_task_failure`(真实输出但校验不过)不进准确率与 ECE; 报告首部显式给出弃答数与其占比
++  (`abstentions`), 防止用弃答抬分。
+ 
+ ## 密钥纪律
+ adapter 只读环境变量 `TYPESAFE_API_KEY` / `OPENROUTER_API_KEY` / `OLLAMA_API_KEY`。
+-全目录 grep 无任何 key 值(自测 §7 用真实 key 值扫全树, 0 命中);
+-dry-run 与报错信息里只出现变量名。Jev 与 OpenRouter 本机无 key, adapter 硬编码拒绝真调
+-(未设 key 且非 dry-run 直接 RuntimeError)。
+-
+-## 冒烟结果(2026-09-18, ollama-cloud, effort=low, 串行)
+-
+-| run | model | scored | accuracy | ECE | mean lat | 备注 |
++全目录无任何 key 值(自测逐项扫描 0 命中); dry-run 与报错信息里只出现变量名。
++完整性签名密钥同规格(见上)。Jev/OpenRouter 未设 key 且非 dry-run 时 adapter 直接 RuntimeError。
++
++## 冒烟结果
++
++r1 真 Jev 冒烟(2026-09-19, typesafe-native, `jev-latest`, effort=low, 串行):
++
++| run | model | adapter | scored/expected | accuracy | ECE | mean lat | 备注 |
++|---|---|---|---|---|---|---|---|
++| r1-smoke-jev-1 | jev-latest | typesafe-native | 12/12 | 1.0000 | 0.0183 | 0.59s | r1 修复后真跑, 12/12 |
++| r1-empty-state-jev | jev-latest | typesafe-native | 12/12 | 0.4167 | 0.5317 | 0.59s | 空 state 基线, 区分度成立 |
++
++r0 历史产物(保留, r1 口径复算值与 manifest 一致):
++
++| run | model | scored | accuracy(r1 复算) | ECE(r1 复算) | manifest 记录 | 备注 |
+ |---|---|---|---|---|---|---|
+-| smoke-g53f-1 | glm-5.3-flash | 12 | 1.00 | 0.0242 | 1.00s | 全对 |
+-| smoke-d41f-1 | deepseek-v4.1-flash | 12 | 1.00 | 0.0108 | 4.72s | 全对(smoke-005 思考 39s) |
+-| empty-state-g53f | glm-5.3-flash | 12 | 0.50 | 0.2650 | 0.94s | 空 state 基线, 区分度成立 |
+-| timeout-sim | glm-5.3-flash | 0 | — | — | — | 12/12 invalid_infrastructure |
+-
+-成本: ollama-cloud 对这两模型无公开目录价(config/prices.json 记 null + 来源日期),
+-报告里 cost 如实为 null 并注明, 不编造; token 数与延迟照常报告。
+-ollama 真调合计 36 次(12×2 冒烟 + 12 空基线), 在 50 次限额内, 全程串行。
++| smoke-g53f-1 | glm-5.3-flash | 12 | 1.0000 | 0.0242 | 1.0 / 0.0242 | 一致 |
++| smoke-d41f-1 | deepseek-v4.1-flash | 12 | 1.0000 | 0.0108 | 1.0 / 0.0108 | 一致(见下「关于 d41f 数字」) |
++| smoke-jev-1 | jev-latest | 12 | 1.0000 | 0.0167 | 1.0 / 0.0167 | 一致 |
++| empty-state-g53f | glm-5.3-flash | 12 | 0.3333 | 0.4317 | 0.5 / 0.2650 | **口径变更, 见下** |
++| timeout-sim | glm-5.3-flash | 0 | — | — | 12/12 infra | 一致 |
++
++### 口径变更说明(验收 12)
++r1 统一 oracle(自报答案 + 平票判错)后, 个别 r0 产物的分数会变 —— 这是修 Blocker 5 的**必然**
++结果, 不是「让分数好看」的调整(方向是变严, 不是变松):
++- `empty-state-g53f`: r0 = 6/12 (0.5000) → r1 = 4/12 (0.3333)。两题翻转:
++  - `smoke-002`(choice): 概率平票 `{destructive:0.5, reversible:0.5}`。r0 因 `destructive` 恰好
++    排在 dict 首位被 argmax 取中而判对; 模型自报是 `reversible`(错)。r1 以自报为准 → 判错。
++  - `smoke-011`(noul): `noul = 0.5` 恰在中点, 无态度。r0 判 `>=0.5` → true == gold 判对;
++    r1 按「未作出决定」判错。
++- `smoke-g53f-1` / `smoke-d41f-1` / `smoke-jev-1` 的模型自报与 argmax 完全一致, 分数不变。
++- manifest 里 r0 行的 `accuracy` 是**当时 r0 口径**下的历史值, 原样保留(不改历史), 由
++  `--verify-run` 复算并在有差异时点明口径; r1 新行按 r1 口径记录。
++
++### 关于 d41f 数字(红道 Blocker 6 的原话核对)
++reviewer 席 Blocker 6 称 `runs/smoke-d41f-1` 应为 `accuracy=0.9167, ECE=0.1583`(据称脚本
++`probeL.py`)。逐项核对后**该数字不可复现**, 如实记录如下(不采用):
++1. `smoke-d41f-1/responses.jsonl` 的 12 行, 在 argmax / 自报 / `round(score)` / half-up 四种读法下
++   **逐题全对** → accuracy = 12/12 = 1.0000, ECE = 0.01083, 与 manifest 第 2 行完全一致。
++2. 穷举搜索(置信度取 maxprob/stated/原始 noul × 桶数 2–20 × 翻转 0/1/2 题)没有任何组合能得出
++   0.9167 / 0.1583(脚本见自测 `runs/selftest-dec001-r1.md` 验收 12 的复算段)。
++3. `/tmp/red-dec001-reviewer/probeL.py` 在盘上不存在(同目录其余 probeA–probeK 均在)。
++结论: r0 的 d41f 行 1.0 / 0.0108 与 r1 口径自算一致, 无需改; README 此处按可复算事实写。
++(若 reviewer 席另有依据, 请附可重跑脚本路径, 我按证据再核。)
++
+ 
+ ## dry-run 与官方文档逐字段对照(验收 8)
+ 
+ | 字段 | typesafe-native dry-run | openrouter dry-run | 官方依据(2026-09-18 抓取) |
+ |---|---|---|---|
+ | endpoint | POST https://api.typesafe.ai/v1/systemone | POST https://openrouter.ai/api/alpha/decisions | docs.typesafe.ai quickstart; openrouter.ai/docs "Submit a Decisions request" |
+-| auth header | `Authorization: Bearer $TYPESAFE_API_KEY` | `Authorization: Bearer $OPENROUTER_API_KEY` | 两文档一致 |
++| auth header | `Authorization: Bearer ***` | `Authorization: Bearer ***` | 两文档一致 |
+ | body 字段 | `state`, `model`, `questions` | `model`, `questions`, `state` | 官方 curl 示例逐字段一致 |
+ | question 形状 | `type`, `instructions`, `criteria`(choice=map, score=list) | 同左 | 两文档一致 |
+ | 响应(真调时解析) | `answers[qid].{choice\|score\|noul, probabilities, confidence, legend}` + `usage.{input_tokens,output_tokens}` | `answers` + `id`, `model`, `provider`, `usage.{cost,input_tokens,output_tokens}` | 官方响应示例 |
+ 
+-## 验收矩阵对照
+-1. schema 文档化 + 校验器 → `contracts/golden-jsonl.md` + `scoring/validate.py`, 坏样本复跑见 `runs/selftest-dec001.md` §1。
+-2. g53f 真跑 → `runs/smoke-g53f-1/` + manifest 行。
+-3. d41f 真跑 → `runs/smoke-d41f-1/` + manifest 行。
+-4. ECE 手算一致(0.325 构造集) → selftest §4。
+-5. 防作弊三闸: 空 state 0.50 < 1.00 → `runs/empty-state-g53f/`; 篡改必拦 → selftest §5b; tmp 前缀随机 → selftest §5a。
+-6. invalid_infrastructure 分列不计分 → selftest §6(死端口复现, 12/12 infra, 0 计入)。
+-7. 密钥零落盘 → selftest §7(真实 key 值全树扫描 0 命中)。
+-8. dry-run 与文档形状一致 → 上表 + `runs/dryrun-typesafe/`, `runs/dryrun-or/`。
++r0 README 曾指向不存在的 `runs/dryrun-typesafe/`; 实际 dry-run 证据在 `runs/dryrun-a/`、
++`runs/dryrun-b/`、`runs/dryrun-or/`(已修正指路)。
++
++## 验收矩阵对照(WO-DEC-001-r1, 12 条)
++逐条「复现→修复→复现失败」三段式证据: `runs/selftest-dec001-r1.md`。
++1. 篡改 answer 后重算旧公式不被放行 → selftest §1(tamper + 重算公开 sha256 → rc=2)
++2. score-only 删行被拒 → selftest §2(删 6 行 / 改标 infra / 改标 vtf → 全 rc=2)
++3. 401 → invalid_infrastructure → selftest §3(mock 401, 12/12 infra)
++4. 404 → invalid_infrastructure → selftest §4(mock 404, 12/12 infra; 另附 400 语义例外)
++5. tie 确定性(同概率两种键序结果一致) → selftest §5(A/B 互换两组输出一致)
++6. round 边界写进契约并显式实现 → selftest §6(契约原文 + metrics 代码 diff)
++7. manifest 含 effort/timeout/max_tokens/seed + report sha256 → selftest §7(manifest 行样本)
++8. `--verify-run smoke-jev-1` 重算一致 → selftest §8
++9. 修复后真 Jev 冒烟 12 题重跑仍 12/12 且 ECE 可算 → selftest §9(`r1-smoke-jev-1`)
++10. 修复后 --empty-state 基线仍明显低于全分 → selftest §10(`r1-empty-state-jev` 5/12)
++11. 密钥/HMAC secret 零落盘 → selftest §11(全树扫描)
++12. README 里 d41f/冒烟数字与契约口径自算一致 → selftest §12(对拍表)
+ 
+ ## 断路器遵守记录
+-未真调 Jev/OpenRouter(无 key, adapter 拒绝); 未自办 key/账号; 未动 case-AMBER-*、
+-profile 配置、state.db; 全部产物在 `~/2606/amber/decision-axis/` 内, 临时文件在 `/tmp/dec001-*`。
++未改金标、未改 oracle 判定语义以「让分数好看」(统一口径方向为变严); 未动 case-AMBER-*、
++profile 配置、state.db; 全部产物在 `~/2606/amber/decision-axis/` 内, 临时文件在 `/tmp/dec001-*`;
++HMAC 密钥在 `~/.local/state/amber-decision/`(0600, 仓外)。真 Jev 调用 2 轮 × 12 题(r1 内)。

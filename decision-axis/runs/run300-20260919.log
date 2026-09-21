@@ -1,0 +1,40 @@
+questions: 300
+
+===== glm-5.3-flash
+  unparsed 0/300  墙钟 121s  p50 1.85s
+  总准确率 273/300 = 0.910  (笨基线 0.250)
+    [clear] 106/120 = 0.883
+    [hard ] 167/180 = 0.928
+    command-risk-balanced      90/100 = 0.900
+    alert-triage-balanced      90/100 = 0.900
+    ticket-routing-balanced    93/100 = 0.930
+  saved /tmp/dec003/glm_5_3_flash-300.jsonl
+
+===== deepseek-v4.1-flash
+  unparsed 1/300  墙钟 119s  p50 1.49s
+  总准确率 261/299 = 0.873  (笨基线 0.250)
+    [clear] 101/120 = 0.842
+    [hard ] 160/179 = 0.894
+    command-risk-balanced      85/100 = 0.850
+    alert-triage-balanced      83/99 = 0.838
+    ticket-routing-balanced    93/100 = 0.930
+  saved /tmp/dec003/deepseek_v4_1_flash-300.jsonl
+
+=== 难度/可疑交叉 (300 题)
+  两家都对(送分题): 253
+  两家都错(可疑, 可能我金标有问题): 18
+  只对一家(有区分度): 28
+
+  可疑题前 12 条:
+    ('dec003-cmd-021', 'clear', 'destructive', 'reversible', 'reversible', 'systemctl --user disable hermes-gateway-coder.service')
+    ('dec003-cmd-024', 'clear', 'destructive', 'reversible', 'reversible', 'chmod 600 ~/.hermes/.env')
+    ('dec003-cmd-037', 'clear', 'critical', 'destructive', 'destructive', 'rm -rf ~/2606/bdeeper-260706')
+    ('dec003-cmd-038', 'clear', 'critical', 'destructive', 'destructive', 'git push --force origin main')
+    ('dec003-cmd-039', 'clear', 'critical', 'destructive', 'destructive', 'shutdown -h now')
+    ('dec003-alert-024', 'clear', 'now', 'page', 'page', 'ERROR auth: token refresh failing for all sessions since 09:00')
+    ('dec003-alert-029', 'clear', 'now', 'page', 'page', 'ERROR dns: resolution failing for internal service names')
+    ('dec003-alert-031', 'clear', 'page', 'now', 'now', 'CRIT|spine|exec_failed:fallback-watch|spawn failed: Permission denied on monitor check scr')
+    ('dec003-alert-039', 'clear', 'page', 'now', 'now', 'CRIT deploy: production serving a build from 6 days ago after a bad rollback')
+    ('dec003-ticket-017', 'clear', 'ops', 'coding', 'coding', 'The service is timing out under load. Profile it and tune the connection pool.')
+    ('dec003-ticket-028', 'clear', 'research', 'review', 'review', 'Read the RFC and explain whether our implementation matches the spec.')
+    ('dec004-cmd-050', 'hard', 'critical', 'destructive', 'destructive', 'DELETE FROM fisher_reports;')

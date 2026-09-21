@@ -1,0 +1,447 @@
+{
+  "n_scored": 12,
+  "accuracy": 1.0,
+  "by_type": {
+    "choice": {
+      "n": 4,
+      "correct": 4,
+      "accuracy": 1.0
+    },
+    "score": {
+      "n": 4,
+      "correct": 4,
+      "accuracy": 1.0
+    },
+    "noul": {
+      "n": 4,
+      "correct": 4,
+      "accuracy": 1.0
+    }
+  },
+  "by_family": {
+    "support-routing": {
+      "n": 1,
+      "correct": 1,
+      "accuracy": 1.0
+    },
+    "safety-guardrail": {
+      "n": 1,
+      "correct": 1,
+      "accuracy": 1.0
+    },
+    "doc-classification": {
+      "n": 1,
+      "correct": 1,
+      "accuracy": 1.0
+    },
+    "language-id": {
+      "n": 1,
+      "correct": 1,
+      "accuracy": 1.0
+    },
+    "customer-sentiment": {
+      "n": 1,
+      "correct": 1,
+      "accuracy": 1.0
+    },
+    "incident-urgency": {
+      "n": 1,
+      "correct": 1,
+      "accuracy": 1.0
+    },
+    "code-quality": {
+      "n": 1,
+      "correct": 1,
+      "accuracy": 1.0
+    },
+    "doc-completeness": {
+      "n": 1,
+      "correct": 1,
+      "accuracy": 1.0
+    },
+    "policy-compliance": {
+      "n": 1,
+      "correct": 1,
+      "accuracy": 1.0
+    },
+    "privacy-check": {
+      "n": 1,
+      "correct": 1,
+      "accuracy": 1.0
+    },
+    "bug-triage": {
+      "n": 1,
+      "correct": 1,
+      "accuracy": 1.0
+    },
+    "grammar-check": {
+      "n": 1,
+      "correct": 1,
+      "accuracy": 1.0
+    }
+  },
+  "calibration": {
+    "buckets": [
+      {
+        "lo": 0.0,
+        "hi": 0.1,
+        "n": 0,
+        "acc": null,
+        "conf": null,
+        "gap": null
+      },
+      {
+        "lo": 0.1,
+        "hi": 0.2,
+        "n": 0,
+        "acc": null,
+        "conf": null,
+        "gap": null
+      },
+      {
+        "lo": 0.2,
+        "hi": 0.3,
+        "n": 0,
+        "acc": null,
+        "conf": null,
+        "gap": null
+      },
+      {
+        "lo": 0.3,
+        "hi": 0.4,
+        "n": 0,
+        "acc": null,
+        "conf": null,
+        "gap": null
+      },
+      {
+        "lo": 0.4,
+        "hi": 0.5,
+        "n": 0,
+        "acc": null,
+        "conf": null,
+        "gap": null
+      },
+      {
+        "lo": 0.5,
+        "hi": 0.6,
+        "n": 0,
+        "acc": null,
+        "conf": null,
+        "gap": null
+      },
+      {
+        "lo": 0.6,
+        "hi": 0.7,
+        "n": 0,
+        "acc": null,
+        "conf": null,
+        "gap": null
+      },
+      {
+        "lo": 0.7,
+        "hi": 0.8,
+        "n": 0,
+        "acc": null,
+        "conf": null,
+        "gap": null
+      },
+      {
+        "lo": 0.8,
+        "hi": 0.9,
+        "n": 0,
+        "acc": null,
+        "conf": null,
+        "gap": null
+      },
+      {
+        "lo": 0.9,
+        "hi": 1.0,
+        "n": 12,
+        "acc": 1.0,
+        "conf": 0.9833333333333334,
+        "gap": 0.016666666666666607
+      }
+    ],
+    "ece": 0.016666666666666607,
+    "n_buckets": 10
+  },
+  "threshold_scan": [
+    {
+      "threshold": 0.0,
+      "auto_execute_rate": 1.0,
+      "n": 12,
+      "accuracy": 1.0
+    },
+    {
+      "threshold": 0.05,
+      "auto_execute_rate": 1.0,
+      "n": 12,
+      "accuracy": 1.0
+    },
+    {
+      "threshold": 0.1,
+      "auto_execute_rate": 1.0,
+      "n": 12,
+      "accuracy": 1.0
+    },
+    {
+      "threshold": 0.15,
+      "auto_execute_rate": 1.0,
+      "n": 12,
+      "accuracy": 1.0
+    },
+    {
+      "threshold": 0.2,
+      "auto_execute_rate": 1.0,
+      "n": 12,
+      "accuracy": 1.0
+    },
+    {
+      "threshold": 0.25,
+      "auto_execute_rate": 1.0,
+      "n": 12,
+      "accuracy": 1.0
+    },
+    {
+      "threshold": 0.3,
+      "auto_execute_rate": 1.0,
+      "n": 12,
+      "accuracy": 1.0
+    },
+    {
+      "threshold": 0.35,
+      "auto_execute_rate": 1.0,
+      "n": 12,
+      "accuracy": 1.0
+    },
+    {
+      "threshold": 0.4,
+      "auto_execute_rate": 1.0,
+      "n": 12,
+      "accuracy": 1.0
+    },
+    {
+      "threshold": 0.45,
+      "auto_execute_rate": 1.0,
+      "n": 12,
+      "accuracy": 1.0
+    },
+    {
+      "threshold": 0.5,
+      "auto_execute_rate": 1.0,
+      "n": 12,
+      "accuracy": 1.0
+    },
+    {
+      "threshold": 0.55,
+      "auto_execute_rate": 1.0,
+      "n": 12,
+      "accuracy": 1.0
+    },
+    {
+      "threshold": 0.6,
+      "auto_execute_rate": 1.0,
+      "n": 12,
+      "accuracy": 1.0
+    },
+    {
+      "threshold": 0.65,
+      "auto_execute_rate": 1.0,
+      "n": 12,
+      "accuracy": 1.0
+    },
+    {
+      "threshold": 0.7,
+      "auto_execute_rate": 1.0,
+      "n": 12,
+      "accuracy": 1.0
+    },
+    {
+      "threshold": 0.75,
+      "auto_execute_rate": 1.0,
+      "n": 12,
+      "accuracy": 1.0
+    },
+    {
+      "threshold": 0.8,
+      "auto_execute_rate": 1.0,
+      "n": 12,
+      "accuracy": 1.0
+    },
+    {
+      "threshold": 0.85,
+      "auto_execute_rate": 1.0,
+      "n": 12,
+      "accuracy": 1.0
+    },
+    {
+      "threshold": 0.9,
+      "auto_execute_rate": 1.0,
+      "n": 12,
+      "accuracy": 1.0
+    },
+    {
+      "threshold": 0.95,
+      "auto_execute_rate": 0.8333333333333334,
+      "n": 10,
+      "accuracy": 1.0
+    },
+    {
+      "threshold": 1.0,
+      "auto_execute_rate": 0.5833333333333334,
+      "n": 7,
+      "accuracy": 1.0
+    }
+  ],
+  "latency": {
+    "mean_s": 0.6036666666666667,
+    "max_s": 0.627,
+    "per_question_s": {
+      "smoke-001": 0.627,
+      "smoke-002": 0.599,
+      "smoke-003": 0.621,
+      "smoke-004": 0.588,
+      "smoke-005": 0.586,
+      "smoke-006": 0.585,
+      "smoke-007": 0.614,
+      "smoke-008": 0.59,
+      "smoke-009": 0.593,
+      "smoke-010": 0.592,
+      "smoke-011": 0.626,
+      "smoke-012": 0.623
+    }
+  },
+  "cost": {
+    "per_decision_mean_usd": null,
+    "total_usd": null,
+    "n_priced": 0,
+    "note": "no price table entry for this model; cost left null rather than fabricated"
+  },
+  "questions": [
+    {
+      "id": "smoke-001",
+      "classification": "scored",
+      "family": "support-routing",
+      "type": "choice",
+      "correct": true,
+      "confidence": 1.0,
+      "latency_s": 0.627,
+      "cost_usd": null
+    },
+    {
+      "id": "smoke-002",
+      "classification": "scored",
+      "family": "safety-guardrail",
+      "type": "choice",
+      "correct": true,
+      "confidence": 1.0,
+      "latency_s": 0.599,
+      "cost_usd": null
+    },
+    {
+      "id": "smoke-003",
+      "classification": "scored",
+      "family": "doc-classification",
+      "type": "choice",
+      "correct": true,
+      "confidence": 1.0,
+      "latency_s": 0.621,
+      "cost_usd": null
+    },
+    {
+      "id": "smoke-004",
+      "classification": "scored",
+      "family": "language-id",
+      "type": "choice",
+      "correct": true,
+      "confidence": 1.0,
+      "latency_s": 0.588,
+      "cost_usd": null
+    },
+    {
+      "id": "smoke-005",
+      "classification": "scored",
+      "family": "customer-sentiment",
+      "type": "score",
+      "correct": true,
+      "confidence": 1.0,
+      "latency_s": 0.586,
+      "cost_usd": null
+    },
+    {
+      "id": "smoke-006",
+      "classification": "scored",
+      "family": "incident-urgency",
+      "type": "score",
+      "correct": true,
+      "confidence": 1.0,
+      "latency_s": 0.585,
+      "cost_usd": null
+    },
+    {
+      "id": "smoke-007",
+      "classification": "scored",
+      "family": "code-quality",
+      "type": "score",
+      "correct": true,
+      "confidence": 1.0,
+      "latency_s": 0.614,
+      "cost_usd": null
+    },
+    {
+      "id": "smoke-008",
+      "classification": "scored",
+      "family": "doc-completeness",
+      "type": "score",
+      "correct": true,
+      "confidence": 0.92,
+      "latency_s": 0.59,
+      "cost_usd": null
+    },
+    {
+      "id": "smoke-009",
+      "classification": "scored",
+      "family": "policy-compliance",
+      "type": "noul",
+      "correct": true,
+      "confidence": 0.97,
+      "latency_s": 0.593,
+      "cost_usd": null
+    },
+    {
+      "id": "smoke-010",
+      "classification": "scored",
+      "family": "privacy-check",
+      "type": "noul",
+      "correct": true,
+      "confidence": 0.99,
+      "latency_s": 0.592,
+      "cost_usd": null
+    },
+    {
+      "id": "smoke-011",
+      "classification": "scored",
+      "family": "bug-triage",
+      "type": "noul",
+      "correct": true,
+      "confidence": 0.98,
+      "latency_s": 0.626,
+      "cost_usd": null
+    },
+    {
+      "id": "smoke-012",
+      "classification": "scored",
+      "family": "grammar-check",
+      "type": "noul",
+      "correct": true,
+      "confidence": 0.94,
+      "latency_s": 0.623,
+      "cost_usd": null
+    }
+  ],
+  "failures": {
+    "invalid_infrastructure": [],
+    "valid_task_failure": []
+  }
+}

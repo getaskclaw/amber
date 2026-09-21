@@ -1,0 +1,491 @@
+{
+  "n_scored": 12,
+  "n_expected": 12,
+  "n_received": 12,
+  "coverage_note": "denominator = 12 scored of 12 expected; 0 valid_task_failure (abstentions raise accuracy -- read alongside this line)",
+  "abstentions": {
+    "n_valid_task_failure": 0,
+    "rate": 0.0,
+    "note": "valid_task_failure is excluded from the denominator per AMBER rule; this count is surfaced so a high abstention rate cannot hide."
+  },
+  "accuracy": 0.4166666666666667,
+  "oracle": {
+    "oracle": "stated-answer (argmax cross-check only)",
+    "tie_rule": "tie or exact 0.5 -> judged wrong (deterministic)",
+    "rounding": "explicit half-up floor(x+0.5), not Python round()",
+    "n_ties": 0,
+    "n_cross_checked": 8,
+    "n_inconsistent": 0
+  },
+  "by_type": {
+    "choice": {
+      "n": 4,
+      "correct": 1,
+      "accuracy": 0.25
+    },
+    "score": {
+      "n": 4,
+      "correct": 2,
+      "accuracy": 0.5
+    },
+    "noul": {
+      "n": 4,
+      "correct": 2,
+      "accuracy": 0.5
+    }
+  },
+  "by_family": {
+    "support-routing": {
+      "n": 1,
+      "correct": 0,
+      "accuracy": 0.0
+    },
+    "safety-guardrail": {
+      "n": 1,
+      "correct": 0,
+      "accuracy": 0.0
+    },
+    "doc-classification": {
+      "n": 1,
+      "correct": 0,
+      "accuracy": 0.0
+    },
+    "language-id": {
+      "n": 1,
+      "correct": 1,
+      "accuracy": 1.0
+    },
+    "customer-sentiment": {
+      "n": 1,
+      "correct": 0,
+      "accuracy": 0.0
+    },
+    "incident-urgency": {
+      "n": 1,
+      "correct": 0,
+      "accuracy": 0.0
+    },
+    "code-quality": {
+      "n": 1,
+      "correct": 1,
+      "accuracy": 1.0
+    },
+    "doc-completeness": {
+      "n": 1,
+      "correct": 1,
+      "accuracy": 1.0
+    },
+    "policy-compliance": {
+      "n": 1,
+      "correct": 1,
+      "accuracy": 1.0
+    },
+    "privacy-check": {
+      "n": 1,
+      "correct": 0,
+      "accuracy": 0.0
+    },
+    "bug-triage": {
+      "n": 1,
+      "correct": 0,
+      "accuracy": 0.0
+    },
+    "grammar-check": {
+      "n": 1,
+      "correct": 1,
+      "accuracy": 1.0
+    }
+  },
+  "calibration": {
+    "buckets": [
+      {
+        "lo": 0.0,
+        "hi": 0.1,
+        "n": 0,
+        "acc": null,
+        "conf": null,
+        "gap": null
+      },
+      {
+        "lo": 0.1,
+        "hi": 0.2,
+        "n": 0,
+        "acc": null,
+        "conf": null,
+        "gap": null
+      },
+      {
+        "lo": 0.2,
+        "hi": 0.3,
+        "n": 0,
+        "acc": null,
+        "conf": null,
+        "gap": null
+      },
+      {
+        "lo": 0.3,
+        "hi": 0.4,
+        "n": 0,
+        "acc": null,
+        "conf": null,
+        "gap": null
+      },
+      {
+        "lo": 0.4,
+        "hi": 0.5,
+        "n": 0,
+        "acc": null,
+        "conf": null,
+        "gap": null
+      },
+      {
+        "lo": 0.5,
+        "hi": 0.6,
+        "n": 1,
+        "acc": 1.0,
+        "conf": 0.51,
+        "gap": 0.49
+      },
+      {
+        "lo": 0.6,
+        "hi": 0.7,
+        "n": 2,
+        "acc": 0.5,
+        "conf": 0.6499999999999999,
+        "gap": 0.1499999999999999
+      },
+      {
+        "lo": 0.7,
+        "hi": 0.8,
+        "n": 0,
+        "acc": null,
+        "conf": null,
+        "gap": null
+      },
+      {
+        "lo": 0.8,
+        "hi": 0.9,
+        "n": 2,
+        "acc": 0.5,
+        "conf": 0.8400000000000001,
+        "gap": 0.3400000000000001
+      },
+      {
+        "lo": 0.9,
+        "hi": 1.0,
+        "n": 7,
+        "acc": 0.2857142857142857,
+        "conf": 0.9871428571428572,
+        "gap": 0.7014285714285715
+      }
+    ],
+    "ece": 0.5316666666666667,
+    "n_buckets": 10
+  },
+  "threshold_scan": [
+    {
+      "threshold": 0.0,
+      "auto_execute_rate": 1.0,
+      "n": 12,
+      "accuracy": 0.4166666666666667
+    },
+    {
+      "threshold": 0.05,
+      "auto_execute_rate": 1.0,
+      "n": 12,
+      "accuracy": 0.4166666666666667
+    },
+    {
+      "threshold": 0.1,
+      "auto_execute_rate": 1.0,
+      "n": 12,
+      "accuracy": 0.4166666666666667
+    },
+    {
+      "threshold": 0.15,
+      "auto_execute_rate": 1.0,
+      "n": 12,
+      "accuracy": 0.4166666666666667
+    },
+    {
+      "threshold": 0.2,
+      "auto_execute_rate": 1.0,
+      "n": 12,
+      "accuracy": 0.4166666666666667
+    },
+    {
+      "threshold": 0.25,
+      "auto_execute_rate": 1.0,
+      "n": 12,
+      "accuracy": 0.4166666666666667
+    },
+    {
+      "threshold": 0.3,
+      "auto_execute_rate": 1.0,
+      "n": 12,
+      "accuracy": 0.4166666666666667
+    },
+    {
+      "threshold": 0.35,
+      "auto_execute_rate": 1.0,
+      "n": 12,
+      "accuracy": 0.4166666666666667
+    },
+    {
+      "threshold": 0.4,
+      "auto_execute_rate": 1.0,
+      "n": 12,
+      "accuracy": 0.4166666666666667
+    },
+    {
+      "threshold": 0.45,
+      "auto_execute_rate": 1.0,
+      "n": 12,
+      "accuracy": 0.4166666666666667
+    },
+    {
+      "threshold": 0.5,
+      "auto_execute_rate": 1.0,
+      "n": 12,
+      "accuracy": 0.4166666666666667
+    },
+    {
+      "threshold": 0.55,
+      "auto_execute_rate": 0.9166666666666666,
+      "n": 11,
+      "accuracy": 0.36363636363636365
+    },
+    {
+      "threshold": 0.6,
+      "auto_execute_rate": 0.9166666666666666,
+      "n": 11,
+      "accuracy": 0.36363636363636365
+    },
+    {
+      "threshold": 0.65,
+      "auto_execute_rate": 0.8333333333333334,
+      "n": 10,
+      "accuracy": 0.4
+    },
+    {
+      "threshold": 0.7,
+      "auto_execute_rate": 0.75,
+      "n": 9,
+      "accuracy": 0.3333333333333333
+    },
+    {
+      "threshold": 0.75,
+      "auto_execute_rate": 0.75,
+      "n": 9,
+      "accuracy": 0.3333333333333333
+    },
+    {
+      "threshold": 0.8,
+      "auto_execute_rate": 0.75,
+      "n": 9,
+      "accuracy": 0.3333333333333333
+    },
+    {
+      "threshold": 0.85,
+      "auto_execute_rate": 0.6666666666666666,
+      "n": 8,
+      "accuracy": 0.25
+    },
+    {
+      "threshold": 0.9,
+      "auto_execute_rate": 0.5833333333333334,
+      "n": 7,
+      "accuracy": 0.2857142857142857
+    },
+    {
+      "threshold": 0.95,
+      "auto_execute_rate": 0.5833333333333334,
+      "n": 7,
+      "accuracy": 0.2857142857142857
+    },
+    {
+      "threshold": 1.0,
+      "auto_execute_rate": 0.25,
+      "n": 3,
+      "accuracy": 0.3333333333333333
+    }
+  ],
+  "latency": {
+    "mean_s": 0.5904166666666667,
+    "max_s": 0.65,
+    "per_question_s": {
+      "smoke-001": 0.571,
+      "smoke-002": 0.605,
+      "smoke-003": 0.585,
+      "smoke-004": 0.599,
+      "smoke-005": 0.559,
+      "smoke-006": 0.577,
+      "smoke-007": 0.65,
+      "smoke-008": 0.595,
+      "smoke-009": 0.637,
+      "smoke-010": 0.554,
+      "smoke-011": 0.574,
+      "smoke-012": 0.579
+    }
+  },
+  "cost": {
+    "per_decision_mean_usd": null,
+    "total_usd": null,
+    "n_priced": 0,
+    "note": "no price table entry for this model; cost left null rather than fabricated"
+  },
+  "questions": [
+    {
+      "id": "smoke-001",
+      "classification": "scored",
+      "family": "support-routing",
+      "type": "choice",
+      "correct": false,
+      "predicted": "technical",
+      "confidence": 1.0,
+      "latency_s": 0.571,
+      "cost_usd": null
+    },
+    {
+      "id": "smoke-002",
+      "classification": "scored",
+      "family": "safety-guardrail",
+      "type": "choice",
+      "correct": false,
+      "predicted": "reversible",
+      "confidence": 0.99,
+      "latency_s": 0.605,
+      "cost_usd": null
+    },
+    {
+      "id": "smoke-003",
+      "classification": "scored",
+      "family": "doc-classification",
+      "type": "choice",
+      "correct": false,
+      "predicted": "contract",
+      "confidence": 0.62,
+      "latency_s": 0.585,
+      "cost_usd": null
+    },
+    {
+      "id": "smoke-004",
+      "classification": "scored",
+      "family": "language-id",
+      "type": "choice",
+      "correct": true,
+      "predicted": "python",
+      "confidence": 0.81,
+      "latency_s": 0.599,
+      "cost_usd": null
+    },
+    {
+      "id": "smoke-005",
+      "classification": "scored",
+      "family": "customer-sentiment",
+      "type": "score",
+      "correct": false,
+      "predicted": 0,
+      "confidence": 1.0,
+      "latency_s": 0.559,
+      "cost_usd": null
+    },
+    {
+      "id": "smoke-006",
+      "classification": "scored",
+      "family": "incident-urgency",
+      "type": "score",
+      "correct": false,
+      "predicted": 0,
+      "confidence": 0.97,
+      "latency_s": 0.577,
+      "cost_usd": null
+    },
+    {
+      "id": "smoke-007",
+      "classification": "scored",
+      "family": "code-quality",
+      "type": "score",
+      "correct": true,
+      "predicted": 0,
+      "confidence": 0.99,
+      "latency_s": 0.65,
+      "cost_usd": null
+    },
+    {
+      "id": "smoke-008",
+      "classification": "scored",
+      "family": "doc-completeness",
+      "type": "score",
+      "correct": true,
+      "predicted": 2,
+      "confidence": 1.0,
+      "latency_s": 0.595,
+      "cost_usd": null
+    },
+    {
+      "id": "smoke-009",
+      "classification": "scored",
+      "family": "policy-compliance",
+      "type": "noul",
+      "correct": true,
+      "predicted": false,
+      "confidence": 0.68,
+      "latency_s": 0.637,
+      "cost_usd": null
+    },
+    {
+      "id": "smoke-010",
+      "classification": "scored",
+      "family": "privacy-check",
+      "type": "noul",
+      "correct": false,
+      "predicted": false,
+      "confidence": 0.96,
+      "latency_s": 0.554,
+      "cost_usd": null
+    },
+    {
+      "id": "smoke-011",
+      "classification": "scored",
+      "family": "bug-triage",
+      "type": "noul",
+      "correct": false,
+      "predicted": false,
+      "confidence": 0.87,
+      "latency_s": 0.574,
+      "cost_usd": null
+    },
+    {
+      "id": "smoke-012",
+      "classification": "scored",
+      "family": "grammar-check",
+      "type": "noul",
+      "correct": true,
+      "predicted": false,
+      "confidence": 0.51,
+      "latency_s": 0.579,
+      "cost_usd": null
+    }
+  ],
+  "failures": {
+    "invalid_infrastructure": [],
+    "valid_task_failure": []
+  },
+  "run_nonce": "d0abaff3811e3d3803715d69d1e4b66f",
+  "integrity_assurance": "hmac-sha256 (keyed; whole-record coverage)",
+  "dataset_sha256": "96ed0440cda55e68935ffbc3acc0e03d6be6899ee8ef2f107fa999caea9f3b4e",
+  "run_config": {
+    "adapter": "typesafe-native",
+    "model": "jev-latest",
+    "effort": "low",
+    "timeout_s": 60.0,
+    "max_tokens": 4096,
+    "max_attempts": 2,
+    "seed": null,
+    "temperature": 0,
+    "empty_state_baseline": true,
+    "dry_run": false
+  },
+  "responses_sha256": "4818da7f459d548f0d17665b0786043d4bb4e0b90fe94765bcdb631328591ccf"
+}

@@ -50,7 +50,7 @@ Worth stating plainly: swe-2-high is not at the top of the overall ladder yet po
 - **Delivery**: 1.000 tied across 29 lanes (the signal is negative: no-deliverable lanes are simply out)
 - **Ops**: full marks tied across 14 lanes (swe-2-max, k3, doubao-seed-evolving, gpt-5.6-luna, hy4-preview-f, the DeepSeek lanes, etc.)
 - **Requirements**: full marks tied across ~26 lanes
-- **UI**: full marks tied across 12 lanes (all swe-2 bands, gpt-6-astra, gpt-5.6-sol/luna-max, glm-5.3-flash @ CrofAI ⚠, two deepseek-v4.1-flash lanes, hy4-preview-f, glm-5-2 @ Devin)
+- **UI**: full marks tied across 12 lanes (all swe-2 bands, ~~gpt-6-astra~~ ([correction 2026-09-21](corrections-2026-09-21.en.md): the cell was fallback-delivered, removed), gpt-5.6-sol/luna-max, glm-5.3-flash @ CrofAI ⚠, two deepseek-v4.1-flash lanes, hy4-preview-f, glm-5-2 @ Devin)
 
 ## How to read this
 

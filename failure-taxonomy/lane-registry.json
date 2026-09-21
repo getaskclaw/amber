@@ -1,0 +1,1690 @@
+{
+ "profiles": {
+  "amber-b": {
+   "bench_sessions": 25,
+   "lane_tokens": {
+    "low": 25
+   },
+   "models": {
+    "glm-5.3-flash:cloud": 24
+   }
+  },
+  "amber-cc": {
+   "bench_sessions": 130,
+   "lane_tokens": {
+    "cc": 26,
+    "low": 26,
+    "med": 26,
+    "none": 26,
+    "xhigh": 26
+   },
+   "models": {
+    "deepseek/deepseek-v4.1-flash": 131
+   }
+  },
+  "amber-cline-d4f": {
+   "bench_sessions": 31,
+   "lane_tokens": {
+    "d4f": 31
+   },
+   "models": {
+    "cline-pass/deepseek-v4-flash": 24
+   }
+  },
+  "amber-cline-g53f": {
+   "bench_sessions": 35,
+   "lane_tokens": {
+    "g53f": 33,
+    "ops78": 2
+   },
+   "models": {
+    "cline-pass/glm-5.3-flash": 23
+   }
+  },
+  "amber-cline-q35": {
+   "bench_sessions": 43,
+   "lane_tokens": {
+    "q35": 43
+   },
+   "models": {}
+  },
+  "amber-cline-q38": {
+   "bench_sessions": 43,
+   "lane_tokens": {
+    "q38": 43
+   },
+   "models": {}
+  },
+  "amber-crof": {
+   "bench_sessions": 26,
+   "lane_tokens": {
+    "d4f": 24,
+    "ops78": 2
+   },
+   "models": {
+    "deepseek-v4-flash-0731": 26
+   }
+  },
+  "amber-crof-d4fv": {
+   "bench_sessions": 25,
+   "lane_tokens": {
+    "d4fv": 25
+   },
+   "models": {
+    "deepseek-v4-flash-vision-exp": 25
+   }
+  },
+  "amber-crof-g53f": {
+   "bench_sessions": 29,
+   "lane_tokens": {
+    "g53f": 27,
+    "ops78": 2
+   },
+   "models": {
+    "glm-5.3-flash": 27
+   }
+  },
+  "amber-crof-q35": {
+   "bench_sessions": 30,
+   "lane_tokens": {
+    "q35": 30
+   },
+   "models": {
+    "qwen3.5-9b": 24
+   }
+  },
+  "amber-crof-q38": {
+   "bench_sessions": 26,
+   "lane_tokens": {
+    "q38": 24,
+    "ops78": 2
+   },
+   "models": {
+    "qwen3.8-27b": 26
+   }
+  },
+  "amber-doubao": {
+   "bench_sessions": 65,
+   "lane_tokens": {
+    "doubao": 30,
+    "arkds41": 26,
+    "be3600": 5,
+    "conv": 4
+   },
+   "models": {
+    "deepseek-v4.1-flash": 27,
+    "doubao-seed-evolving": 26
+   }
+  },
+  "amber-ds41": {
+   "bench_sessions": 54,
+   "lane_tokens": {
+    "ds41v": 28,
+    "ds41ga": 26
+   },
+   "models": {
+    "deepseek-v4.1-flash-expires-on-0910": 27,
+    "deepseek-flash": 26
+   }
+  },
+  "amber-gp27b": {
+   "bench_sessions": 27,
+   "lane_tokens": {
+    "gp27b": 27
+   },
+   "models": {
+    "Qwen3.8-27B": 26
+   }
+  },
+  "amber-gpt": {
+   "bench_sessions": 517,
+   "lane_tokens": {
+    "sol": 219,
+    "luna": 142,
+    "astra": 67,
+    "terra": 60,
+    "spark": 27,
+    "ops78": 2
+   },
+   "models": {
+    "gpt-5.6-luna-900k": 128,
+    "gpt-5.6-sol-900k": 111,
+    "gpt-6-astra-900k": 58,
+    "gpt-5.6-terra-900k": 50,
+    "gpt-5.3-codex-spark": 25,
+    "gpt-6-astra": 2
+   }
+  },
+  "amber-gpt-luna": {
+   "bench_sessions": 166,
+   "lane_tokens": {
+    "luna": 146,
+    "r1": 4,
+    "r2": 4,
+    "r3": 4,
+    "r4": 4,
+    "r5": 4
+   },
+   "models": {
+    "gpt-5.6-luna-900k": 150
+   }
+  },
+  "amber-gpt-sol": {
+   "bench_sessions": 32,
+   "lane_tokens": {
+    "sol": 32
+   },
+   "models": {
+    "gpt-5.6-sol-900k": 9
+   }
+  },
+  "amber-k28": {
+   "bench_sessions": 32,
+   "lane_tokens": {
+    "k28": 32
+   },
+   "models": {
+    "kimi-for-coding": 26
+   }
+  },
+  "amber-ocgo": {
+   "bench_sessions": 28,
+   "lane_tokens": {
+    "ocgo": 28
+   },
+   "models": {
+    "deepseek-flash": 26
+   }
+  },
+  "amber-oll2-g53f": {
+   "bench_sessions": 34,
+   "lane_tokens": {
+    "xhigh": 34
+   },
+   "models": {
+    "glm-5.3-flash": 27
+   }
+  },
+  "amber-ollama-d41f": {
+   "bench_sessions": 72,
+   "lane_tokens": {
+    "oll1d41f": 28,
+    "r4q": 8,
+    "r5q": 8,
+    "r2q": 6,
+    "r3q": 6,
+    "be001mk": 1,
+    "t1": 1,
+    "t10": 1,
+    "t11": 1,
+    "t12": 1,
+    "t13": 1,
+    "t14": 1,
+    "t15": 1,
+    "t2": 1,
+    "t3": 1,
+    "t4": 1,
+    "t5": 1,
+    "t6": 1,
+    "t7": 1,
+    "t8": 1,
+    "t9": 1
+   },
+   "models": {
+    "glm-5.3-flash": 36,
+    "deepseek-v4.1-flash": 26
+   }
+  },
+  "amber-ollama-d4f": {
+   "bench_sessions": 42,
+   "lane_tokens": {
+    "d4f": 40,
+    "ops78": 2
+   },
+   "models": {
+    "deepseek-v4-flash:0731": 26
+   }
+  },
+  "amber-ollama-d4p": {
+   "bench_sessions": 24,
+   "lane_tokens": {
+    "d4p": 24
+   },
+   "models": {
+    "deepseek-v4-pro:0813": 24,
+    "deepseek-v4-pro": 24
+   }
+  },
+  "amber-ollama-g53": {
+   "bench_sessions": 40,
+   "lane_tokens": {
+    "g53": 40
+   },
+   "models": {
+    "glm-5.3": 38
+   }
+  },
+  "amber-ollama-g53f": {
+   "bench_sessions": 154,
+   "lane_tokens": {
+    "g53f": 41,
+    "oll3g53f": 29,
+    "r3": 12,
+    "r4": 12,
+    "r5": 12,
+    "r2": 11,
+    "r1": 9,
+    "be002mk": 6,
+    "ops78": 2,
+    "v001s1": 1,
+    "v001s10": 1,
+    "v001s11": 1,
+    "v001s12": 1,
+    "v001s13": 1,
+    "v001s14": 1,
+    "v001s15": 1,
+    "v001s16": 1,
+    "v001s17": 1,
+    "v001s18": 1,
+    "v001s19": 1,
+    "v001s2": 1,
+    "v001s20": 1,
+    "v001s3": 1,
+    "v001s4": 1,
+    "v001s5": 1,
+    "v001s6": 1,
+    "v001s7": 1,
+    "v001s8": 1,
+    "v001s9": 1
+   },
+   "models": {
+    "glm-5.3-flash": 82
+   }
+  },
+  "amber-ollama-kk3": {
+   "bench_sessions": 54,
+   "lane_tokens": {
+    "kk3": 54
+   },
+   "models": {
+    "kimi-k3": 24
+   }
+  },
+  "amber-step5p": {
+   "bench_sessions": 42,
+   "lane_tokens": {
+    "step5p": 42
+   },
+   "models": {
+    "step-5-preview": 26
+   }
+  },
+  "amber-ualpha": {
+   "bench_sessions": 5,
+   "lane_tokens": {
+    "ualpha": 5
+   },
+   "models": {
+    "union-alpha": 5
+   }
+  },
+  "amber-wb": {
+   "bench_sessions": 87,
+   "lane_tokens": {
+    "hy4": 33,
+    "hy3": 29,
+    "workbuddy": 25
+   },
+   "models": {
+    "deepseek-v4.1-flash": 25,
+    "hy4-preview-f": 25,
+    "hy3": 24
+   }
+  }
+ },
+ "runs": {
+  "runs-arkd41f-conv-high-20260920": {
+   "rows": 2,
+   "models": {
+    "deepseek-v4.1-flash": 2
+   },
+   "profiles": {
+    "amber-doubao": 1
+   },
+   "cases": 2
+  },
+  "runs-arkds41-high-20260917": {
+   "rows": 26,
+   "models": {
+    "deepseek-v4.1-flash": 26
+   },
+   "profiles": {
+    "amber-doubao": 26
+   },
+   "cases": 26
+  },
+  "runs-astra-high-20260905": {
+   "rows": 32,
+   "models": {
+    "gpt-6-astra-900k": 32
+   },
+   "profiles": {
+    "amber-gpt": 8
+   },
+   "cases": 24
+  },
+  "runs-astra-high-20260916": {
+   "rows": 25,
+   "models": {
+    "gpt-6-astra-900k": 25
+   },
+   "profiles": {},
+   "cases": 25
+  },
+  "runs-astra-inj-high-20260920-inj": {
+   "rows": 1,
+   "models": {
+    "gpt-6-astra-900k": 1
+   },
+   "profiles": {},
+   "cases": 1
+  },
+  "runs-astra-low-20260905": {
+   "rows": 6,
+   "models": {
+    "gpt-6-astra-900k": 6
+   },
+   "profiles": {},
+   "cases": 6
+  },
+  "runs-astra-low-20260906": {
+   "rows": 27,
+   "models": {
+    "gpt-6-astra-900k": 27
+   },
+   "profiles": {
+    "amber-gpt": 1
+   },
+   "cases": 24
+  },
+  "runs-astra-max-20260906": {
+   "rows": 24,
+   "models": {
+    "gpt-6-astra-900k": 24
+   },
+   "profiles": {
+    "amber-gpt": 24
+   },
+   "cases": 24
+  },
+  "runs-astra-medium-20260906": {
+   "rows": 26,
+   "models": {
+    "gpt-6-astra-900k": 26
+   },
+   "profiles": {
+    "amber-gpt": 1
+   },
+   "cases": 24
+  },
+  "runs-astra-ops78-high-20260908": {
+   "rows": 2,
+   "models": {
+    "gpt-6-astra": 2
+   },
+   "profiles": {
+    "amber-gpt": 2
+   },
+   "cases": 2
+  },
+  "runs-astra-spot-medium-20260920-spot": {
+   "rows": 11,
+   "models": {
+    "gpt-6-astra-900k": 11
+   },
+   "profiles": {},
+   "cases": 11
+  },
+  "runs-astra-spot2-medium-20260920-spot2": {
+   "rows": 1,
+   "models": {
+    "gpt-6-astra-900k": 1
+   },
+   "profiles": {},
+   "cases": 1
+  },
+  "runs-astra-xhigh-20260906": {
+   "rows": 24,
+   "models": {
+    "gpt-6-astra-900k": 24
+   },
+   "profiles": {
+    "amber-gpt": 24
+   },
+   "cases": 24
+  },
+  "runs-cc-high-20260910": {
+   "rows": 26,
+   "models": {
+    "deepseek/deepseek-v4.1-flash": 26
+   },
+   "profiles": {
+    "amber-cc": 26
+   },
+   "cases": 26
+  },
+  "runs-cc-low-low-20260910": {
+   "rows": 26,
+   "models": {
+    "deepseek/deepseek-v4.1-flash": 26
+   },
+   "profiles": {
+    "amber-cc": 26
+   },
+   "cases": 26
+  },
+  "runs-cc-med-medium-20260910": {
+   "rows": 26,
+   "models": {
+    "deepseek/deepseek-v4.1-flash": 26
+   },
+   "profiles": {
+    "amber-cc": 26
+   },
+   "cases": 26
+  },
+  "runs-cc-none-none-20260910": {
+   "rows": 26,
+   "models": {
+    "deepseek/deepseek-v4.1-flash": 26
+   },
+   "profiles": {
+    "amber-cc": 26
+   },
+   "cases": 26
+  },
+  "runs-cc-xhigh-xhigh-20260910": {
+   "rows": 27,
+   "models": {
+    "deepseek/deepseek-v4.1-flash": 27
+   },
+   "profiles": {
+    "amber-cc": 27
+   },
+   "cases": 26
+  },
+  "runs-claudecode-high-20260918": {
+   "rows": 29,
+   "models": {
+    "haiku": 27,
+    "sonnet": 1,
+    "opus": 1
+   },
+   "profiles": {},
+   "cases": 26
+  },
+  "runs-claudecode-high-20260918c": {
+   "rows": 120,
+   "models": {
+    "opus": 42,
+    "haiku": 41,
+    "sonnet": 37
+   },
+   "profiles": {},
+   "cases": 26
+  },
+  "runs-cline-pass-d4f-high-20260907": {
+   "rows": 24,
+   "models": {
+    "cline-pass/deepseek-v4-flash": 24
+   },
+   "profiles": {
+    "amber-cline-d4f": 24
+   },
+   "cases": 24
+  },
+  "runs-cline-pass-g53f-high-20260907": {
+   "rows": 24,
+   "models": {
+    "cline-pass/glm-5.3-flash": 24
+   },
+   "profiles": {
+    "amber-cline-g53f": 21
+   },
+   "cases": 24
+  },
+  "runs-crof-d4f-high-20260905": {
+   "rows": 24,
+   "models": {
+    "deepseek-v4-flash-0731": 24
+   },
+   "profiles": {
+    "amber-crof": 24
+   },
+   "cases": 24
+  },
+  "runs-crof-d4f-ops78-high-20260908": {
+   "rows": 2,
+   "models": {
+    "deepseek-v4-flash-0731": 2
+   },
+   "profiles": {
+    "amber-crof": 2
+   },
+   "cases": 2
+  },
+  "runs-crof-d4fv-high-20260906": {
+   "rows": 25,
+   "models": {
+    "deepseek-v4-flash-vision-exp": 25
+   },
+   "profiles": {
+    "amber-crof-d4fv": 25
+   },
+   "cases": 24
+  },
+  "runs-crof-g53f-high-20260906": {
+   "rows": 25,
+   "models": {
+    "glm-5.3-flash": 25
+   },
+   "profiles": {
+    "amber-crof-g53f": 25
+   },
+   "cases": 24
+  },
+  "runs-crof-g53f-ops78-high-20260908": {
+   "rows": 2,
+   "models": {
+    "glm-5.3-flash": 2
+   },
+   "profiles": {
+    "amber-crof-g53f": 2
+   },
+   "cases": 2
+  },
+  "runs-crof-q35-high-20260906": {
+   "rows": 26,
+   "models": {
+    "qwen3.5-9b": 26
+   },
+   "profiles": {
+    "amber-crof-q35": 24
+   },
+   "cases": 24
+  },
+  "runs-crof-q38-high-20260906": {
+   "rows": 24,
+   "models": {
+    "qwen3.8-27b": 24
+   },
+   "profiles": {
+    "amber-crof-q38": 24
+   },
+   "cases": 24
+  },
+  "runs-crof-q38-ops78-high-20260908": {
+   "rows": 2,
+   "models": {
+    "qwen3.8-27b": 2
+   },
+   "profiles": {
+    "amber-crof-q38": 2
+   },
+   "cases": 2
+  },
+  "runs-devin-audition-high-20260908": {
+   "rows": 1,
+   "models": {
+    "swe-1-7-medium": 1
+   },
+   "profiles": {},
+   "cases": 1
+  },
+  "runs-devin-glm52-high-20260908": {
+   "rows": 28,
+   "models": {
+    "glm-5-2": 28
+   },
+   "profiles": {},
+   "cases": 26
+  },
+  "runs-devin-swe17m-high-20260908": {
+   "rows": 27,
+   "models": {
+    "swe-1-7-medium": 27
+   },
+   "profiles": {},
+   "cases": 26
+  },
+  "runs-devin-swe17max-high-20260908": {
+   "rows": 17,
+   "models": {
+    "swe-1-7": 17
+   },
+   "profiles": {},
+   "cases": 17
+  },
+  "runs-devin-swe2h-high-20260910": {
+   "rows": 26,
+   "models": {
+    "swe-2-high": 26
+   },
+   "profiles": {},
+   "cases": 26
+  },
+  "runs-devin-swe2l-low-20260912": {
+   "rows": 27,
+   "models": {
+    "swe-2-low": 27
+   },
+   "profiles": {},
+   "cases": 26
+  },
+  "runs-devin-swe2m-high-20260910": {
+   "rows": 26,
+   "models": {
+    "swe-2-medium": 26
+   },
+   "profiles": {},
+   "cases": 26
+  },
+  "runs-devin-swe2max-high-20260910": {
+   "rows": 29,
+   "models": {
+    "swe-2-max": 29
+   },
+   "profiles": {},
+   "cases": 26
+  },
+  "runs-doubao-be3600-high-20260916": {
+   "rows": 3,
+   "models": {
+    "doubao-seed-evolving": 3
+   },
+   "profiles": {
+    "amber-doubao": 3
+   },
+   "cases": 3
+  },
+  "runs-doubao-high-20260916": {
+   "rows": 26,
+   "models": {
+    "doubao-seed-evolving": 26
+   },
+   "profiles": {
+    "amber-doubao": 23
+   },
+   "cases": 26
+  },
+  "runs-ds41ga-high-20260910": {
+   "rows": 26,
+   "models": {
+    "deepseek-flash": 26
+   },
+   "profiles": {
+    "amber-ds41": 26
+   },
+   "cases": 26
+  },
+  "runs-ds41v-high-20260908": {
+   "rows": 27,
+   "models": {
+    "deepseek-v4.1-flash-expires-on-0910": 27
+   },
+   "profiles": {
+    "amber-ds41": 27
+   },
+   "cases": 26
+  },
+  "runs-glmflash-jja-20260906": {
+   "rows": 1,
+   "models": {
+    "glm-5.3-flash:cloud": 1
+   },
+   "profiles": {},
+   "cases": 1
+  },
+  "runs-glmflash-low-low-20260905": {
+   "rows": 25,
+   "models": {
+    "glm-5.3-flash:cloud": 25
+   },
+   "profiles": {
+    "amber-b": 24
+   },
+   "cases": 24
+  },
+  "runs-gp27b-high-20260917": {
+   "rows": 26,
+   "models": {
+    "Qwen3.8-27B": 26
+   },
+   "profiles": {
+    "amber-gp27b": 26
+   },
+   "cases": 26
+  },
+  "runs-gpt56-luna-high-20260907-r2": {
+   "rows": 26,
+   "models": {
+    "gpt-5.6-luna-900k": 26
+   },
+   "profiles": {
+    "amber-gpt": 26
+   },
+   "cases": 26
+  },
+  "runs-gpt56-luna-high-20260907": {
+   "rows": 26,
+   "models": {
+    "gpt-5.6-luna-900k": 26
+   },
+   "profiles": {
+    "amber-gpt": 26
+   },
+   "cases": 26
+  },
+  "runs-gpt56-luna-high-20260912": {
+   "rows": 26,
+   "models": {
+    "gpt-5.6-luna-900k": 26
+   },
+   "profiles": {
+    "amber-gpt-luna": 26
+   },
+   "cases": 26
+  },
+  "runs-gpt56-luna-low-20260912": {
+   "rows": 26,
+   "models": {
+    "gpt-5.6-luna-900k": 26
+   },
+   "profiles": {
+    "amber-gpt-luna": 26
+   },
+   "cases": 26
+  },
+  "runs-gpt56-luna-max-20260917": {
+   "rows": 27,
+   "models": {
+    "gpt-5.6-luna-900k": 27
+   },
+   "profiles": {
+    "amber-gpt-luna": 26
+   },
+   "cases": 26
+  },
+  "runs-gpt56-luna-medium-20260907-r2": {
+   "rows": 26,
+   "models": {
+    "gpt-5.6-luna-900k": 26
+   },
+   "profiles": {
+    "amber-gpt": 26
+   },
+   "cases": 26
+  },
+  "runs-gpt56-luna-medium-20260907": {
+   "rows": 24,
+   "models": {
+    "gpt-5.6-luna-900k": 24
+   },
+   "profiles": {
+    "amber-gpt": 24
+   },
+   "cases": 24
+  },
+  "runs-gpt56-luna-medium-20260912": {
+   "rows": 26,
+   "models": {
+    "gpt-5.6-luna-900k": 26
+   },
+   "profiles": {
+    "amber-gpt-luna": 26
+   },
+   "cases": 26
+  },
+  "runs-gpt56-luna-none-20260912": {
+   "rows": 26,
+   "models": {
+    "gpt-5.6-luna-900k": 26
+   },
+   "profiles": {
+    "amber-gpt-luna": 26
+   },
+   "cases": 26
+  },
+  "runs-gpt56-luna-reqdrift-r1-high-20260915": {
+   "rows": 4,
+   "models": {
+    "gpt-5.6-luna-900k": 4
+   },
+   "profiles": {
+    "amber-gpt-luna": 4
+   },
+   "cases": 4
+  },
+  "runs-gpt56-luna-reqdrift-r2-high-20260915": {
+   "rows": 4,
+   "models": {
+    "gpt-5.6-luna-900k": 4
+   },
+   "profiles": {
+    "amber-gpt-luna": 4
+   },
+   "cases": 4
+  },
+  "runs-gpt56-luna-reqdrift-r3-high-20260915": {
+   "rows": 4,
+   "models": {
+    "gpt-5.6-luna-900k": 4
+   },
+   "profiles": {
+    "amber-gpt-luna": 4
+   },
+   "cases": 4
+  },
+  "runs-gpt56-luna-reqdrift-r4-high-20260915": {
+   "rows": 4,
+   "models": {
+    "gpt-5.6-luna-900k": 4
+   },
+   "profiles": {
+    "amber-gpt-luna": 4
+   },
+   "cases": 4
+  },
+  "runs-gpt56-luna-reqdrift-r5-high-20260915": {
+   "rows": 4,
+   "models": {
+    "gpt-5.6-luna-900k": 4
+   },
+   "profiles": {
+    "amber-gpt-luna": 4
+   },
+   "cases": 4
+  },
+  "runs-gpt56-luna-xhigh-20260907-r2": {
+   "rows": 26,
+   "models": {
+    "gpt-5.6-luna-900k": 26
+   },
+   "profiles": {
+    "amber-gpt": 26
+   },
+   "cases": 26
+  },
+  "runs-gpt56-sol-high-20260907-r2": {
+   "rows": 26,
+   "models": {
+    "gpt-5.6-sol-900k": 26
+   },
+   "profiles": {
+    "amber-gpt": 24
+   },
+   "cases": 26
+  },
+  "runs-gpt56-sol-high-20260907": {
+   "rows": 26,
+   "models": {
+    "gpt-5.6-sol-900k": 26
+   },
+   "profiles": {
+    "amber-gpt": 26
+   },
+   "cases": 26
+  },
+  "runs-gpt56-sol-high-20260912": {
+   "rows": 9,
+   "models": {
+    "gpt-5.6-sol-900k": 9
+   },
+   "profiles": {
+    "amber-gpt-sol": 9
+   },
+   "cases": 9
+  },
+  "runs-gpt56-sol-medium-20260907-r2": {
+   "rows": 26,
+   "models": {
+    "gpt-5.6-sol-900k": 26
+   },
+   "profiles": {
+    "amber-gpt": 26
+   },
+   "cases": 26
+  },
+  "runs-gpt56-sol-medium-20260907": {
+   "rows": 26,
+   "models": {
+    "gpt-5.6-sol-900k": 26
+   },
+   "profiles": {
+    "amber-gpt": 26
+   },
+   "cases": 26
+  },
+  "runs-gpt56-sol-xhigh-20260907-r2": {
+   "rows": 9,
+   "models": {
+    "gpt-5.6-sol-900k": 9
+   },
+   "profiles": {
+    "amber-gpt": 9
+   },
+   "cases": 9
+  },
+  "runs-gpt56-terra-high-20260907": {
+   "rows": 26,
+   "models": {
+    "gpt-5.6-terra-900k": 26
+   },
+   "profiles": {
+    "amber-gpt": 26
+   },
+   "cases": 26
+  },
+  "runs-gpt56-terra-medium-20260907": {
+   "rows": 24,
+   "models": {
+    "gpt-5.6-terra-900k": 24
+   },
+   "profiles": {
+    "amber-gpt": 24
+   },
+   "cases": 24
+  },
+  "runs-k28-high-20260917": {
+   "rows": 26,
+   "models": {
+    "kimi-for-coding": 26
+   },
+   "profiles": {
+    "amber-k28": 26
+   },
+   "cases": 26
+  },
+  "runs-k3-high-20260905": {
+   "rows": 2,
+   "models": {
+    "k3": 2
+   },
+   "profiles": {},
+   "cases": 1
+  },
+  "runs-k3-high-20260906": {
+   "rows": 2,
+   "models": {
+    "k3": 2
+   },
+   "profiles": {},
+   "cases": 2
+  },
+  "runs-k3-high-20260915": {
+   "rows": 26,
+   "models": {
+    "k3": 26
+   },
+   "profiles": {},
+   "cases": 26
+  },
+  "runs-k3-low-20260905": {
+   "rows": 2,
+   "models": {
+    "k3": 2
+   },
+   "profiles": {},
+   "cases": 2
+  },
+  "runs-k3-low-20260915": {
+   "rows": 26,
+   "models": {
+    "k3": 26
+   },
+   "profiles": {},
+   "cases": 26
+  },
+  "runs-k3-low-spot-20260915": {
+   "rows": 3,
+   "models": {
+    "k3": 3
+   },
+   "profiles": {},
+   "cases": 3
+  },
+  "runs-ocgo-high-20260910": {
+   "rows": 27,
+   "models": {
+    "deepseek-flash": 27
+   },
+   "profiles": {
+    "amber-ocgo": 26
+   },
+   "cases": 26
+  },
+  "runs-oll-d4f-ops78-high-20260908": {
+   "rows": 2,
+   "models": {
+    "deepseek-v4-flash:0731": 2
+   },
+   "profiles": {
+    "amber-ollama-d4f": 2
+   },
+   "cases": 2
+  },
+  "runs-oll-g53f-ops78-high-20260908": {
+   "rows": 2,
+   "models": {
+    "glm-5.3-flash": 2
+   },
+   "profiles": {
+    "amber-ollama-g53f": 2
+   },
+   "cases": 2
+  },
+  "runs-oll1d41f-high-20260911": {
+   "rows": 26,
+   "models": {
+    "deepseek-v4.1-flash": 26
+   },
+   "profiles": {
+    "amber-ollama-d41f": 26
+   },
+   "cases": 26
+  },
+  "runs-oll2g53f-xhigh-xhigh-20260910": {
+   "rows": 30,
+   "models": {
+    "glm-5.3-flash": 30
+   },
+   "profiles": {
+    "amber-oll2-g53f": 27
+   },
+   "cases": 26
+  },
+  "runs-oll3g53f-high-20260911": {
+   "rows": 28,
+   "models": {
+    "glm-5.3-flash": 28
+   },
+   "profiles": {
+    "amber-ollama-g53f": 28
+   },
+   "cases": 26
+  },
+  "runs-oll3g53f-jjas2-t1-high-20260915": {
+   "rows": 1,
+   "models": {
+    "glm-5.3-flash": 1
+   },
+   "profiles": {
+    "amber-ollama-d41f": 1
+   },
+   "cases": 1
+  },
+  "runs-oll3g53f-jjas2-t10-high-20260915": {
+   "rows": 1,
+   "models": {
+    "glm-5.3-flash": 1
+   },
+   "profiles": {
+    "amber-ollama-d41f": 1
+   },
+   "cases": 1
+  },
+  "runs-oll3g53f-jjas2-t11-high-20260915": {
+   "rows": 1,
+   "models": {
+    "glm-5.3-flash": 1
+   },
+   "profiles": {
+    "amber-ollama-d41f": 1
+   },
+   "cases": 1
+  },
+  "runs-oll3g53f-jjas2-t12-high-20260915": {
+   "rows": 1,
+   "models": {
+    "glm-5.3-flash": 1
+   },
+   "profiles": {
+    "amber-ollama-d41f": 1
+   },
+   "cases": 1
+  },
+  "runs-oll3g53f-jjas2-t13-high-20260915": {
+   "rows": 1,
+   "models": {
+    "glm-5.3-flash": 1
+   },
+   "profiles": {
+    "amber-ollama-d41f": 1
+   },
+   "cases": 1
+  },
+  "runs-oll3g53f-jjas2-t14-high-20260915": {
+   "rows": 1,
+   "models": {
+    "glm-5.3-flash": 1
+   },
+   "profiles": {
+    "amber-ollama-d41f": 1
+   },
+   "cases": 1
+  },
+  "runs-oll3g53f-jjas2-t15-high-20260915": {
+   "rows": 1,
+   "models": {
+    "glm-5.3-flash": 1
+   },
+   "profiles": {
+    "amber-ollama-d41f": 1
+   },
+   "cases": 1
+  },
+  "runs-oll3g53f-jjas2-t2-high-20260915": {
+   "rows": 1,
+   "models": {
+    "glm-5.3-flash": 1
+   },
+   "profiles": {
+    "amber-ollama-d41f": 1
+   },
+   "cases": 1
+  },
+  "runs-oll3g53f-jjas2-t3-high-20260915": {
+   "rows": 1,
+   "models": {
+    "glm-5.3-flash": 1
+   },
+   "profiles": {
+    "amber-ollama-d41f": 1
+   },
+   "cases": 1
+  },
+  "runs-oll3g53f-jjas2-t4-high-20260915": {
+   "rows": 1,
+   "models": {
+    "glm-5.3-flash": 1
+   },
+   "profiles": {
+    "amber-ollama-d41f": 1
+   },
+   "cases": 1
+  },
+  "runs-oll3g53f-jjas2-t5-high-20260915": {
+   "rows": 1,
+   "models": {
+    "glm-5.3-flash": 1
+   },
+   "profiles": {
+    "amber-ollama-d41f": 1
+   },
+   "cases": 1
+  },
+  "runs-oll3g53f-jjas2-t6-high-20260915": {
+   "rows": 1,
+   "models": {
+    "glm-5.3-flash": 1
+   },
+   "profiles": {
+    "amber-ollama-d41f": 1
+   },
+   "cases": 1
+  },
+  "runs-oll3g53f-jjas2-t7-high-20260915": {
+   "rows": 1,
+   "models": {
+    "glm-5.3-flash": 1
+   },
+   "profiles": {
+    "amber-ollama-d41f": 1
+   },
+   "cases": 1
+  },
+  "runs-oll3g53f-jjas2-t8-high-20260915": {
+   "rows": 1,
+   "models": {
+    "glm-5.3-flash": 1
+   },
+   "profiles": {
+    "amber-ollama-d41f": 1
+   },
+   "cases": 1
+  },
+  "runs-oll3g53f-jjas2-t9-high-20260915": {
+   "rows": 1,
+   "models": {
+    "glm-5.3-flash": 1
+   },
+   "profiles": {
+    "amber-ollama-d41f": 1
+   },
+   "cases": 1
+  },
+  "runs-oll3g53f-sfail-be002mk-high-20260915": {
+   "rows": 3,
+   "models": {
+    "glm-5.3-flash": 3
+   },
+   "profiles": {
+    "amber-ollama-g53f": 1
+   },
+   "cases": 1
+  },
+  "runs-oll3g53f-sfail-r1-high-20260915": {
+   "rows": 6,
+   "models": {
+    "glm-5.3-flash": 6
+   },
+   "profiles": {
+    "amber-ollama-g53f": 5
+   },
+   "cases": 6
+  },
+  "runs-oll3g53f-sfail-r2-high-20260915": {
+   "rows": 6,
+   "models": {
+    "glm-5.3-flash": 6
+   },
+   "profiles": {
+    "amber-ollama-g53f": 1
+   },
+   "cases": 6
+  },
+  "runs-oll3g53f-sfail-r2q-high-20260915": {
+   "rows": 6,
+   "models": {
+    "glm-5.3-flash": 6
+   },
+   "profiles": {
+    "amber-ollama-d41f": 6
+   },
+   "cases": 6
+  },
+  "runs-oll3g53f-sfail-r3-high-20260915": {
+   "rows": 6,
+   "models": {
+    "glm-5.3-flash": 6
+   },
+   "profiles": {},
+   "cases": 6
+  },
+  "runs-oll3g53f-sfail-r3q-high-20260915": {
+   "rows": 6,
+   "models": {
+    "glm-5.3-flash": 6
+   },
+   "profiles": {
+    "amber-ollama-d41f": 6
+   },
+   "cases": 6
+  },
+  "runs-oll3g53f-sfail-r4-high-20260915": {
+   "rows": 6,
+   "models": {
+    "glm-5.3-flash": 6
+   },
+   "profiles": {},
+   "cases": 6
+  },
+  "runs-oll3g53f-sfail-r4q-high-20260915": {
+   "rows": 6,
+   "models": {
+    "glm-5.3-flash": 6
+   },
+   "profiles": {
+    "amber-ollama-d41f": 5
+   },
+   "cases": 6
+  },
+  "runs-oll3g53f-sfail-r5-high-20260915": {
+   "rows": 6,
+   "models": {
+    "glm-5.3-flash": 6
+   },
+   "profiles": {},
+   "cases": 6
+  },
+  "runs-oll3g53f-sfail-r5q-high-20260915": {
+   "rows": 6,
+   "models": {
+    "glm-5.3-flash": 6
+   },
+   "profiles": {
+    "amber-ollama-d41f": 4
+   },
+   "cases": 6
+  },
+  "runs-oll3g53f-v001s1-high-20260914": {
+   "rows": 1,
+   "models": {
+    "glm-5.3-flash": 1
+   },
+   "profiles": {
+    "amber-ollama-g53f": 1
+   },
+   "cases": 1
+  },
+  "runs-oll3g53f-v001s10-high-20260914": {
+   "rows": 1,
+   "models": {
+    "glm-5.3-flash": 1
+   },
+   "profiles": {
+    "amber-ollama-g53f": 1
+   },
+   "cases": 1
+  },
+  "runs-oll3g53f-v001s11-high-20260914": {
+   "rows": 1,
+   "models": {
+    "glm-5.3-flash": 1
+   },
+   "profiles": {
+    "amber-ollama-g53f": 1
+   },
+   "cases": 1
+  },
+  "runs-oll3g53f-v001s12-high-20260914": {
+   "rows": 1,
+   "models": {
+    "glm-5.3-flash": 1
+   },
+   "profiles": {
+    "amber-ollama-g53f": 1
+   },
+   "cases": 1
+  },
+  "runs-oll3g53f-v001s13-high-20260914": {
+   "rows": 1,
+   "models": {
+    "glm-5.3-flash": 1
+   },
+   "profiles": {
+    "amber-ollama-g53f": 1
+   },
+   "cases": 1
+  },
+  "runs-oll3g53f-v001s14-high-20260914": {
+   "rows": 1,
+   "models": {
+    "glm-5.3-flash": 1
+   },
+   "profiles": {
+    "amber-ollama-g53f": 1
+   },
+   "cases": 1
+  },
+  "runs-oll3g53f-v001s15-high-20260914": {
+   "rows": 1,
+   "models": {
+    "glm-5.3-flash": 1
+   },
+   "profiles": {
+    "amber-ollama-g53f": 1
+   },
+   "cases": 1
+  },
+  "runs-oll3g53f-v001s16-high-20260914": {
+   "rows": 1,
+   "models": {
+    "glm-5.3-flash": 1
+   },
+   "profiles": {
+    "amber-ollama-g53f": 1
+   },
+   "cases": 1
+  },
+  "runs-oll3g53f-v001s17-high-20260914": {
+   "rows": 1,
+   "models": {
+    "glm-5.3-flash": 1
+   },
+   "profiles": {
+    "amber-ollama-g53f": 1
+   },
+   "cases": 1
+  },
+  "runs-oll3g53f-v001s18-high-20260914": {
+   "rows": 1,
+   "models": {
+    "glm-5.3-flash": 1
+   },
+   "profiles": {
+    "amber-ollama-g53f": 1
+   },
+   "cases": 1
+  },
+  "runs-oll3g53f-v001s19-high-20260914": {
+   "rows": 1,
+   "models": {
+    "glm-5.3-flash": 1
+   },
+   "profiles": {
+    "amber-ollama-g53f": 1
+   },
+   "cases": 1
+  },
+  "runs-oll3g53f-v001s2-high-20260914": {
+   "rows": 1,
+   "models": {
+    "glm-5.3-flash": 1
+   },
+   "profiles": {
+    "amber-ollama-g53f": 1
+   },
+   "cases": 1
+  },
+  "runs-oll3g53f-v001s20-high-20260914": {
+   "rows": 1,
+   "models": {
+    "glm-5.3-flash": 1
+   },
+   "profiles": {
+    "amber-ollama-g53f": 1
+   },
+   "cases": 1
+  },
+  "runs-oll3g53f-v001s3-high-20260914": {
+   "rows": 1,
+   "models": {
+    "glm-5.3-flash": 1
+   },
+   "profiles": {
+    "amber-ollama-g53f": 1
+   },
+   "cases": 1
+  },
+  "runs-oll3g53f-v001s4-high-20260914": {
+   "rows": 1,
+   "models": {
+    "glm-5.3-flash": 1
+   },
+   "profiles": {
+    "amber-ollama-g53f": 1
+   },
+   "cases": 1
+  },
+  "runs-oll3g53f-v001s5-high-20260914": {
+   "rows": 1,
+   "models": {
+    "glm-5.3-flash": 1
+   },
+   "profiles": {
+    "amber-ollama-g53f": 1
+   },
+   "cases": 1
+  },
+  "runs-oll3g53f-v001s6-high-20260914": {
+   "rows": 1,
+   "models": {
+    "glm-5.3-flash": 1
+   },
+   "profiles": {
+    "amber-ollama-g53f": 1
+   },
+   "cases": 1
+  },
+  "runs-oll3g53f-v001s7-high-20260914": {
+   "rows": 1,
+   "models": {
+    "glm-5.3-flash": 1
+   },
+   "profiles": {
+    "amber-ollama-g53f": 1
+   },
+   "cases": 1
+  },
+  "runs-oll3g53f-v001s8-high-20260914": {
+   "rows": 1,
+   "models": {
+    "glm-5.3-flash": 1
+   },
+   "profiles": {
+    "amber-ollama-g53f": 1
+   },
+   "cases": 1
+  },
+  "runs-oll3g53f-v001s9-high-20260914": {
+   "rows": 1,
+   "models": {
+    "glm-5.3-flash": 1
+   },
+   "profiles": {
+    "amber-ollama-g53f": 1
+   },
+   "cases": 1
+  },
+  "runs-ollama-d4f-high-20260906": {
+   "rows": 25,
+   "models": {
+    "deepseek-v4-flash:0731": 25
+   },
+   "profiles": {
+    "amber-ollama-d4f": 24
+   },
+   "cases": 24
+  },
+  "runs-ollama-d4p-high-20260906": {
+   "rows": 38,
+   "models": {
+    "deepseek-v4-pro:0813": 24,
+    "deepseek-v4-pro": 14
+   },
+   "profiles": {
+    "amber-ollama-d4p": 24
+   },
+   "cases": 24
+  },
+  "runs-ollama-g53-high-20260906": {
+   "rows": 39,
+   "models": {
+    "glm-5.3": 39
+   },
+   "profiles": {
+    "amber-ollama-g53": 38
+   },
+   "cases": 24
+  },
+  "runs-ollama-g53f-high-20260906": {
+   "rows": 26,
+   "models": {
+    "glm-5.3-flash": 26
+   },
+   "profiles": {
+    "amber-ollama-g53f": 25
+   },
+   "cases": 24
+  },
+  "runs-ollama-kk3-high-20260906": {
+   "rows": 39,
+   "models": {
+    "kimi-k3": 39
+   },
+   "profiles": {
+    "amber-ollama-kk3": 24
+   },
+   "cases": 24
+  },
+  "runs-smoke-ops78-high-20260907": {
+   "rows": 2,
+   "models": {
+    "cline-pass/glm-5.3-flash": 2
+   },
+   "profiles": {
+    "amber-cline-g53f": 2
+   },
+   "cases": 2
+  },
+  "runs-sol-high-20260916": {
+   "rows": 26,
+   "models": {
+    "gpt-5.6-sol-900k": 26
+   },
+   "profiles": {},
+   "cases": 26
+  },
+  "runs-spark-high-20260907": {
+   "rows": 25,
+   "models": {
+    "gpt-5.3-codex-spark": 25
+   },
+   "profiles": {
+    "amber-gpt": 25
+   },
+   "cases": 25
+  },
+  "runs-step5p-high-20260920": {
+   "rows": 31,
+   "models": {
+    "step-5-preview": 31
+   },
+   "profiles": {
+    "amber-step5p": 26
+   },
+   "cases": 26
+  },
+  "runs-ualpha-high-20260917.bak-refusewalled": {
+   "rows": 5,
+   "models": {
+    "union-alpha": 5
+   },
+   "profiles": {
+    "amber-ualpha": 5
+   },
+   "cases": 5
+  },
+  "runs-workbuddy-high-20260912": {
+   "rows": 26,
+   "models": {
+    "deepseek-v4.1-flash": 26
+   },
+   "profiles": {
+    "amber-wb": 25
+   },
+   "cases": 26
+  },
+  "runs-workbuddy-hy3-high-20260912": {
+   "rows": 26,
+   "models": {
+    "hy3": 26
+   },
+   "profiles": {
+    "amber-wb": 24
+   },
+   "cases": 26
+  },
+  "runs-workbuddy-hy4-high-20260912": {
+   "rows": 28,
+   "models": {
+    "hy4-preview-f": 27
+   },
+   "profiles": {
+    "amber-wb": 25
+   },
+   "cases": 26
+  }
+ }
+}
