@@ -1,0 +1,218 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": "white",
+  "title": {
+    "text": "AMBER 当前总榜：五个名次档（2026-W39，全库 23 案）",
+    "fontSize": 16,
+    "anchor": "start"
+  },
+  "data": {
+    "values": [
+      {
+        "lane": "swe-2-max @ Devin",
+        "pass": 18,
+        "rank": "#1"
+      },
+      {
+        "lane": "glm-5.3-flash @ Ollama Cloud",
+        "pass": 17,
+        "rank": "#2 并列"
+      },
+      {
+        "lane": "deepseek-v4.1-flash @ CommandCode",
+        "pass": 17,
+        "rank": "#2 并列"
+      },
+      {
+        "lane": "deepseek-v4.1-flash @ Ollama Cloud",
+        "pass": 17,
+        "rank": "#2 并列"
+      },
+      {
+        "lane": "k3 @ Kimi 官方 coding",
+        "pass": 17,
+        "rank": "#2 并列"
+      },
+      {
+        "lane": "hy4-preview-f @ WorkBuddy",
+        "pass": 17,
+        "rank": "#2 并列"
+      },
+      {
+        "lane": "gpt-6-astra-900k @ OpenAI Codex",
+        "pass": 16,
+        "rank": "#3 并列"
+      },
+      {
+        "lane": "qwen3.8-27b @ CrofAI",
+        "pass": 16,
+        "rank": "#3 并列"
+      },
+      {
+        "lane": "deepseek-flash @ OpenCode Go",
+        "pass": 16,
+        "rank": "#3 并列"
+      },
+      {
+        "lane": "deepseek-v4.1-flash @ DeepSeek 官方",
+        "pass": 16,
+        "rank": "#3 并列"
+      },
+      {
+        "lane": "swe-2-high @ Devin",
+        "pass": 16,
+        "rank": "#3 并列"
+      },
+      {
+        "lane": "doubao-seed-evolving @ 火山方舟 Agent Plan",
+        "pass": 16,
+        "rank": "#3 并列"
+      },
+      {
+        "lane": "gpt-5.6-sol-900k @ OpenAI Codex",
+        "pass": 15,
+        "rank": "#4 并列"
+      },
+      {
+        "lane": "gpt-5.6-luna-900k @ OpenAI Codex",
+        "pass": 15,
+        "rank": "#4 并列"
+      },
+      {
+        "lane": "deepseek-v4-flash-0731 @ CrofAI",
+        "pass": 15,
+        "rank": "#4 并列"
+      },
+      {
+        "lane": "deepseek-v4-flash:0731 @ Ollama Cloud",
+        "pass": 15,
+        "rank": "#4 并列"
+      },
+      {
+        "lane": "swe-2-medium @ Devin",
+        "pass": 15,
+        "rank": "#4 并列"
+      },
+      {
+        "lane": "swe-2-high @ Devin (二跑)",
+        "pass": 15,
+        "rank": "#4 并列"
+      },
+      {
+        "lane": "deepseek-v4.1-flash @ WorkBuddy",
+        "pass": 15,
+        "rank": "#4 并列"
+      },
+      {
+        "lane": "step-5-preview @ stepfun plan",
+        "pass": 15,
+        "rank": "#4 并列"
+      },
+      {
+        "lane": "glm-5.3-flash @ CrofAI",
+        "pass": 14,
+        "rank": "#5 并列"
+      },
+      {
+        "lane": "swe-1-7-medium @ Devin",
+        "pass": 14,
+        "rank": "#5 并列"
+      },
+      {
+        "lane": "deepseek-v4.1-flash-exp @ DeepSeek 官方（预览）",
+        "pass": 14,
+        "rank": "#5 并列"
+      },
+      {
+        "lane": "kimi-for-coding @ Kimi 官方 coding",
+        "pass": 14,
+        "rank": "#5 并列"
+      },
+      {
+        "lane": "Qwen3.8-27B @ goldenpotato 自部署",
+        "pass": 14,
+        "rank": "#5 并列"
+      }
+    ]
+  },
+  "width": 620,
+  "height": 730,
+  "layer": [
+    {
+      "mark": {
+        "type": "bar",
+        "cornerRadiusEnd": 3,
+        "height": 20,
+        "stroke": "#00414A",
+        "strokeWidth": 0.75,
+        "tooltip": true
+      },
+      "encoding": {
+        "y": {
+          "field": "lane",
+          "type": "nominal",
+          "sort": "-x",
+          "axis": {
+            "labelFontSize": 12,
+            "labelLimit": 0,
+            "title": null
+          }
+        },
+        "x": {
+          "field": "pass",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              23
+            ]
+          },
+          "axis": {
+            "title": "通过案数（/ 23）",
+            "grid": true
+          }
+        },
+        "color": {
+          "field": "rank",
+          "type": "nominal",
+          "scale": {
+            "range": [
+              "#003A44",
+              "#00695F",
+              "#0097A7",
+              "#26C6DA",
+              "#80DEEA"
+            ]
+          },
+          "legend": {
+            "title": "名次"
+          }
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 4,
+        "fontSize": 12,
+        "color": "#006064"
+      },
+      "encoding": {
+        "y": {
+          "field": "lane",
+          "type": "nominal",
+          "sort": "-x"
+        },
+        "x": {
+          "field": "pass",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "pass",
+          "type": "quantitative"
+        }
+      }
+    }
+  ]
+}
