@@ -1,0 +1,980 @@
+{
+ "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+ "width": 700,
+ "height": 372,
+ "title": {
+  "text": "Five-way 17/23 tie + doubao 16/23 + gp27b 14/23: ten-axis completion matrix (21-case subset) (three-valued DRAFT: ⊘=pending, unsigned)",
+  "subtitle": "bigger dot = higher completion; doubao verification axes = 3600s-makeup real scores (addendum 1); gp27b = one-shot snapshot of a community self-hosted endpoint (effort knob proven inert); blank Convergence cell = lane not yet examined (not a zero)",
+  "fontSize": 15,
+  "subtitleFontSize": 11
+ },
+ "layer": [
+  {
+   "data": {
+    "values": [
+     {
+      "key": "Vision",
+      "lane": "k3 @ Kimi official coding",
+      "value": 0.778
+     },
+     {
+      "key": "UI",
+      "lane": "k3 @ Kimi official coding",
+      "value": 0.0
+     },
+     {
+      "key": "Requirements",
+      "lane": "k3 @ Kimi official coding",
+      "value": 1.0
+     },
+     {
+      "key": "Ops",
+      "lane": "k3 @ Kimi official coding",
+      "value": 1.0
+     },
+     {
+      "key": "Review",
+      "lane": "k3 @ Kimi official coding",
+      "value": 0.556
+     },
+     {
+      "key": "Attribution",
+      "lane": "k3 @ Kimi official coding",
+      "value": 0.667
+     },
+     {
+      "key": "Defense",
+      "lane": "k3 @ Kimi official coding",
+      "value": 0.389
+     },
+     {
+      "key": "Delivery",
+      "lane": "k3 @ Kimi official coding",
+      "value": 1.0
+     },
+     {
+      "key": "Coding",
+      "lane": "k3 @ Kimi official coding",
+      "value": 0.958
+     },
+     {
+      "key": "Coding",
+      "lane": "v4.1-flash @ CommandCode",
+      "value": 0.958
+     },
+     {
+      "key": "Delivery",
+      "lane": "v4.1-flash @ CommandCode",
+      "value": 1.0
+     },
+     {
+      "key": "Defense",
+      "lane": "v4.1-flash @ CommandCode",
+      "value": 0.611
+     },
+     {
+      "key": "Attribution",
+      "lane": "v4.1-flash @ CommandCode",
+      "value": 0.867
+     },
+     {
+      "key": "Review",
+      "lane": "v4.1-flash @ CommandCode",
+      "value": 0.556
+     },
+     {
+      "key": "Ops",
+      "lane": "v4.1-flash @ CommandCode",
+      "value": 1.0
+     },
+     {
+      "key": "Requirements",
+      "lane": "v4.1-flash @ CommandCode",
+      "value": 1.0
+     },
+     {
+      "key": "UI",
+      "lane": "v4.1-flash @ CommandCode",
+      "value": 1.0
+     },
+     {
+      "key": "Vision",
+      "lane": "v4.1-flash @ CommandCode",
+      "value": 0.333
+     },
+     {
+      "key": "Coding",
+      "lane": "glm-5.3-flash @ Ollama",
+      "value": 0.958
+     },
+     {
+      "key": "Delivery",
+      "lane": "glm-5.3-flash @ Ollama",
+      "value": 1.0
+     },
+     {
+      "key": "Defense",
+      "lane": "glm-5.3-flash @ Ollama",
+      "value": 0.389
+     },
+     {
+      "key": "Attribution",
+      "lane": "glm-5.3-flash @ Ollama",
+      "value": 0.933
+     },
+     {
+      "key": "Review",
+      "lane": "glm-5.3-flash @ Ollama",
+      "value": 0.667
+     },
+     {
+      "key": "Ops",
+      "lane": "glm-5.3-flash @ Ollama",
+      "value": 1.0
+     },
+     {
+      "key": "Requirements",
+      "lane": "glm-5.3-flash @ Ollama",
+      "value": 1.0
+     },
+     {
+      "key": "UI",
+      "lane": "glm-5.3-flash @ Ollama",
+      "value": 0.917
+     },
+     {
+      "key": "Vision",
+      "lane": "glm-5.3-flash @ Ollama",
+      "value": 0.778
+     },
+     {
+      "key": "Coding",
+      "lane": "v4.1-flash @ Ollama",
+      "value": 0.958
+     },
+     {
+      "key": "Delivery",
+      "lane": "v4.1-flash @ Ollama",
+      "value": 1.0
+     },
+     {
+      "key": "Defense",
+      "lane": "v4.1-flash @ Ollama",
+      "value": 0.389
+     },
+     {
+      "key": "Attribution",
+      "lane": "v4.1-flash @ Ollama",
+      "value": 0.467
+     },
+     {
+      "key": "Review",
+      "lane": "v4.1-flash @ Ollama",
+      "value": 0.667
+     },
+     {
+      "key": "Ops",
+      "lane": "v4.1-flash @ Ollama",
+      "value": 1.0
+     },
+     {
+      "key": "Requirements",
+      "lane": "v4.1-flash @ Ollama",
+      "value": 1.0
+     },
+     {
+      "key": "UI",
+      "lane": "v4.1-flash @ Ollama",
+      "value": 1.0
+     },
+     {
+      "key": "Vision",
+      "lane": "v4.1-flash @ Ollama",
+      "value": 0.222
+     },
+     {
+      "key": "Coding",
+      "lane": "hy4-preview-f @ WorkBuddy",
+      "value": 0.958
+     },
+     {
+      "key": "Delivery",
+      "lane": "hy4-preview-f @ WorkBuddy",
+      "value": 1.0
+     },
+     {
+      "key": "Defense",
+      "lane": "hy4-preview-f @ WorkBuddy",
+      "value": 0.333
+     },
+     {
+      "key": "Attribution",
+      "lane": "hy4-preview-f @ WorkBuddy",
+      "value": 0.933
+     },
+     {
+      "key": "Review",
+      "lane": "hy4-preview-f @ WorkBuddy",
+      "value": 0.556
+     },
+     {
+      "key": "Ops",
+      "lane": "hy4-preview-f @ WorkBuddy",
+      "value": 1.0
+     },
+     {
+      "key": "Requirements",
+      "lane": "hy4-preview-f @ WorkBuddy",
+      "value": 1.0
+     },
+     {
+      "key": "UI",
+      "lane": "hy4-preview-f @ WorkBuddy",
+      "value": 1.0
+     },
+     {
+      "key": "Vision",
+      "lane": "hy4-preview-f @ WorkBuddy",
+      "value": 0.333
+     },
+     {
+      "key": "Coding",
+      "lane": "doubao-seed-evolving @ Ark Agent Plan",
+      "value": 0.958
+     },
+     {
+      "key": "Delivery",
+      "lane": "doubao-seed-evolving @ Ark Agent Plan",
+      "value": 1.0
+     },
+     {
+      "key": "Defense",
+      "lane": "doubao-seed-evolving @ Ark Agent Plan",
+      "value": 0.5
+     },
+     {
+      "key": "Attribution",
+      "lane": "doubao-seed-evolving @ Ark Agent Plan",
+      "value": 0.467
+     },
+     {
+      "key": "Review",
+      "lane": "doubao-seed-evolving @ Ark Agent Plan",
+      "value": 0.333
+     },
+     {
+      "key": "Ops",
+      "lane": "doubao-seed-evolving @ Ark Agent Plan",
+      "value": 1.0
+     },
+     {
+      "key": "Requirements",
+      "lane": "doubao-seed-evolving @ Ark Agent Plan",
+      "value": 1.0
+     },
+     {
+      "key": "UI",
+      "lane": "doubao-seed-evolving @ Ark Agent Plan",
+      "value": 0.0
+     },
+     {
+      "key": "Vision",
+      "lane": "doubao-seed-evolving @ Ark Agent Plan",
+      "value": 0.0
+     },
+     {
+      "key": "Coding",
+      "lane": "Qwen3.8-27B @ goldenpotato self-hosted",
+      "value": 0.833
+     },
+     {
+      "key": "Delivery",
+      "lane": "Qwen3.8-27B @ goldenpotato self-hosted",
+      "value": 1.0
+     },
+     {
+      "key": "Attribution",
+      "lane": "Qwen3.8-27B @ goldenpotato self-hosted",
+      "value": 0.4
+     },
+     {
+      "key": "Ops",
+      "lane": "Qwen3.8-27B @ goldenpotato self-hosted",
+      "value": 0.967
+     },
+     {
+      "key": "Requirements",
+      "lane": "Qwen3.8-27B @ goldenpotato self-hosted",
+      "value": 1.0
+     },
+     {
+      "key": "UI",
+      "lane": "Qwen3.8-27B @ goldenpotato self-hosted",
+      "value": 0.0
+     },
+     {
+      "key": "Vision",
+      "lane": "Qwen3.8-27B @ goldenpotato self-hosted",
+      "value": 0.0
+     },
+     {
+      "key": "Review",
+      "lane": "Qwen3.8-27B @ goldenpotato self-hosted",
+      "value": 0.0
+     },
+     {
+      "key": "Defense",
+      "lane": "Qwen3.8-27B @ goldenpotato self-hosted",
+      "value": 0.389
+     },
+     {
+      "key": "Convergence",
+      "lane": "k3 @ Kimi official coding",
+      "value": 1.0
+     },
+     {
+      "key": "Convergence",
+      "lane": "glm-5.3-flash @ Ollama",
+      "value": 1.0
+     },
+     {
+      "key": "Convergence",
+      "lane": "v4.1-flash @ Ollama",
+      "value": 1.0
+     },
+     {
+      "key": "Convergence",
+      "lane": "doubao-seed-evolving @ Ark Agent Plan",
+      "value": 1.0
+     },
+     {
+      "key": "Convergence",
+      "lane": "Qwen3.8-27B @ goldenpotato self-hosted",
+      "value": 1.0
+     },
+     {
+      "key": "Convergence",
+      "lane": "hy4-preview-f @ WorkBuddy",
+      "value": 1.0
+     }
+    ]
+   },
+   "encoding": {
+    "x": {
+     "field": "key",
+     "type": "nominal",
+     "sort": [
+      "Coding",
+      "Delivery",
+      "Attribution",
+      "Ops",
+      "Requirements",
+      "UI",
+      "Vision",
+      "Review",
+      "Defense",
+      "Convergence"
+     ],
+     "title": null,
+     "axis": {
+      "labelFontSize": 13,
+      "labelAngle": 0,
+      "domain": false,
+      "ticks": false
+     }
+    },
+    "y": {
+     "field": "lane",
+     "type": "nominal",
+     "sort": [
+      "k3 @ Kimi official coding",
+      "hy4-preview-f @ WorkBuddy",
+      "v4.1-flash @ CommandCode",
+      "glm-5.3-flash @ Ollama",
+      "v4.1-flash @ Ollama",
+      "doubao-seed-evolving @ Ark Agent Plan",
+      "Qwen3.8-27B @ goldenpotato self-hosted"
+     ],
+     "title": null,
+     "axis": {
+      "labelFontSize": 12,
+      "labelLimit": 0,
+      "domain": false,
+      "ticks": false
+     }
+    },
+    "color": {
+     "field": "lane",
+     "type": "nominal",
+     "scale": {
+      "domain": [
+       "k3 @ Kimi official coding",
+       "hy4-preview-f @ WorkBuddy",
+       "v4.1-flash @ CommandCode",
+       "glm-5.3-flash @ Ollama",
+       "v4.1-flash @ Ollama",
+       "doubao-seed-evolving @ Ark Agent Plan",
+       "Qwen3.8-27B @ goldenpotato self-hosted"
+      ],
+      "range": [
+       "#26C6DA",
+       "#2e8b57",
+       "#2a9d8f",
+       "#e76f51",
+       "#8d6fd1",
+       "#f4a261",
+       "#e9c46a"
+      ]
+     },
+     "legend": null
+    },
+    "size": {
+     "field": "value",
+     "type": "quantitative",
+     "scale": {
+      "domain": [
+       0,
+       1
+      ],
+      "range": [
+       90,
+       420
+      ]
+     },
+     "legend": null
+    }
+   },
+   "mark": {
+    "type": "point",
+    "filled": true,
+    "opacity": 0.95,
+    "stroke": "#bbb",
+    "strokeWidth": 1,
+    "tooltip": true
+   }
+  },
+  {
+   "data": {
+    "values": [
+     {
+      "key": "Vision",
+      "lane": "k3 @ Kimi official coding",
+      "value": 0.778
+     },
+     {
+      "key": "UI",
+      "lane": "k3 @ Kimi official coding",
+      "value": 0.0
+     },
+     {
+      "key": "Requirements",
+      "lane": "k3 @ Kimi official coding",
+      "value": 1.0
+     },
+     {
+      "key": "Ops",
+      "lane": "k3 @ Kimi official coding",
+      "value": 1.0
+     },
+     {
+      "key": "Review",
+      "lane": "k3 @ Kimi official coding",
+      "value": 0.556
+     },
+     {
+      "key": "Attribution",
+      "lane": "k3 @ Kimi official coding",
+      "value": 0.667
+     },
+     {
+      "key": "Defense",
+      "lane": "k3 @ Kimi official coding",
+      "value": 0.389
+     },
+     {
+      "key": "Delivery",
+      "lane": "k3 @ Kimi official coding",
+      "value": 1.0
+     },
+     {
+      "key": "Coding",
+      "lane": "k3 @ Kimi official coding",
+      "value": 0.958
+     },
+     {
+      "key": "Coding",
+      "lane": "v4.1-flash @ CommandCode",
+      "value": 0.958
+     },
+     {
+      "key": "Delivery",
+      "lane": "v4.1-flash @ CommandCode",
+      "value": 1.0
+     },
+     {
+      "key": "Defense",
+      "lane": "v4.1-flash @ CommandCode",
+      "value": 0.611
+     },
+     {
+      "key": "Attribution",
+      "lane": "v4.1-flash @ CommandCode",
+      "value": 0.867
+     },
+     {
+      "key": "Review",
+      "lane": "v4.1-flash @ CommandCode",
+      "value": 0.556
+     },
+     {
+      "key": "Ops",
+      "lane": "v4.1-flash @ CommandCode",
+      "value": 1.0
+     },
+     {
+      "key": "Requirements",
+      "lane": "v4.1-flash @ CommandCode",
+      "value": 1.0
+     },
+     {
+      "key": "UI",
+      "lane": "v4.1-flash @ CommandCode",
+      "value": 1.0
+     },
+     {
+      "key": "Vision",
+      "lane": "v4.1-flash @ CommandCode",
+      "value": 0.333
+     },
+     {
+      "key": "Coding",
+      "lane": "glm-5.3-flash @ Ollama",
+      "value": 0.958
+     },
+     {
+      "key": "Delivery",
+      "lane": "glm-5.3-flash @ Ollama",
+      "value": 1.0
+     },
+     {
+      "key": "Defense",
+      "lane": "glm-5.3-flash @ Ollama",
+      "value": 0.389
+     },
+     {
+      "key": "Attribution",
+      "lane": "glm-5.3-flash @ Ollama",
+      "value": 0.933
+     },
+     {
+      "key": "Review",
+      "lane": "glm-5.3-flash @ Ollama",
+      "value": 0.667
+     },
+     {
+      "key": "Ops",
+      "lane": "glm-5.3-flash @ Ollama",
+      "value": 1.0
+     },
+     {
+      "key": "Requirements",
+      "lane": "glm-5.3-flash @ Ollama",
+      "value": 1.0
+     },
+     {
+      "key": "UI",
+      "lane": "glm-5.3-flash @ Ollama",
+      "value": 0.917
+     },
+     {
+      "key": "Vision",
+      "lane": "glm-5.3-flash @ Ollama",
+      "value": 0.778
+     },
+     {
+      "key": "Coding",
+      "lane": "v4.1-flash @ Ollama",
+      "value": 0.958
+     },
+     {
+      "key": "Delivery",
+      "lane": "v4.1-flash @ Ollama",
+      "value": 1.0
+     },
+     {
+      "key": "Defense",
+      "lane": "v4.1-flash @ Ollama",
+      "value": 0.389
+     },
+     {
+      "key": "Attribution",
+      "lane": "v4.1-flash @ Ollama",
+      "value": 0.467
+     },
+     {
+      "key": "Review",
+      "lane": "v4.1-flash @ Ollama",
+      "value": 0.667
+     },
+     {
+      "key": "Ops",
+      "lane": "v4.1-flash @ Ollama",
+      "value": 1.0
+     },
+     {
+      "key": "Requirements",
+      "lane": "v4.1-flash @ Ollama",
+      "value": 1.0
+     },
+     {
+      "key": "UI",
+      "lane": "v4.1-flash @ Ollama",
+      "value": 1.0
+     },
+     {
+      "key": "Vision",
+      "lane": "v4.1-flash @ Ollama",
+      "value": 0.222
+     },
+     {
+      "key": "Coding",
+      "lane": "hy4-preview-f @ WorkBuddy",
+      "value": 0.958
+     },
+     {
+      "key": "Delivery",
+      "lane": "hy4-preview-f @ WorkBuddy",
+      "value": 1.0
+     },
+     {
+      "key": "Defense",
+      "lane": "hy4-preview-f @ WorkBuddy",
+      "value": 0.333
+     },
+     {
+      "key": "Attribution",
+      "lane": "hy4-preview-f @ WorkBuddy",
+      "value": 0.933
+     },
+     {
+      "key": "Review",
+      "lane": "hy4-preview-f @ WorkBuddy",
+      "value": 0.556
+     },
+     {
+      "key": "Ops",
+      "lane": "hy4-preview-f @ WorkBuddy",
+      "value": 1.0
+     },
+     {
+      "key": "Requirements",
+      "lane": "hy4-preview-f @ WorkBuddy",
+      "value": 1.0
+     },
+     {
+      "key": "UI",
+      "lane": "hy4-preview-f @ WorkBuddy",
+      "value": 1.0
+     },
+     {
+      "key": "Vision",
+      "lane": "hy4-preview-f @ WorkBuddy",
+      "value": 0.333
+     },
+     {
+      "key": "Coding",
+      "lane": "doubao-seed-evolving @ Ark Agent Plan",
+      "value": 0.958
+     },
+     {
+      "key": "Delivery",
+      "lane": "doubao-seed-evolving @ Ark Agent Plan",
+      "value": 1.0
+     },
+     {
+      "key": "Defense",
+      "lane": "doubao-seed-evolving @ Ark Agent Plan",
+      "value": 0.5
+     },
+     {
+      "key": "Attribution",
+      "lane": "doubao-seed-evolving @ Ark Agent Plan",
+      "value": 0.467
+     },
+     {
+      "key": "Review",
+      "lane": "doubao-seed-evolving @ Ark Agent Plan",
+      "value": 0.333
+     },
+     {
+      "key": "Ops",
+      "lane": "doubao-seed-evolving @ Ark Agent Plan",
+      "value": 1.0
+     },
+     {
+      "key": "Requirements",
+      "lane": "doubao-seed-evolving @ Ark Agent Plan",
+      "value": 1.0
+     },
+     {
+      "key": "UI",
+      "lane": "doubao-seed-evolving @ Ark Agent Plan",
+      "value": 0.0
+     },
+     {
+      "key": "Vision",
+      "lane": "doubao-seed-evolving @ Ark Agent Plan",
+      "value": 0.0
+     },
+     {
+      "key": "Coding",
+      "lane": "Qwen3.8-27B @ goldenpotato self-hosted",
+      "value": 0.833
+     },
+     {
+      "key": "Delivery",
+      "lane": "Qwen3.8-27B @ goldenpotato self-hosted",
+      "value": 1.0
+     },
+     {
+      "key": "Attribution",
+      "lane": "Qwen3.8-27B @ goldenpotato self-hosted",
+      "value": 0.4
+     },
+     {
+      "key": "Ops",
+      "lane": "Qwen3.8-27B @ goldenpotato self-hosted",
+      "value": 0.967
+     },
+     {
+      "key": "Requirements",
+      "lane": "Qwen3.8-27B @ goldenpotato self-hosted",
+      "value": 1.0
+     },
+     {
+      "key": "UI",
+      "lane": "Qwen3.8-27B @ goldenpotato self-hosted",
+      "value": 0.0
+     },
+     {
+      "key": "Vision",
+      "lane": "Qwen3.8-27B @ goldenpotato self-hosted",
+      "value": 0.0
+     },
+     {
+      "key": "Review",
+      "lane": "Qwen3.8-27B @ goldenpotato self-hosted",
+      "value": 0.0
+     },
+     {
+      "key": "Defense",
+      "lane": "Qwen3.8-27B @ goldenpotato self-hosted",
+      "value": 0.389
+     },
+     {
+      "key": "Convergence",
+      "lane": "k3 @ Kimi official coding",
+      "value": 1.0
+     },
+     {
+      "key": "Convergence",
+      "lane": "glm-5.3-flash @ Ollama",
+      "value": 1.0
+     },
+     {
+      "key": "Convergence",
+      "lane": "v4.1-flash @ Ollama",
+      "value": 1.0
+     },
+     {
+      "key": "Convergence",
+      "lane": "doubao-seed-evolving @ Ark Agent Plan",
+      "value": 1.0
+     },
+     {
+      "key": "Convergence",
+      "lane": "Qwen3.8-27B @ goldenpotato self-hosted",
+      "value": 1.0
+     },
+     {
+      "key": "Convergence",
+      "lane": "hy4-preview-f @ WorkBuddy",
+      "value": 1.0
+     }
+    ]
+   },
+   "encoding": {
+    "x": {
+     "field": "key",
+     "type": "nominal",
+     "sort": [
+      "Coding",
+      "Delivery",
+      "Attribution",
+      "Ops",
+      "Requirements",
+      "UI",
+      "Vision",
+      "Review",
+      "Defense",
+      "Convergence"
+     ],
+     "title": null,
+     "axis": {
+      "labelFontSize": 13,
+      "labelAngle": 0,
+      "domain": false,
+      "ticks": false
+     }
+    },
+    "y": {
+     "field": "lane",
+     "type": "nominal",
+     "sort": [
+      "k3 @ Kimi official coding",
+      "hy4-preview-f @ WorkBuddy",
+      "v4.1-flash @ CommandCode",
+      "glm-5.3-flash @ Ollama",
+      "v4.1-flash @ Ollama",
+      "doubao-seed-evolving @ Ark Agent Plan",
+      "Qwen3.8-27B @ goldenpotato self-hosted"
+     ],
+     "title": null,
+     "axis": {
+      "labelFontSize": 12,
+      "labelLimit": 0,
+      "domain": false,
+      "ticks": false
+     }
+    },
+    "color": {
+     "field": "lane",
+     "type": "nominal",
+     "scale": {
+      "domain": [
+       "k3 @ Kimi official coding",
+       "hy4-preview-f @ WorkBuddy",
+       "v4.1-flash @ CommandCode",
+       "glm-5.3-flash @ Ollama",
+       "v4.1-flash @ Ollama",
+       "doubao-seed-evolving @ Ark Agent Plan",
+       "Qwen3.8-27B @ goldenpotato self-hosted"
+      ],
+      "range": [
+       "#26C6DA",
+       "#2e8b57",
+       "#2a9d8f",
+       "#e76f51",
+       "#8d6fd1",
+       "#f4a261",
+       "#e9c46a"
+      ]
+     },
+     "legend": null
+    },
+    "text": {
+     "field": "value",
+     "format": ".2f"
+    }
+   },
+   "mark": {
+    "type": "text",
+    "fontSize": 10,
+    "dy": 16,
+    "color": "#555"
+   }
+  },
+  {
+   "data": {
+    "values": [
+     {
+      "lane": "v4.1-flash @ Ollama",
+      "key": "Review"
+     },
+     {
+      "lane": "v4.1-flash @ Ollama",
+      "key": "Vision"
+     },
+     {
+      "lane": "v4.1-flash @ Ollama",
+      "key": "UI"
+     },
+     {
+      "lane": "glm-5.3-flash @ Ollama",
+      "key": "UI"
+     },
+     {
+      "lane": "doubao-seed-evolving @ Ark Agent Plan",
+      "key": "Vision"
+     },
+     {
+      "lane": "Qwen3.8-27B @ goldenpotato self-hosted",
+      "key": "Review"
+     },
+     {
+      "lane": "Qwen3.8-27B @ goldenpotato self-hosted",
+      "key": "UI"
+     },
+     {
+      "lane": "hy4-preview-f @ WorkBuddy",
+      "key": "Vision"
+     }
+    ]
+   },
+   "mark": {
+    "type": "text",
+    "fontSize": 16,
+    "fontWeight": "bold",
+    "color": "#D3722C"
+   },
+   "encoding": {
+    "x": {
+     "field": "key",
+     "type": "nominal",
+     "sort": [
+      "Coding",
+      "Delivery",
+      "Attribution",
+      "Ops",
+      "Requirements",
+      "UI",
+      "Vision",
+      "Review",
+      "Defense",
+      "Convergence"
+     ],
+     "title": null,
+     "axis": {
+      "labelFontSize": 13,
+      "labelAngle": 0,
+      "domain": false,
+      "ticks": false
+     }
+    },
+    "y": {
+     "field": "lane",
+     "type": "nominal",
+     "sort": [
+      "k3 @ Kimi official coding",
+      "hy4-preview-f @ WorkBuddy",
+      "v4.1-flash @ CommandCode",
+      "glm-5.3-flash @ Ollama",
+      "v4.1-flash @ Ollama",
+      "doubao-seed-evolving @ Ark Agent Plan",
+      "Qwen3.8-27B @ goldenpotato self-hosted"
+     ],
+     "title": null,
+     "axis": {
+      "labelFontSize": 12,
+      "labelLimit": 0,
+      "domain": false,
+      "ticks": false
+     }
+    },
+    "text": {
+     "value": "⊘"
+    }
+   }
+  }
+ ]
+}

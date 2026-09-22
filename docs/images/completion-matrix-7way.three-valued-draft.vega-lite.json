@@ -1,0 +1,980 @@
+{
+ "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+ "width": 700,
+ "height": 372,
+ "title": {
+  "text": "五家 17/23 + doubao 16/23 + gp27b 14/23：十轴完成度矩阵（21 案子集）（三值化预览草稿：⊘=挂起格，未签发）",
+  "subtitle": "点越大 = 该面完成度越高；doubao 核验两轴为 3600s 补考真值（addendum 1）；gp27b = 社区自部署端点（effort 旋钮实证无效，按端点默认档记）；收敛轴空白 = 该道未考（不是零分）",
+  "fontSize": 15,
+  "subtitleFontSize": 11
+ },
+ "layer": [
+  {
+   "data": {
+    "values": [
+     {
+      "key": "视觉",
+      "lane": "k3 @ Kimi 官方 coding",
+      "value": 0.778
+     },
+     {
+      "key": "UI",
+      "lane": "k3 @ Kimi 官方 coding",
+      "value": 0.0
+     },
+     {
+      "key": "需求",
+      "lane": "k3 @ Kimi 官方 coding",
+      "value": 1.0
+     },
+     {
+      "key": "运维",
+      "lane": "k3 @ Kimi 官方 coding",
+      "value": 1.0
+     },
+     {
+      "key": "审查",
+      "lane": "k3 @ Kimi 官方 coding",
+      "value": 0.556
+     },
+     {
+      "key": "归因",
+      "lane": "k3 @ Kimi 官方 coding",
+      "value": 0.667
+     },
+     {
+      "key": "防御",
+      "lane": "k3 @ Kimi 官方 coding",
+      "value": 0.389
+     },
+     {
+      "key": "交付",
+      "lane": "k3 @ Kimi 官方 coding",
+      "value": 1.0
+     },
+     {
+      "key": "编码",
+      "lane": "k3 @ Kimi 官方 coding",
+      "value": 0.958
+     },
+     {
+      "key": "编码",
+      "lane": "v4.1-flash @ CommandCode",
+      "value": 0.958
+     },
+     {
+      "key": "交付",
+      "lane": "v4.1-flash @ CommandCode",
+      "value": 1.0
+     },
+     {
+      "key": "防御",
+      "lane": "v4.1-flash @ CommandCode",
+      "value": 0.611
+     },
+     {
+      "key": "归因",
+      "lane": "v4.1-flash @ CommandCode",
+      "value": 0.867
+     },
+     {
+      "key": "审查",
+      "lane": "v4.1-flash @ CommandCode",
+      "value": 0.556
+     },
+     {
+      "key": "运维",
+      "lane": "v4.1-flash @ CommandCode",
+      "value": 1.0
+     },
+     {
+      "key": "需求",
+      "lane": "v4.1-flash @ CommandCode",
+      "value": 1.0
+     },
+     {
+      "key": "UI",
+      "lane": "v4.1-flash @ CommandCode",
+      "value": 1.0
+     },
+     {
+      "key": "视觉",
+      "lane": "v4.1-flash @ CommandCode",
+      "value": 0.333
+     },
+     {
+      "key": "编码",
+      "lane": "glm-5.3-flash @ Ollama",
+      "value": 0.958
+     },
+     {
+      "key": "交付",
+      "lane": "glm-5.3-flash @ Ollama",
+      "value": 1.0
+     },
+     {
+      "key": "防御",
+      "lane": "glm-5.3-flash @ Ollama",
+      "value": 0.389
+     },
+     {
+      "key": "归因",
+      "lane": "glm-5.3-flash @ Ollama",
+      "value": 0.933
+     },
+     {
+      "key": "审查",
+      "lane": "glm-5.3-flash @ Ollama",
+      "value": 0.667
+     },
+     {
+      "key": "运维",
+      "lane": "glm-5.3-flash @ Ollama",
+      "value": 1.0
+     },
+     {
+      "key": "需求",
+      "lane": "glm-5.3-flash @ Ollama",
+      "value": 1.0
+     },
+     {
+      "key": "UI",
+      "lane": "glm-5.3-flash @ Ollama",
+      "value": 0.917
+     },
+     {
+      "key": "视觉",
+      "lane": "glm-5.3-flash @ Ollama",
+      "value": 0.778
+     },
+     {
+      "key": "编码",
+      "lane": "v4.1-flash @ Ollama",
+      "value": 0.958
+     },
+     {
+      "key": "交付",
+      "lane": "v4.1-flash @ Ollama",
+      "value": 1.0
+     },
+     {
+      "key": "防御",
+      "lane": "v4.1-flash @ Ollama",
+      "value": 0.389
+     },
+     {
+      "key": "归因",
+      "lane": "v4.1-flash @ Ollama",
+      "value": 0.467
+     },
+     {
+      "key": "审查",
+      "lane": "v4.1-flash @ Ollama",
+      "value": 0.667
+     },
+     {
+      "key": "运维",
+      "lane": "v4.1-flash @ Ollama",
+      "value": 1.0
+     },
+     {
+      "key": "需求",
+      "lane": "v4.1-flash @ Ollama",
+      "value": 1.0
+     },
+     {
+      "key": "UI",
+      "lane": "v4.1-flash @ Ollama",
+      "value": 1.0
+     },
+     {
+      "key": "视觉",
+      "lane": "v4.1-flash @ Ollama",
+      "value": 0.222
+     },
+     {
+      "key": "编码",
+      "lane": "hy4-preview-f @ WorkBuddy",
+      "value": 0.958
+     },
+     {
+      "key": "交付",
+      "lane": "hy4-preview-f @ WorkBuddy",
+      "value": 1.0
+     },
+     {
+      "key": "防御",
+      "lane": "hy4-preview-f @ WorkBuddy",
+      "value": 0.333
+     },
+     {
+      "key": "归因",
+      "lane": "hy4-preview-f @ WorkBuddy",
+      "value": 0.933
+     },
+     {
+      "key": "审查",
+      "lane": "hy4-preview-f @ WorkBuddy",
+      "value": 0.556
+     },
+     {
+      "key": "运维",
+      "lane": "hy4-preview-f @ WorkBuddy",
+      "value": 1.0
+     },
+     {
+      "key": "需求",
+      "lane": "hy4-preview-f @ WorkBuddy",
+      "value": 1.0
+     },
+     {
+      "key": "UI",
+      "lane": "hy4-preview-f @ WorkBuddy",
+      "value": 1.0
+     },
+     {
+      "key": "视觉",
+      "lane": "hy4-preview-f @ WorkBuddy",
+      "value": 0.333
+     },
+     {
+      "key": "编码",
+      "lane": "doubao-seed-evolving @ 火山方舟 Agent Plan",
+      "value": 0.958
+     },
+     {
+      "key": "交付",
+      "lane": "doubao-seed-evolving @ 火山方舟 Agent Plan",
+      "value": 1.0
+     },
+     {
+      "key": "防御",
+      "lane": "doubao-seed-evolving @ 火山方舟 Agent Plan",
+      "value": 0.5
+     },
+     {
+      "key": "归因",
+      "lane": "doubao-seed-evolving @ 火山方舟 Agent Plan",
+      "value": 0.467
+     },
+     {
+      "key": "审查",
+      "lane": "doubao-seed-evolving @ 火山方舟 Agent Plan",
+      "value": 0.333
+     },
+     {
+      "key": "运维",
+      "lane": "doubao-seed-evolving @ 火山方舟 Agent Plan",
+      "value": 1.0
+     },
+     {
+      "key": "需求",
+      "lane": "doubao-seed-evolving @ 火山方舟 Agent Plan",
+      "value": 1.0
+     },
+     {
+      "key": "UI",
+      "lane": "doubao-seed-evolving @ 火山方舟 Agent Plan",
+      "value": 0.0
+     },
+     {
+      "key": "视觉",
+      "lane": "doubao-seed-evolving @ 火山方舟 Agent Plan",
+      "value": 0.0
+     },
+     {
+      "key": "编码",
+      "lane": "Qwen3.8-27B @ goldenpotato 自部署",
+      "value": 0.833
+     },
+     {
+      "key": "交付",
+      "lane": "Qwen3.8-27B @ goldenpotato 自部署",
+      "value": 1.0
+     },
+     {
+      "key": "归因",
+      "lane": "Qwen3.8-27B @ goldenpotato 自部署",
+      "value": 0.4
+     },
+     {
+      "key": "运维",
+      "lane": "Qwen3.8-27B @ goldenpotato 自部署",
+      "value": 0.967
+     },
+     {
+      "key": "需求",
+      "lane": "Qwen3.8-27B @ goldenpotato 自部署",
+      "value": 1.0
+     },
+     {
+      "key": "UI",
+      "lane": "Qwen3.8-27B @ goldenpotato 自部署",
+      "value": 0.0
+     },
+     {
+      "key": "视觉",
+      "lane": "Qwen3.8-27B @ goldenpotato 自部署",
+      "value": 0.0
+     },
+     {
+      "key": "审查",
+      "lane": "Qwen3.8-27B @ goldenpotato 自部署",
+      "value": 0.0
+     },
+     {
+      "key": "防御",
+      "lane": "Qwen3.8-27B @ goldenpotato 自部署",
+      "value": 0.389
+     },
+     {
+      "key": "收敛",
+      "lane": "k3 @ Kimi 官方 coding",
+      "value": 1.0
+     },
+     {
+      "key": "收敛",
+      "lane": "glm-5.3-flash @ Ollama",
+      "value": 1.0
+     },
+     {
+      "key": "收敛",
+      "lane": "v4.1-flash @ Ollama",
+      "value": 1.0
+     },
+     {
+      "key": "收敛",
+      "lane": "doubao-seed-evolving @ 火山方舟 Agent Plan",
+      "value": 1.0
+     },
+     {
+      "key": "收敛",
+      "lane": "Qwen3.8-27B @ goldenpotato 自部署",
+      "value": 1.0
+     },
+     {
+      "key": "收敛",
+      "lane": "hy4-preview-f @ WorkBuddy",
+      "value": 1.0
+     }
+    ]
+   },
+   "encoding": {
+    "x": {
+     "field": "key",
+     "type": "nominal",
+     "sort": [
+      "编码",
+      "交付",
+      "归因",
+      "运维",
+      "需求",
+      "UI",
+      "视觉",
+      "审查",
+      "防御",
+      "收敛"
+     ],
+     "title": null,
+     "axis": {
+      "labelFontSize": 13,
+      "labelAngle": 0,
+      "domain": false,
+      "ticks": false
+     }
+    },
+    "y": {
+     "field": "lane",
+     "type": "nominal",
+     "sort": [
+      "k3 @ Kimi 官方 coding",
+      "hy4-preview-f @ WorkBuddy",
+      "v4.1-flash @ CommandCode",
+      "glm-5.3-flash @ Ollama",
+      "v4.1-flash @ Ollama",
+      "doubao-seed-evolving @ 火山方舟 Agent Plan",
+      "Qwen3.8-27B @ goldenpotato 自部署"
+     ],
+     "title": null,
+     "axis": {
+      "labelFontSize": 12,
+      "labelLimit": 0,
+      "domain": false,
+      "ticks": false
+     }
+    },
+    "color": {
+     "field": "lane",
+     "type": "nominal",
+     "scale": {
+      "domain": [
+       "k3 @ Kimi 官方 coding",
+       "hy4-preview-f @ WorkBuddy",
+       "v4.1-flash @ CommandCode",
+       "glm-5.3-flash @ Ollama",
+       "v4.1-flash @ Ollama",
+       "doubao-seed-evolving @ 火山方舟 Agent Plan",
+       "Qwen3.8-27B @ goldenpotato 自部署"
+      ],
+      "range": [
+       "#26C6DA",
+       "#2e8b57",
+       "#2a9d8f",
+       "#e76f51",
+       "#8d6fd1",
+       "#f4a261",
+       "#e9c46a"
+      ]
+     },
+     "legend": null
+    },
+    "size": {
+     "field": "value",
+     "type": "quantitative",
+     "scale": {
+      "domain": [
+       0,
+       1
+      ],
+      "range": [
+       90,
+       420
+      ]
+     },
+     "legend": null
+    }
+   },
+   "mark": {
+    "type": "point",
+    "filled": true,
+    "opacity": 0.95,
+    "stroke": "#bbb",
+    "strokeWidth": 1,
+    "tooltip": true
+   }
+  },
+  {
+   "data": {
+    "values": [
+     {
+      "key": "视觉",
+      "lane": "k3 @ Kimi 官方 coding",
+      "value": 0.778
+     },
+     {
+      "key": "UI",
+      "lane": "k3 @ Kimi 官方 coding",
+      "value": 0.0
+     },
+     {
+      "key": "需求",
+      "lane": "k3 @ Kimi 官方 coding",
+      "value": 1.0
+     },
+     {
+      "key": "运维",
+      "lane": "k3 @ Kimi 官方 coding",
+      "value": 1.0
+     },
+     {
+      "key": "审查",
+      "lane": "k3 @ Kimi 官方 coding",
+      "value": 0.556
+     },
+     {
+      "key": "归因",
+      "lane": "k3 @ Kimi 官方 coding",
+      "value": 0.667
+     },
+     {
+      "key": "防御",
+      "lane": "k3 @ Kimi 官方 coding",
+      "value": 0.389
+     },
+     {
+      "key": "交付",
+      "lane": "k3 @ Kimi 官方 coding",
+      "value": 1.0
+     },
+     {
+      "key": "编码",
+      "lane": "k3 @ Kimi 官方 coding",
+      "value": 0.958
+     },
+     {
+      "key": "编码",
+      "lane": "v4.1-flash @ CommandCode",
+      "value": 0.958
+     },
+     {
+      "key": "交付",
+      "lane": "v4.1-flash @ CommandCode",
+      "value": 1.0
+     },
+     {
+      "key": "防御",
+      "lane": "v4.1-flash @ CommandCode",
+      "value": 0.611
+     },
+     {
+      "key": "归因",
+      "lane": "v4.1-flash @ CommandCode",
+      "value": 0.867
+     },
+     {
+      "key": "审查",
+      "lane": "v4.1-flash @ CommandCode",
+      "value": 0.556
+     },
+     {
+      "key": "运维",
+      "lane": "v4.1-flash @ CommandCode",
+      "value": 1.0
+     },
+     {
+      "key": "需求",
+      "lane": "v4.1-flash @ CommandCode",
+      "value": 1.0
+     },
+     {
+      "key": "UI",
+      "lane": "v4.1-flash @ CommandCode",
+      "value": 1.0
+     },
+     {
+      "key": "视觉",
+      "lane": "v4.1-flash @ CommandCode",
+      "value": 0.333
+     },
+     {
+      "key": "编码",
+      "lane": "glm-5.3-flash @ Ollama",
+      "value": 0.958
+     },
+     {
+      "key": "交付",
+      "lane": "glm-5.3-flash @ Ollama",
+      "value": 1.0
+     },
+     {
+      "key": "防御",
+      "lane": "glm-5.3-flash @ Ollama",
+      "value": 0.389
+     },
+     {
+      "key": "归因",
+      "lane": "glm-5.3-flash @ Ollama",
+      "value": 0.933
+     },
+     {
+      "key": "审查",
+      "lane": "glm-5.3-flash @ Ollama",
+      "value": 0.667
+     },
+     {
+      "key": "运维",
+      "lane": "glm-5.3-flash @ Ollama",
+      "value": 1.0
+     },
+     {
+      "key": "需求",
+      "lane": "glm-5.3-flash @ Ollama",
+      "value": 1.0
+     },
+     {
+      "key": "UI",
+      "lane": "glm-5.3-flash @ Ollama",
+      "value": 0.917
+     },
+     {
+      "key": "视觉",
+      "lane": "glm-5.3-flash @ Ollama",
+      "value": 0.778
+     },
+     {
+      "key": "编码",
+      "lane": "v4.1-flash @ Ollama",
+      "value": 0.958
+     },
+     {
+      "key": "交付",
+      "lane": "v4.1-flash @ Ollama",
+      "value": 1.0
+     },
+     {
+      "key": "防御",
+      "lane": "v4.1-flash @ Ollama",
+      "value": 0.389
+     },
+     {
+      "key": "归因",
+      "lane": "v4.1-flash @ Ollama",
+      "value": 0.467
+     },
+     {
+      "key": "审查",
+      "lane": "v4.1-flash @ Ollama",
+      "value": 0.667
+     },
+     {
+      "key": "运维",
+      "lane": "v4.1-flash @ Ollama",
+      "value": 1.0
+     },
+     {
+      "key": "需求",
+      "lane": "v4.1-flash @ Ollama",
+      "value": 1.0
+     },
+     {
+      "key": "UI",
+      "lane": "v4.1-flash @ Ollama",
+      "value": 1.0
+     },
+     {
+      "key": "视觉",
+      "lane": "v4.1-flash @ Ollama",
+      "value": 0.222
+     },
+     {
+      "key": "编码",
+      "lane": "hy4-preview-f @ WorkBuddy",
+      "value": 0.958
+     },
+     {
+      "key": "交付",
+      "lane": "hy4-preview-f @ WorkBuddy",
+      "value": 1.0
+     },
+     {
+      "key": "防御",
+      "lane": "hy4-preview-f @ WorkBuddy",
+      "value": 0.333
+     },
+     {
+      "key": "归因",
+      "lane": "hy4-preview-f @ WorkBuddy",
+      "value": 0.933
+     },
+     {
+      "key": "审查",
+      "lane": "hy4-preview-f @ WorkBuddy",
+      "value": 0.556
+     },
+     {
+      "key": "运维",
+      "lane": "hy4-preview-f @ WorkBuddy",
+      "value": 1.0
+     },
+     {
+      "key": "需求",
+      "lane": "hy4-preview-f @ WorkBuddy",
+      "value": 1.0
+     },
+     {
+      "key": "UI",
+      "lane": "hy4-preview-f @ WorkBuddy",
+      "value": 1.0
+     },
+     {
+      "key": "视觉",
+      "lane": "hy4-preview-f @ WorkBuddy",
+      "value": 0.333
+     },
+     {
+      "key": "编码",
+      "lane": "doubao-seed-evolving @ 火山方舟 Agent Plan",
+      "value": 0.958
+     },
+     {
+      "key": "交付",
+      "lane": "doubao-seed-evolving @ 火山方舟 Agent Plan",
+      "value": 1.0
+     },
+     {
+      "key": "防御",
+      "lane": "doubao-seed-evolving @ 火山方舟 Agent Plan",
+      "value": 0.5
+     },
+     {
+      "key": "归因",
+      "lane": "doubao-seed-evolving @ 火山方舟 Agent Plan",
+      "value": 0.467
+     },
+     {
+      "key": "审查",
+      "lane": "doubao-seed-evolving @ 火山方舟 Agent Plan",
+      "value": 0.333
+     },
+     {
+      "key": "运维",
+      "lane": "doubao-seed-evolving @ 火山方舟 Agent Plan",
+      "value": 1.0
+     },
+     {
+      "key": "需求",
+      "lane": "doubao-seed-evolving @ 火山方舟 Agent Plan",
+      "value": 1.0
+     },
+     {
+      "key": "UI",
+      "lane": "doubao-seed-evolving @ 火山方舟 Agent Plan",
+      "value": 0.0
+     },
+     {
+      "key": "视觉",
+      "lane": "doubao-seed-evolving @ 火山方舟 Agent Plan",
+      "value": 0.0
+     },
+     {
+      "key": "编码",
+      "lane": "Qwen3.8-27B @ goldenpotato 自部署",
+      "value": 0.833
+     },
+     {
+      "key": "交付",
+      "lane": "Qwen3.8-27B @ goldenpotato 自部署",
+      "value": 1.0
+     },
+     {
+      "key": "归因",
+      "lane": "Qwen3.8-27B @ goldenpotato 自部署",
+      "value": 0.4
+     },
+     {
+      "key": "运维",
+      "lane": "Qwen3.8-27B @ goldenpotato 自部署",
+      "value": 0.967
+     },
+     {
+      "key": "需求",
+      "lane": "Qwen3.8-27B @ goldenpotato 自部署",
+      "value": 1.0
+     },
+     {
+      "key": "UI",
+      "lane": "Qwen3.8-27B @ goldenpotato 自部署",
+      "value": 0.0
+     },
+     {
+      "key": "视觉",
+      "lane": "Qwen3.8-27B @ goldenpotato 自部署",
+      "value": 0.0
+     },
+     {
+      "key": "审查",
+      "lane": "Qwen3.8-27B @ goldenpotato 自部署",
+      "value": 0.0
+     },
+     {
+      "key": "防御",
+      "lane": "Qwen3.8-27B @ goldenpotato 自部署",
+      "value": 0.389
+     },
+     {
+      "key": "收敛",
+      "lane": "k3 @ Kimi 官方 coding",
+      "value": 1.0
+     },
+     {
+      "key": "收敛",
+      "lane": "glm-5.3-flash @ Ollama",
+      "value": 1.0
+     },
+     {
+      "key": "收敛",
+      "lane": "v4.1-flash @ Ollama",
+      "value": 1.0
+     },
+     {
+      "key": "收敛",
+      "lane": "doubao-seed-evolving @ 火山方舟 Agent Plan",
+      "value": 1.0
+     },
+     {
+      "key": "收敛",
+      "lane": "Qwen3.8-27B @ goldenpotato 自部署",
+      "value": 1.0
+     },
+     {
+      "key": "收敛",
+      "lane": "hy4-preview-f @ WorkBuddy",
+      "value": 1.0
+     }
+    ]
+   },
+   "encoding": {
+    "x": {
+     "field": "key",
+     "type": "nominal",
+     "sort": [
+      "编码",
+      "交付",
+      "归因",
+      "运维",
+      "需求",
+      "UI",
+      "视觉",
+      "审查",
+      "防御",
+      "收敛"
+     ],
+     "title": null,
+     "axis": {
+      "labelFontSize": 13,
+      "labelAngle": 0,
+      "domain": false,
+      "ticks": false
+     }
+    },
+    "y": {
+     "field": "lane",
+     "type": "nominal",
+     "sort": [
+      "k3 @ Kimi 官方 coding",
+      "hy4-preview-f @ WorkBuddy",
+      "v4.1-flash @ CommandCode",
+      "glm-5.3-flash @ Ollama",
+      "v4.1-flash @ Ollama",
+      "doubao-seed-evolving @ 火山方舟 Agent Plan",
+      "Qwen3.8-27B @ goldenpotato 自部署"
+     ],
+     "title": null,
+     "axis": {
+      "labelFontSize": 12,
+      "labelLimit": 0,
+      "domain": false,
+      "ticks": false
+     }
+    },
+    "color": {
+     "field": "lane",
+     "type": "nominal",
+     "scale": {
+      "domain": [
+       "k3 @ Kimi 官方 coding",
+       "hy4-preview-f @ WorkBuddy",
+       "v4.1-flash @ CommandCode",
+       "glm-5.3-flash @ Ollama",
+       "v4.1-flash @ Ollama",
+       "doubao-seed-evolving @ 火山方舟 Agent Plan",
+       "Qwen3.8-27B @ goldenpotato 自部署"
+      ],
+      "range": [
+       "#26C6DA",
+       "#2e8b57",
+       "#2a9d8f",
+       "#e76f51",
+       "#8d6fd1",
+       "#f4a261",
+       "#e9c46a"
+      ]
+     },
+     "legend": null
+    },
+    "text": {
+     "field": "value",
+     "format": ".2f"
+    }
+   },
+   "mark": {
+    "type": "text",
+    "fontSize": 10,
+    "dy": 16,
+    "color": "#555"
+   }
+  },
+  {
+   "data": {
+    "values": [
+     {
+      "lane": "v4.1-flash @ Ollama",
+      "key": "审查"
+     },
+     {
+      "lane": "v4.1-flash @ Ollama",
+      "key": "视觉"
+     },
+     {
+      "lane": "v4.1-flash @ Ollama",
+      "key": "UI"
+     },
+     {
+      "lane": "glm-5.3-flash @ Ollama",
+      "key": "UI"
+     },
+     {
+      "lane": "doubao-seed-evolving @ 火山方舟 Agent Plan",
+      "key": "视觉"
+     },
+     {
+      "lane": "Qwen3.8-27B @ goldenpotato 自部署",
+      "key": "审查"
+     },
+     {
+      "lane": "Qwen3.8-27B @ goldenpotato 自部署",
+      "key": "UI"
+     },
+     {
+      "lane": "hy4-preview-f @ WorkBuddy",
+      "key": "视觉"
+     }
+    ]
+   },
+   "mark": {
+    "type": "text",
+    "fontSize": 16,
+    "fontWeight": "bold",
+    "color": "#D3722C"
+   },
+   "encoding": {
+    "x": {
+     "field": "key",
+     "type": "nominal",
+     "sort": [
+      "编码",
+      "交付",
+      "归因",
+      "运维",
+      "需求",
+      "UI",
+      "视觉",
+      "审查",
+      "防御",
+      "收敛"
+     ],
+     "title": null,
+     "axis": {
+      "labelFontSize": 13,
+      "labelAngle": 0,
+      "domain": false,
+      "ticks": false
+     }
+    },
+    "y": {
+     "field": "lane",
+     "type": "nominal",
+     "sort": [
+      "k3 @ Kimi 官方 coding",
+      "hy4-preview-f @ WorkBuddy",
+      "v4.1-flash @ CommandCode",
+      "glm-5.3-flash @ Ollama",
+      "v4.1-flash @ Ollama",
+      "doubao-seed-evolving @ 火山方舟 Agent Plan",
+      "Qwen3.8-27B @ goldenpotato 自部署"
+     ],
+     "title": null,
+     "axis": {
+      "labelFontSize": 12,
+      "labelLimit": 0,
+      "domain": false,
+      "ticks": false
+     }
+    },
+    "text": {
+     "value": "⊘"
+    }
+   }
+  }
+ ]
+}

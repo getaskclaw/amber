@@ -18,11 +18,13 @@
 
 **① 当前榜首** —— **swe-2-max @ Devin，19/24**（2026-09-21 起收敛轴首案 A-3f2a9cdd 并入记分：swe-2-max ✓ fast 37s；原 23 案口径 18/23，档线 medium 15 < high 16 < max 18）。同名模型换个端点，可能就是另一个脑：成绩一律按「端点 × 名字」记。
 
+> ⚠️ **三值化预览**（W38 更正特刊草稿 · 未签发 · 本草稿分支仅供审阅）：整数成绩将改写为「确认过 / 确认挂 / 挂起区间」。榜首 19/24 不受裁定影响（Devin 仓零改判零挂起）；18/24 并列带中 Ollama 两道共 5 格挂起（可能上移，补考前不计聚合、不给新名次）；下方完成度矩阵含 gp27b 3 格、doubao 1 格挂起。另：假绿双向审计（WO-BRAIN）未开庭，现有 ✓ 格含「假及格」风险。已签裁定全账见特刊（待签发）。
+
 ![当前前五 2026-W39](docs/images/top5-2026-w39.png?v=20260921)
 
 **② 完成度画像：同分 ≠ 同款** —— 十轴完成度矩阵（09-21 起九轴升十轴，新增**收敛**轴）七家同场；原 17/23 五家并列在收敛补测后分流：k3 / glm-5.3-flash / v4.1-flash @ Ollama / hy4 四家 18/24，CommandCode 道 owner 令冻结 ∅，同分五种形状（钉级完成度；找茬分拿了负分也照记）。新补的 k3 行一眼读：UI 是空点（交付缺文件那案）、归因低于头部两家、视觉与 glm-5.3-flash 并列最高。09-16 再补 doubao 16/23 行：施工四轴（编码/交付/运维/需求）满格与头部对齐，但 UI/视觉空点、审查仅三分之一——形状是同场最偏科的一条；核验两轴（归因/防御）初扫考墙 ∅，3600s 补考落到真值 0.47/0.50（低分但真实，见 [amber-doubao W38 addendum](https://github.com/getaskclaw/amber-doubao/blob/main/results/2026-W38.md)）；找茬分负分按 0 落点。09-17 再补 gp27b 14/23 行（Qwen3.8-27B @ goldenpotato 社区自部署）：偏科比 doubao 更极端——施工组四轴贴着头部（编码 0.83 / 交付满 / 运维 0.97 / 需求满），审查/视觉/UI 三轴全零，归因/防御落在全场最低档；NVFP4 激进量化在动手面无损，在判断面全灭（[amber-goldenpotato W38](https://github.com/getaskclaw/amber-goldenpotato/blob/main/results/2026-W38.md)）：
 
-![完成度矩阵 五家 17/23 + doubao 16/23 + gp27b 14/23](docs/images/completion-matrix-7way.png?v=20260921c)
+![完成度矩阵 五家 17/23 + doubao 16/23 + gp27b 14/23](docs/images/completion-matrix-7way.three-valued-draft.png)（三值化预览草稿）
 
 **十轴怎么读（白话版）** —— 每格 = 该轴全部案子的完成度（0–1），按钉数折算：
 
