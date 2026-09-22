@@ -46,7 +46,7 @@ dataset: 12 questions, sha256 96ed0440cda55e68..., tmp prefix dec001-49iq_g_5
   smoke-007: ok=False err=invalid_infrastructure lat=0.0s
 ...(截断)...
   smoke-012: ok=False err=invalid_infrastructure lat=0.0s
-done -> /home/computebox/2606/amber/decision-axis/runs/selftest-timeout-200111
+done -> /home/runner/2606/amber/decision-axis/runs/selftest-timeout-200111
 accuracy=None ece=0.0 n_scored=0/12
 verify with: python3 driver.py --verify-run selftest-timeout-200111 --dataset data/smoke-12.jsonl
 ```

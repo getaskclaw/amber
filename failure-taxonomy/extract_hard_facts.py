@@ -38,51 +38,30 @@ DEFAULT_OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "hard-fac
 # set (source: ~/2608/sandbox/amber-run/case-number-map.csv +
 # amber-crof-alias-map.json + INDEX.md). Longest match wins.
 # ---------------------------------------------------------------------------
-# (internal id, variant, public alias or None, face)
-CASES = [
-    ("REQ-001", "visible",     "A-0676097b", "req-drift"),
-    ("REQ-001", "drift",       "A-0676097b", "req-drift"),
-    ("REQ-001", "leaf-swap",   "A-0676097b", "req-drift"),
-    ("REQ-001", "signed-sync", "A-0676097b", "req-drift"),
-    ("BD-R001", "",            "A-cdc3d11a", "review"),
-    ("BD-R003", "",            "A-47eea242", "review"),
-    ("BD-V001", "",            "A-ea80d793", "vision"),
-    ("BD-001",  "",            "A-77d62143", "build"),
-    ("BD-002",  "",            "A-569dbe0d", "build"),
-    ("BD-003",  "",            "A-87c472cb", "build"),
-    ("BD-004",  "",            "A-641195e2", "build"),
-    ("BD-005",  "",            "A-442d4aab", "build"),
-    ("BD-006",  "",            "A-61f7ad01", "build"),
-    ("BE-001",  "",            "A-d511f9e8", "verify"),
-    ("BE-002",  "",            "A-a317e74b", "verify"),
-    ("BE-003",  "",            "A-be92627f", "verify"),
-    ("OPS-01",  "",            "A-a5608487", "ops"),
-    ("OPS-02",  "",            "A-984e80ee", "ops"),
-    ("OPS-03",  "",            "A-24bcf707", "ops"),
-    ("OPS-06",  "",            "A-8d4bc770", "ops"),
-    ("OPS-07",  "",            "A-6fbeb363", "ops"),
-    ("OPS-08",  "",            "A-8c909d0a", "ops"),
-    ("FTM-001", "",            "A-791e90ac", "text"),
-    ("FTM-002", "",            "A-1fd3683a", "text"),
-    ("FTM-004", "",            "A-13854d9d", "text"),
-    ("JJA-BRAND-01", "",       "A-d9b79b46", "ui-build"),
-    # in-progress / retired / non-scoring — no public alias, still case-shaped
-    ("CONV-001", "", None, "convergence"),
-    ("ORCH-AVAIL-001", "", None, "orchestration"),
-    ("META-001", "", None, "-"),
-    ("OPS-09", "", None, "ops"),
-    ("OPS-04", "", None, "ops"),
-    ("CE-001", "", None, "-"),
-    ("AUTH-FLOW-01", "", None, "-"),
-    ("DLV-001", "", None, "delivery"),
-    ("FTM-003", "", None, "text"),
-    ("FTM-005", "", None, "text"),
-    ("PA-001", "", None, "-"),
-    ("RB-001", "", None, "-"),
-    ("RB-002", "", None, "-"),
-    ("RB-003", "", None, "-"),
-]
-# longest internal id first so BD-R001 beats BD-001
+# Case registry lives OUTSIDE this public repo (09-22: internal case ids
+# must never be tracked in the public tree). The tool loads it from
+# $AMBER_CASE_REGISTRY or the canonical private path; see
+# case-registry.example.json for the schema.
+def _load_cases():
+    import json, os, sys
+    path = os.environ.get(
+        "AMBER_CASE_REGISTRY",
+        os.path.expanduser("~/2608/sandbox/amber-run/case-registry.json"),
+    )
+    try:
+        data = json.load(open(path))
+    except OSError:
+        sys.exit(
+            f"case registry not found: {path}\n"
+            "set AMBER_CASE_REGISTRY or place the private registry there "
+            "(schema: case-registry.example.json)"
+        )
+    if data.get("schema") != "amber-case-registry/v1":
+        sys.exit(f"case registry schema mismatch in {path}")
+    return [(c["internal"], c["variant"], c["alias"], c["face"]) for c in data["cases"]]
+
+CASES = _load_cases()
+# longest internal id first so a long id beats its own prefix
 CASES.sort(key=lambda c: -len(c[0]))
 
 BENCH_SOURCE_RE = re.compile(r"^amber-lib-(?P<rest>.+)$")
@@ -137,7 +116,7 @@ def pick_case(rest):
     """rest = session source minus 'amber-lib-'. Returns (case_key, variant, alias, face)."""
     for cid, var, alias, face in CASES:
         if rest.startswith(cid + "-") or rest == cid:
-            # REQ-001 variants are encoded as REQ-001-<variant>-<lane>-...
+            # multi-variant cases are encoded as <case>-<variant>-<lane>-...
             if var and not rest.startswith(cid + "-" + var):
                 continue
             return cid, var, alias, face
@@ -260,7 +239,7 @@ def extract_session(cur, sid, profile, source, sess_row):
                         {"ts": ts, "tool": tool_name,
                          "snippet": blob[max(0, bm.start() - 60):bm.end() + 100]})
         # ---- billing is deliberately NOT scanned from prose: bench cases exist
-        #      that discuss quota triage (OPS-08), so candidate text about
+        #      that discuss quota triage, so candidate text about
         #      "no_credits" is task content, not a billing wall. Only machine
         #      envelopes above count.
 

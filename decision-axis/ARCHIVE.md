@@ -3,20 +3,20 @@
 > ## ⚠️ 合规性判定（2026-09-19 owner 指出后自查）
 > **本目录下 300 题的成绩不是 AMBER 成绩**，只是方法前摸底。禁止混入 AMBER 成绩账。
 > 四条 Core 违规（对照 `~/2606/amber/AMBER-Core-Specification.md` §5 + 真案
-> `~/2608/sandbox/amber-run/case-AMBER-BE-001/`）：
+> （私有题仓该校验案目录））：
 > 1. **§5.1 Real history**：题是 Vesper 自编（`source: vesper-authored`），
 >    非真实可审计事件回放。自编题连 `synthetic_supplement` 都够不着（合成补充也得基于真实事件改），
 >    **永不计入 Core 成绩**。
 > 2. **§4.2 cutoff**：无 `cutoff_utc`、无 base_snapshot、无 candidate_visible/evaluator_only 双清单、
 >    无 fixture sha256。只有一个 state + 一个 gold = 没有封存。
 > 3. **§4.6 / oracle**：`gold` 是静态字符串 = **锚定式评分**，正是红道 r1 抓过的同款病。
->    真案 oracle 运行时自造篡改/扰动（BE-001 有 P0/B1/B2 三道「必须放行」闸 + H1/H2 隐藏变体），
+>    真案 oracle 运行时自造篡改/扰动（该校验案有 P0/B1/B2 三道「必须放行」闸 + H1/H2 隐藏变体），
 >    并配 base_control 3/11 / reference_control 11/11 双对照。
 > 4. **无隐藏变体与反蒙混良性对照**：只出题不设防 → 实测 253/300 两家模型同时答对。
 >    **「区分度不足」的真因不是题太简单，是卷子没设防。**
 >
 > **要造真合规案**，走制案流程（真实源事件 + cutoff + 双快照 + 自算 oracle + 隐藏变体），
-> 模板照 `case-AMBER-BE-001`。owner 09-19 已判：暂不做。
+> 模板照私有题仓该校验案。owner 09-19 已判：暂不做。
 
 > ## ⚠️ 红道裁决（2026-09-19 终局）
 > **双红 verdict 冲突**：Iris SHIP / Reviewer FIX。Vesper 裁决 = **FIX，未放行**。

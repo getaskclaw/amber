@@ -45,7 +45,7 @@ python3 build_attribution.py           # -> attribution-W38.md
 
 - **timeout**：工具结果 exit_code=124 且 output 命中**帽长文本**（1800/3600/7200s），
   或会话墙钟落在 1800/3600/7200s 帽 ±窗口内。**候选自己 command 超时（180s）不算帽墙**，归 `tool_failure`。
-- **billing_exhausted**：只扫工具结果的 `error` 机器信封；**不扫正文**——OPS-08 这类
+- **billing_exhausted**：只扫工具结果的 `error` 机器信封；**不扫正文**——配额分诊类案件这类
   「配额分诊」案正文天然含 `no_credits` 字样，扫正文会全线假阳性。
 - **tool_failure**：工具结果 exit_code≠0 或 status=error（端点/环境故障，非能力判定）。
 - **test_modified**：write_file/patch 的**入参路径**命中测试文件模式（`tests/`、`test_*.py`、`*.test.ts`…）。

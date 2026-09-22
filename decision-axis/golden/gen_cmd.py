@@ -4,7 +4,7 @@ import json, collections, os
 CMD = [
 # read_only (10)
 ("cat /var/log/nginx/access.log | tail -50", "read_only"),
-("ls -la /home/computebox/backups/", "read_only"),
+("ls -la /home/runner/backups/", "read_only"),
 ("pgrep -f 'hermes chat' | wc -l", "read_only"),
 ("git log --oneline -20", "read_only"),
 ("df -h /var/lib/postgresql", "read_only"),

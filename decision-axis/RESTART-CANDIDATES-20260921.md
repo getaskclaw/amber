@@ -2,7 +2,7 @@
 
 > 触发：owner 问「trace sqlite 过去 100 天，看哪些 AMBER 案例能加进决策轴，它的范围和定义是什么」。
 > 方法：子代理挖 Vesper state.db（只读，窗口 2026-06-13 → 2026-09-21，18.3 万条消息）+ Vesper 复核裁决。
-> 关联档：本目录 ARCHIVE.md（封存令+7 条诚信闸+四条 Core 违规）、~/2608/sandbox/amber-run/INDEX.md。
+> 关联档：本目录 ARCHIVE.md（封存令+7 条诚信闸+四条 Core 违规）、私有 amber-run 仓 INDEX.md。
 
 ## 决策轴定义与范围（封存档原文）
 
@@ -17,7 +17,7 @@ Choice（选项判断）/ Score（量表）/ Noul（0-1 概率），返回校准
 
 | 族 | 题型 | 具体事件（100 天内） | gold 来源 | 锻造难度 |
 |---|---|---|---|---|
-| 事故归因 | Choice（根因是哪层/哪端） | user@1000 cgroup blackout（09-18，根因=madp docker 容器每 5s 健康检查搬进程，已锻 BE-004=先例）；ID162/TDOA 丢包（09-19，设备端漏装 21%，gold=sqlite 无断号+logger fail-closed） | 修复 commit/日志/账本证据链 | 低-中 |
+| 事故归因 | Choice（根因是哪层/哪端） | user@1000 cgroup blackout（09-18，根因=madp docker 容器每 5s 健康检查搬进程，已锻校验案 MustPass 闸先例）；ID162/TDOA 丢包（09-19，设备端漏装 21%，gold=sqlite 无断号+logger fail-closed） | 修复 commit/日志/账本证据链 | 低-中 |
 | 红道裁决 | Choice（SHIP/FIX） | 13 份裁决档 ~/.hermes/red-lane/adjudications/（含 conv001-r1、pr175、dec001-r1 等） | 该 PR/案后续实际崩坏或存活 | 中 |
 | 部署 go/no-go | Choice/Noul | askclaw.dev 部署史、网关重启哨兵史 | 事后健康检查/日志 | 中 |
 
@@ -35,7 +35,7 @@ Choice（选项判断）/ Score（量表）/ Noul（0-1 概率），返回校准
 2. 修 B1-B7 诚信闸（r2）——否则任何分数不可对外
 3. Jev 新 key（旧 key 09-19 已过期 401）；候选平替=Kev（Cognition 开源，System One API 兼容，改 base_url 即可）
 4. 先解方法论矛盾：黑话题考黑话（Jev 必输无意义）、通用题无区分度（253/300 两家同对）——须从「模型实际答错什么」造题
-5. 窄族（归因+go/no-go）造 10-30 案 Core 合规 casebook，模板照 BE-001/BE-004
+5. 窄族（归因+go/no-go）造 10-30 案 Core 合规 casebook，模板照校验案系列
 6. 补 ECE/阈值扫描验证（Jev 独家卖点，封存前从未验过）
 
 ## 状态
