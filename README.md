@@ -7,6 +7,7 @@
 **题集** 24 案 / 27 卷（headline 记分已并入 /24，死道/停道标 ∅ 冻结） · **规范** v0.2.2（草案） · **哈希索引** [v2026-09](hash-index/v2026-09.md) · **成绩仓** × 12 · **纪律** 只发分数，不发题
 
 > ⚠️ **[更正 2026-09-18](docs/corrections-2026-09-18.md)**：已发布的「swe-2-low @ Devin」成绩实为 **swe-2-high**——该模型 id 不存在，服务端静默路由至默认档。榜单 medium 15 < high 16 < max 18 不受影响。
+> ⚠️ **[更正 2026-W38](docs/corrections-2026-W38.md)**：全库复核第一波改判与挂起，逐仓特刊见 12 个成绩仓；本仓 docs 筛查文档 4 个观察点只加注、非成绩格。
 
 *English readers: the normative documents are in English — start with [AMBER-Core-Specification.md](AMBER-Core-Specification.md); repo orientation in English: [README.en.md](README.en.md).*
 

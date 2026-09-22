@@ -5,6 +5,7 @@
 **Library** 24 cases / 27 papers (headline scoring now on the /24 basis; dead or paused lanes are frozen at ∅) · **Spec** v0.2.2 (draft) · **Hash index** [v2026-09](hash-index/v2026-09.md) · **Result repos** × 12 · **Rule** scores always public, cases never
 
 > ⚠️ **[Correction 2026-09-18](docs/corrections-2026-09-18.en.md)**: published "swe-2-low @ Devin" results were actually **swe-2-high** — that model id does not exist; the server silently routed to its default band. The medium 15 < high 16 < max 18 ladder is unaffected.
+> ⚠️ **[Correction 2026-W38](docs/corrections-2026-W38.en.md)**: first wave of reversals and holds from the full-library review; per-repo notices in the 12 result repos. The 4 observation points in this repo's docs screen are annotated only — not score cells.
 
 中文说明：[README.md](README.md). The normative document is [AMBER-Core-Specification.md](AMBER-Core-Specification.md).
 
