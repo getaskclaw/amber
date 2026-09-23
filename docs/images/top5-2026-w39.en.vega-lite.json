@@ -1,213 +1,231 @@
 {
-  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "background": "white",
-  "title": {
-    "text": "AMBER full board: five rank tiers (2026-W39, 24-case library)",
-    "fontSize": 16,
-    "anchor": "start",
-    "subtitle": [
-      "Frozen/retired lanes off the board (sealed /23 records): d41f@CommandCode 17 · qwen3.8-27b@CrofAI 16 · sol 15 · 0731@CrofAI 15 · glm@CrofAI 14 · ds-v4.1-exp 14 · swe-2-low (phantom id)",
-      "' = one contested case pending (NA — neither a win nor a loss)"
-    ],
-    "subtitleFontSize": 11,
-    "subtitleColor": "#555"
-  },
-  "data": {
-    "values": [
-      {
-        "lane": "swe-2-max @ Devin",
-        "pass": 19,
-        "rank": "#1",
-        "label": "19"
-      },
-      {
-        "lane": "glm-5.3-flash @ Ollama Cloud",
-        "pass": 18,
-        "rank": "#2 tie",
-        "label": "18"
-      },
-      {
-        "lane": "deepseek-v4.1-flash @ Ollama Cloud",
-        "pass": 18,
-        "rank": "#2 tie",
-        "label": "18"
-      },
-      {
-        "lane": "k3 @ Kimi official coding",
-        "pass": 18,
-        "rank": "#2 tie",
-        "label": "18"
-      },
-      {
-        "lane": "hy4-preview-f @ WorkBuddy",
-        "pass": 18,
-        "rank": "#2 tie",
-        "label": "18"
-      },
-      {
-        "lane": "deepseek-flash @ DeepSeek official",
-        "pass": 17,
-        "rank": "#3 tie",
-        "label": "17"
-      },
-      {
-        "lane": "deepseek-flash @ OpenCode Go",
-        "pass": 17,
-        "rank": "#3 tie",
-        "label": "17"
-      },
-      {
-        "lane": "swe-2-high @ Devin",
-        "pass": 17,
-        "rank": "#3 tie",
-        "label": "17"
-      },
-      {
-        "lane": "doubao-seed-evolving @ Volcengine Ark Agent Plan",
-        "pass": 17,
-        "rank": "#3 tie",
-        "label": "17"
-      },
-      {
-        "lane": "claude-opus-5-5 @ Anthropic",
-        "pass": 17,
-        "rank": "#3 tie",
-        "label": "17'"
-      },
-      {
-        "lane": "gpt-5.6-luna-900k @ OpenAI Codex",
-        "pass": 16,
-        "rank": "#4 tie",
-        "label": "16"
-      },
-      {
-        "lane": "gpt-6-astra-900k @ OpenAI Codex",
-        "pass": 16,
-        "rank": "#4 tie",
-        "label": "16"
-      },
-      {
-        "lane": "deepseek-v4-flash:0731 @ Ollama Cloud",
-        "pass": 16,
-        "rank": "#4 tie",
-        "label": "16"
-      },
-      {
-        "lane": "swe-2-medium @ Devin",
-        "pass": 16,
-        "rank": "#4 tie",
-        "label": "16"
-      },
-      {
-        "lane": "deepseek-v4.1-flash @ WorkBuddy",
-        "pass": 16,
-        "rank": "#4 tie",
-        "label": "16"
-      },
-      {
-        "lane": "step-5-preview @ stepfun plan",
-        "pass": 16,
-        "rank": "#4 tie",
-        "label": "16"
-      },
-      {
-        "lane": "kimi-for-coding @ Kimi official coding",
-        "pass": 15,
-        "rank": "#5 tie",
-        "label": "15"
-      },
-      {
-        "lane": "swe-1-7-medium @ Devin",
-        "pass": 15,
-        "rank": "#5 tie",
-        "label": "15"
-      },
-      {
-        "lane": "Qwen3.8-27B @ goldenpotato self-hosted",
-        "pass": 15,
-        "rank": "#5 tie",
-        "label": "15"
-      }
-    ]
-  },
-  "width": 620,
-  "height": 580,
-  "layer": [
-    {
-      "mark": {
-        "type": "bar",
-        "cornerRadiusEnd": 3,
-        "height": 20,
-        "stroke": "#00414A",
-        "strokeWidth": 0.75,
-        "tooltip": true
-      },
-      "encoding": {
-        "y": {
-          "field": "lane",
-          "type": "nominal",
-          "sort": null,
-          "axis": {
-            "labelFontSize": 12,
-            "labelLimit": 0,
-            "title": null
-          }
-        },
-        "x": {
-          "field": "pass",
-          "type": "quantitative",
-          "scale": {
-            "domain": [
-              0,
-              24
-            ]
-          },
-          "axis": {
-            "title": "cases passed (/ 24)",
-            "grid": true
-          }
-        },
-        "color": {
-          "field": "rank",
-          "type": "nominal",
-          "scale": {
-            "range": [
-              "#003A44",
-              "#00695F",
-              "#0097A7",
-              "#26C6DA",
-              "#80DEEA"
-            ]
-          },
-          "legend": {
-            "title": "rank"
-          }
-        }
-      }
-    },
-    {
-      "mark": {
-        "type": "text",
-        "align": "left",
-        "dx": 4,
-        "fontSize": 12,
-        "color": "#006064"
-      },
-      "encoding": {
-        "y": {
-          "field": "lane",
-          "type": "nominal",
-          "sort": null
-        },
-        "x": {
-          "field": "pass",
-          "type": "quantitative"
-        },
-        "text": {
-          "field": "label",
-          "type": "nominal"
-        }
-      }
-    }
+ "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+ "background": "white",
+ "title": {
+  "text": "AMBER full board: five rank tiers (2026-W39, 24-case library)",
+  "fontSize": 16,
+  "anchor": "start",
+  "subtitle": [
+   "Frozen/retired lanes off the board (sealed /23 records): d41f@CommandCode 17 · qwen3.8-27b@CrofAI 16 · 5.6-sol 15 · 0731@CrofAI 15 · glm@CrofAI 14 · ds-v4.1-exp 14 · swe-2-low (phantom id)",
+   "' = 1 case held (contested or invalid pending re-judge; NA, not counted)"
+  ],
+  "subtitleFontSize": 11,
+  "subtitleColor": "#555"
+ },
+ "data": {
+  "values": [
+   {
+    "lane": "swe-2-max @ Devin",
+    "pass": 19,
+    "rank": "#1",
+    "label": "19"
+   },
+   {
+    "lane": "glm-5.3-flash @ Ollama Cloud",
+    "pass": 18,
+    "rank": "#2 tie",
+    "label": "18"
+   },
+   {
+    "lane": "deepseek-v4.1-flash @ Ollama Cloud",
+    "pass": 18,
+    "rank": "#2 tie",
+    "label": "18"
+   },
+   {
+    "lane": "k3 @ Kimi official coding",
+    "pass": 18,
+    "rank": "#2 tie",
+    "label": "18"
+   },
+   {
+    "lane": "hy4-preview-f @ WorkBuddy",
+    "pass": 18,
+    "rank": "#2 tie",
+    "label": "18"
+   },
+   {
+    "lane": "deepseek-flash @ DeepSeek official",
+    "pass": 17,
+    "rank": "#3 tie",
+    "label": "17"
+   },
+   {
+    "lane": "deepseek-flash @ OpenCode Go",
+    "pass": 17,
+    "rank": "#3 tie",
+    "label": "17"
+   },
+   {
+    "lane": "swe-2-high @ Devin",
+    "pass": 17,
+    "rank": "#3 tie",
+    "label": "17"
+   },
+   {
+    "lane": "doubao-seed-evolving @ Volcengine Ark Agent Plan",
+    "pass": 17,
+    "rank": "#3 tie",
+    "label": "17"
+   },
+   {
+    "lane": "claude-opus-5-5 @ Anthropic",
+    "pass": 17,
+    "rank": "#3 tie",
+    "label": "17'"
+   },
+   {
+    "lane": "gpt-6-sol-900k @ OpenAI Codex",
+    "pass": 17,
+    "rank": "#3 tie",
+    "label": "17"
+   },
+   {
+    "lane": "mimo-v2.6-pro @ CommandCode",
+    "pass": 17,
+    "rank": "#3 tie",
+    "label": "17'"
+   },
+   {
+    "lane": "gpt-5.6-luna-900k @ OpenAI Codex",
+    "pass": 16,
+    "rank": "#4 tie",
+    "label": "16"
+   },
+   {
+    "lane": "gpt-6-astra-900k @ OpenAI Codex",
+    "pass": 16,
+    "rank": "#4 tie",
+    "label": "16"
+   },
+   {
+    "lane": "deepseek-v4-flash:0731 @ Ollama Cloud",
+    "pass": 16,
+    "rank": "#4 tie",
+    "label": "16"
+   },
+   {
+    "lane": "swe-2-medium @ Devin",
+    "pass": 16,
+    "rank": "#4 tie",
+    "label": "16"
+   },
+   {
+    "lane": "deepseek-v4.1-flash @ WorkBuddy",
+    "pass": 16,
+    "rank": "#4 tie",
+    "label": "16"
+   },
+   {
+    "lane": "step-5-preview @ stepfun plan",
+    "pass": 16,
+    "rank": "#4 tie",
+    "label": "16"
+   },
+   {
+    "lane": "kimi-for-coding @ Kimi official coding",
+    "pass": 15,
+    "rank": "#5 tie",
+    "label": "15"
+   },
+   {
+    "lane": "swe-1-7-medium @ Devin",
+    "pass": 15,
+    "rank": "#5 tie",
+    "label": "15"
+   },
+   {
+    "lane": "Qwen3.8-27B @ goldenpotato self-hosted",
+    "pass": 15,
+    "rank": "#5 tie",
+    "label": "15"
+   },
+   {
+    "lane": "gpt-6-luna-900k @ OpenAI Codex",
+    "pass": 15,
+    "rank": "#5 tie",
+    "label": "15"
+   }
   ]
+ },
+ "width": 620,
+ "height": 580,
+ "layer": [
+  {
+   "mark": {
+    "type": "bar",
+    "cornerRadiusEnd": 3,
+    "height": 20,
+    "stroke": "#00414A",
+    "strokeWidth": 0.75,
+    "tooltip": true
+   },
+   "encoding": {
+    "y": {
+     "field": "lane",
+     "type": "nominal",
+     "sort": null,
+     "axis": {
+      "labelFontSize": 12,
+      "labelLimit": 0,
+      "title": null
+     }
+    },
+    "x": {
+     "field": "pass",
+     "type": "quantitative",
+     "scale": {
+      "domain": [
+       0,
+       24
+      ]
+     },
+     "axis": {
+      "title": "cases passed (/ 24)",
+      "grid": true
+     }
+    },
+    "color": {
+     "field": "rank",
+     "type": "nominal",
+     "scale": {
+      "range": [
+       "#003A44",
+       "#00695F",
+       "#0097A7",
+       "#26C6DA",
+       "#80DEEA"
+      ]
+     },
+     "legend": {
+      "title": "rank"
+     }
+    }
+   }
+  },
+  {
+   "mark": {
+    "type": "text",
+    "align": "left",
+    "dx": 4,
+    "fontSize": 12,
+    "color": "#006064"
+   },
+   "encoding": {
+    "y": {
+     "field": "lane",
+     "type": "nominal",
+     "sort": null
+    },
+    "x": {
+     "field": "pass",
+     "type": "quantitative"
+    },
+    "text": {
+     "field": "label",
+     "type": "nominal"
+    }
+   }
+  }
+ ]
 }
