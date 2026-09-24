@@ -6,8 +6,8 @@
   "fontSize": 16,
   "anchor": "start",
   "subtitle": [
-   "∅ 冻结/停用车道不入榜（密封 /23 旧口径）：d41f@CommandCode 17 · qwen3.8-27b@CrofAI 16 · 5.6-sol 15 · 0731@CrofAI 15 · glm@CrofAI 14 · ds-v4.1-exp 14 · swe-2-low（假 id）",
-   "' = 有 1 案挂起（contested 或 invalid 待重评，NA 不计胜负）"
+   "∅ 冻结/停用车道不入榜（密封 /23 旧口径）：d41f@CommandCode 17 · qwen3.8-27b@CrofAI 16 · 5.6-sol 15' · 0731@CrofAI 15 · glm@CrofAI 14 · ds-v4.1-exp 14 · swe-2-low（假 id）",
+   "' = contested（安全拒答挂起）或 invalid（基建相关（考场 harness 或判分环境）的挂起、作废或待重评），均不计胜负；所有含 NA 的道都带撇号，包括冻结展示行；挂起不表示死因已定"
   ],
   "subtitleFontSize": 11,
   "subtitleColor": "#555"
@@ -18,7 +18,7 @@
     "lane": "swe-2-max @ Devin",
     "pass": 19,
     "rank": "#1",
-    "label": "19"
+    "label": "19'"
    },
    {
     "lane": "glm-5.3-flash @ Ollama Cloud",
@@ -66,7 +66,7 @@
     "lane": "doubao-seed-evolving @ 火山方舟 Agent Plan",
     "pass": 17,
     "rank": "#3 并列",
-    "label": "17"
+    "label": "17'"
    },
    {
     "lane": "claude-opus-5-5 @ Anthropic",
@@ -87,10 +87,10 @@
     "label": "17'"
    },
    {
-    "lane": "gpt-5.6-luna-900k @ OpenAI Codex",
+    "lane": "gpt-5.6-luna-900k high @ OpenAI Codex (W37)",
     "pass": 16,
     "rank": "#4 并列",
-    "label": "16"
+    "label": "16'"
    },
    {
     "lane": "gpt-6-astra-900k @ OpenAI Codex",
@@ -117,10 +117,10 @@
     "label": "16"
    },
    {
-    "lane": "step-5-preview @ stepfun plan",
+    "lane": "step-5-preview @ stepfun plan (W38)",
     "pass": 16,
     "rank": "#4 并列",
-    "label": "16"
+    "label": "16'"
    },
    {
     "lane": "kimi-for-coding @ Kimi 官方 coding",

@@ -6,8 +6,8 @@
   "fontSize": 16,
   "anchor": "start",
   "subtitle": [
-   "Frozen/retired lanes off the board (sealed /23 records): d41f@CommandCode 17 · qwen3.8-27b@CrofAI 16 · 5.6-sol 15 · 0731@CrofAI 15 · glm@CrofAI 14 · ds-v4.1-exp 14 · swe-2-low (phantom id)",
-   "' = 1 case held (contested or invalid pending re-judge; NA, not counted)"
+   "Frozen/retired lanes off the board (sealed /23 records): d41f@CommandCode 17 · qwen3.8-27b@CrofAI 16 · 5.6-sol 15' · 0731@CrofAI 15 · glm@CrofAI 14 · ds-v4.1-exp 14 · swe-2-low (phantom id)",
+   "' = contested (held for safety refusal) or invalid (infrastructure-related (test harness or scoring environment) cases: held, void or awaiting re-scoring); neither counts as a win or a loss. Every lane with NA carries an apostrophe, including frozen display rows; a hold does not settle the cause"
   ],
   "subtitleFontSize": 11,
   "subtitleColor": "#555"
@@ -18,7 +18,7 @@
     "lane": "swe-2-max @ Devin",
     "pass": 19,
     "rank": "#1",
-    "label": "19"
+    "label": "19'"
    },
    {
     "lane": "glm-5.3-flash @ Ollama Cloud",
@@ -66,7 +66,7 @@
     "lane": "doubao-seed-evolving @ Volcengine Ark Agent Plan",
     "pass": 17,
     "rank": "#3 tie",
-    "label": "17"
+    "label": "17'"
    },
    {
     "lane": "claude-opus-5-5 @ Anthropic",
@@ -87,10 +87,10 @@
     "label": "17'"
    },
    {
-    "lane": "gpt-5.6-luna-900k @ OpenAI Codex",
+    "lane": "gpt-5.6-luna-900k high @ OpenAI Codex (W37)",
     "pass": 16,
     "rank": "#4 tie",
-    "label": "16"
+    "label": "16'"
    },
    {
     "lane": "gpt-6-astra-900k @ OpenAI Codex",
@@ -117,10 +117,10 @@
     "label": "16"
    },
    {
-    "lane": "step-5-preview @ stepfun plan",
+    "lane": "step-5-preview @ stepfun plan (W38)",
     "pass": 16,
     "rank": "#4 tie",
-    "label": "16"
+    "label": "16'"
    },
    {
     "lane": "kimi-for-coding @ Kimi official coding",
