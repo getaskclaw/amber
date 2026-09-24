@@ -1,231 +1,237 @@
 {
- "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
- "background": "white",
- "title": {
-  "text": "AMBER 当前总榜：五个名次档（2026-W39，全库 24 案）",
-  "fontSize": 16,
-  "anchor": "start",
-  "subtitle": [
-   "∅ 冻结/停用车道不入榜（密封 /23 旧口径）：d41f@CommandCode 17 · qwen3.8-27b@CrofAI 16 · 5.6-sol 15' · 0731@CrofAI 15 · glm@CrofAI 14 · ds-v4.1-exp 14 · swe-2-low（假 id）",
-   "' = contested（安全拒答挂起）或 invalid（基建相关（考场 harness 或判分环境）的挂起、作废或待重评），均不计胜负；所有含 NA 的道都带撇号，包括冻结展示行；挂起不表示死因已定"
-  ],
-  "subtitleFontSize": 11,
-  "subtitleColor": "#555"
- },
- "data": {
-  "values": [
-   {
-    "lane": "swe-2-max @ Devin",
-    "pass": 19,
-    "rank": "#1",
-    "label": "19'"
-   },
-   {
-    "lane": "glm-5.3-flash @ Ollama Cloud",
-    "pass": 18,
-    "rank": "#2 并列",
-    "label": "18"
-   },
-   {
-    "lane": "deepseek-v4.1-flash @ Ollama Cloud",
-    "pass": 18,
-    "rank": "#2 并列",
-    "label": "18"
-   },
-   {
-    "lane": "k3 @ Kimi 官方 coding",
-    "pass": 18,
-    "rank": "#2 并列",
-    "label": "18"
-   },
-   {
-    "lane": "hy4-preview-f @ WorkBuddy",
-    "pass": 18,
-    "rank": "#2 并列",
-    "label": "18"
-   },
-   {
-    "lane": "deepseek-flash @ DeepSeek 官方",
-    "pass": 17,
-    "rank": "#3 并列",
-    "label": "17"
-   },
-   {
-    "lane": "deepseek-flash @ OpenCode Go",
-    "pass": 17,
-    "rank": "#3 并列",
-    "label": "17"
-   },
-   {
-    "lane": "swe-2-high @ Devin",
-    "pass": 17,
-    "rank": "#3 并列",
-    "label": "17"
-   },
-   {
-    "lane": "doubao-seed-evolving @ 火山方舟 Agent Plan",
-    "pass": 17,
-    "rank": "#3 并列",
-    "label": "17'"
-   },
-   {
-    "lane": "claude-opus-5-5 @ Anthropic",
-    "pass": 17,
-    "rank": "#3 并列",
-    "label": "17'"
-   },
-   {
-    "lane": "gpt-6-sol-900k @ OpenAI Codex",
-    "pass": 17,
-    "rank": "#3 并列",
-    "label": "17"
-   },
-   {
-    "lane": "mimo-v2.6-pro @ CommandCode",
-    "pass": 17,
-    "rank": "#3 并列",
-    "label": "17'"
-   },
-   {
-    "lane": "gpt-5.6-luna-900k high @ OpenAI Codex (W37)",
-    "pass": 16,
-    "rank": "#4 并列",
-    "label": "16'"
-   },
-   {
-    "lane": "gpt-6-astra-900k @ OpenAI Codex",
-    "pass": 16,
-    "rank": "#4 并列",
-    "label": "16"
-   },
-   {
-    "lane": "deepseek-v4-flash:0731 @ Ollama Cloud",
-    "pass": 16,
-    "rank": "#4 并列",
-    "label": "16"
-   },
-   {
-    "lane": "swe-2-medium @ Devin",
-    "pass": 16,
-    "rank": "#4 并列",
-    "label": "16"
-   },
-   {
-    "lane": "deepseek-v4.1-flash @ WorkBuddy",
-    "pass": 16,
-    "rank": "#4 并列",
-    "label": "16"
-   },
-   {
-    "lane": "step-5-preview @ stepfun plan (W38)",
-    "pass": 16,
-    "rank": "#4 并列",
-    "label": "16'"
-   },
-   {
-    "lane": "kimi-for-coding @ Kimi 官方 coding",
-    "pass": 15,
-    "rank": "#5 并列",
-    "label": "15"
-   },
-   {
-    "lane": "swe-1-7-medium @ Devin",
-    "pass": 15,
-    "rank": "#5 并列",
-    "label": "15"
-   },
-   {
-    "lane": "Qwen3.8-27B @ goldenpotato 自部署",
-    "pass": 15,
-    "rank": "#5 并列",
-    "label": "15"
-   },
-   {
-    "lane": "gpt-6-luna-900k @ OpenAI Codex",
-    "pass": 15,
-    "rank": "#5 并列",
-    "label": "15"
-   }
-  ]
- },
- "width": 620,
- "height": 580,
- "layer": [
-  {
-   "mark": {
-    "type": "bar",
-    "cornerRadiusEnd": 3,
-    "height": 20,
-    "stroke": "#00414A",
-    "strokeWidth": 0.75,
-    "tooltip": true
-   },
-   "encoding": {
-    "y": {
-     "field": "lane",
-     "type": "nominal",
-     "sort": null,
-     "axis": {
-      "labelFontSize": 12,
-      "labelLimit": 0,
-      "title": null
-     }
-    },
-    "x": {
-     "field": "pass",
-     "type": "quantitative",
-     "scale": {
-      "domain": [
-       0,
-       24
-      ]
-     },
-     "axis": {
-      "title": "通过案数（/ 24）",
-      "grid": true
-     }
-    },
-    "color": {
-     "field": "rank",
-     "type": "nominal",
-     "scale": {
-      "range": [
-       "#003A44",
-       "#00695F",
-       "#0097A7",
-       "#26C6DA",
-       "#80DEEA"
-      ]
-     },
-     "legend": {
-      "title": "名次"
-     }
-    }
-   }
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": "white",
+  "title": {
+    "text": "AMBER 当前总榜：五个名次档（2026-W39，全库 24 案）",
+    "fontSize": 16,
+    "anchor": "start",
+    "subtitle": [
+      "∅ 冻结/停用车道不入榜（密封 /23 旧口径）：d41f@CommandCode 17 · qwen3.8-27b@CrofAI 16 · 5.6-sol 15' · 0731@CrofAI 15 · glm@CrofAI 14 · ds-v4.1-exp 14 · swe-2-low（假 id）",
+      "' = contested（安全拒答挂起）或 invalid（基建相关（考场 harness 或判分环境）的挂起、作废或待重评），均不计胜负；所有含 NA 的道都带撇号，包括冻结展示行；挂起不表示死因已定"
+    ],
+    "subtitleFontSize": 11,
+    "subtitleColor": "#555"
   },
-  {
-   "mark": {
-    "type": "text",
-    "align": "left",
-    "dx": 4,
-    "fontSize": 12,
-    "color": "#006064"
-   },
-   "encoding": {
-    "y": {
-     "field": "lane",
-     "type": "nominal",
-     "sort": null
+  "data": {
+    "values": [
+      {
+        "lane": "swe-2-max @ Devin",
+        "pass": 19,
+        "rank": "#1",
+        "label": "19'"
+      },
+      {
+        "lane": "glm-5.3-flash @ Ollama Cloud",
+        "pass": 18,
+        "rank": "#2 并列",
+        "label": "18"
+      },
+      {
+        "lane": "deepseek-v4.1-flash @ Ollama Cloud",
+        "pass": 18,
+        "rank": "#2 并列",
+        "label": "18"
+      },
+      {
+        "lane": "k3 @ Kimi 官方 coding",
+        "pass": 18,
+        "rank": "#2 并列",
+        "label": "18"
+      },
+      {
+        "lane": "hy4-preview-f @ WorkBuddy",
+        "pass": 18,
+        "rank": "#2 并列",
+        "label": "18"
+      },
+      {
+        "lane": "deepseek-flash @ DeepSeek 官方",
+        "pass": 17,
+        "rank": "#3 并列",
+        "label": "17"
+      },
+      {
+        "lane": "deepseek-flash @ OpenCode Go",
+        "pass": 17,
+        "rank": "#3 并列",
+        "label": "17"
+      },
+      {
+        "lane": "swe-2-high @ Devin",
+        "pass": 17,
+        "rank": "#3 并列",
+        "label": "17"
+      },
+      {
+        "lane": "doubao-seed-evolving @ 火山方舟 Agent Plan",
+        "pass": 17,
+        "rank": "#3 并列",
+        "label": "17'"
+      },
+      {
+        "lane": "claude-opus-5-5 @ Anthropic",
+        "pass": 17,
+        "rank": "#3 并列",
+        "label": "17'"
+      },
+      {
+        "lane": "gpt-6-sol-900k @ OpenAI Codex",
+        "pass": 17,
+        "rank": "#3 并列",
+        "label": "17"
+      },
+      {
+        "lane": "mimo-v2.6-pro @ CommandCode",
+        "pass": 17,
+        "rank": "#3 并列",
+        "label": "17'"
+      },
+      {
+        "lane": "gpt-5.6-luna-900k high @ OpenAI Codex (W37)",
+        "pass": 16,
+        "rank": "#4 并列",
+        "label": "16'"
+      },
+      {
+        "lane": "gpt-6-astra-900k @ OpenAI Codex",
+        "pass": 16,
+        "rank": "#4 并列",
+        "label": "16"
+      },
+      {
+        "lane": "deepseek-v4-flash:0731 @ Ollama Cloud",
+        "pass": 16,
+        "rank": "#4 并列",
+        "label": "16"
+      },
+      {
+        "lane": "swe-2-medium @ Devin",
+        "pass": 16,
+        "rank": "#4 并列",
+        "label": "16"
+      },
+      {
+        "lane": "deepseek-v4.1-flash @ WorkBuddy",
+        "pass": 16,
+        "rank": "#4 并列",
+        "label": "16"
+      },
+      {
+        "lane": "step-5-preview @ stepfun plan (W38)",
+        "pass": 16,
+        "rank": "#4 并列",
+        "label": "16'"
+      },
+      {
+        "lane": "kimi-for-coding @ Kimi 官方 coding",
+        "pass": 15,
+        "rank": "#5 并列",
+        "label": "15"
+      },
+      {
+        "lane": "swe-1-7-medium @ Devin",
+        "pass": 15,
+        "rank": "#5 并列",
+        "label": "15"
+      },
+      {
+        "lane": "Qwen3.8-27B @ goldenpotato 自部署",
+        "pass": 15,
+        "rank": "#5 并列",
+        "label": "15"
+      },
+      {
+        "lane": "gpt-6-luna-900k @ OpenAI Codex",
+        "pass": 15,
+        "rank": "#5 并列",
+        "label": "15"
+      },
+      {
+        "lane": "space-bunny-alpha @ CommandCode (W39 加餐)",
+        "pass": 15,
+        "rank": "#5 并列",
+        "label": "15"
+      }
+    ]
+  },
+  "width": 620,
+  "height": 600,
+  "layer": [
+    {
+      "mark": {
+        "type": "bar",
+        "cornerRadiusEnd": 3,
+        "height": 20,
+        "stroke": "#00414A",
+        "strokeWidth": 0.75,
+        "tooltip": true
+      },
+      "encoding": {
+        "y": {
+          "field": "lane",
+          "type": "nominal",
+          "sort": null,
+          "axis": {
+            "labelFontSize": 12,
+            "labelLimit": 0,
+            "title": null
+          }
+        },
+        "x": {
+          "field": "pass",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              24
+            ]
+          },
+          "axis": {
+            "title": "通过案数（/ 24）",
+            "grid": true
+          }
+        },
+        "color": {
+          "field": "rank",
+          "type": "nominal",
+          "scale": {
+            "range": [
+              "#003A44",
+              "#00695F",
+              "#0097A7",
+              "#26C6DA",
+              "#80DEEA"
+            ]
+          },
+          "legend": {
+            "title": "名次"
+          }
+        }
+      }
     },
-    "x": {
-     "field": "pass",
-     "type": "quantitative"
-    },
-    "text": {
-     "field": "label",
-     "type": "nominal"
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 4,
+        "fontSize": 12,
+        "color": "#006064"
+      },
+      "encoding": {
+        "y": {
+          "field": "lane",
+          "type": "nominal",
+          "sort": null
+        },
+        "x": {
+          "field": "pass",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "label",
+          "type": "nominal"
+        }
+      }
     }
-   }
-  }
- ]
+  ]
 }
