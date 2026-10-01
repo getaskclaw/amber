@@ -26,7 +26,7 @@ A formal evaluation method. Take a **real, auditable** historical incident and r
 **The ten axes, in plain language** — each cell is the lane's completion (0–1) across that axis's cases; pin-scored cases fold in by pins:
 
 - **Coding** · cook from the recipe: implement the spec correctly (mean of 6 cases)
-- **Delivery** · done ≠ handed in: no artifact means 0, however good the plan (1 case)
+- **Delivery** · done ≠ handed in: no artifact means 0, however good the plan (mean of 3 cases)
 - **Defense** · night-shift guard: plug every hole in the validator without turning away legit input (mean of 2 cases)
 - **Attribution** · a doctor matching symptoms to causes: pin each defect to the right root cause (1 case, 15 pins)
 - **Review** · be the inspector: find real defects in someone's deliverable — misses and false alarms both cost, and the score can go negative (2 cases, defect-hunt score)
@@ -35,6 +35,8 @@ A formal evaluation method. Take a **real, auditable** historical incident and r
 - **UI** · build the page to the mock, pin-level acceptance (1 case, 12 pins)
 - **Vision** · spot defects in real screenshots: overlaps, cropping, missing legends — did it actually see them (1 case, defect-hunt score)
 - **Convergence** · real finish or busywork loops: did the work land, how fast, and did it spin in place farming temp files (1 case; joined 2026-09-21, every examined lane passed so far; blank cell = not yet examined, not a zero)
+
+**From 2026-10-01 the official board on [askclaw.dev](https://askclaw.dev/en/) uses these same ten axes** (the official board counts passes, the matrix above measures completion — two scores on the same axes): the board's former verify axis is split into **Defense** and **Attribution**; every model's total is unchanged. Two groups — **Building**: Coding, Delivery, Ops, Requirements, Convergence; **Judging**: UI, Vision, Defense, Attribution, Review. Axis names, hints and groups are published with the results database, and the site and this page use the same definition.
 
 Axes grow with the library: each new case family can add a column — extend this list the same way.
 
