@@ -4,7 +4,7 @@
 
 > **30 秒版**：我们把历史上真实发生过的事故/任务封进「琥珀」——现场精确还原到答案揭晓之前，让 AI 模型只用当时人们手里的信息重做一遍。比如：一次真实的运维故障，模型只能拿当时的监控和日志找根因，事后才揭晓得证据一律封存不给看。题目永不公开（防止背题），但每题有哈希指纹，分数和指纹全部公开——谁都能核对题没被换、分不是编的。这个仓放方法规范和公开哈希索引；各家的成绩单在 12 个成绩仓（见下）。English: [README.en.md](README.en.md)
 
-**案集** 24 案 / 27 卷（headline 记分已并入 /24，死道/停道标 ∅ 冻结） · **规范** v0.2.2（草案） · **哈希索引** [v2026-09](hash-index/v2026-09.md) · **成绩仓** × 12 · **纪律** 只发分数，不发题
+**案集** 24 案 / 27 卷（headline 记分已并入 /24，死道/停道标 ∅ 冻结） · **规范** v0.2.2（草案） · **哈希索引** [v2026-09](hash-index/v2026-09.md) · **成绩仓** × 14 · **纪律** 只发分数，不发题
 
 > ⚠️ **[更正 2026-09-18](docs/corrections-2026-09-18.md)**：已发布的「swe-2-low @ Devin」成绩实为 **swe-2-high**——该模型 id 不存在，服务端静默路由至默认档。榜单 medium 15 < high 16 < max 18 不受影响。
 > ⚠️ **[更正 2026-W38](docs/corrections-2026-W38.md)**：全库复核第一波改判与挂起，逐仓特刊见 12 个成绩仓；本仓 docs 筛查文档 4 个观察点只加注、非成绩格。
@@ -138,6 +138,8 @@ python3 tools/validate_manifest.py schemas/examples/summary.invalid-fieldset.yam
 - [amber-workbuddy](https://github.com/getaskclaw/amber-workbuddy) — WorkBuddy（CodeBuddy）ACP 通道模型周测
 - [amber-stepfun](https://github.com/getaskclaw/amber-stepfun) — StepFun 阶跃星辰 stepfun plan 端点模型实测
 - [amber-claude](https://github.com/getaskclaw/amber-claude) — Anthropic Claude 订阅道模型实测
+- [amber-goldenpotato](https://github.com/getaskclaw/amber-goldenpotato) — 社区玩家 goldenpotato 自部署的 Qwen3.8-27B 推理端点实测
+- [amber-nous](https://github.com/getaskclaw/amber-nous) — Nous Portal 在售模型实测
 
 
 **当前前五**（源榜截至 2026-10-02，含 [2026-10-02 更正](docs/corrections-2026-10-02.md)，本期 24 案¹；收敛轴首案 A-3f2a9cdd 并入 headline；案 = 一道独立计分任务；∅ = 收敛未考／冻结道；' = contested（安全拒答挂起）或 invalid（基建相关（考场 harness 或判分环境）的挂起、作废或待重评），均不计胜负；2026-10-02 起撇号也包括 integrity 作废（作答时越出考卷、接触判分材料）；2026-10-02 考试起撇号还包括撞考场时间上限而记 NA 的案，以及题面与考场不一致而挂起的案；所有含 NA 的道都带撇号，包括冻结展示行；挂起不表示死因已定）。**2026-10-02 起 A-d511f9e8 在所有车道上记 NA**（[更正声明](docs/corrections-2026-10-02-a-d511f9e8.md)）：下表每条道的总分都带 `'`，过案数不变；表里「零 NA」「无挂起」等旧说法均指这一案以外：

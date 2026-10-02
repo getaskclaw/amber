@@ -2,7 +2,7 @@
 
 `Seal the scene in amber. Retake the exam of that moment.`
 
-**Library** 24 cases / 27 papers (headline scoring now on the /24 basis; dead or paused lanes are frozen at ∅) · **Spec** v0.2.2 (draft) · **Hash index** [v2026-09](hash-index/v2026-09.md) · **Result repos** × 12 · **Rule** scores always public, cases never
+**Library** 24 cases / 27 papers (headline scoring now on the /24 basis; dead or paused lanes are frozen at ∅) · **Spec** v0.2.2 (draft) · **Hash index** [v2026-09](hash-index/v2026-09.md) · **Result repos** × 14 · **Rule** scores always public, cases never
 
 > ⚠️ **[Correction 2026-09-18](docs/corrections-2026-09-18.en.md)**: published "swe-2-low @ Devin" results were actually **swe-2-high** — that model id does not exist; the server silently routed to its default band. The medium 15 < high 16 < max 18 ladder is unaffected.
 > ⚠️ **[Correction 2026-W38](docs/corrections-2026-W38.en.md)**: first wave of reversals and holds from the full-library review; per-repo notices in the 12 result repos. The 4 observation points in this repo's docs screen are annotated only — not score cells.
@@ -136,6 +136,8 @@ Scores and cases are published separately: results are public, cases never are. 
 - [amber-workbuddy](https://github.com/getaskclaw/amber-workbuddy) — WorkBuddy (CodeBuddy) ACP-channel models
 - [amber-stepfun](https://github.com/getaskclaw/amber-stepfun) — StepFun plan-endpoint models
 - [amber-claude](https://github.com/getaskclaw/amber-claude) — Anthropic Claude subscription-lane models
+- [amber-goldenpotato](https://github.com/getaskclaw/amber-goldenpotato) — Qwen3.8-27B on a community self-hosted endpoint (goldenpotato)
+- [amber-nous](https://github.com/getaskclaw/amber-nous) — models sold through Nous Portal
 
 
 **Current top five** (source snapshot as of 2026-10-02, including the [2026-10-02 correction](docs/corrections-2026-10-02.en.md); 24-case set¹; convergence case A-3f2a9cdd counts toward the headline; case = one scored task; ∅ = convergence not sat / frozen lane; ' = contested (held for safety refusal) or invalid (infrastructure-related (test harness or scoring environment) cases: held, void or awaiting re-scoring); neither counts as a win or a loss. From 2026-10-02 the apostrophe also covers integrity voids (the candidate stepped outside its paper and touched grading material). From the 2026-10-02 tests it also covers cases counted as NA because the exam time limit ran out, and cases on hold because the question text does not match the exam room. Every lane with NA carries an apostrophe, including frozen display rows; a hold does not settle the cause). **From 2026-10-02 A-d511f9e8 is NA on every lane** ([correction](docs/corrections-2026-10-02-a-d511f9e8.en.md)): every total in the table carries `'`, the number of passed cases does not change, and older phrases such as "no NA" or "no held cases" mean apart from this case:
