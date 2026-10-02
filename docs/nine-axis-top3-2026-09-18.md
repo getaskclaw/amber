@@ -48,7 +48,7 @@
 
 - **编码**：24 条车道同分 0.958——A-87c472cb 的 2 颗钉全场合伙丢，无人 6/6。这轴当前不区分头部
 - **交付**：满分 1.000 并列 29 条车道（反向信息才有价值：零交付的当场出局）
-- **运维**：满分并列 14 条车道（swe-2-max、k3、doubao-seed-evolving、gpt-5.6-luna、hy4-preview-f、DeepSeek 各道等）
+- **运维**：满分并列 ~~14~~ **9** 条车道（swe-2-max、k3、doubao-seed-evolving、gpt-5.6-luna、hy4-preview-f、deepseek-v4.1-flash @ CommandCode 等）。[2026-10-02 更正](corrections-2026-10-02.md)：原 14 条里有 5 条各有运维卷因作答时接触判分材料而作废，不再满分——deepseek-flash @ OpenCode Go、deepseek-flash @ DeepSeek 官方、deepseek-v4.1-flash @ Ollama Cloud、deepseek-v4.1-flash-exp @ DeepSeek 官方、deepseek-v4-flash-0731 @ CrofAI。有区分度的四轴名次不受这次更正影响
 - **需求**：满分并列约 26 条车道
 - **UI**：满分并列 12 条车道（swe-2 全系、~~gpt-6-astra~~（[2026-09-21 更正](corrections-2026-09-21.md)：该格系 fallback 替身交付，剔除）、gpt-5.6-sol/luna-max、glm-5.3-flash @ CrofAI ⚠、deepseek-v4.1-flash 两道、hy4-preview-f、glm-5-2 @ Devin）
 

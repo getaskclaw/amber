@@ -48,7 +48,7 @@ Worth stating plainly: swe-2-high is not at the top of the overall ladder yet po
 
 - **Coding**: 24 lanes tied at 0.958 — everyone loses the same 2 pins on A-87c472cb; nobody sweeps 6/6. The axis does not currently separate the leaders
 - **Delivery**: 1.000 tied across 29 lanes (the signal is negative: no-deliverable lanes are simply out)
-- **Ops**: full marks tied across 14 lanes (swe-2-max, k3, doubao-seed-evolving, gpt-5.6-luna, hy4-preview-f, the DeepSeek lanes, etc.)
+- **Ops**: full marks tied across ~~14~~ **9** lanes (swe-2-max, k3, doubao-seed-evolving, gpt-5.6-luna, hy4-preview-f, deepseek-v4.1-flash @ CommandCode, etc.). [Correction 2026-10-02](corrections-2026-10-02.en.md): five of the original 14 each had an ops paper voided because the candidate touched grading material, so they no longer hold full marks: deepseek-flash @ OpenCode Go, deepseek-flash @ DeepSeek official, deepseek-v4.1-flash @ Ollama Cloud, deepseek-v4.1-flash-exp @ DeepSeek official, deepseek-v4-flash-0731 @ CrofAI. Rankings on the four discriminating axes are not affected by this correction
 - **Requirements**: full marks tied across ~26 lanes
 - **UI**: full marks tied across 12 lanes (all swe-2 bands, ~~gpt-6-astra~~ ([correction 2026-09-21](corrections-2026-09-21.en.md): the cell was fallback-delivered, removed), gpt-5.6-sol/luna-max, glm-5.3-flash @ CrofAI ⚠, two deepseek-v4.1-flash lanes, hy4-preview-f, glm-5-2 @ Devin)
 
