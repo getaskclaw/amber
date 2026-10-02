@@ -1,5 +1,7 @@
 # AMBER 决策轴 · 封存档（2026-09-19 owner 令「封存收工」）
 
+> **2026-10-02 去标识化**：`golden/golden-300-20260919.jsonl`、`golden/command-risk-balanced.jsonl` 和 `golden/gen_hard.py` 里有两条示例命令写了真实环境的名字（一个机器编号、一个用户目录），已换成中性写法（`tailscale ping node-b`、`/home/user/backups/`），题的分类标签不变。两个数据文件的 sha256 因此变化：`golden-300-20260919.jsonl` 267ae44f0fda → 5e05f2532279，`command-risk-balanced.jsonl` a21abb581220 → aaf377a7b578；已记录的运行（`runs/manifest.jsonl`）没有引用这两个文件的哈希。旧名字仍在这个仓的 git 历史里。
+
 > ## ⚠️ 合规性判定（2026-09-19 owner 指出后自查）
 > **本目录下 300 题的成绩不是 AMBER 成绩**，只是方法前摸底。禁止混入 AMBER 成绩账。
 > 四条 Core 违规（对照 `~/2606/amber/AMBER-Core-Specification.md` §5 + 真案

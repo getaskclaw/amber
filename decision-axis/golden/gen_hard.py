@@ -8,7 +8,7 @@ CMD_NEW = [
 ("du -sh /var/lib/postgresql/*", "read_only"),
 ("sqlite3 data.db 'SELECT count(*) FROM reports;'", "read_only"),
 ("journalctl -u hermes-gateway --since '1 hour ago'", "read_only"),
-("tailscale ping 26430", "read_only"),
+("tailscale ping node-b", "read_only"),
 ("curl -sI https://example.com", "read_only"),
 ("stat -c '%s %n' /var/backups/*", "read_only"),
 ("aws s3 ls s3://my-bucket/", "read_only"),
