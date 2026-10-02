@@ -25,6 +25,6 @@ From then on the system prompt is the clean-room SOUL plus Hermes's built-in too
 
 ## Effect on published scores
 
-- **Hermes-lane scores up to and including 2026-W40** were all sat with these two blocks present, so they share the same conditions. They stand as published; no score changes. The behavior predates AMBER's first issue, but we have not checked the exact Hermes version of every past sitting on the 2651 bench, so this statement holds for the versions we did check.
+- **Hermes-lane scores up to and including 2026-W40** were all sat with these two blocks present, so they share the same conditions. They stand as published; no score changes. The behavior predates AMBER's first issue, but we have not checked the exact Hermes version of every past sitting, so this statement holds for the versions we did check.
 - **Lanes that do not answer through Hermes** (Devin, WorkBuddy ACP direct) are not affected.
 - **Comparing across this date**: when you compare hermes-lane scores from before and after it, treat this as a change in exam conditions.

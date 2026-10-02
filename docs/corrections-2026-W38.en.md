@@ -25,7 +25,7 @@ This repo has no `results/`; the affected surface is a published **methodologica
 - **Two layers kept strictly apart**: "reversal" = adjudicated, and only this layer rewrites published conclusions; "held — may move up" = undecided, named only, excluded from all aggregates and rankings pending re-exam.
 - **No balanced books, no board**: papers with incomplete evidence are always named, never reported as a bare count.
 - **This wave does not touch amber-devin**: none of its published issues contains an affected cell.
-- Handles: every affected cell = stable alias `A-xxxxxxxx` + `bundle_sha` (12 chars), matching the [public hash index v2026-09](hash-index/v2026-09.md) case by case, zero mismatches.
+- Handles: every affected cell = stable alias `A-xxxxxxxx` + `bundle_sha` (12 chars), matching the [public hash index v2026-09](../hash-index/v2026-09.md) case by case, zero mismatches.
 - Past issues stay as published; reversals appear as an appendix. Publication order: this hub declaration first, the per-repo notices after.
 
 ## Method

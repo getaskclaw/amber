@@ -26,8 +26,8 @@ python3 build_attribution.py           # -> attribution-W38.md
 ## hard-facts.jsonl 记录格式
 
 ```json
-{"profile": "amber-ollama-g53f", "session_id": "2026...", "source": "amber-lib-BD-001-ollama-g53f-high",
- "case_hint": "BD-001", "case_alias": "A-77d62143", "face": "build",
+{"profile": "amber-ollama-g53f", "session_id": "2026...", "source": "<internal source tag>",
+ "case_hint": null, "case_alias": "A-77d62143", "face": "build",
  "lane_token": "ollama", "band_token": "high", "model": "glm-5.3-flash",
  "started_at": 1788..., "ended_at": 1788..., "wall_s": 165.4, "end_reason": "cli_close",
  "message_count": 30, "tool_call_count": 16, "cwd": null,
