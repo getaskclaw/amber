@@ -6,6 +6,7 @@
 
 > ⚠️ **[Correction 2026-09-18](docs/corrections-2026-09-18.en.md)**: published "swe-2-low @ Devin" results were actually **swe-2-high** — that model id does not exist; the server silently routed to its default band. The medium 15 < high 16 < max 18 ladder is unaffected.
 > ⚠️ **[Correction 2026-W38](docs/corrections-2026-W38.en.md)**: first wave of reversals and holds from the full-library review; per-repo notices in the 12 result repos. The 4 observation points in this repo's docs screen are annotated only — not score cells.
+> ⚠️ **[Correction 2026-10-02](docs/corrections-2026-10-02.en.md)**: 9 papers whose candidate stepped outside the paper and touched grading material are now NA (neither a pass nor a fail). Six lanes move down: deepseek-v4.1-flash @ CommandCode 17/23∅→15'/23∅, deepseek-flash @ OpenCode Go 17→15', space-bunny-alpha @ CommandCode 15→13', deepseek-flash @ DeepSeek official 17→16', mimo-v2.6-pro @ CommandCode 17'→16', step-5-preview 16'→15' (all /24). The cause was an isolation defect in our exam setup; the fault is ours. Since 2026-10-01 papers are answered in isolated containers.
 
 中文说明：[README.md](README.md). The normative document is [AMBER-Core-Specification.md](AMBER-Core-Specification.md).
 
@@ -130,6 +131,8 @@ Scores and cases are published separately: results are public, cases never are. 
 - [amber-workbuddy](https://github.com/getaskclaw/amber-workbuddy) — WorkBuddy (CodeBuddy) ACP-channel models
 - [amber-stepfun](https://github.com/getaskclaw/amber-stepfun) — StepFun plan-endpoint models
 - [amber-claude](https://github.com/getaskclaw/amber-claude) — Anthropic Claude subscription-lane models
+
+> Note: the table below is the 2026-09-24 snapshot and predates the [2026-10-02 correction](docs/corrections-2026-10-02.en.md); for the six lanes above, the correction governs. The live board is at [askclaw.dev](https://askclaw.dev/en/).
 
 **Current top five** (source snapshot as of 2026-09-24; 24-case set¹; convergence case A-3f2a9cdd counts toward the headline; case = one scored task; ∅ = convergence not sat / frozen lane; ' = contested (held for safety refusal) or invalid (infrastructure-related (test harness or scoring environment) cases: held, void or awaiting re-scoring); neither counts as a win or a loss. Every lane with NA carries an apostrophe, including frozen display rows; a hold does not settle the cause):
 

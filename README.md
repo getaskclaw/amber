@@ -8,6 +8,7 @@
 
 > ⚠️ **[更正 2026-09-18](docs/corrections-2026-09-18.md)**：已发布的「swe-2-low @ Devin」成绩实为 **swe-2-high**——该模型 id 不存在，服务端静默路由至默认档。榜单 medium 15 < high 16 < max 18 不受影响。
 > ⚠️ **[更正 2026-W38](docs/corrections-2026-W38.md)**：全库复核第一波改判与挂起，逐仓特刊见 12 个成绩仓；本仓 docs 筛查文档 4 个观察点只加注、非成绩格。
+> ⚠️ **[更正 2026-10-02](docs/corrections-2026-10-02.md)**：9 张考卷作答时越出考卷、接触了判分材料，改记 NA（不计胜负）。6 道下调：deepseek-v4.1-flash @ CommandCode 17/23∅→15'/23∅、deepseek-flash @ OpenCode Go 17→15'、space-bunny-alpha @ CommandCode 15→13'、deepseek-flash @ DeepSeek 官方 17→16'、mimo-v2.6-pro @ CommandCode 17'→16'、step-5-preview 16'→15'（均 /24）。原因是考场隔离缺陷，责任在我们；2026-10-01 起已改为隔离容器作答。
 
 *English readers: the normative documents are in English — start with [AMBER-Core-Specification.md](AMBER-Core-Specification.md); repo orientation in English: [README.en.md](README.en.md).*
 
@@ -132,6 +133,8 @@ python3 tools/validate_manifest.py schemas/examples/summary.invalid-fieldset.yam
 - [amber-workbuddy](https://github.com/getaskclaw/amber-workbuddy) — WorkBuddy（CodeBuddy）ACP 通道模型周测
 - [amber-stepfun](https://github.com/getaskclaw/amber-stepfun) — StepFun 阶跃星辰 stepfun plan 端点模型实测
 - [amber-claude](https://github.com/getaskclaw/amber-claude) — Anthropic Claude 订阅道模型实测
+
+> 注：下表是 2026-09-24 的快照，未计入 [2026-10-02 更正](docs/corrections-2026-10-02.md)（上述 6 道分数以更正声明为准）。现行榜单见 [askclaw.dev](https://askclaw.dev/)。
 
 **当前前五**（源榜截至 2026-09-24，本期 24 案¹；收敛轴首案 A-3f2a9cdd 并入 headline；案 = 一道独立计分任务；∅ = 收敛未考／冻结道；' = contested（安全拒答挂起）或 invalid（基建相关（考场 harness 或判分环境）的挂起、作废或待重评），均不计胜负；所有含 NA 的道都带撇号，包括冻结展示行；挂起不表示死因已定）：
 
