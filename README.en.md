@@ -33,14 +33,14 @@ A formal evaluation method. Take a **real, auditable** historical incident and r
 
 - **Coding** · cook from the recipe: implement the spec correctly (mean of 6 cases)
 - **Delivery** · done ≠ handed in: no artifact means 0, however good the plan (mean of 3 cases)
-- **Defense** · night-shift guard: plug every hole in the validator without turning away legit input (mean of 2 cases)
-- **Attribution** · a doctor matching symptoms to causes: pin each defect to the right root cause (1 case, 15 pins)
-- **Review** · be the inspector: find real defects in someone's deliverable — misses and false alarms both cost, and the score can go negative (2 cases, defect-hunt score)
 - **Ops** · follow the runbook: backups, cutovers, reconciliation — no skipped steps (mean of 6 cases)
 - **Requirements** · the client asked for A, not B — ship A (1 case)
+- **Convergence** · real finish or busywork loops: did the work land, how fast, and did it spin in place farming temp files (1 case; joined 2026-09-21; as of 2026-10-02, 18 of the 19 examined lanes on the askclaw.dev board passed and one (space-bunny-alpha) did not; blank cell = not yet examined, not a zero)
 - **UI** · build the page to the mock, pin-level acceptance (1 case, 12 pins)
 - **Vision** · spot defects in real screenshots: overlaps, cropping, missing legends — did it actually see them (1 case, defect-hunt score)
-- **Convergence** · real finish or busywork loops: did the work land, how fast, and did it spin in place farming temp files (1 case; joined 2026-09-21, every examined lane passed so far; blank cell = not yet examined, not a zero)
+- **Defense** · night-shift guard: plug every hole in the validator without turning away legit input (mean of 2 cases; A-d511f9e8 has been on hold on every lane since 2026-10-02, see the [correction](docs/corrections-2026-10-02-a-d511f9e8.en.md))
+- **Attribution** · a doctor matching symptoms to causes: pin each defect to the right root cause (1 case, 15 pins)
+- **Review** · be the inspector: find real defects in someone's deliverable — misses and false alarms both cost, and the score can go negative (2 cases, defect-hunt score)
 
 **From 2026-10-01 the official board on [askclaw.dev](https://askclaw.dev/en/) uses these same ten axes** (the official board counts passes, the matrix above measures completion — two scores on the same axes): the board's former verify axis is split into **Defense** and **Attribution**; every model's total is unchanged. Two groups — **Building**: Coding, Delivery, Ops, Requirements, Convergence; **Judging**: UI, Vision, Defense, Attribution, Review. Axis names, hints and groups are published with the results database, and the site and this page use the same definition.
 
