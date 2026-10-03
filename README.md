@@ -13,14 +13,14 @@
 
 ## 现在谁领先
 
-![当前前五 2026-W40（含 2026-10-02 更正、2026-10-02 考试与 A-d511f9e8 全车道挂起）](docs/images/top5-2026-w40d.png?v=20261003)
+![当前前五 2026-W40（含 2026-10-02 更正、2026-10-02 考试与 A-d511f9e8 全车道挂起）](docs/images/top5-2026-w40e.png?v=20261003)
 
 | # | 总分 | 模型 @ 端点 |
 |---|---|---|
 | 1 | 19'/24 | swe-2-max @ Devin<br>claude-sonnet-5-5 @ Anthropic 订阅道<br>claude-opus-5-5 @ Anthropic 订阅道 |
 | 2 | 18'/24 | glm-5.3-flash @ Ollama Cloud<br>k3 @ Kimi<br>hy4-preview-f @ WorkBuddy |
 | 3 | 17'/24 | gpt-6-sol-900k @ OpenAI Codex<br>swe-2-high @ Devin<br>doubao-seed-evolving @ 火山方舟 |
-| 4 | 16'/24 | gpt-6.1-sol @ OpenAI Codex、claude-fable-5-1 @ Anthropic 订阅道 等 10 条 |
+| 4 | 16'/24 | gpt-6.1-sol @ OpenAI Codex、claude-fable-5-1 @ Anthropic 订阅道 等 9 条 |
 | 5 | 15'/24 | kimi-for-coding（K2.8）@ Kimi、gpt-6-luna-900k @ OpenAI Codex 等 6 条 |
 
 `'` = 其中有案暂不计分（NA），不算输；现在每条道都带，因为 A-d511f9e8 在所有车道上暂不计分。同名模型换个端点可能是另一个脑，所以成绩一律按「端点 × 名字」记。claude-opus-5-5 取 W40 重考一场（W39 首考 17'/24）：两场各考一次、考场不同，**不据此判断强弱**，见 [amber-claude W40](https://github.com/getaskclaw/amber-claude/blob/main/results/2026-W40.md)。完整名单、脚注、冻结道：[榜单全文](docs/leaderboard-notes.md)。

@@ -13,14 +13,14 @@
 
 ## Who leads now
 
-![Current top five 2026-W40, including the 2026-10-02 correction, the 2026-10-02 tests and A-d511f9e8 on hold for every lane](docs/images/top5-2026-w40d.en.png?v=20261003)
+![Current top five 2026-W40, including the 2026-10-02 correction, the 2026-10-02 tests and A-d511f9e8 on hold for every lane](docs/images/top5-2026-w40e.en.png?v=20261003)
 
 | # | Total | Model @ endpoint |
 |---|---|---|
 | 1 | 19'/24 | swe-2-max @ Devin<br>claude-sonnet-5-5 @ Anthropic subscription lane<br>claude-opus-5-5 @ Anthropic subscription lane |
 | 2 | 18'/24 | glm-5.3-flash @ Ollama Cloud<br>k3 @ Kimi<br>hy4-preview-f @ WorkBuddy |
 | 3 | 17'/24 | gpt-6-sol-900k @ OpenAI Codex<br>swe-2-high @ Devin<br>doubao-seed-evolving @ Volcengine Ark |
-| 4 | 16'/24 | gpt-6.1-sol @ OpenAI Codex, claude-fable-5-1 @ Anthropic subscription lane and 8 more |
+| 4 | 16'/24 | gpt-6.1-sol @ OpenAI Codex, claude-fable-5-1 @ Anthropic subscription lane and 7 more |
 | 5 | 15'/24 | kimi-for-coding (K2.8) @ Kimi, gpt-6-luna-900k @ OpenAI Codex and 4 more |
 
 `'` = at least one case is NA (not scored; it does not count as a loss). Every total carries it now, because A-d511f9e8 is NA on every lane. The same model name on a different endpoint can be a different brain, so scores are always recorded per endpoint × name. claude-opus-5-5 is shown with its W40 re-test (its W39 first test was 17'/24): each test was taken once, in a different exam room, so this does **not** show that it got stronger or weaker; see [amber-claude W40](https://github.com/getaskclaw/amber-claude/blob/main/results/2026-W40.en.md). Complete lists, footnotes and frozen lanes: [leaderboard in full](docs/leaderboard-notes.en.md).
