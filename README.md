@@ -4,7 +4,7 @@
 
 **一句话**：拿真实发生过的事故和任务，让 AI 模型只用当时手里的信息重做一遍。比如一次真实的运维故障：模型只能拿当时的监控和日志找根因，事后才揭晓的证据一律封存不给看。题目永不公开，但每题有哈希指纹，分数和指纹全部公开，谁都能核对题没被换、分不是编的。
 
-**案集** 24 案 · **规范** v0.2.2（草案） · **哈希索引** [v2026-09](hash-index/v2026-09.md) · **成绩仓** × 14 · **纪律** 只发分数，不发题 · English: [README.en.md](README.en.md)
+**案集** 24 案 · **规范** v0.2.2（草案） · **哈希索引** [v2026-09](hash-index/v2026-09.md) · **成绩仓** × 13 · **纪律** 只发分数，不发题 · English: [README.en.md](README.en.md)
 
 > ⚠️ **更正**（原文与受影响车道清单见[榜单全文](docs/leaderboard-notes.md)）
 > - **[2026-10-02](docs/corrections-2026-10-02.md)**：22 张已发布的考卷在作答时越出考卷、接触了判分材料，改记 NA（不计胜负）。责任在我们；2026-10-01 起已改为隔离容器作答。
@@ -60,23 +60,11 @@
 
 另有三个发现（思考档位、token 账单、耗时与分数的关系）：[docs/findings-effort-and-speed.md](docs/findings-effort-and-speed.md)。
 
-## 怎么读一期成绩
-
-![一份 AMBER 成绩单怎么读：24 案各自过、没过或 NA，总分 = 过的案数 / 24，有 NA 加撇号](docs/images/how-to-read-a-score.png?v=20261003)
-
-每个成绩仓每期一篇 `results/YYYY-Www.md`，核心是一张矩阵：
-
-- **别名（A-xxxxxxxx）** — 案件的公开称呼，不暴露题面。
-- **bundle_sha** — 题面的内容哈希。对照[公开哈希索引](hash-index/v2026-09.md)：一致 = 题集没换。
-- **✓ / ✗** — 通过线是「必检项全绿」：8/9 也是挂。
-- **找茬分（审查/视觉案）** — 命中 − 误报 − 恭维 − 判错罚分，可为负。（成绩仓里写作 `d2`。）
-- **口径** — 只在同档、同题集版本、尽量同日对比。单日数字是快照，不是定律。
-
 ## 成绩仓
 
 成绩与题目分开发布：结果公开，题目永不公开。别名 + bundle 哈希逐案对照本仓的公开哈希索引。
 
-[amber-claude](https://github.com/getaskclaw/amber-claude)（Claude）· [amber-gpt](https://github.com/getaskclaw/amber-gpt)（GPT）· [amber-devin](https://github.com/getaskclaw/amber-devin)（Devin）· [amber-kimi](https://github.com/getaskclaw/amber-kimi)（Kimi）· [amber-deepseek](https://github.com/getaskclaw/amber-deepseek)（DeepSeek）· [amber-ollama](https://github.com/getaskclaw/amber-ollama)（Ollama Cloud）· [amber-opencode](https://github.com/getaskclaw/amber-opencode)（OpenCode Go）· [amber-commandcode](https://github.com/getaskclaw/amber-commandcode)（CommandCode）· [amber-workbuddy](https://github.com/getaskclaw/amber-workbuddy)（WorkBuddy）· [amber-doubao](https://github.com/getaskclaw/amber-doubao)（豆包）· [amber-stepfun](https://github.com/getaskclaw/amber-stepfun)（阶跃星辰）· [amber-nous](https://github.com/getaskclaw/amber-nous)（Nous Portal）· [amber-crof](https://github.com/getaskclaw/amber-crof)（CrofAI）· [amber-goldenpotato](https://github.com/getaskclaw/amber-goldenpotato)（社区自部署 Qwen3.8-27B）
+[amber-claude](https://github.com/getaskclaw/amber-claude)（Claude）· [amber-gpt](https://github.com/getaskclaw/amber-gpt)（GPT）· [amber-devin](https://github.com/getaskclaw/amber-devin)（Devin）· [amber-kimi](https://github.com/getaskclaw/amber-kimi)（Kimi）· [amber-deepseek](https://github.com/getaskclaw/amber-deepseek)（DeepSeek）· [amber-ollama](https://github.com/getaskclaw/amber-ollama)（Ollama Cloud）· [amber-opencode](https://github.com/getaskclaw/amber-opencode)（OpenCode Go）· [amber-commandcode](https://github.com/getaskclaw/amber-commandcode)（CommandCode）· [amber-workbuddy](https://github.com/getaskclaw/amber-workbuddy)（WorkBuddy）· [amber-doubao](https://github.com/getaskclaw/amber-doubao)（豆包）· [amber-stepfun](https://github.com/getaskclaw/amber-stepfun)（阶跃星辰）· [amber-nous](https://github.com/getaskclaw/amber-nous)（Nous Portal）· [amber-goldenpotato](https://github.com/getaskclaw/amber-goldenpotato)（社区自部署 Qwen3.8-27B）
 
 ## 常见问题
 

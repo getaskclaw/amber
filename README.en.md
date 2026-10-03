@@ -4,7 +4,7 @@
 
 **In one line**: we take real past incidents and tasks and have AI models redo them using only what people had in hand at the time. For example, a real operations outage: the model gets only the monitoring and logs of the time, and the evidence revealed afterwards stays sealed. The questions are never published, but every question has a hash fingerprint, and scores and fingerprints are all public, so anyone can check that the questions were not swapped and the scores were not made up.
 
-**Library** 24 cases · **Spec** v0.2.2 (draft) · **Hash index** [v2026-09](hash-index/v2026-09.md) · **Result repos** × 14 · **Rule** scores always public, cases never · 中文: [README.md](README.md)
+**Library** 24 cases · **Spec** v0.2.2 (draft) · **Hash index** [v2026-09](hash-index/v2026-09.md) · **Result repos** × 13 · **Rule** scores always public, cases never · 中文: [README.md](README.md)
 
 > ⚠️ **Corrections** (original text and the list of affected lanes: [leaderboard in full](docs/leaderboard-notes.en.md))
 > - **[2026-10-02](docs/corrections-2026-10-02.en.md)**: 22 published papers whose candidate stepped outside the paper and touched grading material are now NA (neither a pass nor a fail). The fault is ours; since 2026-10-01 papers are answered in isolated containers.
@@ -60,23 +60,11 @@ A result is produced like an exam: papers sealed at authoring, sat in a clean ro
 
 Three more findings (effort bands, token bills, wall time vs. score): [docs/findings-effort-and-speed.en.md](docs/findings-effort-and-speed.en.md).
 
-## How to read a results matrix
-
-![How to read an AMBER score: each of 24 cases is a pass, a fail or NA; the total is cases passed / 24, with a prime when any case is NA](docs/images/how-to-read-a-score.en.png?v=20261003)
-
-Every issue in a result repo is a `results/YYYY-Www.md` built around a matrix:
-
-- **Alias (A-xxxxxxxx)** — the case's public handle; it does not reveal the task.
-- **bundle_sha** — the content hash of the case bundle. Match it against the [hash index](hash-index/v2026-09.md): identical means the library hasn't changed.
-- **✓ / ✗** — the pass line is "all required checks green": 8/9 still fails.
-- **Defect-hunt score (review/vision cases)** — hits − false positives − flattery − verdict penalty; can be negative. (Written `d2` in the result repos.)
-- **Comparability** — compare only at the same effort band and library version, ideally the same day. One day's number is a snapshot, not a law.
-
 ## Result repos
 
 Results are public, cases never are. Aliases and bundle hashes are checked case by case against this repo's public hash index.
 
-[amber-claude](https://github.com/getaskclaw/amber-claude) (Claude) · [amber-gpt](https://github.com/getaskclaw/amber-gpt) (GPT) · [amber-devin](https://github.com/getaskclaw/amber-devin) (Devin) · [amber-kimi](https://github.com/getaskclaw/amber-kimi) (Kimi) · [amber-deepseek](https://github.com/getaskclaw/amber-deepseek) (DeepSeek) · [amber-ollama](https://github.com/getaskclaw/amber-ollama) (Ollama Cloud) · [amber-opencode](https://github.com/getaskclaw/amber-opencode) (OpenCode Go) · [amber-commandcode](https://github.com/getaskclaw/amber-commandcode) (CommandCode) · [amber-workbuddy](https://github.com/getaskclaw/amber-workbuddy) (WorkBuddy) · [amber-doubao](https://github.com/getaskclaw/amber-doubao) (Doubao) · [amber-stepfun](https://github.com/getaskclaw/amber-stepfun) (StepFun) · [amber-nous](https://github.com/getaskclaw/amber-nous) (Nous Portal) · [amber-crof](https://github.com/getaskclaw/amber-crof) (CrofAI) · [amber-goldenpotato](https://github.com/getaskclaw/amber-goldenpotato) (community self-hosted Qwen3.8-27B)
+[amber-claude](https://github.com/getaskclaw/amber-claude) (Claude) · [amber-gpt](https://github.com/getaskclaw/amber-gpt) (GPT) · [amber-devin](https://github.com/getaskclaw/amber-devin) (Devin) · [amber-kimi](https://github.com/getaskclaw/amber-kimi) (Kimi) · [amber-deepseek](https://github.com/getaskclaw/amber-deepseek) (DeepSeek) · [amber-ollama](https://github.com/getaskclaw/amber-ollama) (Ollama Cloud) · [amber-opencode](https://github.com/getaskclaw/amber-opencode) (OpenCode Go) · [amber-commandcode](https://github.com/getaskclaw/amber-commandcode) (CommandCode) · [amber-workbuddy](https://github.com/getaskclaw/amber-workbuddy) (WorkBuddy) · [amber-doubao](https://github.com/getaskclaw/amber-doubao) (Doubao) · [amber-stepfun](https://github.com/getaskclaw/amber-stepfun) (StepFun) · [amber-nous](https://github.com/getaskclaw/amber-nous) (Nous Portal) · [amber-goldenpotato](https://github.com/getaskclaw/amber-goldenpotato) (community self-hosted Qwen3.8-27B)
 
 ## FAQ
 
