@@ -176,6 +176,8 @@ Not yet on the board: Fable was held back earlier because the token budget did n
 
 ## How to read a results matrix
 
+![How to read an AMBER score: each of 24 cases is a pass, a fail or NA; the total is cases passed / 24, with a prime when any case is NA](docs/images/how-to-read-a-score.en.png?v=20261003)
+
 Every issue is a single `results/YYYY-Www.md` built around a matrix. Five things to know:
 
 - **Alias (A-xxxxxxxx)** — the case's public handle. Internal case numbers never appear, so scores can't be reverse-engineered into case content.

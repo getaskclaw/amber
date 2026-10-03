@@ -176,6 +176,8 @@ python3 tools/validate_manifest.py schemas/examples/summary.invalid-fieldset.yam
 
 ## 怎么读一期成绩（结果仓矩阵）
 
+![一份 AMBER 成绩单怎么读：24 案各自过、没过或 NA，总分 = 过的案数 / 24，有 NA 加撇号](docs/images/how-to-read-a-score.png?v=20261003)
+
 每个结果仓每期一篇 `results/YYYY-Www.md`，核心是一张矩阵。读法有五条：
 
 - **别名（A-xxxxxxxx）** — 案件对外的公开称呼。内部案号永不出现，从分数反推不出题面。
