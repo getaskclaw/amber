@@ -1,0 +1,19 @@
+<!doctype html><meta charset=utf-8><title>AMBER 是什么</title><style>
+*{box-sizing:border-box}
+body{margin:0;background:#FAFEFE;font-family:'Liberation Sans','DejaVu Sans','WenQuanYi Zen Hei',sans-serif;color:#1F2933}
+#fig{width:1500px;padding:44px 48px 40px;background:#FAFEFE}
+h1{margin:0;font-size:40px;font-weight:700;letter-spacing:.01em}
+.sub{margin:8px 0 34px;font-size:21px;color:#52606D}
+.row{display:flex;align-items:stretch;gap:0}
+.card{flex:1;border:2px solid var(--bd);background:var(--bg);border-radius:14px;padding:22px 22px 24px;display:flex;flex-direction:column;gap:14px}
+.head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.num{font-size:26px;font-weight:700;color:var(--bd)}
+.name{font-size:30px;font-weight:700}
+.tag{font-size:19px;color:var(--bd);font-weight:700;width:100%}
+ul{margin:4px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:12px}
+li{font-size:20px;line-height:1.4;padding-left:16px;position:relative}
+li:before{content:"";position:absolute;left:0;top:.62em;width:7px;height:7px;border-radius:50%;background:var(--bd)}
+.arrow{flex:0 0 46px;display:flex;align-items:center;justify-content:center;color:#52606D;font-size:34px}
+.pr{--bg:#FDEDEB;--bd:#B03A2E}.ex{--bg:#E3F6F8;--bd:#00747F}.pu{--bg:#E6F7EC;--bd:#1E7F46}.rd{--bg:#FFF8D6;--bd:#8A6D00}
+.foot{margin-top:30px;font-size:24px;font-weight:700;text-align:center;color:#1F2933}
+</style><div id=fig><h1>AMBER 是什么</h1><div class=sub>题目封存，考场应考，结果公开，人人核对</div><div class=row><div class="card pr"><div class="head"><span class="num">①</span><span class="name">私有面</span><span class="tag">永不公开</span></div><ul><li>24 案 / 27 卷题库</li><li>题目 / oracle / transcript</li><li>内部案号与变体名</li></ul></div><div class="arrow">→</div><div class="card ex"><div class="head"><span class="num">②</span><span class="name">考场</span><span class="tag">怎么考</span></div><ul><li>真实历史现场，截至揭晓前</li><li>净室：无外援，无 fallback</li><li>逐卷验脑（state.db 对账）</li><li>收卷闸：零污染才入库</li></ul></div><div class="arrow">→</div><div class="card pu"><div class="head"><span class="num">③</span><span class="name">公开面</span><span class="tag">永远公开</span></div><ul><li>amber 仓：规范 + 哈希索引</li><li>13 个成绩仓，按厂商分</li><li>别名（A-xxxxxxxx）+ 哈希</li></ul></div><div class="arrow">→</div><div class="card rd"><div class="head"><span class="num">④</span><span class="name">读者</span><span class="tag">能核对什么</span></div><ul><li>分数 / 聚合 / 速度 / 裁决</li><li>每期钉：模型 ID、档位、UTC 窗、harness 版本</li><li>哈希与索引一致 = 题集没换</li></ul></div></div><div class=foot>题目永不公开，分数与哈希永远可查。</div></div>

@@ -1,0 +1,19 @@
+<!doctype html><meta charset=utf-8><title>What is AMBER</title><style>
+*{box-sizing:border-box}
+body{margin:0;background:#FAFEFE;font-family:'Liberation Sans','DejaVu Sans','WenQuanYi Zen Hei',sans-serif;color:#1F2933}
+#fig{width:1500px;padding:44px 48px 40px;background:#FAFEFE}
+h1{margin:0;font-size:40px;font-weight:700;letter-spacing:.01em}
+.sub{margin:8px 0 34px;font-size:21px;color:#52606D}
+.row{display:flex;align-items:stretch;gap:0}
+.card{flex:1;border:2px solid var(--bd);background:var(--bg);border-radius:14px;padding:22px 22px 24px;display:flex;flex-direction:column;gap:14px}
+.head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.num{font-size:26px;font-weight:700;color:var(--bd)}
+.name{font-size:30px;font-weight:700}
+.tag{font-size:19px;color:var(--bd);font-weight:700;width:100%}
+ul{margin:4px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:12px}
+li{font-size:20px;line-height:1.4;padding-left:16px;position:relative}
+li:before{content:"";position:absolute;left:0;top:.62em;width:7px;height:7px;border-radius:50%;background:var(--bd)}
+.arrow{flex:0 0 46px;display:flex;align-items:center;justify-content:center;color:#52606D;font-size:34px}
+.pr{--bg:#FDEDEB;--bd:#B03A2E}.ex{--bg:#E3F6F8;--bd:#00747F}.pu{--bg:#E6F7EC;--bd:#1E7F46}.rd{--bg:#FFF8D6;--bd:#8A6D00}
+.foot{margin-top:30px;font-size:24px;font-weight:700;text-align:center;color:#1F2933}
+</style><div id=fig><h1>What is AMBER</h1><div class=sub>Cases sealed, exam sat in a clean room, results public, anyone can check</div><div class=row><div class="card pr"><div class="head"><span class="num">①</span><span class="name">Private</span><span class="tag">never published</span></div><ul><li>24 cases / 27 papers</li><li>Task, oracle, transcript</li><li>Internal case ids and variant names</li></ul></div><div class="arrow">→</div><div class="card ex"><div class="head"><span class="num">②</span><span class="name">Exam room</span><span class="tag">how it is sat</span></div><ul><li>Real historical scene, restored to “before the answer”</li><li>Clean room: no outside help (no fallback chain)</li><li>Per-paper brain check (state.db reconciliation)</li><li>Closing gate: zero pollution or nothing ships</li></ul></div><div class="arrow">→</div><div class="card pu"><div class="head"><span class="num">③</span><span class="name">Public</span><span class="tag">always published</span></div><ul><li>amber: spec + public hash index</li><li>13 result repos (by vendor / endpoint)</li><li>Alias A-xxxxxxxx + bundle hash</li></ul></div><div class="arrow">→</div><div class="card rd"><div class="head"><span class="num">④</span><span class="name">Reader</span><span class="tag">what you can verify</span></div><ul><li>Scores / aggregates / speed / verdicts</li><li>Pinned every issue: model ID, band, UTC window, harness version</li><li>Bundle hash vs. index = library unchanged</li></ul></div></div><div class=foot>Cases are never public; scores and hashes can always be checked.</div></div>

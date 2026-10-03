@@ -52,7 +52,7 @@ Per-axis reading and each lane's numbers: [the ten axes and the completion matri
 
 A private case library plus public scores: the cases never go public, the scores and hashes always do. The rubric is frozen before anyone sees the output, and everything is archived.
 
-![What is AMBER](docs/images/what-is-amber.en.png?v=20260917)
+![What is AMBER](docs/images/what-is-amber-2026-10.en.png?v=20261003)
 
 A result is produced like an exam: papers sealed at authoring, sat in a clean room, audited paper by paper, published redacted, checkable by anyone.
 
