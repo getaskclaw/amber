@@ -13,7 +13,7 @@
 
 ## Who leads now
 
-![Current top five 2026-W40, including the 2026-10-02 correction, the 2026-10-02 tests and A-d511f9e8 on hold for every lane](docs/images/top5-2026-w40e.en.png?v=20261003)
+![Current top five 2026-W40, including the 2026-10-02 correction, the 2026-10-02 tests and A-d511f9e8 on hold for every lane](docs/images/top5-2026-w40g.en.png?v=20261003)
 
 | # | Total | Model @ endpoint |
 |---|---|---|
