@@ -49,7 +49,7 @@ An independent reviewer re-ran both points and confirmed the main finding. So th
 - **The askclaw.dev board and the tables on issue pages that are generated from the score database:** regenerated with the new rule.
 - **Hand-written older issue pages:** kept as they were. Please read the A-d511f9e8 cell through this notice.
 - **The top-five table and chart in the spec repo:** `'` added, chart redrawn.
-- **The completion matrix chart (`completion-matrix-7way`):** not redrawn yet. Its defense-axis values include A-d511f9e8, so read it with the old rule; this note stays here until it is redrawn.
+- **The completion matrix chart (`completion-matrix-7way`):** redrawn as a new file, `completion-matrix-top6-2026-w40` (the one the README now uses, computed with A-d511f9e8 as NA). The old figure stays as history; its defense-axis values include A-d511f9e8, so read it with the old rule.
 
 ## Next
 

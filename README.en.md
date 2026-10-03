@@ -23,18 +23,16 @@ A formal evaluation method. Take a **real, auditable** historical incident and r
 
 ![Current top five 2026-W40, including the 2026-10-02 correction, the 2026-10-02 tests and A-d511f9e8 on hold for every lane](docs/images/top5-2026-w40c.en.png?v=20261002c)
 
-**② Completion profile: same score, different shape** — the same total can hide very different strengths and weak spots. The chart below shows seven lanes across the ten axes as a dot matrix: a bigger dot = higher completion, and a blank = the lane did not sit that axis (not a zero). It is a snapshot from 2026-09 (the **Convergence** axis joined on 09-21); how the 2026-10-02 corrections affect it is explained in the two chart notes below it.
+**② Completion profile: same score, different shape** — lanes with the same total can have very different strengths and weak spots. The chart below shows the 6 lanes with 18 or more on the board across the ten axes: a bigger, darker dot = higher completion, and NA = no scorable case on that axis (voided or on hold), not a zero. The data comes from the score database (the same source as the askclaw.dev board), on the full 24-case library as of 2026-10-02, with A-d511f9e8 excluded as NA.
 
-- **Same score, five shapes**: before the convergence make-ups, five lanes tied at 17/23. After them they split: k3, glm-5.3-flash and hy4 sit at 18/24 (v4.1-flash @ Ollama is 16'/24 after the 10-02 correction), and the CommandCode lane was frozen at ∅ at the owner's call. Completion is folded in by pins; negative defect-hunt scores still count.
-- **k3 at a glance**: an empty dot on UI (the incomplete-deliverable case), attribution below the top pair, vision tied for best with glm-5.3-flash.
-- **doubao (16/23, added 09-16)**: full marks on all four construction axes (coding/delivery/ops/requirements), level with the leaders; empty dots on UI and vision and review at a third, the most lopsided shape on the field. Its attribution and defense axes hit the harness wall in the main sweep and were recorded as ∅; a 3600s makeup landed real scores (0.47 / 0.50, low but real; [amber-doubao W38 addendum](https://github.com/getaskclaw/amber-doubao/blob/main/results/2026-W38.md)). Negative defect-hunt scores are floored at 0.
-- **gp27b (Qwen3.8-27B @ goldenpotato, community self-hosted, 14/23, added 09-17)**: even more lopsided than doubao: the construction axes sit at the leaders' level (coding 0.83 / delivery full / ops 0.97 / requirements full), review, vision and UI are at absolute zero, and attribution and defense are in the field's bottom band. Aggressive NVFP4 quantization cost nothing on the hands-on faces and everything on the judgment faces ([amber-goldenpotato W38](https://github.com/getaskclaw/amber-goldenpotato/blob/main/results/2026-W38.md)).
+![Completion matrix: the 6 lanes with 18+ on the board, ten axes, 24 cases, 2026-10-02](docs/images/completion-matrix-top6-2026-w40.en.png?v=20261003)
 
-![Completion matrix, five-way 17/23 tie + doubao 16/23 + gp27b 14/23](docs/images/completion-matrix-7way.en.png?v=20260921c)
+How to read it:
 
-> Chart note (2026-10-02): the matrix above has not been redrawn yet. Its deepseek-v4.1-flash @ Ollama Cloud row includes 2 voided ops papers (A-a5608487, A-8d4bc770), and its deepseek-v4.1-flash @ CommandCode row includes 2 voided papers (coding A-61f7ad01, ops A-24bcf707). Those rows now stand at 16'/24 and 15'/23∅, so paragraph ② now says three lanes at 18/24. See the [2026-10-02 correction](docs/corrections-2026-10-02.en.md); the chart will be redrawn with the next matrix update.
->
-> Chart note (2026-10-02, second): the defense-axis values in this matrix include A-d511f9e8. That case is now NA on every lane, see the [correction](docs/corrections-2026-10-02-a-d511f9e8.en.md); please read the defense axis with the old rule. The chart will be redrawn with the next matrix update.
+- **The building side is almost full**: coding is 0.96–1.00, and delivery, ops, requirements and convergence are 1.00 for all six. On the hands-on axes these six cannot be told apart.
+- **The differences are all on the judging side**: four lanes have 1.00 on UI, while glm-5.3-flash and k3 have 0.00 (the score database holds no check-by-check detail for that case, so the rule records 0.00); vision runs from 0.33 (hy4-preview-f) to 0.89 (claude-opus-5-5); review sits at 0.22–0.67.
+- **Defense and attribution spread the most**: claude-opus-5-5 is NA on both, and swe-2-max is NA on attribution; claude-sonnet-5-5 has the best defense (0.89) but only 0.47 on attribution; glm-5.3-flash and hy4-preview-f have the best attribution (0.93).
+- For the earlier seven-lane version (old rule; it includes the lopsided doubao and Qwen3.8-27B lanes, kept as history only): [completion-matrix-7way.en.png](docs/images/completion-matrix-7way.en.png). Each lane's completion is also in its result repo's issue page.
 
 **The ten axes, in plain language** — each cell is the lane's completion (0–1) across that axis's cases; pin-scored cases fold in by pins:
 
@@ -42,7 +40,7 @@ A formal evaluation method. Take a **real, auditable** historical incident and r
 - **Delivery** · done ≠ handed in: no artifact means 0, however good the plan (mean of 3 cases)
 - **Ops** · follow the runbook: backups, cutovers, reconciliation — no skipped steps (mean of 6 cases)
 - **Requirements** · the client asked for A, not B — ship A (1 case)
-- **Convergence** · real finish or busywork loops: did the work land, how fast, and did it spin in place farming temp files (1 case; joined 2026-09-21; as of 2026-10-02, 18 of the 19 examined lanes on the askclaw.dev board passed and one (space-bunny-alpha) did not; blank cell = not yet examined, not a zero)
+- **Convergence** · real finish or busywork loops: did the work land, how fast, and did it spin in place farming temp files (1 case; joined 2026-09-21; as of 2026-10-02, 18 of the 19 examined lanes on the askclaw.dev board passed and one (space-bunny-alpha) did not; in the older matrix figure a blank cell = not yet examined, not a zero)
 - **UI** · build the page to the mock, pin-level acceptance (1 case, 12 pins)
 - **Vision** · spot defects in real screenshots: overlaps, cropping, missing legends — did it actually see them (1 case, defect-hunt score)
 - **Defense** · night-shift guard: plug every hole in the validator without turning away legit input (mean of 2 cases; A-d511f9e8 has been on hold on every lane since 2026-10-02, see the [correction](docs/corrections-2026-10-02-a-d511f9e8.en.md))

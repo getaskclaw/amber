@@ -73,7 +73,7 @@ Knock-on effects:
 - Top five in this repository's README: deepseek-v4.1-flash @ Ollama Cloud leaves the #2 tie and joins the #4 tie.
 - In the CommandCode W37 band ladder, "band none ties band high at 17" no longer holds: high is corrected to 15' and none to 16'.
 - [Nine-axis podium 2026-09-18](nine-axis-top3-2026-09-18.en.md): the ops axis "full marks tied across 14 lanes" becomes 9 lanes. Rankings on the four discriminating axes do not change.
-- The completion-matrix chart in the README has not been redrawn yet; a note under it names the two rows that include voided papers.
+- The completion-matrix chart in the README has been redrawn as a new file, `completion-matrix-top6-2026-w40` (the 6 lanes with 18+ on the board, with voided papers excluded); the old figure stays as history.
 
 **One cell we could not settle**: mimo-v2.6-flash @ CommandCode (W39, published 13/24). Three of its sessions read material outside the paper, one of them on A-a5608487, a cell published as a pass. Only part of that sitting's per-paper record survives on our side, so we cannot tie the session to a specific paper and cannot void it under the same rule. Treat that cell as doubtful.
 
