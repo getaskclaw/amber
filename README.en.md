@@ -4,7 +4,7 @@
 
 **In one line**: we take real past incidents and tasks and have AI models redo them using only what people had in hand at the time. For example, a real operations outage: the model gets only the monitoring and logs of the time, and the evidence revealed afterwards stays sealed. The questions are never published, but every question has a hash fingerprint, and scores and fingerprints are all public, so anyone can check that the questions were not swapped and the scores were not made up.
 
-**Library** 24 cases · **Spec** v0.2.2 (draft) · **Hash index** [v2026-09](hash-index/v2026-09.md) · **Result repos** × 13 · **Rule** scores always public, cases never · 中文: [README.md](README.md)
+**Library** 24 cases · **Spec** v0.2.2 (draft) · **Hash index** [v2026-09](hash-index/v2026-09.md) · **Result repos** × 13 · **Rule** scores always public, cases never · **Live board** [askclaw.dev](https://askclaw.dev/en/) · 中文: [README.md](README.md)
 
 > ⚠️ **Corrections** (original text and the list of affected lanes: [leaderboard in full](docs/leaderboard-notes.en.md))
 > - **[2026-10-02](docs/corrections-2026-10-02.en.md)**: 22 published papers whose candidate stepped outside the paper and touched grading material are now NA (neither a pass nor a fail). The fault is ours; since 2026-10-01 papers are answered in isolated containers.
