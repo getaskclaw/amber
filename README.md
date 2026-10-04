@@ -13,23 +13,25 @@
 
 ## 现在谁领先
 
-![当前前五 2026-W40（含 2026-10-02 更正、2026-10-02 考试与 A-d511f9e8 全车道挂起）](docs/images/top5-2026-w40g.png?v=20261003)
+![当前前五 2026-W40（含 2026-10-02 更正、2026-10-02 考试、2026-10-04 WorkBuddy 直连四条道与 A-d511f9e8 全车道挂起）](docs/images/top5-2026-w40h.png?v=20261004)
 
 | # | 总分 | 模型 @ 端点 |
 |---|---|---|
 | 1 | 19'/24 | swe-2-max @ Devin<br>claude-sonnet-5-5 @ Anthropic 订阅道<br>claude-opus-5-5 @ Anthropic 订阅道 |
-| 2 | 18'/24 | glm-5.3-flash @ Ollama Cloud<br>k3 @ Kimi<br>hy4-preview-f @ WorkBuddy |
-| 3 | 17'/24 | gpt-6-sol-900k @ OpenAI Codex<br>swe-2-high @ Devin<br>doubao-seed-evolving @ 火山方舟 |
-| 4 | 16'/24 | gpt-5.6-luna-900k（high）@ OpenAI Codex<br>gpt-6-astra-900k @ OpenAI Codex<br>gpt-6.1-sol @ OpenAI Codex<br>claude-fable-5-1 @ Anthropic 订阅道<br>deepseek-v4-flash:0731 @ Ollama Cloud<br>swe-2-medium @ Devin<br>deepseek-v4.1-flash @ Ollama Cloud ▼<br>deepseek-flash @ DeepSeek ▼<br>mimo-v2.6-pro @ CommandCode ▼ |
+| 2 | 18'/24 | glm-5.3-flash @ Ollama Cloud<br>k3 @ Kimi<br>hy4-preview-f @ WorkBuddy ACP（W37）<br>deepseek-v4.1-flash @ WorkBuddy 直连（W40） |
+| 3 | 17'/24 | gpt-6-sol-900k @ OpenAI Codex<br>swe-2-high @ Devin<br>doubao-seed-evolving @ 火山方舟<br>glm-5.3-flash @ WorkBuddy 直连（W40） |
+| 4 | 16'/24 | gpt-5.6-luna-900k（high）@ OpenAI Codex<br>gpt-6-astra-900k @ OpenAI Codex<br>gpt-6.1-sol @ OpenAI Codex<br>claude-fable-5-1 @ Anthropic 订阅道<br>deepseek-v4-flash:0731 @ Ollama Cloud<br>swe-2-medium @ Devin<br>deepseek-v4.1-flash @ Ollama Cloud ▼<br>deepseek-flash @ DeepSeek ▼<br>mimo-v2.6-pro @ CommandCode ▼<br>hy4-preview-f @ WorkBuddy 直连（W40）<br>minimax-m3 @ WorkBuddy 直连（W40） |
 | 5 | 15'/24 | kimi-for-coding（K2.8）@ Kimi<br>gpt-6-luna-900k @ OpenAI Codex<br>swe-1-7-medium @ Devin<br>Qwen3.8-27B @ GoldenPotato 自部署<br>deepseek-flash @ OpenCode Go ▼<br>step-5-preview @ StepFun ▼ |
 
-`'` = 其中有案暂不计分（NA），不算输；现在每条道都带，因为 A-d511f9e8 在所有车道上暂不计分。同名模型换个端点可能是另一个脑，所以成绩一律按「端点 × 名字」记。claude-opus-5-5 取 W40 重考一场（W39 首考 17'/24）：两场各考一次、考场不同，**不据此判断强弱**，见 [amber-claude W40](https://github.com/getaskclaw/amber-claude/blob/main/results/2026-W40.md)。▼ = 经 2026-10-02 更正下调。各车道出处、脚注、冻结道：[榜单全文](docs/leaderboard-notes.md)。
+`'` = 其中有案暂不计分（NA），不算输；现在每条道都带，因为 A-d511f9e8 在所有车道上暂不计分。同名模型换个端点可能是另一个脑，所以成绩一律按「端点 × 名字」记。claude-opus-5-5 取 W40 重考一场（W39 首考 17'/24）：两场各考一次、考场不同，**不据此判断强弱**，见 [amber-claude W40](https://github.com/getaskclaw/amber-claude/blob/main/results/2026-W40.md)。▼ = 经 2026-10-02 更正下调。WorkBuddy 直连（W40）的四条道是 2026-10-04 隔离考场的新场次，和 W37（ACP 道）、W39（直连道场次）不可逐格对比；hy4-preview-f 在榜上有 ACP（W37，18'）和直连（W40，16'）两行，是两条不同的道、不同的考场，**不据此判断强弱**，见 [amber-workbuddy W40](https://github.com/getaskclaw/amber-workbuddy/blob/main/results/2026-W40.md)。各车道出处、脚注、冻结道：[榜单全文](docs/leaderboard-notes.md)。
 
 ## 同分不同款
 
 总分相同的车道，强项和短板可以完全不同。点越大、颜色越深，完成度越高；NA = 该轴没有可计分的案，不是零分。
 
 ![完成度矩阵：榜上总分 18 以上的 6 条车道，十轴，24 案，2026-10-02](docs/images/completion-matrix-top6-2026-w40.png?v=20261003)
+
+*此图画于 2026-10-02，没有包含 2026-10-04 入榜的 deepseek-v4.1-flash @ WorkBuddy 直连（W40，18'/24，同样在 18 分以上），待重画。*
 
 **读法**：动手干活的「施工面」几乎全满，差别在「判断面」。每格 = 该轴全部案子的完成度（0–1）。官方榜 [askclaw.dev](https://askclaw.dev/) 也用这十个轴。
 

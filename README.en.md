@@ -13,23 +13,25 @@
 
 ## Who leads now
 
-![Current top five 2026-W40, including the 2026-10-02 correction, the 2026-10-02 tests and A-d511f9e8 on hold for every lane](docs/images/top5-2026-w40g.en.png?v=20261003)
+![Current top five 2026-W40, including the 2026-10-02 correction, the 2026-10-02 tests, the four WorkBuddy direct lanes of 2026-10-04 and A-d511f9e8 on hold for every lane](docs/images/top5-2026-w40h.en.png?v=20261004)
 
 | # | Total | Model @ endpoint |
 |---|---|---|
 | 1 | 19'/24 | swe-2-max @ Devin<br>claude-sonnet-5-5 @ Anthropic subscription lane<br>claude-opus-5-5 @ Anthropic subscription lane |
-| 2 | 18'/24 | glm-5.3-flash @ Ollama Cloud<br>k3 @ Kimi<br>hy4-preview-f @ WorkBuddy |
-| 3 | 17'/24 | gpt-6-sol-900k @ OpenAI Codex<br>swe-2-high @ Devin<br>doubao-seed-evolving @ Volcengine Ark |
-| 4 | 16'/24 | gpt-5.6-luna-900k (high) @ OpenAI Codex<br>gpt-6-astra-900k @ OpenAI Codex<br>gpt-6.1-sol @ OpenAI Codex<br>claude-fable-5-1 @ Anthropic subscription lane<br>deepseek-v4-flash:0731 @ Ollama Cloud<br>swe-2-medium @ Devin<br>deepseek-v4.1-flash @ Ollama Cloud ▼<br>deepseek-flash @ DeepSeek ▼<br>mimo-v2.6-pro @ CommandCode ▼ |
+| 2 | 18'/24 | glm-5.3-flash @ Ollama Cloud<br>k3 @ Kimi<br>hy4-preview-f @ WorkBuddy ACP (W37)<br>deepseek-v4.1-flash @ WorkBuddy direct (W40) |
+| 3 | 17'/24 | gpt-6-sol-900k @ OpenAI Codex<br>swe-2-high @ Devin<br>doubao-seed-evolving @ Volcengine Ark<br>glm-5.3-flash @ WorkBuddy direct (W40) |
+| 4 | 16'/24 | gpt-5.6-luna-900k (high) @ OpenAI Codex<br>gpt-6-astra-900k @ OpenAI Codex<br>gpt-6.1-sol @ OpenAI Codex<br>claude-fable-5-1 @ Anthropic subscription lane<br>deepseek-v4-flash:0731 @ Ollama Cloud<br>swe-2-medium @ Devin<br>deepseek-v4.1-flash @ Ollama Cloud ▼<br>deepseek-flash @ DeepSeek ▼<br>mimo-v2.6-pro @ CommandCode ▼<br>hy4-preview-f @ WorkBuddy direct (W40)<br>minimax-m3 @ WorkBuddy direct (W40) |
 | 5 | 15'/24 | kimi-for-coding (K2.8) @ Kimi<br>gpt-6-luna-900k @ OpenAI Codex<br>swe-1-7-medium @ Devin<br>Qwen3.8-27B @ GoldenPotato self-hosted<br>deepseek-flash @ OpenCode Go ▼<br>step-5-preview @ StepFun ▼ |
 
-`'` = at least one case is NA (not scored; it does not count as a loss). Every total carries it now, because A-d511f9e8 is NA on every lane. The same model name on a different endpoint can be a different brain, so scores are always recorded per endpoint × name. claude-opus-5-5 is shown with its W40 re-test (its W39 first test was 17'/24): each test was taken once, in a different exam room, so this does **not** show that it got stronger or weaker; see [amber-claude W40](https://github.com/getaskclaw/amber-claude/blob/main/results/2026-W40.en.md). ▼ = moved down by the 2026-10-02 correction. Sources per lane, footnotes and frozen lanes: [leaderboard in full](docs/leaderboard-notes.en.md).
+`'` = at least one case is NA (not scored; it does not count as a loss). Every total carries it now, because A-d511f9e8 is NA on every lane. The same model name on a different endpoint can be a different brain, so scores are always recorded per endpoint × name. claude-opus-5-5 is shown with its W40 re-test (its W39 first test was 17'/24): each test was taken once, in a different exam room, so this does **not** show that it got stronger or weaker; see [amber-claude W40](https://github.com/getaskclaw/amber-claude/blob/main/results/2026-W40.en.md). ▼ = moved down by the 2026-10-02 correction. The four WorkBuddy direct (W40) lanes are new sittings of 2026-10-04 in an isolated exam room, not comparable cell by cell with W37 (ACP lane) or W39 (direct-lane sitting); hy4-preview-f has two rows on the board, ACP (W37, 18') and direct (W40, 16'): different lanes in different exam rooms, so this does **not** show that it got stronger or weaker; see [amber-workbuddy W40](https://github.com/getaskclaw/amber-workbuddy/blob/main/results/2026-W40.en.md). Sources per lane, footnotes and frozen lanes: [leaderboard in full](docs/leaderboard-notes.en.md).
 
 ## Same score, different shape
 
 Lanes with the same total can have very different strengths and weak spots. A bigger, darker dot = higher completion; NA = no scorable case on that axis, not a zero.
 
 ![Completion matrix: the 6 lanes with 18+ on the board, ten axes, 24 cases, 2026-10-02](docs/images/completion-matrix-top6-2026-w40.en.png?v=20261003)
+
+*This figure was drawn on 2026-10-02 and does not include deepseek-v4.1-flash @ WorkBuddy direct (W40, 18'/24, also at 18 or above), which joined the board on 2026-10-04; redraw pending.*
 
 **How to read it**: the hands-on "building" axes are almost full for everyone; the differences are on the "judging" side. Each cell = the lane's completion (0–1) across that axis's cases. The official board on [askclaw.dev](https://askclaw.dev/en/) uses the same ten axes.
 
