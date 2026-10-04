@@ -2,16 +2,16 @@
 
 > Moved from the front-page [README](../README.en.md); text unchanged. 中文: [axes.md](axes.md)
 
-**Completion profile: same score, different shape** — lanes with the same total can have very different strengths and weak spots. The chart below shows the 6 lanes with 18 or more on the board across the ten axes: a bigger, darker dot = higher completion, and NA = no scorable case on that axis (voided or on hold), not a zero. The data comes from the score database (the same source as the askclaw.dev board), on the full 24-case library as of 2026-10-02, with A-d511f9e8 excluded as NA.
+**Completion profile: same score, different shape** — lanes with the same total can have very different strengths and weak spots. The chart below shows the 7 lanes with 18 or more on the board across the ten axes: a bigger, darker dot = higher completion, and NA = no scorable case on that axis (voided or on hold), not a zero. The data comes from the score database (the same source as the askclaw.dev board), on the full 24-case library as of 2026-10-04, with A-d511f9e8 excluded as NA.
 
-![Completion matrix: the 6 lanes with 18+ on the board, ten axes, 24 cases, 2026-10-02](images/completion-matrix-top6-2026-w40.en.png?v=20261003)
+![Completion matrix: the 7 lanes with 18+ on the board, ten axes, 24 cases, 2026-10-04](images/completion-matrix-top7-2026-w40.en.png?v=20261004)
 
 How to read it:
 
-- **The building side is almost full**: coding is 0.96–1.00, and delivery, ops, requirements and convergence are 1.00 for all six. On the hands-on axes these six cannot be told apart.
-- **The differences are all on the judging side**: four lanes have 1.00 on UI, while glm-5.3-flash and k3 have 0.00 (the score database holds no check-by-check detail for that case, so the rule records 0.00); vision runs from 0.33 (hy4-preview-f) to 0.89 (claude-opus-5-5); review sits at 0.22–0.67.
-- **Defense and attribution spread the most**: claude-opus-5-5 is NA on both, and swe-2-max is NA on attribution; claude-sonnet-5-5 has the best defense (0.89) but only 0.47 on attribution; glm-5.3-flash and hy4-preview-f have the best attribution (0.93).
-- For the earlier seven-lane version (old rule; it includes the lopsided doubao and Qwen3.8-27B lanes, kept as history only): [completion-matrix-7way.en.png](images/completion-matrix-7way.en.png). Each lane's completion is also in its result repo's issue page.
+- **The building side is almost full**: coding is 0.96–1.00, and delivery, ops, requirements and convergence are 1.00 for all seven. On the hands-on axes these seven cannot be told apart.
+- **The differences are all on the judging side**: four lanes have 1.00 on UI, while glm-5.3-flash (Ollama Cloud) and k3 have 0.00 (the score database holds no check-by-check detail for that case, so the rule records 0.00), and deepseek-v4.1-flash (WorkBuddy direct) is NA (the one UI case, A-d9b79b46, is on hold); vision runs from 0.33 (hy4-preview-f, ACP) to 0.89 (claude-opus-5-5 and deepseek-v4.1-flash on WorkBuddy direct, whose vision cell is taken from the re-sit paper after the exam-room fix); review sits at 0.22–0.67.
+- **Defense and attribution spread the most**: claude-opus-5-5 is NA on both, and swe-2-max is NA on attribution; claude-sonnet-5-5 has the best defense (0.89) but only 0.47 on attribution; glm-5.3-flash (Ollama Cloud), hy4-preview-f (ACP) and deepseek-v4.1-flash (WorkBuddy direct) have the best attribution (0.93).
+- Earlier versions: the six-lane one (2026-10-02, without deepseek-v4.1-flash @ WorkBuddy direct) [completion-matrix-top6-2026-w40.en.png](images/completion-matrix-top6-2026-w40.en.png); and the earlier seven-lane one (old rule; it includes the lopsided doubao and Qwen3.8-27B lanes, kept as history only) [completion-matrix-7way.en.png](images/completion-matrix-7way.en.png). Each lane's completion is also in its result repo's issue page.
 
 **The ten axes, in plain language** — each cell is the lane's completion (0–1) across that axis's cases; pin-scored cases fold in by pins:
 

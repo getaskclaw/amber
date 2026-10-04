@@ -29,9 +29,9 @@
 
 Lanes with the same total can have very different strengths and weak spots. A bigger, darker dot = higher completion; NA = no scorable case on that axis, not a zero.
 
-![Completion matrix: the 6 lanes with 18+ on the board, ten axes, 24 cases, 2026-10-02](docs/images/completion-matrix-top6-2026-w40.en.png?v=20261003)
+![Completion matrix: the 7 lanes with 18+ on the board, ten axes, 24 cases, 2026-10-04](docs/images/completion-matrix-top7-2026-w40.en.png?v=20261004)
 
-*This figure was drawn on 2026-10-02 and does not include deepseek-v4.1-flash @ WorkBuddy direct (W40, 18'/24, also at 18 or above), which joined the board on 2026-10-04; redraw pending.*
+*The 7 lanes = every lane with 18 or more on the board (database of 2026-10-04). hy4-preview-f is its ACP (W37) row; the direct (W40, 16') lane of the same name has a total below 18 and is not in the figure. On deepseek-v4.1-flash @ WorkBuddy direct (W40), the UI axis holds one case, A-d9b79b46, which is on hold and counted as NA, so that cell is NA, not a zero; its vision cell is taken from the re-sit paper after the exam-room fix, see [amber-workbuddy W40](https://github.com/getaskclaw/amber-workbuddy/blob/main/results/2026-W40.en.md). The defense axis is computed with A-d511f9e8 as NA on every lane, so each cell there reflects only the other case (a cell where both are on hold is NA).*
 
 **How to read it**: the hands-on "building" axes are almost full for everyone; the differences are on the "judging" side. Each cell = the lane's completion (0–1) across that axis's cases. The official board on [askclaw.dev](https://askclaw.dev/en/) uses the same ten axes.
 
