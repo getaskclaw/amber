@@ -1,0 +1,828 @@
+{
+ "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+ "width": 700,
+ "height": 480,
+ "background": "#FFFFFF",
+ "config": {
+  "font": "WenQuanYi Zen Hei",
+  "view": {
+   "stroke": null
+  }
+ },
+ "title": {
+  "text": "完成度矩阵：榜上总分 18 以上的 8 条车道（十轴 · 24 案 · 2026-10-07）",
+  "subtitle": [
+   "点越大、颜色越深 = 该轴完成度越高（0–1，按必检项折算，没过的案也按做对的比例计）",
+   "NA = 该轴没有可计分的案（作废或暂停），不是零分；行末总分带 ' 表示含 NA"
+  ],
+  "fontSize": 17,
+  "subtitleFontSize": 12,
+  "subtitleColor": "#455A64",
+  "anchor": "start",
+  "offset": 14
+ },
+ "data": {
+  "values": [
+   {
+    "key": "编码",
+    "lane": "claude-opus-5-5 @ Anthropic 订阅道 · 19'/24",
+    "value": 0.9583333333333334,
+    "label": "0.96"
+   },
+   {
+    "key": "交付",
+    "lane": "claude-opus-5-5 @ Anthropic 订阅道 · 19'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "运维",
+    "lane": "claude-opus-5-5 @ Anthropic 订阅道 · 19'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "需求",
+    "lane": "claude-opus-5-5 @ Anthropic 订阅道 · 19'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "收敛",
+    "lane": "claude-opus-5-5 @ Anthropic 订阅道 · 19'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "UI",
+    "lane": "claude-opus-5-5 @ Anthropic 订阅道 · 19'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "视觉",
+    "lane": "claude-opus-5-5 @ Anthropic 订阅道 · 19'/24",
+    "value": 0.8888888888888888,
+    "label": "0.89"
+   },
+   {
+    "key": "防御",
+    "lane": "claude-opus-5-5 @ Anthropic 订阅道 · 19'/24",
+    "value": null,
+    "label": "NA"
+   },
+   {
+    "key": "归因",
+    "lane": "claude-opus-5-5 @ Anthropic 订阅道 · 19'/24",
+    "value": null,
+    "label": "NA"
+   },
+   {
+    "key": "审查",
+    "lane": "claude-opus-5-5 @ Anthropic 订阅道 · 19'/24",
+    "value": 0.4444444444444444,
+    "label": "0.44"
+   },
+   {
+    "key": "编码",
+    "lane": "claude-sonnet-5-5 @ Anthropic 订阅道 · 19'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "交付",
+    "lane": "claude-sonnet-5-5 @ Anthropic 订阅道 · 19'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "运维",
+    "lane": "claude-sonnet-5-5 @ Anthropic 订阅道 · 19'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "需求",
+    "lane": "claude-sonnet-5-5 @ Anthropic 订阅道 · 19'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "收敛",
+    "lane": "claude-sonnet-5-5 @ Anthropic 订阅道 · 19'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "UI",
+    "lane": "claude-sonnet-5-5 @ Anthropic 订阅道 · 19'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "视觉",
+    "lane": "claude-sonnet-5-5 @ Anthropic 订阅道 · 19'/24",
+    "value": 0.7777777777777778,
+    "label": "0.78"
+   },
+   {
+    "key": "防御",
+    "lane": "claude-sonnet-5-5 @ Anthropic 订阅道 · 19'/24",
+    "value": 0.8888888888888888,
+    "label": "0.89"
+   },
+   {
+    "key": "归因",
+    "lane": "claude-sonnet-5-5 @ Anthropic 订阅道 · 19'/24",
+    "value": 0.4666666666666667,
+    "label": "0.47"
+   },
+   {
+    "key": "审查",
+    "lane": "claude-sonnet-5-5 @ Anthropic 订阅道 · 19'/24",
+    "value": 0.2222222222222222,
+    "label": "0.22"
+   },
+   {
+    "key": "编码",
+    "lane": "swe-2-max @ Devin · 19'/24",
+    "value": 0.9583333333333334,
+    "label": "0.96"
+   },
+   {
+    "key": "交付",
+    "lane": "swe-2-max @ Devin · 19'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "运维",
+    "lane": "swe-2-max @ Devin · 19'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "需求",
+    "lane": "swe-2-max @ Devin · 19'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "收敛",
+    "lane": "swe-2-max @ Devin · 19'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "UI",
+    "lane": "swe-2-max @ Devin · 19'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "视觉",
+    "lane": "swe-2-max @ Devin · 19'/24",
+    "value": 0.7777777777777778,
+    "label": "0.78"
+   },
+   {
+    "key": "防御",
+    "lane": "swe-2-max @ Devin · 19'/24",
+    "value": 0.4444444444444444,
+    "label": "0.44"
+   },
+   {
+    "key": "归因",
+    "lane": "swe-2-max @ Devin · 19'/24",
+    "value": null,
+    "label": "NA"
+   },
+   {
+    "key": "审查",
+    "lane": "swe-2-max @ Devin · 19'/24",
+    "value": 0.5555555555555556,
+    "label": "0.56"
+   },
+   {
+    "key": "编码",
+    "lane": "deepseek-v4.1-flash @ WorkBuddy 直连 (W40) · 18'/24",
+    "value": 0.9583333333333334,
+    "label": "0.96"
+   },
+   {
+    "key": "交付",
+    "lane": "deepseek-v4.1-flash @ WorkBuddy 直连 (W40) · 18'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "运维",
+    "lane": "deepseek-v4.1-flash @ WorkBuddy 直连 (W40) · 18'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "需求",
+    "lane": "deepseek-v4.1-flash @ WorkBuddy 直连 (W40) · 18'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "收敛",
+    "lane": "deepseek-v4.1-flash @ WorkBuddy 直连 (W40) · 18'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "UI",
+    "lane": "deepseek-v4.1-flash @ WorkBuddy 直连 (W40) · 18'/24",
+    "value": null,
+    "label": "NA"
+   },
+   {
+    "key": "视觉",
+    "lane": "deepseek-v4.1-flash @ WorkBuddy 直连 (W40) · 18'/24",
+    "value": 0.8888888888888888,
+    "label": "0.89"
+   },
+   {
+    "key": "防御",
+    "lane": "deepseek-v4.1-flash @ WorkBuddy 直连 (W40) · 18'/24",
+    "value": 0.6666666666666666,
+    "label": "0.67"
+   },
+   {
+    "key": "归因",
+    "lane": "deepseek-v4.1-flash @ WorkBuddy 直连 (W40) · 18'/24",
+    "value": 0.9333333333333333,
+    "label": "0.93"
+   },
+   {
+    "key": "审查",
+    "lane": "deepseek-v4.1-flash @ WorkBuddy 直连 (W40) · 18'/24",
+    "value": 0.5,
+    "label": "0.50"
+   },
+   {
+    "key": "编码",
+    "lane": "glm-5.3-flash @ Ollama Cloud · 18'/24",
+    "value": 0.9583333333333334,
+    "label": "0.96"
+   },
+   {
+    "key": "交付",
+    "lane": "glm-5.3-flash @ Ollama Cloud · 18'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "运维",
+    "lane": "glm-5.3-flash @ Ollama Cloud · 18'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "需求",
+    "lane": "glm-5.3-flash @ Ollama Cloud · 18'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "收敛",
+    "lane": "glm-5.3-flash @ Ollama Cloud · 18'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "UI",
+    "lane": "glm-5.3-flash @ Ollama Cloud · 18'/24",
+    "value": 0.0,
+    "label": "0.00"
+   },
+   {
+    "key": "视觉",
+    "lane": "glm-5.3-flash @ Ollama Cloud · 18'/24",
+    "value": 0.7777777777777778,
+    "label": "0.78"
+   },
+   {
+    "key": "防御",
+    "lane": "glm-5.3-flash @ Ollama Cloud · 18'/24",
+    "value": 0.4444444444444444,
+    "label": "0.44"
+   },
+   {
+    "key": "归因",
+    "lane": "glm-5.3-flash @ Ollama Cloud · 18'/24",
+    "value": 0.9333333333333333,
+    "label": "0.93"
+   },
+   {
+    "key": "审查",
+    "lane": "glm-5.3-flash @ Ollama Cloud · 18'/24",
+    "value": 0.6666666666666666,
+    "label": "0.67"
+   },
+   {
+    "key": "编码",
+    "lane": "hy4-preview-f @ WorkBuddy ACP (W37) · 18'/24",
+    "value": 0.9583333333333334,
+    "label": "0.96"
+   },
+   {
+    "key": "交付",
+    "lane": "hy4-preview-f @ WorkBuddy ACP (W37) · 18'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "运维",
+    "lane": "hy4-preview-f @ WorkBuddy ACP (W37) · 18'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "需求",
+    "lane": "hy4-preview-f @ WorkBuddy ACP (W37) · 18'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "收敛",
+    "lane": "hy4-preview-f @ WorkBuddy ACP (W37) · 18'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "UI",
+    "lane": "hy4-preview-f @ WorkBuddy ACP (W37) · 18'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "视觉",
+    "lane": "hy4-preview-f @ WorkBuddy ACP (W37) · 18'/24",
+    "value": 0.3333333333333333,
+    "label": "0.33"
+   },
+   {
+    "key": "防御",
+    "lane": "hy4-preview-f @ WorkBuddy ACP (W37) · 18'/24",
+    "value": 0.3333333333333333,
+    "label": "0.33"
+   },
+   {
+    "key": "归因",
+    "lane": "hy4-preview-f @ WorkBuddy ACP (W37) · 18'/24",
+    "value": 0.9333333333333333,
+    "label": "0.93"
+   },
+   {
+    "key": "审查",
+    "lane": "hy4-preview-f @ WorkBuddy ACP (W37) · 18'/24",
+    "value": 0.5555555555555556,
+    "label": "0.56"
+   },
+   {
+    "key": "编码",
+    "lane": "k3 @ Kimi 官方 coding · 18'/24",
+    "value": 0.9583333333333334,
+    "label": "0.96"
+   },
+   {
+    "key": "交付",
+    "lane": "k3 @ Kimi 官方 coding · 18'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "运维",
+    "lane": "k3 @ Kimi 官方 coding · 18'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "需求",
+    "lane": "k3 @ Kimi 官方 coding · 18'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "收敛",
+    "lane": "k3 @ Kimi 官方 coding · 18'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "UI",
+    "lane": "k3 @ Kimi 官方 coding · 18'/24",
+    "value": 0.0,
+    "label": "0.00"
+   },
+   {
+    "key": "视觉",
+    "lane": "k3 @ Kimi 官方 coding · 18'/24",
+    "value": 0.7777777777777778,
+    "label": "0.78"
+   },
+   {
+    "key": "防御",
+    "lane": "k3 @ Kimi 官方 coding · 18'/24",
+    "value": 0.4444444444444444,
+    "label": "0.44"
+   },
+   {
+    "key": "归因",
+    "lane": "k3 @ Kimi 官方 coding · 18'/24",
+    "value": 0.6666666666666666,
+    "label": "0.67"
+   },
+   {
+    "key": "审查",
+    "lane": "k3 @ Kimi 官方 coding · 18'/24",
+    "value": 0.5555555555555556,
+    "label": "0.56"
+   },
+   {
+    "key": "编码",
+    "lane": "step-5-preview @ StepFun (W41) · 18'/24",
+    "value": 0.9583333333333334,
+    "label": "0.96"
+   },
+   {
+    "key": "交付",
+    "lane": "step-5-preview @ StepFun (W41) · 18'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "运维",
+    "lane": "step-5-preview @ StepFun (W41) · 18'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "需求",
+    "lane": "step-5-preview @ StepFun (W41) · 18'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "收敛",
+    "lane": "step-5-preview @ StepFun (W41) · 18'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "UI",
+    "lane": "step-5-preview @ StepFun (W41) · 18'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "视觉",
+    "lane": "step-5-preview @ StepFun (W41) · 18'/24",
+    "value": 0.2222222222222222,
+    "label": "0.22"
+   },
+   {
+    "key": "防御",
+    "lane": "step-5-preview @ StepFun (W41) · 18'/24",
+    "value": null,
+    "label": "NA"
+   },
+   {
+    "key": "归因",
+    "lane": "step-5-preview @ StepFun (W41) · 18'/24",
+    "value": null,
+    "label": "NA"
+   },
+   {
+    "key": "审查",
+    "lane": "step-5-preview @ StepFun (W41) · 18'/24",
+    "value": 0.5,
+    "label": "0.50"
+   }
+  ]
+ },
+ "layer": [
+  {
+   "transform": [
+    {
+     "filter": "datum.value !== null"
+    }
+   ],
+   "mark": {
+    "type": "circle",
+    "opacity": 1,
+    "stroke": "#0F5E59",
+    "strokeWidth": 0.8
+   },
+   "encoding": {
+    "x": {
+     "field": "key",
+     "type": "nominal",
+     "scale": {
+      "domain": [
+       "编码",
+       "交付",
+       "运维",
+       "需求",
+       "收敛",
+       "UI",
+       "视觉",
+       "防御",
+       "归因",
+       "审查"
+      ]
+     },
+     "sort": null,
+     "title": null,
+     "axis": {
+      "labelFontSize": 14,
+      "labelAngle": 0,
+      "orient": "top",
+      "domain": false,
+      "ticks": false,
+      "labelPadding": 8
+     }
+    },
+    "y": {
+     "field": "lane",
+     "type": "nominal",
+     "sort": [
+      "claude-opus-5-5 @ Anthropic 订阅道 · 19'/24",
+      "claude-sonnet-5-5 @ Anthropic 订阅道 · 19'/24",
+      "swe-2-max @ Devin · 19'/24",
+      "deepseek-v4.1-flash @ WorkBuddy 直连 (W40) · 18'/24",
+      "glm-5.3-flash @ Ollama Cloud · 18'/24",
+      "hy4-preview-f @ WorkBuddy ACP (W37) · 18'/24",
+      "k3 @ Kimi 官方 coding · 18'/24",
+      "step-5-preview @ StepFun (W41) · 18'/24"
+     ],
+     "title": null,
+     "axis": {
+      "labelFontSize": 13,
+      "labelLimit": 0,
+      "domain": false,
+      "ticks": false,
+      "labelColor": "#263238"
+     }
+    },
+    "size": {
+     "field": "value",
+     "type": "quantitative",
+     "scale": {
+      "domain": [
+       0,
+       1
+      ],
+      "range": [
+       40,
+       700
+      ]
+     },
+     "legend": null
+    },
+    "color": {
+     "field": "value",
+     "type": "quantitative",
+     "scale": {
+      "domain": [
+       0,
+       1
+      ],
+      "range": [
+       "#DCEFEC",
+       "#0F5E59"
+      ]
+     },
+     "legend": null
+    }
+   }
+  },
+  {
+   "transform": [
+    {
+     "filter": "datum.value !== null"
+    }
+   ],
+   "mark": {
+    "type": "text",
+    "fontSize": 11,
+    "dy": 19,
+    "color": "#37474F"
+   },
+   "encoding": {
+    "x": {
+     "field": "key",
+     "type": "nominal",
+     "scale": {
+      "domain": [
+       "编码",
+       "交付",
+       "运维",
+       "需求",
+       "收敛",
+       "UI",
+       "视觉",
+       "防御",
+       "归因",
+       "审查"
+      ]
+     },
+     "sort": null,
+     "title": null,
+     "axis": {
+      "labelFontSize": 14,
+      "labelAngle": 0,
+      "orient": "top",
+      "domain": false,
+      "ticks": false,
+      "labelPadding": 8
+     }
+    },
+    "y": {
+     "field": "lane",
+     "type": "nominal",
+     "sort": [
+      "claude-opus-5-5 @ Anthropic 订阅道 · 19'/24",
+      "claude-sonnet-5-5 @ Anthropic 订阅道 · 19'/24",
+      "swe-2-max @ Devin · 19'/24",
+      "deepseek-v4.1-flash @ WorkBuddy 直连 (W40) · 18'/24",
+      "glm-5.3-flash @ Ollama Cloud · 18'/24",
+      "hy4-preview-f @ WorkBuddy ACP (W37) · 18'/24",
+      "k3 @ Kimi 官方 coding · 18'/24",
+      "step-5-preview @ StepFun (W41) · 18'/24"
+     ],
+     "title": null,
+     "axis": {
+      "labelFontSize": 13,
+      "labelLimit": 0,
+      "domain": false,
+      "ticks": false,
+      "labelColor": "#263238"
+     }
+    },
+    "text": {
+     "field": "label"
+    }
+   }
+  },
+  {
+   "transform": [
+    {
+     "filter": "datum.value === null"
+    }
+   ],
+   "mark": {
+    "type": "text",
+    "fontSize": 13,
+    "fontWeight": "bold",
+    "color": "#78909C"
+   },
+   "encoding": {
+    "x": {
+     "field": "key",
+     "type": "nominal",
+     "scale": {
+      "domain": [
+       "编码",
+       "交付",
+       "运维",
+       "需求",
+       "收敛",
+       "UI",
+       "视觉",
+       "防御",
+       "归因",
+       "审查"
+      ]
+     },
+     "sort": null,
+     "title": null,
+     "axis": {
+      "labelFontSize": 14,
+      "labelAngle": 0,
+      "orient": "top",
+      "domain": false,
+      "ticks": false,
+      "labelPadding": 8
+     }
+    },
+    "y": {
+     "field": "lane",
+     "type": "nominal",
+     "sort": [
+      "claude-opus-5-5 @ Anthropic 订阅道 · 19'/24",
+      "claude-sonnet-5-5 @ Anthropic 订阅道 · 19'/24",
+      "swe-2-max @ Devin · 19'/24",
+      "deepseek-v4.1-flash @ WorkBuddy 直连 (W40) · 18'/24",
+      "glm-5.3-flash @ Ollama Cloud · 18'/24",
+      "hy4-preview-f @ WorkBuddy ACP (W37) · 18'/24",
+      "k3 @ Kimi 官方 coding · 18'/24",
+      "step-5-preview @ StepFun (W41) · 18'/24"
+     ],
+     "title": null,
+     "axis": {
+      "labelFontSize": 13,
+      "labelLimit": 0,
+      "domain": false,
+      "ticks": false,
+      "labelColor": "#263238"
+     }
+    },
+    "text": {
+     "field": "label"
+    }
+   }
+  },
+  {
+   "data": {
+    "values": [
+     {
+      "k": "UI"
+     }
+    ]
+   },
+   "mark": {
+    "type": "rule",
+    "stroke": "#B0BEC5",
+    "strokeDash": [
+     4,
+     3
+    ],
+    "strokeWidth": 1.2,
+    "xOffset": -35.0
+   },
+   "encoding": {
+    "x": {
+     "field": "k",
+     "type": "nominal",
+     "scale": {
+      "domain": [
+       "编码",
+       "交付",
+       "运维",
+       "需求",
+       "收敛",
+       "UI",
+       "视觉",
+       "防御",
+       "归因",
+       "审查"
+      ]
+     }
+    }
+   }
+  },
+  {
+   "data": {
+    "values": [
+     {
+      "k": "编码",
+      "t": "施工面"
+     },
+     {
+      "k": "UI",
+      "t": "判断面"
+     }
+    ]
+   },
+   "mark": {
+    "type": "text",
+    "align": "left",
+    "fontSize": 14,
+    "fontWeight": "bold",
+    "color": "#455A64",
+    "dx": -30
+   },
+   "encoding": {
+    "x": {
+     "field": "k",
+     "type": "nominal",
+     "scale": {
+      "domain": [
+       "编码",
+       "交付",
+       "运维",
+       "需求",
+       "收敛",
+       "UI",
+       "视觉",
+       "防御",
+       "归因",
+       "审查"
+      ]
+     }
+    },
+    "y": {
+     "value": -46
+    },
+    "text": {
+     "field": "t"
+    }
+   }
+  }
+ ]
+}

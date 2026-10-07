@@ -29,9 +29,9 @@
 
 总分相同的车道，强项和短板可以完全不同。点越大、颜色越深，完成度越高；NA = 该轴没有可计分的案，不是零分。
 
-![完成度矩阵：榜上总分 18 以上的 7 条车道，十轴，24 案，2026-10-04](docs/images/completion-matrix-top7-2026-w40.png?v=20261004)
+![完成度矩阵：榜上总分 18 以上的 8 条车道，十轴，24 案，2026-10-07](docs/images/completion-matrix-top8-2026-w41.png?v=20261007)
 
-*图中 7 条 = 榜上总分 18 以上的全部车道（2026-10-04 的库）。hy4-preview-f 取 ACP（W37）一行；同名的直连（W40，16'）总分不到 18，不在图内。deepseek-v4.1-flash @ WorkBuddy 直连（W40）的 UI 轴只有一案 A-d9b79b46，该案挂起、记 NA，所以那一格是 NA 不是零分；它的视觉格取考场修复后的重考卷，见 [amber-workbuddy W40](https://github.com/getaskclaw/amber-workbuddy/blob/main/results/2026-W40.md)。防御轴按 A-d511f9e8 在所有车道上 NA 的口径算，各格只剩另一案的读数（两案都挂起的格是 NA）。*
+*图中 8 条 = 榜上总分 18 以上的全部车道（2026-10-07 的库）。hy4-preview-f 取 ACP（W37）一行；同名的直连（W40，16'）总分不到 18，不在图内。deepseek-v4.1-flash @ WorkBuddy 直连（W40）的 UI 轴只有一案 A-d9b79b46，该案挂起、记 NA，所以那一格是 NA 不是零分；它的视觉格取考场修复后的重考卷，见 [amber-workbuddy W40](https://github.com/getaskclaw/amber-workbuddy/blob/main/results/2026-W40.md)。防御轴按 A-d511f9e8 在所有车道上 NA 的口径算，各格只剩另一案的读数（两案都没有可计分结果的格是 NA）。step-5-preview（W41）的 UI 格是 1.00：品牌案 A-d9b79b46 在题面修订后于 2026-10-07 单案重考通过（12/12），见 [amber-stepfun W41](https://github.com/getaskclaw/amber-stepfun/blob/main/results/2026-W41.md)；它的防御和归因两格是 NA，因为这两轴各有一案撞考场时间上限、没有可计分结果。*
 
 **读法**：动手干活的「施工面」几乎全满，差别在「判断面」。每格 = 该轴全部案子的完成度（0–1）。官方榜 [askclaw.dev](https://askclaw.dev/) 也用这十个轴。
 

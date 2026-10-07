@@ -2,16 +2,16 @@
 
 > 从首页 [README](../README.md) 移来，正文未改。English: [axes.en.md](axes.en.md)
 
-**完成度画像：同分 ≠ 同款** —— 总分相同的车道，强项和短板可以完全不同。下图把榜上总分 18 以上的 7 条车道，在十个轴上的完成度画成点阵：点越大、颜色越深，完成度越高；NA = 该轴没有可计分的案（作废或暂停），不是零分。数据来自成绩库（与官网榜同源），24 案全库，2026-10-04 口径，A-d511f9e8 已按 NA 排除。
+**完成度画像：同分 ≠ 同款** —— 总分相同的车道，强项和短板可以完全不同。下图把榜上总分 18 以上的 8 条车道，在十个轴上的完成度画成点阵：点越大、颜色越深，完成度越高；NA = 该轴没有可计分的案（作废或暂停），不是零分。数据来自成绩库（与官网榜同源），24 案全库，2026-10-07 口径，A-d511f9e8 已按 NA 排除。
 
-![完成度矩阵：榜上总分 18 以上的 7 条车道，十轴，24 案，2026-10-04](images/completion-matrix-top7-2026-w40.png?v=20261004)
+![完成度矩阵：榜上总分 18 以上的 8 条车道，十轴，24 案，2026-10-07](images/completion-matrix-top8-2026-w41.png?v=20261007)
 
 怎么读这张图：
 
-- **施工面几乎全满**：编码 0.96–1.00，交付、运维、需求、收敛七条都是 1.00。动手干活的轴上，这七条拉不开差距。
-- **差别全在判断面**：UI 有四条是 1.00，glm-5.3-flash（Ollama Cloud）和 k3 是 0.00（这一案在成绩库里没有检查项明细，按规则记 0.00），deepseek-v4.1-flash（WorkBuddy 直连）是 NA（UI 轴唯一的一案 A-d9b79b46 挂起）；视觉从 hy4-preview-f（ACP）的 0.33 到 claude-opus-5-5 和 deepseek-v4.1-flash（WorkBuddy 直连）的 0.89，后者的视觉格取考场修复后的重考卷；审查都在 0.22–0.67。
-- **防御和归因最分散**：claude-opus-5-5 这两轴都是 NA，swe-2-max 的归因也是 NA；claude-sonnet-5-5 防御最高（0.89）但归因只有 0.47；glm-5.3-flash（Ollama Cloud）、hy4-preview-f（ACP）和 deepseek-v4.1-flash（WorkBuddy 直连）归因最高（0.93）。
-- 想看更早的版本：六道版（2026-10-02，不含 deepseek-v4.1-flash @ WorkBuddy 直连）[completion-matrix-top6-2026-w40.png](images/completion-matrix-top6-2026-w40.png)；七道版（旧口径，含 doubao 和 Qwen3.8-27B 两条偏科的车道，仅作历史）[completion-matrix-7way.png](images/completion-matrix-7way.png)。各车道的完成度也写在各结果仓的期文里。
+- **施工面几乎全满**：编码 0.96–1.00，交付、运维、需求、收敛八条都是 1.00。动手干活的轴上，这八条拉不开差距。
+- **差别全在判断面**：UI 有五条是 1.00，glm-5.3-flash（Ollama Cloud）和 k3 是 0.00（这一案在成绩库里没有检查项明细，按规则记 0.00），deepseek-v4.1-flash（WorkBuddy 直连）是 NA（UI 轴唯一的一案 A-d9b79b46 挂起）；视觉从 step-5-preview 的 0.22、hy4-preview-f（ACP）的 0.33 到 claude-opus-5-5 和 deepseek-v4.1-flash（WorkBuddy 直连）的 0.89，后者的视觉格取考场修复后的重考卷；审查都在 0.22–0.67。
+- **防御和归因最分散**：claude-opus-5-5 和 step-5-preview 这两轴都是 NA（step-5-preview 每轴各有一案撞考场时间上限），swe-2-max 的归因也是 NA；claude-sonnet-5-5 防御最高（0.89）但归因只有 0.47；glm-5.3-flash（Ollama Cloud）、hy4-preview-f（ACP）和 deepseek-v4.1-flash（WorkBuddy 直连）归因最高（0.93）。
+- 想看更早的版本：七道版（2026-10-04，不含 step-5-preview）[completion-matrix-top7-2026-w40.png](images/completion-matrix-top7-2026-w40.png)；六道版（2026-10-02，不含 deepseek-v4.1-flash @ WorkBuddy 直连）[completion-matrix-top6-2026-w40.png](images/completion-matrix-top6-2026-w40.png)；七道版（旧口径，含 doubao 和 Qwen3.8-27B 两条偏科的车道，仅作历史）[completion-matrix-7way.png](images/completion-matrix-7way.png)。各车道的完成度也写在各结果仓的期文里。
 
 **十轴怎么读（白话版）** —— 每格 = 该轴全部案子的完成度（0–1），按钉数折算：
 

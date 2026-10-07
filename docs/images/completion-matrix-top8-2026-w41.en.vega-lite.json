@@ -1,0 +1,828 @@
+{
+ "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+ "width": 880,
+ "height": 480,
+ "background": "#FFFFFF",
+ "config": {
+  "font": "Liberation Sans",
+  "view": {
+   "stroke": null
+  }
+ },
+ "title": {
+  "text": "Completion matrix: the 8 lanes with 18+ on the board (ten axes · 24 cases · 2026-10-07)",
+  "subtitle": [
+   "A bigger, darker dot = higher completion on that axis (0–1, prorated by required checks; a failed case still earns what it got right)",
+   "NA = no scorable case on that axis (voided or on hold), not a zero; a total with ' contains NA"
+  ],
+  "fontSize": 17,
+  "subtitleFontSize": 12,
+  "subtitleColor": "#455A64",
+  "anchor": "start",
+  "offset": 14
+ },
+ "data": {
+  "values": [
+   {
+    "key": "Coding",
+    "lane": "claude-opus-5-5 @ Anthropic subscription · 19'/24",
+    "value": 0.9583333333333334,
+    "label": "0.96"
+   },
+   {
+    "key": "Delivery",
+    "lane": "claude-opus-5-5 @ Anthropic subscription · 19'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "Ops",
+    "lane": "claude-opus-5-5 @ Anthropic subscription · 19'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "Requirements",
+    "lane": "claude-opus-5-5 @ Anthropic subscription · 19'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "Convergence",
+    "lane": "claude-opus-5-5 @ Anthropic subscription · 19'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "UI",
+    "lane": "claude-opus-5-5 @ Anthropic subscription · 19'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "Vision",
+    "lane": "claude-opus-5-5 @ Anthropic subscription · 19'/24",
+    "value": 0.8888888888888888,
+    "label": "0.89"
+   },
+   {
+    "key": "Defense",
+    "lane": "claude-opus-5-5 @ Anthropic subscription · 19'/24",
+    "value": null,
+    "label": "NA"
+   },
+   {
+    "key": "Attribution",
+    "lane": "claude-opus-5-5 @ Anthropic subscription · 19'/24",
+    "value": null,
+    "label": "NA"
+   },
+   {
+    "key": "Review",
+    "lane": "claude-opus-5-5 @ Anthropic subscription · 19'/24",
+    "value": 0.4444444444444444,
+    "label": "0.44"
+   },
+   {
+    "key": "Coding",
+    "lane": "claude-sonnet-5-5 @ Anthropic subscription · 19'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "Delivery",
+    "lane": "claude-sonnet-5-5 @ Anthropic subscription · 19'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "Ops",
+    "lane": "claude-sonnet-5-5 @ Anthropic subscription · 19'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "Requirements",
+    "lane": "claude-sonnet-5-5 @ Anthropic subscription · 19'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "Convergence",
+    "lane": "claude-sonnet-5-5 @ Anthropic subscription · 19'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "UI",
+    "lane": "claude-sonnet-5-5 @ Anthropic subscription · 19'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "Vision",
+    "lane": "claude-sonnet-5-5 @ Anthropic subscription · 19'/24",
+    "value": 0.7777777777777778,
+    "label": "0.78"
+   },
+   {
+    "key": "Defense",
+    "lane": "claude-sonnet-5-5 @ Anthropic subscription · 19'/24",
+    "value": 0.8888888888888888,
+    "label": "0.89"
+   },
+   {
+    "key": "Attribution",
+    "lane": "claude-sonnet-5-5 @ Anthropic subscription · 19'/24",
+    "value": 0.4666666666666667,
+    "label": "0.47"
+   },
+   {
+    "key": "Review",
+    "lane": "claude-sonnet-5-5 @ Anthropic subscription · 19'/24",
+    "value": 0.2222222222222222,
+    "label": "0.22"
+   },
+   {
+    "key": "Coding",
+    "lane": "swe-2-max @ Devin · 19'/24",
+    "value": 0.9583333333333334,
+    "label": "0.96"
+   },
+   {
+    "key": "Delivery",
+    "lane": "swe-2-max @ Devin · 19'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "Ops",
+    "lane": "swe-2-max @ Devin · 19'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "Requirements",
+    "lane": "swe-2-max @ Devin · 19'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "Convergence",
+    "lane": "swe-2-max @ Devin · 19'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "UI",
+    "lane": "swe-2-max @ Devin · 19'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "Vision",
+    "lane": "swe-2-max @ Devin · 19'/24",
+    "value": 0.7777777777777778,
+    "label": "0.78"
+   },
+   {
+    "key": "Defense",
+    "lane": "swe-2-max @ Devin · 19'/24",
+    "value": 0.4444444444444444,
+    "label": "0.44"
+   },
+   {
+    "key": "Attribution",
+    "lane": "swe-2-max @ Devin · 19'/24",
+    "value": null,
+    "label": "NA"
+   },
+   {
+    "key": "Review",
+    "lane": "swe-2-max @ Devin · 19'/24",
+    "value": 0.5555555555555556,
+    "label": "0.56"
+   },
+   {
+    "key": "Coding",
+    "lane": "deepseek-v4.1-flash @ WorkBuddy direct (W40) · 18'/24",
+    "value": 0.9583333333333334,
+    "label": "0.96"
+   },
+   {
+    "key": "Delivery",
+    "lane": "deepseek-v4.1-flash @ WorkBuddy direct (W40) · 18'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "Ops",
+    "lane": "deepseek-v4.1-flash @ WorkBuddy direct (W40) · 18'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "Requirements",
+    "lane": "deepseek-v4.1-flash @ WorkBuddy direct (W40) · 18'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "Convergence",
+    "lane": "deepseek-v4.1-flash @ WorkBuddy direct (W40) · 18'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "UI",
+    "lane": "deepseek-v4.1-flash @ WorkBuddy direct (W40) · 18'/24",
+    "value": null,
+    "label": "NA"
+   },
+   {
+    "key": "Vision",
+    "lane": "deepseek-v4.1-flash @ WorkBuddy direct (W40) · 18'/24",
+    "value": 0.8888888888888888,
+    "label": "0.89"
+   },
+   {
+    "key": "Defense",
+    "lane": "deepseek-v4.1-flash @ WorkBuddy direct (W40) · 18'/24",
+    "value": 0.6666666666666666,
+    "label": "0.67"
+   },
+   {
+    "key": "Attribution",
+    "lane": "deepseek-v4.1-flash @ WorkBuddy direct (W40) · 18'/24",
+    "value": 0.9333333333333333,
+    "label": "0.93"
+   },
+   {
+    "key": "Review",
+    "lane": "deepseek-v4.1-flash @ WorkBuddy direct (W40) · 18'/24",
+    "value": 0.5,
+    "label": "0.50"
+   },
+   {
+    "key": "Coding",
+    "lane": "glm-5.3-flash @ Ollama Cloud · 18'/24",
+    "value": 0.9583333333333334,
+    "label": "0.96"
+   },
+   {
+    "key": "Delivery",
+    "lane": "glm-5.3-flash @ Ollama Cloud · 18'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "Ops",
+    "lane": "glm-5.3-flash @ Ollama Cloud · 18'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "Requirements",
+    "lane": "glm-5.3-flash @ Ollama Cloud · 18'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "Convergence",
+    "lane": "glm-5.3-flash @ Ollama Cloud · 18'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "UI",
+    "lane": "glm-5.3-flash @ Ollama Cloud · 18'/24",
+    "value": 0.0,
+    "label": "0.00"
+   },
+   {
+    "key": "Vision",
+    "lane": "glm-5.3-flash @ Ollama Cloud · 18'/24",
+    "value": 0.7777777777777778,
+    "label": "0.78"
+   },
+   {
+    "key": "Defense",
+    "lane": "glm-5.3-flash @ Ollama Cloud · 18'/24",
+    "value": 0.4444444444444444,
+    "label": "0.44"
+   },
+   {
+    "key": "Attribution",
+    "lane": "glm-5.3-flash @ Ollama Cloud · 18'/24",
+    "value": 0.9333333333333333,
+    "label": "0.93"
+   },
+   {
+    "key": "Review",
+    "lane": "glm-5.3-flash @ Ollama Cloud · 18'/24",
+    "value": 0.6666666666666666,
+    "label": "0.67"
+   },
+   {
+    "key": "Coding",
+    "lane": "hy4-preview-f @ WorkBuddy ACP (W37) · 18'/24",
+    "value": 0.9583333333333334,
+    "label": "0.96"
+   },
+   {
+    "key": "Delivery",
+    "lane": "hy4-preview-f @ WorkBuddy ACP (W37) · 18'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "Ops",
+    "lane": "hy4-preview-f @ WorkBuddy ACP (W37) · 18'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "Requirements",
+    "lane": "hy4-preview-f @ WorkBuddy ACP (W37) · 18'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "Convergence",
+    "lane": "hy4-preview-f @ WorkBuddy ACP (W37) · 18'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "UI",
+    "lane": "hy4-preview-f @ WorkBuddy ACP (W37) · 18'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "Vision",
+    "lane": "hy4-preview-f @ WorkBuddy ACP (W37) · 18'/24",
+    "value": 0.3333333333333333,
+    "label": "0.33"
+   },
+   {
+    "key": "Defense",
+    "lane": "hy4-preview-f @ WorkBuddy ACP (W37) · 18'/24",
+    "value": 0.3333333333333333,
+    "label": "0.33"
+   },
+   {
+    "key": "Attribution",
+    "lane": "hy4-preview-f @ WorkBuddy ACP (W37) · 18'/24",
+    "value": 0.9333333333333333,
+    "label": "0.93"
+   },
+   {
+    "key": "Review",
+    "lane": "hy4-preview-f @ WorkBuddy ACP (W37) · 18'/24",
+    "value": 0.5555555555555556,
+    "label": "0.56"
+   },
+   {
+    "key": "Coding",
+    "lane": "k3 @ Kimi official coding · 18'/24",
+    "value": 0.9583333333333334,
+    "label": "0.96"
+   },
+   {
+    "key": "Delivery",
+    "lane": "k3 @ Kimi official coding · 18'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "Ops",
+    "lane": "k3 @ Kimi official coding · 18'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "Requirements",
+    "lane": "k3 @ Kimi official coding · 18'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "Convergence",
+    "lane": "k3 @ Kimi official coding · 18'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "UI",
+    "lane": "k3 @ Kimi official coding · 18'/24",
+    "value": 0.0,
+    "label": "0.00"
+   },
+   {
+    "key": "Vision",
+    "lane": "k3 @ Kimi official coding · 18'/24",
+    "value": 0.7777777777777778,
+    "label": "0.78"
+   },
+   {
+    "key": "Defense",
+    "lane": "k3 @ Kimi official coding · 18'/24",
+    "value": 0.4444444444444444,
+    "label": "0.44"
+   },
+   {
+    "key": "Attribution",
+    "lane": "k3 @ Kimi official coding · 18'/24",
+    "value": 0.6666666666666666,
+    "label": "0.67"
+   },
+   {
+    "key": "Review",
+    "lane": "k3 @ Kimi official coding · 18'/24",
+    "value": 0.5555555555555556,
+    "label": "0.56"
+   },
+   {
+    "key": "Coding",
+    "lane": "step-5-preview @ StepFun (W41) · 18'/24",
+    "value": 0.9583333333333334,
+    "label": "0.96"
+   },
+   {
+    "key": "Delivery",
+    "lane": "step-5-preview @ StepFun (W41) · 18'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "Ops",
+    "lane": "step-5-preview @ StepFun (W41) · 18'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "Requirements",
+    "lane": "step-5-preview @ StepFun (W41) · 18'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "Convergence",
+    "lane": "step-5-preview @ StepFun (W41) · 18'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "UI",
+    "lane": "step-5-preview @ StepFun (W41) · 18'/24",
+    "value": 1.0,
+    "label": "1.00"
+   },
+   {
+    "key": "Vision",
+    "lane": "step-5-preview @ StepFun (W41) · 18'/24",
+    "value": 0.2222222222222222,
+    "label": "0.22"
+   },
+   {
+    "key": "Defense",
+    "lane": "step-5-preview @ StepFun (W41) · 18'/24",
+    "value": null,
+    "label": "NA"
+   },
+   {
+    "key": "Attribution",
+    "lane": "step-5-preview @ StepFun (W41) · 18'/24",
+    "value": null,
+    "label": "NA"
+   },
+   {
+    "key": "Review",
+    "lane": "step-5-preview @ StepFun (W41) · 18'/24",
+    "value": 0.5,
+    "label": "0.50"
+   }
+  ]
+ },
+ "layer": [
+  {
+   "transform": [
+    {
+     "filter": "datum.value !== null"
+    }
+   ],
+   "mark": {
+    "type": "circle",
+    "opacity": 1,
+    "stroke": "#0F5E59",
+    "strokeWidth": 0.8
+   },
+   "encoding": {
+    "x": {
+     "field": "key",
+     "type": "nominal",
+     "scale": {
+      "domain": [
+       "Coding",
+       "Delivery",
+       "Ops",
+       "Requirements",
+       "Convergence",
+       "UI",
+       "Vision",
+       "Defense",
+       "Attribution",
+       "Review"
+      ]
+     },
+     "sort": null,
+     "title": null,
+     "axis": {
+      "labelFontSize": 13,
+      "labelAngle": 0,
+      "orient": "top",
+      "domain": false,
+      "ticks": false,
+      "labelPadding": 8
+     }
+    },
+    "y": {
+     "field": "lane",
+     "type": "nominal",
+     "sort": [
+      "claude-opus-5-5 @ Anthropic subscription · 19'/24",
+      "claude-sonnet-5-5 @ Anthropic subscription · 19'/24",
+      "swe-2-max @ Devin · 19'/24",
+      "deepseek-v4.1-flash @ WorkBuddy direct (W40) · 18'/24",
+      "glm-5.3-flash @ Ollama Cloud · 18'/24",
+      "hy4-preview-f @ WorkBuddy ACP (W37) · 18'/24",
+      "k3 @ Kimi official coding · 18'/24",
+      "step-5-preview @ StepFun (W41) · 18'/24"
+     ],
+     "title": null,
+     "axis": {
+      "labelFontSize": 13,
+      "labelLimit": 0,
+      "domain": false,
+      "ticks": false,
+      "labelColor": "#263238"
+     }
+    },
+    "size": {
+     "field": "value",
+     "type": "quantitative",
+     "scale": {
+      "domain": [
+       0,
+       1
+      ],
+      "range": [
+       40,
+       700
+      ]
+     },
+     "legend": null
+    },
+    "color": {
+     "field": "value",
+     "type": "quantitative",
+     "scale": {
+      "domain": [
+       0,
+       1
+      ],
+      "range": [
+       "#DCEFEC",
+       "#0F5E59"
+      ]
+     },
+     "legend": null
+    }
+   }
+  },
+  {
+   "transform": [
+    {
+     "filter": "datum.value !== null"
+    }
+   ],
+   "mark": {
+    "type": "text",
+    "fontSize": 11,
+    "dy": 19,
+    "color": "#37474F"
+   },
+   "encoding": {
+    "x": {
+     "field": "key",
+     "type": "nominal",
+     "scale": {
+      "domain": [
+       "Coding",
+       "Delivery",
+       "Ops",
+       "Requirements",
+       "Convergence",
+       "UI",
+       "Vision",
+       "Defense",
+       "Attribution",
+       "Review"
+      ]
+     },
+     "sort": null,
+     "title": null,
+     "axis": {
+      "labelFontSize": 13,
+      "labelAngle": 0,
+      "orient": "top",
+      "domain": false,
+      "ticks": false,
+      "labelPadding": 8
+     }
+    },
+    "y": {
+     "field": "lane",
+     "type": "nominal",
+     "sort": [
+      "claude-opus-5-5 @ Anthropic subscription · 19'/24",
+      "claude-sonnet-5-5 @ Anthropic subscription · 19'/24",
+      "swe-2-max @ Devin · 19'/24",
+      "deepseek-v4.1-flash @ WorkBuddy direct (W40) · 18'/24",
+      "glm-5.3-flash @ Ollama Cloud · 18'/24",
+      "hy4-preview-f @ WorkBuddy ACP (W37) · 18'/24",
+      "k3 @ Kimi official coding · 18'/24",
+      "step-5-preview @ StepFun (W41) · 18'/24"
+     ],
+     "title": null,
+     "axis": {
+      "labelFontSize": 13,
+      "labelLimit": 0,
+      "domain": false,
+      "ticks": false,
+      "labelColor": "#263238"
+     }
+    },
+    "text": {
+     "field": "label"
+    }
+   }
+  },
+  {
+   "transform": [
+    {
+     "filter": "datum.value === null"
+    }
+   ],
+   "mark": {
+    "type": "text",
+    "fontSize": 13,
+    "fontWeight": "bold",
+    "color": "#78909C"
+   },
+   "encoding": {
+    "x": {
+     "field": "key",
+     "type": "nominal",
+     "scale": {
+      "domain": [
+       "Coding",
+       "Delivery",
+       "Ops",
+       "Requirements",
+       "Convergence",
+       "UI",
+       "Vision",
+       "Defense",
+       "Attribution",
+       "Review"
+      ]
+     },
+     "sort": null,
+     "title": null,
+     "axis": {
+      "labelFontSize": 13,
+      "labelAngle": 0,
+      "orient": "top",
+      "domain": false,
+      "ticks": false,
+      "labelPadding": 8
+     }
+    },
+    "y": {
+     "field": "lane",
+     "type": "nominal",
+     "sort": [
+      "claude-opus-5-5 @ Anthropic subscription · 19'/24",
+      "claude-sonnet-5-5 @ Anthropic subscription · 19'/24",
+      "swe-2-max @ Devin · 19'/24",
+      "deepseek-v4.1-flash @ WorkBuddy direct (W40) · 18'/24",
+      "glm-5.3-flash @ Ollama Cloud · 18'/24",
+      "hy4-preview-f @ WorkBuddy ACP (W37) · 18'/24",
+      "k3 @ Kimi official coding · 18'/24",
+      "step-5-preview @ StepFun (W41) · 18'/24"
+     ],
+     "title": null,
+     "axis": {
+      "labelFontSize": 13,
+      "labelLimit": 0,
+      "domain": false,
+      "ticks": false,
+      "labelColor": "#263238"
+     }
+    },
+    "text": {
+     "field": "label"
+    }
+   }
+  },
+  {
+   "data": {
+    "values": [
+     {
+      "k": "UI"
+     }
+    ]
+   },
+   "mark": {
+    "type": "rule",
+    "stroke": "#B0BEC5",
+    "strokeDash": [
+     4,
+     3
+    ],
+    "strokeWidth": 1.2,
+    "xOffset": -44.0
+   },
+   "encoding": {
+    "x": {
+     "field": "k",
+     "type": "nominal",
+     "scale": {
+      "domain": [
+       "Coding",
+       "Delivery",
+       "Ops",
+       "Requirements",
+       "Convergence",
+       "UI",
+       "Vision",
+       "Defense",
+       "Attribution",
+       "Review"
+      ]
+     }
+    }
+   }
+  },
+  {
+   "data": {
+    "values": [
+     {
+      "k": "Coding",
+      "t": "Building"
+     },
+     {
+      "k": "UI",
+      "t": "Judging"
+     }
+    ]
+   },
+   "mark": {
+    "type": "text",
+    "align": "left",
+    "fontSize": 14,
+    "fontWeight": "bold",
+    "color": "#455A64",
+    "dx": -30
+   },
+   "encoding": {
+    "x": {
+     "field": "k",
+     "type": "nominal",
+     "scale": {
+      "domain": [
+       "Coding",
+       "Delivery",
+       "Ops",
+       "Requirements",
+       "Convergence",
+       "UI",
+       "Vision",
+       "Defense",
+       "Attribution",
+       "Review"
+      ]
+     }
+    },
+    "y": {
+     "value": -46
+    },
+    "text": {
+     "field": "t"
+    }
+   }
+  }
+ ]
+}
