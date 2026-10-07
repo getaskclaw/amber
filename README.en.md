@@ -9,6 +9,7 @@
 > ⚠️ **Corrections** (original text and the list of affected lanes: [leaderboard in full](docs/leaderboard-notes.en.md))
 > - **[2026-10-02](docs/corrections-2026-10-02.en.md)**: 22 published papers whose candidate stepped outside the paper and touched grading material are now NA (neither a pass nor a fail). The fault is ours; since 2026-10-01 papers are answered in isolated containers.
 > - **[2026-10-02 (second)](docs/corrections-2026-10-02-a-d511f9e8.en.md)**: one defense-axis case, A-d511f9e8, is now NA on every lane. The denominator and the **number of passed cases do not change**; every lane's total now carries `'`.
+> - **[2026-10-07](docs/corrections-2026-10-07-a-24bcf707.en.md)**: one ops-axis case, A-24bcf707, changes from a loss to NA on seven lanes (the grading asked for one more thing than the task text says). The denominator, **totals and rank tiers do not change**, and no sitting is re-run.
 > - Earlier: [2026-09-18](docs/corrections-2026-09-18.en.md) (swe-2-low was actually swe-2-high) · [2026-W38](docs/corrections-2026-W38.en.md) (full-library review, per-repo notices)
 
 ## Who leads now
