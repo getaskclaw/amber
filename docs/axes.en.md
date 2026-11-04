@@ -31,3 +31,21 @@ How to read it:
 Axes grow with the library: each new case family can add a column — extend this list the same way.
 
 Who tops each axis? Recomputed across 40 published lanes: [Nine-axis podium 2026-09-18](nine-axis-top3-2026-09-18.en.md) (written before the Convergence axis joined — covers the first nine) — only defense/attribution/review/vision actually rank the field, the four champions belong to four different vendors, and the overall board leader wins none of them; on Convergence every examined lane is tied at full marks, pending more cases.
+
+
+## W45: k3.1-pro high
+
+| Axis | k3.1-pro high W45 |
+|---|---|
+| Coding | 5/6 |
+| Delivery | 2/3 |
+| Ops | 5/6 |
+| Requirements | 1/1 |
+| Convergence | 1/1 |
+| UI | 1/1 |
+| Vision | 0/1 |
+| Defense | 0/2 · 1 NA |
+| Attribution | 0/1 |
+| Review | 1/2 · 1 NA |
+
+Total: **16'/24**. The older charts above keep their dated snapshots. [Current axes](data/axes.json) · [Per-case ledger](data/ledger.json).

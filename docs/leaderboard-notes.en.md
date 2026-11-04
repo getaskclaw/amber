@@ -40,3 +40,8 @@ Not yet on the board: Fable was held back earlier because the token budget did n
 | 0.958 | 1.000 | 1.000 | 1.000 | NA | NA | 0.333 | 0.667 | NA | 1.000 |
 
 **Update 2026-10-09**: the Defense cell changes from 0.292 to 0.333. The old value counted A-d511f9e8 (3/12 pins, before its 10-02 hold). That case has been NA on every lane since 10-02 and is excluded under the rule above, so Defense now rests on A-be92627f alone (3/9 pins): 0.333. All other cells are unchanged.
+
+
+## W45 update — 2026-11-04
+
+k3.1-pro high: **16'/24**, 16 wins, 6 losses, 2 inherited NA. Current board: [README](../README.en.md). Earlier source snapshots above remain as published.

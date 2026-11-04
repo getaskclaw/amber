@@ -1,0 +1,2232 @@
+[
+ {
+  "id": "devin",
+  "name": "swe-2-max",
+  "vendor": "Devin",
+  "wk": "W37",
+  "cases": 24,
+  "repo": "amber-devin",
+  "file": "amber-devin/results/2026-W37.md",
+  "total": 19,
+  "n": 24,
+  "axis": {
+   "build": {
+    "p": 5,
+    "n": 6
+   },
+   "text": {
+    "p": 3,
+    "n": 3
+   },
+   "ops": {
+    "p": 6,
+    "n": 6
+   },
+   "req-drift": {
+    "p": 1,
+    "n": 1
+   },
+   "convergence": {
+    "p": 1,
+    "n": 1
+   },
+   "ui-build": {
+    "p": 1,
+    "n": 1
+   },
+   "vision": {
+    "p": 1,
+    "n": 1
+   },
+   "defense": {
+    "p": 0,
+    "n": 2,
+    "na": 1
+   },
+   "attribution": {
+    "p": 0,
+    "n": 1,
+    "na": 1
+   },
+   "review": {
+    "p": 1,
+    "n": 2,
+    "na": 1
+   }
+  }
+ },
+ {
+  "id": "kimi",
+  "name": "k3",
+  "vendor": "Kimi 官方 coding 端点",
+  "wk": "W38",
+  "cases": 24,
+  "repo": "amber-kimi",
+  "file": "amber-kimi/results/2026-W38.md",
+  "total": 18,
+  "n": 24,
+  "axis": {
+   "build": {
+    "p": 5,
+    "n": 6
+   },
+   "text": {
+    "p": 3,
+    "n": 3
+   },
+   "ops": {
+    "p": 6,
+    "n": 6
+   },
+   "req-drift": {
+    "p": 1,
+    "n": 1
+   },
+   "convergence": {
+    "p": 1,
+    "n": 1
+   },
+   "ui-build": {
+    "p": 0,
+    "n": 1
+   },
+   "vision": {
+    "p": 1,
+    "n": 1
+   },
+   "defense": {
+    "p": 0,
+    "n": 2,
+    "na": 1
+   },
+   "attribution": {
+    "p": 0,
+    "n": 1
+   },
+   "review": {
+    "p": 1,
+    "n": 2,
+    "na": 1
+   }
+  }
+ },
+ {
+  "id": "cc",
+  "name": "deepseek-v4.1-flash",
+  "vendor": "CommandCode",
+  "wk": "W37",
+  "cases": 23,
+  "repo": "amber-commandcode",
+  "file": "amber-commandcode/results/2026-W37.md",
+  "total": 15,
+  "n": 23,
+  "axis": {
+   "build": {
+    "p": 4,
+    "n": 6,
+    "na": 1
+   },
+   "text": {
+    "p": 3,
+    "n": 3
+   },
+   "ops": {
+    "p": 5,
+    "n": 6,
+    "na": 1
+   },
+   "req-drift": {
+    "p": 1,
+    "n": 1
+   },
+   "convergence": {
+    "p": 0,
+    "n": 0
+   },
+   "ui-build": {
+    "p": 1,
+    "n": 1
+   },
+   "vision": {
+    "p": 0,
+    "n": 1
+   },
+   "defense": {
+    "p": 0,
+    "n": 2,
+    "na": 1
+   },
+   "attribution": {
+    "p": 0,
+    "n": 1
+   },
+   "review": {
+    "p": 1,
+    "n": 2,
+    "na": 1
+   }
+  }
+ },
+ {
+  "id": "wb",
+  "name": "hy4-preview-f",
+  "vendor": "WorkBuddy ACP",
+  "wk": "W37",
+  "cases": 24,
+  "repo": "amber-workbuddy",
+  "file": "amber-workbuddy/results/2026-W37.md",
+  "total": 18,
+  "n": 24,
+  "axis": {
+   "build": {
+    "p": 5,
+    "n": 6
+   },
+   "text": {
+    "p": 3,
+    "n": 3
+   },
+   "ops": {
+    "p": 6,
+    "n": 6
+   },
+   "req-drift": {
+    "p": 1,
+    "n": 1
+   },
+   "convergence": {
+    "p": 1,
+    "n": 1
+   },
+   "ui-build": {
+    "p": 1,
+    "n": 1
+   },
+   "vision": {
+    "p": 0,
+    "n": 1
+   },
+   "defense": {
+    "p": 0,
+    "n": 2,
+    "na": 1
+   },
+   "attribution": {
+    "p": 0,
+    "n": 1
+   },
+   "review": {
+    "p": 1,
+    "n": 2,
+    "na": 1
+   }
+  }
+ },
+ {
+  "id": "gpt-luna",
+  "name": "gpt-5.6-luna-900k (high 档)",
+  "vendor": "OpenAI Codex",
+  "wk": "W37",
+  "cases": 24,
+  "repo": "amber-gpt",
+  "file": "amber-gpt/results/2026-W37.md",
+  "total": 16,
+  "n": 24,
+  "axis": {
+   "build": {
+    "p": 5,
+    "n": 6
+   },
+   "text": {
+    "p": 3,
+    "n": 3
+   },
+   "ops": {
+    "p": 6,
+    "n": 6
+   },
+   "req-drift": {
+    "p": 1,
+    "n": 1
+   },
+   "convergence": {
+    "p": 1,
+    "n": 1
+   },
+   "ui-build": {
+    "p": 0,
+    "n": 1,
+    "na": 1
+   },
+   "vision": {
+    "p": 0,
+    "n": 1,
+    "na": 1
+   },
+   "defense": {
+    "p": 0,
+    "n": 2,
+    "na": 1
+   },
+   "attribution": {
+    "p": 0,
+    "n": 1
+   },
+   "review": {
+    "p": 0,
+    "n": 2,
+    "na": 2
+   }
+  }
+ },
+ {
+  "id": "ds",
+  "name": "deepseek-flash (GA)",
+  "vendor": "DeepSeek 官方",
+  "wk": "W37",
+  "cases": 24,
+  "repo": "amber-deepseek",
+  "file": "amber-deepseek/results/2026-W37.md",
+  "total": 16,
+  "n": 24,
+  "axis": {
+   "build": {
+    "p": 5,
+    "n": 6
+   },
+   "text": {
+    "p": 3,
+    "n": 3
+   },
+   "ops": {
+    "p": 5,
+    "n": 6,
+    "na": 1
+   },
+   "req-drift": {
+    "p": 1,
+    "n": 1
+   },
+   "convergence": {
+    "p": 1,
+    "n": 1
+   },
+   "ui-build": {
+    "p": 0,
+    "n": 1
+   },
+   "vision": {
+    "p": 0,
+    "n": 1
+   },
+   "defense": {
+    "p": 0,
+    "n": 2,
+    "na": 1
+   },
+   "attribution": {
+    "p": 0,
+    "n": 1
+   },
+   "review": {
+    "p": 1,
+    "n": 2,
+    "na": 1
+   }
+  }
+ },
+ {
+  "id": "ocgo",
+  "name": "deepseek-flash",
+  "vendor": "OpenCode Go",
+  "wk": "W37",
+  "cases": 24,
+  "repo": "amber-opencode",
+  "file": "amber-opencode/results/2026-W37.md",
+  "total": 15,
+  "n": 24,
+  "axis": {
+   "build": {
+    "p": 5,
+    "n": 6
+   },
+   "text": {
+    "p": 3,
+    "n": 3
+   },
+   "ops": {
+    "p": 4,
+    "n": 6,
+    "na": 2
+   },
+   "req-drift": {
+    "p": 1,
+    "n": 1
+   },
+   "convergence": {
+    "p": 1,
+    "n": 1
+   },
+   "ui-build": {
+    "p": 0,
+    "n": 1
+   },
+   "vision": {
+    "p": 0,
+    "n": 1
+   },
+   "defense": {
+    "p": 0,
+    "n": 2,
+    "na": 1
+   },
+   "attribution": {
+    "p": 0,
+    "n": 1
+   },
+   "review": {
+    "p": 1,
+    "n": 2,
+    "na": 1
+   }
+  }
+ },
+ {
+  "id": "doubao",
+  "name": "doubao-seed-evolving",
+  "vendor": "火山方舟 Agent Plan",
+  "wk": "W38",
+  "cases": 24,
+  "repo": "amber-doubao",
+  "file": "amber-doubao/results/2026-W38.md",
+  "total": 17,
+  "n": 24,
+  "axis": {
+   "build": {
+    "p": 5,
+    "n": 6
+   },
+   "text": {
+    "p": 3,
+    "n": 3
+   },
+   "ops": {
+    "p": 6,
+    "n": 6
+   },
+   "req-drift": {
+    "p": 1,
+    "n": 1
+   },
+   "convergence": {
+    "p": 1,
+    "n": 1
+   },
+   "ui-build": {
+    "p": 0,
+    "n": 1
+   },
+   "vision": {
+    "p": 0,
+    "n": 1
+   },
+   "defense": {
+    "p": 0,
+    "n": 2,
+    "na": 2
+   },
+   "attribution": {
+    "p": 0,
+    "n": 1,
+    "na": 1
+   },
+   "review": {
+    "p": 1,
+    "n": 2,
+    "na": 1
+   }
+  }
+ },
+ {
+  "id": "claude",
+  "name": "claude-opus-5-5",
+  "vendor": "Anthropic 订阅道",
+  "wk": "W40",
+  "cases": 24,
+  "repo": "amber-claude",
+  "file": "amber-claude/results/2026-W40.md",
+  "total": 19,
+  "n": 24,
+  "axis": {
+   "build": {
+    "p": 5,
+    "n": 6
+   },
+   "text": {
+    "p": 3,
+    "n": 3
+   },
+   "ops": {
+    "p": 6,
+    "n": 6
+   },
+   "req-drift": {
+    "p": 1,
+    "n": 1
+   },
+   "convergence": {
+    "p": 1,
+    "n": 1
+   },
+   "ui-build": {
+    "p": 1,
+    "n": 1
+   },
+   "vision": {
+    "p": 1,
+    "n": 1
+   },
+   "defense": {
+    "p": 0,
+    "n": 2,
+    "na": 2
+   },
+   "attribution": {
+    "p": 0,
+    "n": 1,
+    "na": 1
+   },
+   "review": {
+    "p": 1,
+    "n": 2,
+    "na": 1
+   }
+  }
+ },
+ {
+  "id": "stepfun",
+  "name": "step-5-preview",
+  "vendor": "stepfun plan 端点",
+  "wk": "W41",
+  "cases": 24,
+  "repo": "amber-stepfun",
+  "file": "amber-stepfun/results/2026-W41.md",
+  "total": 16,
+  "n": 24,
+  "axis": {
+   "build": {
+    "p": 5,
+    "n": 6
+   },
+   "text": {
+    "p": 2,
+    "n": 3,
+    "na": 1
+   },
+   "ops": {
+    "p": 6,
+    "n": 6
+   },
+   "req-drift": {
+    "p": 1,
+    "n": 1
+   },
+   "convergence": {
+    "p": 1,
+    "n": 1
+   },
+   "ui-build": {
+    "p": 0,
+    "n": 1,
+    "na": 1
+   },
+   "vision": {
+    "p": 0,
+    "n": 1,
+    "na": 1
+   },
+   "defense": {
+    "p": 0,
+    "n": 2,
+    "na": 2
+   },
+   "attribution": {
+    "p": 0,
+    "n": 1,
+    "na": 1
+   },
+   "review": {
+    "p": 1,
+    "n": 2,
+    "na": 1
+   }
+  }
+ },
+ {
+  "id": "gpt-sol",
+  "name": "gpt-5.6-sol-900k (high 档)",
+  "vendor": "OpenAI Codex",
+  "wk": "W41",
+  "cases": 24,
+  "repo": "amber-gpt",
+  "file": "amber-gpt/results/2026-W41.md",
+  "total": 17,
+  "n": 24,
+  "axis": {
+   "build": {
+    "p": 5,
+    "n": 6
+   },
+   "text": {
+    "p": 3,
+    "n": 3
+   },
+   "ops": {
+    "p": 4,
+    "n": 6
+   },
+   "req-drift": {
+    "p": 1,
+    "n": 1
+   },
+   "convergence": {
+    "p": 1,
+    "n": 1
+   },
+   "ui-build": {
+    "p": 1,
+    "n": 1
+   },
+   "vision": {
+    "p": 1,
+    "n": 1
+   },
+   "defense": {
+    "p": 0,
+    "n": 2,
+    "na": 1
+   },
+   "attribution": {
+    "p": 0,
+    "n": 1
+   },
+   "review": {
+    "p": 1,
+    "n": 2,
+    "na": 1
+   }
+  }
+ },
+ {
+  "id": "ollama",
+  "name": "glm-5.3-flash",
+  "vendor": "Ollama Cloud",
+  "wk": "W37",
+  "cases": 24,
+  "repo": "amber-ollama",
+  "file": "amber-ollama/results/2026-W37.md",
+  "total": 18,
+  "n": 24,
+  "axis": {
+   "build": {
+    "p": 5,
+    "n": 6
+   },
+   "text": {
+    "p": 3,
+    "n": 3
+   },
+   "ops": {
+    "p": 6,
+    "n": 6
+   },
+   "req-drift": {
+    "p": 1,
+    "n": 1
+   },
+   "convergence": {
+    "p": 1,
+    "n": 1
+   },
+   "ui-build": {
+    "p": 0,
+    "n": 1
+   },
+   "vision": {
+    "p": 1,
+    "n": 1
+   },
+   "defense": {
+    "p": 0,
+    "n": 2,
+    "na": 1
+   },
+   "attribution": {
+    "p": 0,
+    "n": 1
+   },
+   "review": {
+    "p": 1,
+    "n": 2,
+    "na": 1
+   }
+  }
+ },
+ {
+  "id": "gp",
+  "name": "Qwen3.8-27B",
+  "vendor": "社区自部署 3×V100",
+  "wk": "W38",
+  "cases": 24,
+  "repo": "amber-goldenpotato",
+  "file": "amber-goldenpotato/results/2026-W38.md",
+  "total": 15,
+  "n": 24,
+  "axis": {
+   "build": {
+    "p": 5,
+    "n": 6
+   },
+   "text": {
+    "p": 3,
+    "n": 3
+   },
+   "ops": {
+    "p": 5,
+    "n": 6,
+    "na": 1
+   },
+   "req-drift": {
+    "p": 1,
+    "n": 1
+   },
+   "convergence": {
+    "p": 1,
+    "n": 1
+   },
+   "ui-build": {
+    "p": 0,
+    "n": 1
+   },
+   "vision": {
+    "p": 0,
+    "n": 1
+   },
+   "defense": {
+    "p": 0,
+    "n": 2,
+    "na": 1
+   },
+   "attribution": {
+    "p": 0,
+    "n": 1
+   },
+   "review": {
+    "p": 0,
+    "n": 2,
+    "na": 1
+   }
+  }
+ },
+ {
+  "id": "crof",
+  "name": "qwen3.8-27b",
+  "vendor": "CrofAI",
+  "wk": "W36",
+  "cases": 21,
+  "repo": "amber-crof",
+  "file": "amber-crof/results/2026-W36.md",
+  "total": 14,
+  "n": 21,
+  "axis": {
+   "build": {
+    "p": 5,
+    "n": 6
+   },
+   "text": {
+    "p": 3,
+    "n": 3
+   },
+   "ops": {
+    "p": 3,
+    "n": 4
+   },
+   "req-drift": {
+    "p": 1,
+    "n": 1
+   },
+   "convergence": {
+    "p": 0,
+    "n": 0
+   },
+   "ui-build": {
+    "p": 0,
+    "n": 1
+   },
+   "vision": {
+    "p": 0,
+    "n": 1
+   },
+   "defense": {
+    "p": 0,
+    "n": 2,
+    "na": 1
+   },
+   "attribution": {
+    "p": 1,
+    "n": 1
+   },
+   "review": {
+    "p": 1,
+    "n": 2,
+    "na": 1
+   }
+  }
+ },
+ {
+  "id": "astra",
+  "name": "gpt-6-astra-900k",
+  "vendor": "OpenAI Codex",
+  "wk": "W41",
+  "cases": 24,
+  "repo": "amber-gpt",
+  "file": "amber-gpt/results/2026-W41.md",
+  "total": 15,
+  "n": 24,
+  "axis": {
+   "build": {
+    "p": 5,
+    "n": 6
+   },
+   "text": {
+    "p": 2,
+    "n": 3
+   },
+   "ops": {
+    "p": 5,
+    "n": 6,
+    "na": 1
+   },
+   "req-drift": {
+    "p": 1,
+    "n": 1
+   },
+   "convergence": {
+    "p": 1,
+    "n": 1
+   },
+   "ui-build": {
+    "p": 0,
+    "n": 1
+   },
+   "vision": {
+    "p": 1,
+    "n": 1
+   },
+   "defense": {
+    "p": 0,
+    "n": 2,
+    "na": 1
+   },
+   "attribution": {
+    "p": 0,
+    "n": 1
+   },
+   "review": {
+    "p": 0,
+    "n": 2,
+    "na": 1
+   }
+  }
+ },
+ {
+  "id": "gpt6-sol",
+  "name": "gpt-6-sol-900k",
+  "vendor": "OpenAI Codex",
+  "wk": "W39",
+  "cases": 24,
+  "repo": "amber-gpt",
+  "file": "amber-gpt/results/2026-W39.md",
+  "total": 17,
+  "n": 24,
+  "axis": {
+   "build": {
+    "p": 5,
+    "n": 6
+   },
+   "text": {
+    "p": 3,
+    "n": 3
+   },
+   "ops": {
+    "p": 5,
+    "n": 6,
+    "na": 1
+   },
+   "req-drift": {
+    "p": 1,
+    "n": 1
+   },
+   "convergence": {
+    "p": 1,
+    "n": 1
+   },
+   "ui-build": {
+    "p": 1,
+    "n": 1
+   },
+   "vision": {
+    "p": 0,
+    "n": 1
+   },
+   "defense": {
+    "p": 0,
+    "n": 2,
+    "na": 1
+   },
+   "attribution": {
+    "p": 0,
+    "n": 1
+   },
+   "review": {
+    "p": 1,
+    "n": 2,
+    "na": 1
+   }
+  }
+ },
+ {
+  "id": "gpt6-luna",
+  "name": "gpt-6-luna-900k",
+  "vendor": "OpenAI Codex",
+  "wk": "W41",
+  "cases": 24,
+  "repo": "amber-gpt",
+  "file": "amber-gpt/results/2026-W41.md",
+  "total": 15,
+  "n": 24,
+  "axis": {
+   "build": {
+    "p": 5,
+    "n": 6
+   },
+   "text": {
+    "p": 3,
+    "n": 3
+   },
+   "ops": {
+    "p": 5,
+    "n": 6,
+    "na": 1
+   },
+   "req-drift": {
+    "p": 0,
+    "n": 1
+   },
+   "convergence": {
+    "p": 1,
+    "n": 1
+   },
+   "ui-build": {
+    "p": 0,
+    "n": 1
+   },
+   "vision": {
+    "p": 0,
+    "n": 1
+   },
+   "defense": {
+    "p": 0,
+    "n": 2,
+    "na": 1
+   },
+   "attribution": {
+    "p": 0,
+    "n": 1
+   },
+   "review": {
+    "p": 1,
+    "n": 2,
+    "na": 1
+   }
+  }
+ },
+ {
+  "id": "cc-m26p",
+  "name": "mimo-v2.6-pro",
+  "vendor": "CommandCode",
+  "wk": "W39",
+  "cases": 24,
+  "repo": "amber-commandcode",
+  "file": "amber-commandcode/results/2026-W39.md",
+  "total": 16,
+  "n": 24,
+  "axis": {
+   "build": {
+    "p": 5,
+    "n": 6
+   },
+   "text": {
+    "p": 3,
+    "n": 3
+   },
+   "ops": {
+    "p": 5,
+    "n": 6,
+    "na": 1
+   },
+   "req-drift": {
+    "p": 1,
+    "n": 1
+   },
+   "convergence": {
+    "p": 1,
+    "n": 1
+   },
+   "ui-build": {
+    "p": 0,
+    "n": 1
+   },
+   "vision": {
+    "p": 0,
+    "n": 1
+   },
+   "defense": {
+    "p": 0,
+    "n": 2,
+    "na": 1
+   },
+   "attribution": {
+    "p": 0,
+    "n": 1
+   },
+   "review": {
+    "p": 1,
+    "n": 2,
+    "na": 1
+   }
+  }
+ },
+ {
+  "id": "cc-sb",
+  "name": "space-bunny-alpha",
+  "vendor": "CommandCode",
+  "wk": "W39",
+  "cases": 24,
+  "repo": "amber-commandcode",
+  "file": "amber-commandcode/results/2026-W39.md",
+  "total": 13,
+  "n": 24,
+  "axis": {
+   "build": {
+    "p": 4,
+    "n": 6
+   },
+   "text": {
+    "p": 2,
+    "n": 3
+   },
+   "ops": {
+    "p": 5,
+    "n": 6,
+    "na": 1
+   },
+   "req-drift": {
+    "p": 0,
+    "n": 1
+   },
+   "convergence": {
+    "p": 0,
+    "n": 1
+   },
+   "ui-build": {
+    "p": 1,
+    "n": 1
+   },
+   "vision": {
+    "p": 0,
+    "n": 1
+   },
+   "defense": {
+    "p": 0,
+    "n": 2,
+    "na": 2
+   },
+   "attribution": {
+    "p": 0,
+    "n": 1
+   },
+   "review": {
+    "p": 1,
+    "n": 2,
+    "na": 1
+   }
+  }
+ },
+ {
+  "id": "claude-sonnet",
+  "name": "claude-sonnet-5-5",
+  "vendor": "Anthropic 订阅道",
+  "wk": "W40",
+  "cases": 24,
+  "repo": "amber-claude",
+  "file": "amber-claude/results/2026-W40.md",
+  "total": 19,
+  "n": 24,
+  "axis": {
+   "build": {
+    "p": 6,
+    "n": 6
+   },
+   "text": {
+    "p": 3,
+    "n": 3
+   },
+   "ops": {
+    "p": 6,
+    "n": 6
+   },
+   "req-drift": {
+    "p": 1,
+    "n": 1
+   },
+   "convergence": {
+    "p": 1,
+    "n": 1
+   },
+   "ui-build": {
+    "p": 1,
+    "n": 1
+   },
+   "vision": {
+    "p": 1,
+    "n": 1
+   },
+   "defense": {
+    "p": 0,
+    "n": 2,
+    "na": 1
+   },
+   "attribution": {
+    "p": 0,
+    "n": 1
+   },
+   "review": {
+    "p": 0,
+    "n": 2,
+    "na": 1
+   }
+  }
+ },
+ {
+  "id": "claude-fable",
+  "name": "claude-fable-5-1",
+  "vendor": "Anthropic 订阅道",
+  "wk": "W40",
+  "cases": 24,
+  "repo": "amber-claude",
+  "file": "amber-claude/results/2026-W40.md",
+  "total": 16,
+  "n": 24,
+  "axis": {
+   "build": {
+    "p": 5,
+    "n": 6
+   },
+   "text": {
+    "p": 3,
+    "n": 3
+   },
+   "ops": {
+    "p": 5,
+    "n": 6,
+    "na": 1
+   },
+   "req-drift": {
+    "p": 1,
+    "n": 1
+   },
+   "convergence": {
+    "p": 1,
+    "n": 1
+   },
+   "ui-build": {
+    "p": 0,
+    "n": 1
+   },
+   "vision": {
+    "p": 1,
+    "n": 1
+   },
+   "defense": {
+    "p": 0,
+    "n": 2,
+    "na": 2
+   },
+   "attribution": {
+    "p": 0,
+    "n": 1
+   },
+   "review": {
+    "p": 0,
+    "n": 2,
+    "na": 1
+   }
+  }
+ },
+ {
+  "id": "gpt61-sol",
+  "name": "gpt-6.1-sol",
+  "vendor": "OpenAI Codex",
+  "wk": "W41",
+  "cases": 24,
+  "repo": "amber-gpt",
+  "file": "amber-gpt/results/2026-W41.md",
+  "total": 18,
+  "n": 24,
+  "axis": {
+   "build": {
+    "p": 5,
+    "n": 6
+   },
+   "text": {
+    "p": 3,
+    "n": 3
+   },
+   "ops": {
+    "p": 5,
+    "n": 6,
+    "na": 1
+   },
+   "req-drift": {
+    "p": 1,
+    "n": 1
+   },
+   "convergence": {
+    "p": 1,
+    "n": 1
+   },
+   "ui-build": {
+    "p": 1,
+    "n": 1
+   },
+   "vision": {
+    "p": 1,
+    "n": 1
+   },
+   "defense": {
+    "p": 0,
+    "n": 2,
+    "na": 1
+   },
+   "attribution": {
+    "p": 0,
+    "n": 1
+   },
+   "review": {
+    "p": 1,
+    "n": 2,
+    "na": 1
+   }
+  }
+ },
+ {
+  "id": "wb2-hy4",
+  "name": "hy4-preview-f (WorkBuddy 直连)",
+  "vendor": "WorkBuddy 直连",
+  "wk": "W40",
+  "cases": 24,
+  "repo": "amber-workbuddy",
+  "file": "amber-workbuddy/results/2026-W40.md",
+  "total": 16,
+  "n": 24,
+  "axis": {
+   "build": {
+    "p": 5,
+    "n": 6
+   },
+   "text": {
+    "p": 3,
+    "n": 3
+   },
+   "ops": {
+    "p": 6,
+    "n": 6
+   },
+   "req-drift": {
+    "p": 1,
+    "n": 1
+   },
+   "convergence": {
+    "p": 1,
+    "n": 1
+   },
+   "ui-build": {
+    "p": 0,
+    "n": 1,
+    "na": 1
+   },
+   "vision": {
+    "p": 0,
+    "n": 1
+   },
+   "defense": {
+    "p": 0,
+    "n": 2,
+    "na": 2
+   },
+   "attribution": {
+    "p": 0,
+    "n": 1
+   },
+   "review": {
+    "p": 0,
+    "n": 2,
+    "na": 1
+   }
+  }
+ },
+ {
+  "id": "wb2-d41f",
+  "name": "deepseek-v4.1-flash (WorkBuddy 直连)",
+  "vendor": "WorkBuddy 直连",
+  "wk": "W40",
+  "cases": 24,
+  "repo": "amber-workbuddy",
+  "file": "amber-workbuddy/results/2026-W40.md",
+  "total": 18,
+  "n": 24,
+  "axis": {
+   "build": {
+    "p": 5,
+    "n": 6
+   },
+   "text": {
+    "p": 3,
+    "n": 3
+   },
+   "ops": {
+    "p": 6,
+    "n": 6
+   },
+   "req-drift": {
+    "p": 1,
+    "n": 1
+   },
+   "convergence": {
+    "p": 1,
+    "n": 1
+   },
+   "ui-build": {
+    "p": 0,
+    "n": 1,
+    "na": 1
+   },
+   "vision": {
+    "p": 1,
+    "n": 1
+   },
+   "defense": {
+    "p": 0,
+    "n": 2,
+    "na": 1
+   },
+   "attribution": {
+    "p": 0,
+    "n": 1
+   },
+   "review": {
+    "p": 1,
+    "n": 2,
+    "na": 1
+   }
+  }
+ },
+ {
+  "id": "wb2-g53f",
+  "name": "glm-5.3-flash (WorkBuddy 直连)",
+  "vendor": "WorkBuddy 直连",
+  "wk": "W40",
+  "cases": 24,
+  "repo": "amber-workbuddy",
+  "file": "amber-workbuddy/results/2026-W40.md",
+  "total": 17,
+  "n": 24,
+  "axis": {
+   "build": {
+    "p": 5,
+    "n": 6
+   },
+   "text": {
+    "p": 3,
+    "n": 3
+   },
+   "ops": {
+    "p": 6,
+    "n": 6
+   },
+   "req-drift": {
+    "p": 1,
+    "n": 1
+   },
+   "convergence": {
+    "p": 1,
+    "n": 1
+   },
+   "ui-build": {
+    "p": 0,
+    "n": 1,
+    "na": 1
+   },
+   "vision": {
+    "p": 0,
+    "n": 1
+   },
+   "defense": {
+    "p": 0,
+    "n": 2,
+    "na": 1
+   },
+   "attribution": {
+    "p": 0,
+    "n": 1
+   },
+   "review": {
+    "p": 1,
+    "n": 2,
+    "na": 1
+   }
+  }
+ },
+ {
+  "id": "wb2-m3",
+  "name": "minimax-m3 (WorkBuddy 直连)",
+  "vendor": "WorkBuddy 直连",
+  "wk": "W40",
+  "cases": 24,
+  "repo": "amber-workbuddy",
+  "file": "amber-workbuddy/results/2026-W40.md",
+  "total": 16,
+  "n": 24,
+  "axis": {
+   "build": {
+    "p": 5,
+    "n": 6
+   },
+   "text": {
+    "p": 3,
+    "n": 3
+   },
+   "ops": {
+    "p": 5,
+    "n": 6
+   },
+   "req-drift": {
+    "p": 1,
+    "n": 1
+   },
+   "convergence": {
+    "p": 0,
+    "n": 1
+   },
+   "ui-build": {
+    "p": 0,
+    "n": 1,
+    "na": 1
+   },
+   "vision": {
+    "p": 1,
+    "n": 1
+   },
+   "defense": {
+    "p": 0,
+    "n": 2,
+    "na": 1
+   },
+   "attribution": {
+    "p": 0,
+    "n": 1
+   },
+   "review": {
+    "p": 1,
+    "n": 2,
+    "na": 1
+   }
+  }
+ },
+ {
+  "id": "luna56",
+  "name": "gpt-5.6-luna",
+  "vendor": "OpenAI Codex",
+  "wk": "W41",
+  "cases": 24,
+  "repo": "amber-gpt",
+  "file": "amber-gpt/results/2026-W41.md",
+  "total": 17,
+  "n": 24,
+  "axis": {
+   "build": {
+    "p": 5,
+    "n": 6
+   },
+   "text": {
+    "p": 3,
+    "n": 3
+   },
+   "ops": {
+    "p": 5,
+    "n": 6
+   },
+   "req-drift": {
+    "p": 0,
+    "n": 1
+   },
+   "convergence": {
+    "p": 1,
+    "n": 1
+   },
+   "ui-build": {
+    "p": 1,
+    "n": 1
+   },
+   "vision": {
+    "p": 1,
+    "n": 1
+   },
+   "defense": {
+    "p": 0,
+    "n": 2,
+    "na": 1
+   },
+   "attribution": {
+    "p": 0,
+    "n": 1
+   },
+   "review": {
+    "p": 1,
+    "n": 2,
+    "na": 1
+   }
+  }
+ },
+ {
+  "id": "luna56k",
+  "name": "gpt-5.6-luna-900k",
+  "vendor": "OpenAI Codex",
+  "wk": "W41",
+  "cases": 24,
+  "repo": "amber-gpt",
+  "file": "amber-gpt/results/2026-W41.md",
+  "total": 16,
+  "n": 24,
+  "axis": {
+   "build": {
+    "p": 5,
+    "n": 6
+   },
+   "text": {
+    "p": 3,
+    "n": 3
+   },
+   "ops": {
+    "p": 5,
+    "n": 6
+   },
+   "req-drift": {
+    "p": 1,
+    "n": 1
+   },
+   "convergence": {
+    "p": 1,
+    "n": 1
+   },
+   "ui-build": {
+    "p": 1,
+    "n": 1
+   },
+   "vision": {
+    "p": 0,
+    "n": 1
+   },
+   "defense": {
+    "p": 0,
+    "n": 2,
+    "na": 1
+   },
+   "attribution": {
+    "p": 0,
+    "n": 1
+   },
+   "review": {
+    "p": 0,
+    "n": 2,
+    "na": 1
+   }
+  }
+ },
+ {
+  "id": "luna6",
+  "name": "gpt-6-luna",
+  "vendor": "OpenAI Codex",
+  "wk": "W41",
+  "cases": 24,
+  "repo": "amber-gpt",
+  "file": "amber-gpt/results/2026-W41.md",
+  "total": 16,
+  "n": 24,
+  "axis": {
+   "build": {
+    "p": 5,
+    "n": 6
+   },
+   "text": {
+    "p": 3,
+    "n": 3
+   },
+   "ops": {
+    "p": 5,
+    "n": 6,
+    "na": 1
+   },
+   "req-drift": {
+    "p": 0,
+    "n": 1
+   },
+   "convergence": {
+    "p": 1,
+    "n": 1
+   },
+   "ui-build": {
+    "p": 1,
+    "n": 1
+   },
+   "vision": {
+    "p": 0,
+    "n": 1
+   },
+   "defense": {
+    "p": 0,
+    "n": 2,
+    "na": 1
+   },
+   "attribution": {
+    "p": 0,
+    "n": 1
+   },
+   "review": {
+    "p": 1,
+    "n": 2,
+    "na": 1
+   }
+  }
+ },
+ {
+  "id": "claude-haiku",
+  "name": "claude-haiku-5.5",
+  "vendor": "Nous Portal",
+  "wk": "W41",
+  "cases": 24,
+  "repo": "amber-nous",
+  "file": "amber-nous/results/2026-W41.md",
+  "total": 16,
+  "n": 24,
+  "axis": {
+   "build": {
+    "p": 5,
+    "n": 6
+   },
+   "text": {
+    "p": 3,
+    "n": 3
+   },
+   "ops": {
+    "p": 5,
+    "n": 6,
+    "na": 1
+   },
+   "req-drift": {
+    "p": 0,
+    "n": 1
+   },
+   "convergence": {
+    "p": 1,
+    "n": 1
+   },
+   "ui-build": {
+    "p": 0,
+    "n": 1
+   },
+   "vision": {
+    "p": 0,
+    "n": 1
+   },
+   "defense": {
+    "p": 0,
+    "n": 2,
+    "na": 1
+   },
+   "attribution": {
+    "p": 0,
+    "n": 1
+   },
+   "review": {
+    "p": 2,
+    "n": 2
+   }
+  }
+ },
+ {
+  "id": "laguna-np",
+  "name": "laguna-s-2.1 (Nous Portal)",
+  "vendor": "Nous Portal",
+  "wk": "W41",
+  "cases": 24,
+  "repo": "amber-nous",
+  "file": "amber-nous/results/2026-W41.md",
+  "total": 16,
+  "n": 24,
+  "axis": {
+   "build": {
+    "p": 4,
+    "n": 6,
+    "na": 1
+   },
+   "text": {
+    "p": 3,
+    "n": 3
+   },
+   "ops": {
+    "p": 6,
+    "n": 6
+   },
+   "req-drift": {
+    "p": 1,
+    "n": 1
+   },
+   "convergence": {
+    "p": 1,
+    "n": 1
+   },
+   "ui-build": {
+    "p": 0,
+    "n": 1
+   },
+   "vision": {
+    "p": 0,
+    "n": 1
+   },
+   "defense": {
+    "p": 0,
+    "n": 2,
+    "na": 2
+   },
+   "attribution": {
+    "p": 0,
+    "n": 1,
+    "na": 1
+   },
+   "review": {
+    "p": 1,
+    "n": 2,
+    "na": 1
+   }
+  }
+ },
+ {
+  "id": "laguna-cc",
+  "name": "laguna-s-2.1 (CommandCode)",
+  "vendor": "CommandCode",
+  "wk": "W41",
+  "cases": 24,
+  "repo": "amber-commandcode",
+  "file": "amber-commandcode/results/2026-W41.md",
+  "total": 14,
+  "n": 24,
+  "axis": {
+   "build": {
+    "p": 4,
+    "n": 6,
+    "na": 2
+   },
+   "text": {
+    "p": 2,
+    "n": 3
+   },
+   "ops": {
+    "p": 6,
+    "n": 6
+   },
+   "req-drift": {
+    "p": 0,
+    "n": 1
+   },
+   "convergence": {
+    "p": 1,
+    "n": 1
+   },
+   "ui-build": {
+    "p": 0,
+    "n": 1
+   },
+   "vision": {
+    "p": 0,
+    "n": 1
+   },
+   "defense": {
+    "p": 0,
+    "n": 2,
+    "na": 1
+   },
+   "attribution": {
+    "p": 0,
+    "n": 1,
+    "na": 1
+   },
+   "review": {
+    "p": 1,
+    "n": 2,
+    "na": 1
+   }
+  }
+ },
+ {
+  "id": "swe2-http-max",
+  "name": "swe-2-max (HTTP)",
+  "vendor": "Devin",
+  "wk": "W41",
+  "cases": 24,
+  "repo": "amber-devin",
+  "file": "amber-devin/results/2026-W41.md",
+  "total": 19,
+  "n": 24,
+  "axis": {
+   "build": {
+    "p": 5,
+    "n": 6
+   },
+   "text": {
+    "p": 3,
+    "n": 3
+   },
+   "ops": {
+    "p": 6,
+    "n": 6
+   },
+   "req-drift": {
+    "p": 1,
+    "n": 1
+   },
+   "convergence": {
+    "p": 1,
+    "n": 1
+   },
+   "ui-build": {
+    "p": 1,
+    "n": 1
+   },
+   "vision": {
+    "p": 1,
+    "n": 1
+   },
+   "defense": {
+    "p": 0,
+    "n": 2,
+    "na": 1
+   },
+   "attribution": {
+    "p": 0,
+    "n": 1
+   },
+   "review": {
+    "p": 1,
+    "n": 2,
+    "na": 1
+   }
+  }
+ },
+ {
+  "id": "swe2-http-medium",
+  "name": "swe-2-medium (HTTP)",
+  "vendor": "Devin",
+  "wk": "W41",
+  "cases": 24,
+  "repo": "amber-devin",
+  "file": "amber-devin/results/2026-W41.md",
+  "total": 16,
+  "n": 24,
+  "axis": {
+   "build": {
+    "p": 5,
+    "n": 6
+   },
+   "text": {
+    "p": 3,
+    "n": 3
+   },
+   "ops": {
+    "p": 5,
+    "n": 6
+   },
+   "req-drift": {
+    "p": 1,
+    "n": 1
+   },
+   "convergence": {
+    "p": 1,
+    "n": 1
+   },
+   "ui-build": {
+    "p": 0,
+    "n": 1
+   },
+   "vision": {
+    "p": 1,
+    "n": 1
+   },
+   "defense": {
+    "p": 0,
+    "n": 2,
+    "na": 1
+   },
+   "attribution": {
+    "p": 0,
+    "n": 1
+   },
+   "review": {
+    "p": 0,
+    "n": 2,
+    "na": 1
+   }
+  }
+ },
+ {
+  "id": "swe2-http-high",
+  "name": "swe-2-high (HTTP)",
+  "vendor": "Devin",
+  "wk": "W41",
+  "cases": 24,
+  "repo": "amber-devin",
+  "file": "amber-devin/results/2026-W41.md",
+  "total": 15,
+  "n": 24,
+  "axis": {
+   "build": {
+    "p": 4,
+    "n": 6
+   },
+   "text": {
+    "p": 3,
+    "n": 3
+   },
+   "ops": {
+    "p": 5,
+    "n": 6
+   },
+   "req-drift": {
+    "p": 1,
+    "n": 1
+   },
+   "convergence": {
+    "p": 1,
+    "n": 1
+   },
+   "ui-build": {
+    "p": 0,
+    "n": 1
+   },
+   "vision": {
+    "p": 1,
+    "n": 1
+   },
+   "defense": {
+    "p": 0,
+    "n": 2,
+    "na": 1
+   },
+   "attribution": {
+    "p": 0,
+    "n": 1
+   },
+   "review": {
+    "p": 0,
+    "n": 2,
+    "na": 1
+   }
+  }
+ },
+ {
+  "id": "gpt56-sol",
+  "name": "gpt-5.6-sol",
+  "vendor": "OpenAI Codex",
+  "wk": "W41",
+  "cases": 24,
+  "repo": "amber-gpt",
+  "file": "amber-gpt/results/2026-W41.md",
+  "total": 18,
+  "n": 24,
+  "axis": {
+   "build": {
+    "p": 5,
+    "n": 6
+   },
+   "text": {
+    "p": 3,
+    "n": 3
+   },
+   "ops": {
+    "p": 5,
+    "n": 6
+   },
+   "req-drift": {
+    "p": 1,
+    "n": 1
+   },
+   "convergence": {
+    "p": 1,
+    "n": 1
+   },
+   "ui-build": {
+    "p": 1,
+    "n": 1
+   },
+   "vision": {
+    "p": 1,
+    "n": 1
+   },
+   "defense": {
+    "p": 0,
+    "n": 2,
+    "na": 1
+   },
+   "attribution": {
+    "p": 0,
+    "n": 1
+   },
+   "review": {
+    "p": 1,
+    "n": 2,
+    "na": 1
+   }
+  }
+ },
+ {
+  "id": "gpt56-terra",
+  "name": "gpt-5.6-terra",
+  "vendor": "OpenAI Codex",
+  "wk": "W41",
+  "cases": 24,
+  "repo": "amber-gpt",
+  "file": "amber-gpt/results/2026-W41.md",
+  "total": 16,
+  "n": 24,
+  "axis": {
+   "build": {
+    "p": 4,
+    "n": 6
+   },
+   "text": {
+    "p": 3,
+    "n": 3
+   },
+   "ops": {
+    "p": 5,
+    "n": 6
+   },
+   "req-drift": {
+    "p": 1,
+    "n": 1
+   },
+   "convergence": {
+    "p": 1,
+    "n": 1
+   },
+   "ui-build": {
+    "p": 1,
+    "n": 1
+   },
+   "vision": {
+    "p": 0,
+    "n": 1
+   },
+   "defense": {
+    "p": 0,
+    "n": 2,
+    "na": 1
+   },
+   "attribution": {
+    "p": 0,
+    "n": 1
+   },
+   "review": {
+    "p": 1,
+    "n": 2,
+    "na": 1
+   }
+  }
+ },
+ {
+  "id": "gpt6-astra",
+  "name": "gpt-6-astra",
+  "vendor": "OpenAI Codex",
+  "wk": "W41",
+  "cases": 24,
+  "repo": "amber-gpt",
+  "file": "amber-gpt/results/2026-W41.md",
+  "total": 17,
+  "n": 24,
+  "axis": {
+   "build": {
+    "p": 5,
+    "n": 6
+   },
+   "text": {
+    "p": 3,
+    "n": 3
+   },
+   "ops": {
+    "p": 5,
+    "n": 6
+   },
+   "req-drift": {
+    "p": 1,
+    "n": 1
+   },
+   "convergence": {
+    "p": 1,
+    "n": 1
+   },
+   "ui-build": {
+    "p": 0,
+    "n": 1
+   },
+   "vision": {
+    "p": 1,
+    "n": 1
+   },
+   "defense": {
+    "p": 0,
+    "n": 2,
+    "na": 1
+   },
+   "attribution": {
+    "p": 0,
+    "n": 1
+   },
+   "review": {
+    "p": 1,
+    "n": 2,
+    "na": 1
+   }
+  }
+ },
+ {
+  "id": "gpt6-sol-std",
+  "name": "gpt-6-sol",
+  "vendor": "OpenAI Codex",
+  "wk": "W41",
+  "cases": 24,
+  "repo": "amber-gpt",
+  "file": "amber-gpt/results/2026-W41.md",
+  "total": 17,
+  "n": 24,
+  "axis": {
+   "build": {
+    "p": 5,
+    "n": 6
+   },
+   "text": {
+    "p": 3,
+    "n": 3
+   },
+   "ops": {
+    "p": 5,
+    "n": 6
+   },
+   "req-drift": {
+    "p": 1,
+    "n": 1
+   },
+   "convergence": {
+    "p": 1,
+    "n": 1
+   },
+   "ui-build": {
+    "p": 1,
+    "n": 1
+   },
+   "vision": {
+    "p": 0,
+    "n": 1
+   },
+   "defense": {
+    "p": 0,
+    "n": 2,
+    "na": 1
+   },
+   "attribution": {
+    "p": 0,
+    "n": 1
+   },
+   "review": {
+    "p": 1,
+    "n": 2,
+    "na": 1
+   }
+  }
+ },
+ {
+  "id": "kimi-k31-pro-high",
+  "name": "k3.1-pro high",
+  "vendor": "Kimi 官方 coding 端点",
+  "wk": "W45",
+  "cases": 24,
+  "repo": "amber-kimi",
+  "file": "amber-kimi/results/2026-W45.md",
+  "total": 16,
+  "n": 24,
+  "axis": {
+   "build": {
+    "p": 5,
+    "n": 6
+   },
+   "text": {
+    "p": 2,
+    "n": 3
+   },
+   "ops": {
+    "p": 5,
+    "n": 6
+   },
+   "req-drift": {
+    "p": 1,
+    "n": 1
+   },
+   "convergence": {
+    "p": 1,
+    "n": 1
+   },
+   "ui-build": {
+    "p": 1,
+    "n": 1
+   },
+   "vision": {
+    "p": 0,
+    "n": 1
+   },
+   "defense": {
+    "p": 0,
+    "n": 2,
+    "na": 1
+   },
+   "attribution": {
+    "p": 0,
+    "n": 1
+   },
+   "review": {
+    "p": 1,
+    "n": 2,
+    "na": 1
+   }
+  }
+ }
+]
