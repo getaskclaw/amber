@@ -17,14 +17,14 @@
 
 ## 现在谁领先
 
-![AMBER W45](docs/images/top5-2026-w45.png?v=20261104)
+![AMBER W45](docs/images/top5-hy4free-w45.png?v=20261104)
 
-当前榜由同一成绩账本生成，共 40 道。总分相同共用一行，档内按中位用时排序；周次为考试周，封存记录保留案数。
+当前榜由同一成绩账本生成，共 41 道。总分相同共用一行，档内按中位用时排序；周次为考试周，封存记录保留案数。
 
 | # | 总分 | 模型 @ 端点 |
 |---|---|---|
 | 1 | 19'/24 | claude-sonnet-5-5 @ Anthropic 订阅道 (W40)<br>claude-opus-5-5 @ Anthropic 订阅道 (W40)<br>swe-2-max (API) @ Devin (W41)<br>swe-2-max (ACP) @ Devin (W37) |
-| 2 | 18'/24 | glm-5.3-flash @ Ollama Cloud (W37)<br>gpt-6.1-sol @ OpenAI Codex (W41)<br>deepseek-v4.1-flash (WorkBuddy 直连) @ WorkBuddy 直连 (W40)<br>gpt-5.6-sol @ OpenAI Codex (W41)<br>k3 @ Kimi 官方 coding 端点 (W38)<br>hy4-preview-f @ WorkBuddy ACP (W37) |
+| 2 | 18'/24 | glm-5.3-flash @ Ollama Cloud (W37)<br>gpt-6.1-sol @ OpenAI Codex (W41)<br>deepseek-v4.1-flash (WorkBuddy 直连) @ WorkBuddy 直连 (W40)<br>gpt-5.6-sol @ OpenAI Codex (W41)<br>k3 @ Kimi 官方 coding 端点 (W38)<br>hy4-preview-f @ WorkBuddy ACP (W37)<br>HY4Free high @ WorkBuddy 路由 API (W45) |
 | 3 | 17'/24 | gpt-6-sol @ OpenAI Codex (W41)<br>gpt-6-astra @ OpenAI Codex (W41)<br>gpt-5.6-luna @ OpenAI Codex (W41)<br>gpt-6-sol-900k @ OpenAI Codex (W39)<br>gpt-5.6-sol-900k (high 档) @ OpenAI Codex (W41)<br>glm-5.3-flash (WorkBuddy 直连) @ WorkBuddy 直连 (W40)<br>doubao-seed-evolving @ 火山方舟 Agent Plan (W38) |
 | 4 | 16'/24 | gpt-6-luna @ OpenAI Codex (W41)<br>swe-2-medium (API) @ Devin (W41)<br>claude-fable-5-1 @ Anthropic 订阅道 (W40)<br>claude-haiku-5.5 @ Nous Portal (W41)<br>deepseek-flash (GA) @ DeepSeek 官方 (W37)<br>gpt-5.6-luna-900k @ OpenAI Codex (W41)<br>k3.1-pro high @ Kimi 官方 coding 端点 (W45)<br>minimax-m3 (WorkBuddy 直连) @ WorkBuddy 直连 (W40)<br>gpt-5.6-terra @ OpenAI Codex (W41)<br>gpt-5.6-luna-900k (high 档) @ OpenAI Codex (W37)<br>mimo-v2.6-pro @ CommandCode (W39)<br>hy4-preview-f (WorkBuddy 直连) @ WorkBuddy 直连 (W40)<br>laguna-s-2.1 (Nous Portal) @ Nous Portal (W41)<br>step-5-preview @ stepfun plan 端点 (W41) |
 | 5 | 15' | gpt-6-luna-900k @ OpenAI Codex (W41, 24 案)<br>gpt-6-astra-900k @ OpenAI Codex (W41, 24 案)<br>deepseek-v4.1-flash @ CommandCode (W37, 23 案)<br>deepseek-flash @ OpenCode Go (W37, 24 案)<br>swe-2-high (API) @ Devin (W41, 24 案)<br>Qwen3.8-27B @ 社区自部署 3×V100 (W38, 24 案) |
@@ -34,6 +34,8 @@
 W45 新增：**k3.1-pro high，16'/24：16 胜、6 负、2 NA**，考试日期2026-11-04。撇号表示判分或基建挂起，不计胜负，分母仍为24。旧 k3 是不同批次，不据此判断进步或退步。
 
 [本期成绩](https://github.com/getaskclaw/amber-kimi/blob/main/results/2026-W45.md) · [官网榜单](https://askclaw.dev/rank/) · [十轴数据](docs/data/axes.json) · [逐案账本](docs/data/ledger.json)
+
+W45 另增：**HY4Free high，18'/24：18 胜、3 负、3 NA**，考试日期 2026-11-04，WorkBuddy 路由 API。官网耗时仅为所选原作答耗时，不含三次首轮超时与子会话时间。[本期成绩与审计](https://github.com/getaskclaw/amber-workbuddy/blob/main/results/2026-W45.md) · [模型页](https://askclaw.dev/model/hy4free/)
 
 ## 同分不同款
 

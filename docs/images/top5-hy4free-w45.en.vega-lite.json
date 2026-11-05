@@ -1,0 +1,340 @@
+{
+ "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+ "background": "white",
+ "title": {
+  "text": "AMBER: five rank tiers (2026-W45)",
+  "fontSize": 22,
+  "anchor": "start",
+  "subtitle": [
+   "HY4Free high · 18'/24 · 18 / 3 / 3 (win / loss / NA)",
+   "' = holds / interruptions; denominator unchanged; accepted driver record",
+   "Resource totals: see full audit side ledger; no speed or cost comparison",
+   "askclaw.dev/en/rank/"
+  ],
+  "subtitleFontSize": 16,
+  "subtitleColor": "#444",
+  "font": "WenQuanYi Zen Hei",
+  "subtitleFont": "WenQuanYi Zen Hei"
+ },
+ "data": {
+  "values": [
+   {
+    "lane": "swe-2-max (ACP) @ Devin",
+    "pass": 19,
+    "rank": "#1 tie",
+    "label": "19'"
+   },
+   {
+    "lane": "claude-sonnet-5-5 @ Anthropic",
+    "pass": 19,
+    "rank": "#1 tie",
+    "label": "19'"
+   },
+   {
+    "lane": "claude-opus-5-5 @ Anthropic (W40)",
+    "pass": 19,
+    "rank": "#1 tie",
+    "label": "19'"
+   },
+   {
+    "lane": "swe-2-max (API) @ Devin (W41)",
+    "pass": 19,
+    "rank": "#1 tie",
+    "label": "19'"
+   },
+   {
+    "lane": "glm-5.3-flash @ Ollama Cloud",
+    "pass": 18,
+    "rank": "#2 tie",
+    "label": "18'"
+   },
+   {
+    "lane": "k3 @ Kimi",
+    "pass": 18,
+    "rank": "#2 tie",
+    "label": "18'"
+   },
+   {
+    "lane": "hy4-preview-f @ WorkBuddy ACP (W37)",
+    "pass": 18,
+    "rank": "#2 tie",
+    "label": "18'"
+   },
+   {
+    "lane": "deepseek-v4.1-flash @ WorkBuddy direct (W40)",
+    "pass": 18,
+    "rank": "#2 tie",
+    "label": "18'"
+   },
+   {
+    "lane": "gpt-6.1-sol @ OpenAI Codex",
+    "pass": 18,
+    "rank": "#2 tie",
+    "label": "18'"
+   },
+   {
+    "lane": "gpt-5.6-sol @ OpenAI Codex",
+    "pass": 18,
+    "rank": "#2 tie",
+    "label": "18'"
+   },
+   {
+    "lane": "HY4Free high @ WorkBuddy routed API (W45)",
+    "pass": 18,
+    "rank": "#2 tie",
+    "label": "18'"
+   },
+   {
+    "lane": "gpt-6-sol-900k @ OpenAI Codex",
+    "pass": 17,
+    "rank": "#3 tie",
+    "label": "17'"
+   },
+   {
+    "lane": "doubao-seed-evolving @ Volcengine Ark",
+    "pass": 17,
+    "rank": "#3 tie",
+    "label": "17'"
+   },
+   {
+    "lane": "glm-5.3-flash @ WorkBuddy direct (W40)",
+    "pass": 17,
+    "rank": "#3 tie",
+    "label": "17'"
+   },
+   {
+    "lane": "gpt-5.6-luna @ OpenAI Codex",
+    "pass": 17,
+    "rank": "#3 tie",
+    "label": "17'"
+   },
+   {
+    "lane": "gpt-5.6-sol-900k high @ OpenAI Codex (W41)",
+    "pass": 17,
+    "rank": "#3 tie",
+    "label": "17'"
+   },
+   {
+    "lane": "gpt-6-astra @ OpenAI Codex",
+    "pass": 17,
+    "rank": "#3 tie",
+    "label": "17'"
+   },
+   {
+    "lane": "gpt-6-sol @ OpenAI Codex",
+    "pass": 17,
+    "rank": "#3 tie",
+    "label": "17'"
+   },
+   {
+    "lane": "gpt-5.6-luna-900k high @ OpenAI Codex (W37)",
+    "pass": 16,
+    "rank": "#4 tie",
+    "label": "16'"
+   },
+   {
+    "lane": "deepseek-flash @ DeepSeek ▼",
+    "pass": 16,
+    "rank": "#4 tie",
+    "label": "16'"
+   },
+   {
+    "lane": "mimo-v2.6-pro @ CommandCode ▼",
+    "pass": 16,
+    "rank": "#4 tie",
+    "label": "16'"
+   },
+   {
+    "lane": "claude-fable-5-1 @ Anthropic",
+    "pass": 16,
+    "rank": "#4 tie",
+    "label": "16'"
+   },
+   {
+    "lane": "hy4-preview-f @ WorkBuddy direct (W40)",
+    "pass": 16,
+    "rank": "#4 tie",
+    "label": "16'"
+   },
+   {
+    "lane": "minimax-m3 @ WorkBuddy direct (W40)",
+    "pass": 16,
+    "rank": "#4 tie",
+    "label": "16'"
+   },
+   {
+    "lane": "gpt-5.6-luna-900k @ OpenAI Codex (W41)",
+    "pass": 16,
+    "rank": "#4 tie",
+    "label": "16'"
+   },
+   {
+    "lane": "gpt-6-luna @ OpenAI Codex",
+    "pass": 16,
+    "rank": "#4 tie",
+    "label": "16'"
+   },
+   {
+    "lane": "claude-haiku-5.5 @ Nous Portal (W41)",
+    "pass": 16,
+    "rank": "#4 tie",
+    "label": "16'"
+   },
+   {
+    "lane": "laguna-s-2.1 @ Nous Portal (W41)",
+    "pass": 16,
+    "rank": "#4 tie",
+    "label": "16'"
+   },
+   {
+    "lane": "swe-2-medium (API) @ Devin (W41)",
+    "pass": 16,
+    "rank": "#4 tie",
+    "label": "16'"
+   },
+   {
+    "lane": "step-5-preview @ StepFun (W41)",
+    "pass": 16,
+    "rank": "#4 tie",
+    "label": "16'"
+   },
+   {
+    "lane": "gpt-5.6-terra @ OpenAI Codex",
+    "pass": 16,
+    "rank": "#4 tie",
+    "label": "16'"
+   },
+   {
+    "lane": "k3.1-pro high @ Kimi (W45)",
+    "pass": 16,
+    "rank": "#4 tie",
+    "label": "16'"
+   },
+   {
+    "lane": "Qwen3.8-27B @ GoldenPotato self-hosted",
+    "pass": 15,
+    "rank": "#5 tie",
+    "label": "15'"
+   },
+   {
+    "lane": "gpt-6-luna-900k @ OpenAI Codex",
+    "pass": 15,
+    "rank": "#5 tie",
+    "label": "15'"
+   },
+   {
+    "lane": "deepseek-flash @ OpenCode Go ▼",
+    "pass": 15,
+    "rank": "#5 tie",
+    "label": "15'"
+   },
+   {
+    "lane": "deepseek-v4.1-flash @ CommandCode (W37, frozen)",
+    "pass": 15,
+    "rank": "#5 tie",
+    "label": "15'/23"
+   },
+   {
+    "lane": "swe-2-high (API) @ Devin (W41)",
+    "pass": 15,
+    "rank": "#5 tie",
+    "label": "15'"
+   },
+   {
+    "lane": "gpt-6-astra-900k @ OpenAI Codex",
+    "pass": 15,
+    "rank": "#5 tie",
+    "label": "15'"
+   }
+  ]
+ },
+ "width": 620,
+ "height": 888,
+ "layer": [
+  {
+   "mark": {
+    "type": "bar",
+    "cornerRadiusEnd": 3,
+    "height": 20,
+    "stroke": "#00414A",
+    "strokeWidth": 0.75,
+    "tooltip": true
+   },
+   "encoding": {
+    "y": {
+     "field": "lane",
+     "type": "nominal",
+     "sort": null,
+     "axis": {
+      "labelFontSize": 12,
+      "labelLimit": 0,
+      "title": null
+     }
+    },
+    "x": {
+     "field": "pass",
+     "type": "quantitative",
+     "scale": {
+      "domain": [
+       0,
+       24
+      ]
+     },
+     "axis": {
+      "title": "cases passed (/ 24)",
+      "grid": true
+     }
+    },
+    "color": {
+     "field": "rank",
+     "type": "nominal",
+     "scale": {
+      "range": [
+       "#003A44",
+       "#00695F",
+       "#0097A7",
+       "#26C6DA",
+       "#80DEEA"
+      ]
+     },
+     "legend": null
+    }
+   }
+  },
+  {
+   "mark": {
+    "type": "text",
+    "align": "left",
+    "dx": 4,
+    "fontSize": 12,
+    "color": "#006064"
+   },
+   "encoding": {
+    "y": {
+     "field": "lane",
+     "type": "nominal",
+     "sort": null
+    },
+    "x": {
+     "field": "pass",
+     "type": "quantitative"
+    },
+    "text": {
+     "field": "label",
+     "type": "nominal"
+    }
+   }
+  }
+ ],
+ "config": {
+  "font": "WenQuanYi Zen Hei",
+  "axis": {
+   "labelFont": "WenQuanYi Zen Hei",
+   "titleFont": "WenQuanYi Zen Hei"
+  },
+  "legend": {
+   "labelFont": "WenQuanYi Zen Hei",
+   "titleFont": "WenQuanYi Zen Hei"
+  }
+ }
+}

@@ -17,14 +17,14 @@
 
 ## Who leads now
 
-![AMBER W45](docs/images/top5-2026-w45.en.png?v=20261104)
+![AMBER W45](docs/images/top5-hy4free-w45.en.png?v=20261104)
 
-The current board has 40 published lanes. Equal totals share one row; entries within a tier follow median time. Each week is the test week, and frozen records keep their case count.
+The current board has 41 published lanes. Equal totals share one row; entries within a tier follow median time. Each week is the test week, and frozen records keep their case count.
 
 | # | Score | Model @ endpoint |
 |---|---|---|
 | 1 | 19'/24 | claude-sonnet-5-5 @ Anthropic subscription (W40)<br>claude-opus-5-5 @ Anthropic subscription (W40)<br>swe-2-max (API) @ Devin (W41)<br>swe-2-max (ACP) @ Devin (W37) |
-| 2 | 18'/24 | glm-5.3-flash @ Ollama Cloud (W37)<br>gpt-6.1-sol @ OpenAI Codex (W41)<br>deepseek-v4.1-flash (WorkBuddy direct) @ WorkBuddy direct (W40)<br>gpt-5.6-sol @ OpenAI Codex (W41)<br>k3 @ Kimi official coding (W38)<br>hy4-preview-f @ WorkBuddy ACP (W37) |
+| 2 | 18'/24 | glm-5.3-flash @ Ollama Cloud (W37)<br>gpt-6.1-sol @ OpenAI Codex (W41)<br>deepseek-v4.1-flash (WorkBuddy direct) @ WorkBuddy direct (W40)<br>gpt-5.6-sol @ OpenAI Codex (W41)<br>k3 @ Kimi official coding (W38)<br>hy4-preview-f @ WorkBuddy ACP (W37)<br>HY4Free high @ WorkBuddy routed API (W45) |
 | 3 | 17'/24 | gpt-6-sol @ OpenAI Codex (W41)<br>gpt-6-astra @ OpenAI Codex (W41)<br>gpt-5.6-luna @ OpenAI Codex (W41)<br>gpt-6-sol-900k @ OpenAI Codex (W39)<br>gpt-5.6-sol-900k (high band) @ OpenAI Codex (W41)<br>glm-5.3-flash (WorkBuddy direct) @ WorkBuddy direct (W40)<br>doubao-seed-evolving @ Volcengine Ark Agent Plan (W38) |
 | 4 | 16'/24 | gpt-6-luna @ OpenAI Codex (W41)<br>swe-2-medium (API) @ Devin (W41)<br>claude-fable-5-1 @ Anthropic subscription (W40)<br>claude-haiku-5.5 @ Nous Portal (W41)<br>deepseek-flash (GA) @ DeepSeek official (W37)<br>gpt-5.6-luna-900k @ OpenAI Codex (W41)<br>k3.1-pro high @ Kimi official coding (W45)<br>minimax-m3 (WorkBuddy direct) @ WorkBuddy direct (W40)<br>gpt-5.6-terra @ OpenAI Codex (W41)<br>gpt-5.6-luna-900k (high band) @ OpenAI Codex (W37)<br>mimo-v2.6-pro @ CommandCode (W39)<br>hy4-preview-f (WorkBuddy direct) @ WorkBuddy direct (W40)<br>laguna-s-2.1 (Nous Portal) @ Nous Portal (W41)<br>step-5-preview @ StepFun plan (W41) |
 | 5 | 15' | gpt-6-luna-900k @ OpenAI Codex (W41, 24 cases)<br>gpt-6-astra-900k @ OpenAI Codex (W41, 24 cases)<br>deepseek-v4.1-flash @ CommandCode (W37, 23 cases)<br>deepseek-flash @ OpenCode Go (W37, 24 cases)<br>swe-2-high (API) @ Devin (W41, 24 cases)<br>Qwen3.8-27B @ Community self-hosted 3×V100 (W38, 24 cases) |
@@ -34,6 +34,8 @@ The current board has 40 published lanes. Equal totals share one row; entries wi
 New in W45: **k3.1-pro high, 16'/24 — 16 wins, 6 losses, 2 NA**, tested 2026-11-04. The apostrophe marks grading or infrastructure holds, neither wins nor losses; the denominator stays 24. Older k3 is a different batch; no improvement or regression is claimed.
 
 [This issue](https://github.com/getaskclaw/amber-kimi/blob/main/results/2026-W45.en.md) · [Board](https://askclaw.dev/en/rank/) · [Axes data](docs/data/axes.json) · [Per-case ledger](docs/data/ledger.json)
+
+Also new in W45: **HY4Free high, 18'/24 — 18 wins, 3 losses, 3 NA**, tested 2026-11-04, WorkBuddy routed API. Website time is the selected original-answer time only and excludes the three first-round timeouts and child-session time. [This issue and audit](https://github.com/getaskclaw/amber-workbuddy/blob/main/results/2026-W45.en.md) · [Model page](https://askclaw.dev/en/model/hy4free/)
 
 ## Same score, different shape
 

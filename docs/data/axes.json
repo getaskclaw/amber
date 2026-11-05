@@ -2228,5 +2228,60 @@
     "na": 1
    }
   }
+ },
+ {
+  "id": "workbuddy-hy4free-high",
+  "name": "HY4Free high",
+  "vendor": "WorkBuddy (routed API)",
+  "wk": "W45",
+  "cases": 24,
+  "repo": "amber-workbuddy",
+  "file": "amber-workbuddy/results/2026-W45.md",
+  "total": 18,
+  "n": 24,
+  "axis": {
+   "build": {
+    "p": 5,
+    "n": 6
+   },
+   "text": {
+    "p": 3,
+    "n": 3
+   },
+   "ops": {
+    "p": 6,
+    "n": 6
+   },
+   "req-drift": {
+    "p": 1,
+    "n": 1
+   },
+   "convergence": {
+    "p": 1,
+    "n": 1
+   },
+   "ui-build": {
+    "p": 1,
+    "n": 1
+   },
+   "vision": {
+    "p": 0,
+    "n": 1
+   },
+   "defense": {
+    "p": 0,
+    "n": 2,
+    "na": 2
+   },
+   "attribution": {
+    "p": 0,
+    "n": 1
+   },
+   "review": {
+    "p": 1,
+    "n": 2,
+    "na": 1
+   }
+  }
  }
 ]
