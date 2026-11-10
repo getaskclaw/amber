@@ -80,7 +80,7 @@ Results are public, cases never are. Aliases and bundle hashes are checked case 
 
 [amber-claude](https://github.com/getaskclaw/amber-claude) (Claude) · [amber-gpt](https://github.com/getaskclaw/amber-gpt) (GPT) · [amber-devin](https://github.com/getaskclaw/amber-devin) (Devin) · [amber-kimi](https://github.com/getaskclaw/amber-kimi) (Kimi) · [amber-deepseek](https://github.com/getaskclaw/amber-deepseek) (DeepSeek) · [amber-ollama](https://github.com/getaskclaw/amber-ollama) (Ollama Cloud) · [amber-opencode](https://github.com/getaskclaw/amber-opencode) (OpenCode Go) · [amber-commandcode](https://github.com/getaskclaw/amber-commandcode) (CommandCode) · [amber-workbuddy](https://github.com/getaskclaw/amber-workbuddy) (WorkBuddy) · [amber-doubao](https://github.com/getaskclaw/amber-doubao) (Doubao) · [amber-stepfun](https://github.com/getaskclaw/amber-stepfun) (StepFun) · [amber-nous](https://github.com/getaskclaw/amber-nous) (Nous Portal) · [amber-goldenpotato](https://github.com/getaskclaw/amber-goldenpotato) (community self-hosted Qwen3.8-27B)
 
-Old-board archive (**pre-launch result, not individually verified**; not on the current board above): [gemini-4-argon @ high @ Devin](https://github.com/getaskclaw/amber-devin/blob/main/results/2026-W45-argon-oldboard.md), strict rule 13/24 (only each case's first attempt counts); as-recorded 16/24 for comparison only.
+Old-board archive (**pre-launch result, not individually verified**; not on the current board above): [gemini-4-argon @ high @ Devin](https://github.com/getaskclaw/amber-devin/blob/main/results/2026-W45-argon-oldboard.md), 2026-11 sittings, strict rule 13/24 (13 pass · 5 fail · 6 NA; only each case's first attempt counts); as-recorded 16/24 for comparison only.
 
 ## FAQ
 

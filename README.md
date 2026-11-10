@@ -80,7 +80,7 @@ W45 另增：**HY4Free high，18'/24：18 胜、3 负、3 NA**，考试日期 20
 
 [amber-claude](https://github.com/getaskclaw/amber-claude)（Claude）· [amber-gpt](https://github.com/getaskclaw/amber-gpt)（GPT）· [amber-devin](https://github.com/getaskclaw/amber-devin)（Devin）· [amber-kimi](https://github.com/getaskclaw/amber-kimi)（Kimi）· [amber-deepseek](https://github.com/getaskclaw/amber-deepseek)（DeepSeek）· [amber-ollama](https://github.com/getaskclaw/amber-ollama)（Ollama Cloud）· [amber-opencode](https://github.com/getaskclaw/amber-opencode)（OpenCode Go）· [amber-commandcode](https://github.com/getaskclaw/amber-commandcode)（CommandCode）· [amber-workbuddy](https://github.com/getaskclaw/amber-workbuddy)（WorkBuddy）· [amber-doubao](https://github.com/getaskclaw/amber-doubao)（豆包）· [amber-stepfun](https://github.com/getaskclaw/amber-stepfun)（阶跃星辰）· [amber-nous](https://github.com/getaskclaw/amber-nous)（Nous Portal）· [amber-goldenpotato](https://github.com/getaskclaw/amber-goldenpotato)（社区自部署 Qwen3.8-27B）
 
-旧榜存档（**上线前成绩、未逐条核验**，不进上面的当前榜）：[gemini-4-argon @ high @ Devin](https://github.com/getaskclaw/amber-devin/blob/main/results/2026-W45-argon-oldboard.md)，严格口径 13/24（每案只认第一次开考），原记口径 16/24 仅对照。
+旧榜存档（**上线前成绩、未逐条核验**，不进上面的当前榜）：[gemini-4-argon @ high @ Devin](https://github.com/getaskclaw/amber-devin/blob/main/results/2026-W45-argon-oldboard.md)，2026-11 场次，严格口径 13/24（13 过 · 5 不过 · 6 NA；每案只认第一次开考），原记口径 16/24 仅对照。
 
 ## 常见问题
 
