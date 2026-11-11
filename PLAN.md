@@ -30,7 +30,7 @@ Specification; where this file and Core conflict, Core wins.
   encoding; `CONTRIBUTING.md` states the no-case-content rule and the
   revision policy.
 - **Index prototype live:** `hash-index/v2026-09.md` publishes per-case
-  aliases and truncated bundle/oracle hashes for the 23 active cases. It is
+  aliases and truncated bundle/oracle hashes for the 24 cases in the library. It is
   a **pre-conformance prototype** of the Distribution §4 index: it does not
   yet carry the §4 entry field set (manifest sha256, `spec_sha256`,
   `cutoff_utc`, state) or a producer signature; full conformance lands with
@@ -83,6 +83,10 @@ Raised by external review (2026-08); resolve in the milestone that owns them:
    that need the unpublished run-record schemas or the private-channel case
    correspondence remain TBD there, so this question stays open until those
    artefacts land.
+5. **Maximum hold period** (M3): a case can be held (counted NA) on some or
+   all lanes pending a fix or re-take; two cases have now been held for more
+   than a month. No maximum hold period, or rule for what happens when it
+   expires, is specified yet.
 
 ## Non-goals
 

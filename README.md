@@ -4,7 +4,7 @@
 
 `封进琥珀，重做当时的题。`
 
-**一句话**：拿真实发生过的事故和任务，让 AI 模型只用当时手里的信息重做一遍。比如一次真实的运维故障：模型只能拿当时的监控和日志找根因，事后才揭晓的证据一律封存不给看。题目永不公开，但每题有哈希指纹，分数和指纹全部公开，谁都能核对题没被换、分不是编的。
+**一句话**：拿真实发生过的事故和任务，让 AI 模型只用当时手里的信息重做一遍。比如一次真实的运维故障：模型只能拿当时的监控和日志找根因，事后才揭晓的证据一律封存不给看。题目永不公开，但每题有哈希指纹，分数和指纹全部公开，谁都能拿公开的指纹对照各期成绩里的指纹。指纹索引目前是未签名的早期原型（见 [PLAN.md](PLAN.md)），还不能单凭它证明题没被换、分不是编的。
 
 **案集** 24 案 · **规范** v0.2.2（草案） · **哈希索引** [v2026-09](hash-index/v2026-09.md) · **成绩仓** × 13 · **纪律** 只发分数，不发题 · **官网榜单** [askclaw.dev](https://askclaw.dev/)
 
@@ -19,7 +19,9 @@
 
 ![AMBER W45](docs/images/top5-hy4free-w45.png?v=20261104)
 
-当前榜由同一成绩账本生成，共 41 道。总分相同共用一行，档内按中位用时排序；周次为考试周，封存记录保留案数。
+> ⚠️ **下表全部是旧榜：上线前成绩、未逐条核验。** 这 41 道的考试都在新榜上线（2026-11-10）之前完成，按 owner 2026-11-10 的裁定归入**旧榜**：原样存档、不改分、不补分；挂起的格不逐条裁定。表里每一格都按「上线前成绩、未逐条核验」读。新榜只收上线后证据齐全的场次。
+
+下表由同一成绩账本生成，共 41 道。总分相同共用一行，档内按中位用时排序；周次为考试周，封存记录保留案数。
 
 | # | 总分 | 模型 @ 端点 |
 |---|---|---|
@@ -31,11 +33,11 @@
 | 6 | 14' | qwen3.8-27b @ CrofAI (W36, 21 案)<br>laguna-s-2.1 (CommandCode) @ CommandCode (W41, 24 案) |
 | 7 | 13'/24 | space-bunny-alpha @ CommandCode (W39) |
 
-W45 新增：**k3.1-pro high，16'/24：16 胜、6 负、2 NA**，考试日期2026-11-04。撇号表示判分或基建挂起，不计胜负，分母仍为24。旧 k3 是不同批次，不据此判断进步或退步。
+W45 新增（旧榜，上线前成绩、未逐条核验）：**k3.1-pro high，16'/24：16 胜、6 负、2 NA**，考试日期2026-11-04。撇号表示判分或基建挂起，不计胜负，分母仍为24。旧 k3 是不同批次，不据此判断进步或退步。
 
 [本期成绩](https://github.com/getaskclaw/amber-kimi/blob/main/results/2026-W45.md) · [官网榜单](https://askclaw.dev/rank/) · [十轴数据](docs/data/axes.json) · [逐案账本](docs/data/ledger.json)
 
-W45 另增：**HY4Free high，18'/24：18 胜、3 负、3 NA**，考试日期 2026-11-04，WorkBuddy 路由 API。官网耗时仅为所选原作答耗时，不含三次首轮超时与子会话时间。[本期成绩与审计](https://github.com/getaskclaw/amber-workbuddy/blob/main/results/2026-W45.md) · [模型页](https://askclaw.dev/model/hy4free/)
+W45 另增（旧榜，上线前成绩、未逐条核验）：**HY4Free high，18'/24：18 胜、3 负、3 NA**，考试日期 2026-11-04，WorkBuddy 路由 API。官网耗时仅为所选原作答耗时，不含三次首轮超时与子会话时间。[本期成绩与审计](https://github.com/getaskclaw/amber-workbuddy/blob/main/results/2026-W45.md) · [模型页](https://askclaw.dev/model/hy4free/)
 
 ## 同分不同款
 
@@ -64,11 +66,11 @@ W45 另增：**HY4Free high，18'/24：18 胜、3 负、3 NA**，考试日期 20
 
 ## 它怎么运作
 
-私有题库 + 公开成绩：题目永不公开，分数与哈希永远可查。评分标准在看到任何输出之前就已冻结，全程留档。
+私有题库 + 公开成绩：题目永不公开，分数与哈希永远可查。评分标准按版本冻结、全程留档；冻结后发现的判分问题和题面修订不悄悄改，逐条公开更正（见上方更正列表和 [docs/](docs/README.md) 里的 corrections 文件），换版记在[哈希索引](hash-index/v2026-09.md)。
 
 ![AMBER 是什么](docs/images/what-is-amber-2026-10.png?v=20261003)
 
-一期成绩像一场考试：出卷封存、净室应考、逐卷验脑、脱敏发布、人人可核对。
+一期成绩像一场考试：出卷封存、净室应考、逐卷验脑、脱敏发布、哈希公开可对照。
 
 ![一期成绩怎么炼成](docs/images/trust-chain.png?v=20260915b)
 
@@ -80,7 +82,7 @@ W45 另增：**HY4Free high，18'/24：18 胜、3 负、3 NA**，考试日期 20
 
 [amber-claude](https://github.com/getaskclaw/amber-claude)（Claude）· [amber-gpt](https://github.com/getaskclaw/amber-gpt)（GPT）· [amber-devin](https://github.com/getaskclaw/amber-devin)（Devin）· [amber-kimi](https://github.com/getaskclaw/amber-kimi)（Kimi）· [amber-deepseek](https://github.com/getaskclaw/amber-deepseek)（DeepSeek）· [amber-ollama](https://github.com/getaskclaw/amber-ollama)（Ollama Cloud）· [amber-opencode](https://github.com/getaskclaw/amber-opencode)（OpenCode Go）· [amber-commandcode](https://github.com/getaskclaw/amber-commandcode)（CommandCode）· [amber-workbuddy](https://github.com/getaskclaw/amber-workbuddy)（WorkBuddy）· [amber-doubao](https://github.com/getaskclaw/amber-doubao)（豆包）· [amber-stepfun](https://github.com/getaskclaw/amber-stepfun)（阶跃星辰）· [amber-nous](https://github.com/getaskclaw/amber-nous)（Nous Portal）· [amber-goldenpotato](https://github.com/getaskclaw/amber-goldenpotato)（社区自部署 Qwen3.8-27B）
 
-旧榜存档（**上线前成绩、未逐条核验**，不进上面的当前榜）：[gemini-4-argon @ high @ Devin](https://github.com/getaskclaw/amber-devin/blob/main/results/2026-W45-argon-oldboard.md)，2026-11 场次，严格口径 13/24（13 过 · 5 不过 · 6 NA；每案只认第一次开考），原记口径 16/24 仅对照。
+旧榜存档（**上线前成绩、未逐条核验**，与上表同属旧榜；这批没有进成绩账本，所以不在上表内，单独存档）：[gemini-4-argon @ high @ Devin](https://github.com/getaskclaw/amber-devin/blob/main/results/2026-W45-argon-oldboard.md)，2026-11 场次，严格口径 13/24（13 过 · 5 不过 · 6 NA；每案只认第一次开考），原记口径 16/24 仅对照。
 
 ## 常见问题
 

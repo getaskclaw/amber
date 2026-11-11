@@ -4,7 +4,7 @@
 
 `Seal the scene in amber. Retake the exam of that moment.`
 
-**In one line**: we take real past incidents and tasks and have AI models redo them using only what people had in hand at the time. For example, a real operations outage: the model gets only the monitoring and logs of the time, and the evidence shown later stays sealed. The questions are never published, but every question has a hash fingerprint, and scores and fingerprints are all public, so anyone can check that the questions were not swapped and the scores were not made up.
+**In one line**: we take real past incidents and tasks and have AI models redo them using only what people had in hand at the time. For example, a real operations outage: the model gets only the monitoring and logs of the time, and the evidence shown later stays sealed. The questions are never published, but every question has a hash fingerprint, and scores and fingerprints are all public, so anyone can compare the published fingerprints with the ones in each result issue. The fingerprint index is still an unsigned early prototype (see [PLAN.md](PLAN.md)), so on its own it cannot yet prove that the questions were not swapped or the scores were not made up.
 
 **Library** 24 cases · **Spec** v0.2.2 (draft) · **Hash index** [v2026-09](hash-index/v2026-09.md) · **Result repos** × 13 · **Rule** scores always public, cases never · **Live board** [askclaw.dev](https://askclaw.dev/en/)
 
@@ -19,7 +19,9 @@
 
 ![AMBER W45](docs/images/top5-hy4free-w45.en.png?v=20261104)
 
-The current board has 41 published lanes. Equal totals share one row; entries within a tier follow median time. Each week is the test week, and frozen records keep their case count.
+> ⚠️ **Everything in the table below is old board: pre-launch result, not individually verified.** All 41 lanes were tested before the new board went live (2026-11-10). By the owner's ruling of 2026-11-10 they belong to the **old board**: archived as recorded, not rescored, not topped up; held cells are not adjudicated one by one. Read every cell as "pre-launch result, not individually verified". The new board only takes sittings after launch with complete evidence.
+
+The table below is generated from one results ledger and has 41 published lanes. Equal totals share one row; entries within a tier follow median time. Each week is the test week, and frozen records keep their case count.
 
 | # | Score | Model @ endpoint |
 |---|---|---|
@@ -31,11 +33,11 @@ The current board has 41 published lanes. Equal totals share one row; entries wi
 | 6 | 14' | qwen3.8-27b @ CrofAI (W36, 21 cases)<br>laguna-s-2.1 (CommandCode) @ CommandCode (W41, 24 cases) |
 | 7 | 13'/24 | space-bunny-alpha @ CommandCode (W39) |
 
-New in W45: **k3.1-pro high, 16'/24 — 16 wins, 6 losses, 2 NA**, tested 2026-11-04. The apostrophe marks grading or infrastructure holds, neither wins nor losses; the denominator stays 24. Older k3 is a different batch; no improvement or regression is claimed.
+New in W45 (old board, pre-launch result, not individually verified): **k3.1-pro high, 16'/24 — 16 wins, 6 losses, 2 NA**, tested 2026-11-04. The apostrophe marks grading or infrastructure holds, neither wins nor losses; the denominator stays 24. Older k3 is a different batch; no improvement or regression is claimed.
 
 [This issue](https://github.com/getaskclaw/amber-kimi/blob/main/results/2026-W45.en.md) · [Board](https://askclaw.dev/en/rank/) · [Axes data](docs/data/axes.json) · [Per-case ledger](docs/data/ledger.json)
 
-Also new in W45: **HY4Free high, 18'/24 — 18 wins, 3 losses, 3 NA**, tested 2026-11-04, WorkBuddy routed API. Website time is the selected original-answer time only and excludes the three first-round timeouts and child-session time. [This issue and audit](https://github.com/getaskclaw/amber-workbuddy/blob/main/results/2026-W45.en.md) · [Model page](https://askclaw.dev/en/model/hy4free/)
+Also new in W45 (old board, pre-launch result, not individually verified): **HY4Free high, 18'/24 — 18 wins, 3 losses, 3 NA**, tested 2026-11-04, WorkBuddy routed API. Website time is the selected original-answer time only and excludes the three first-round timeouts and child-session time. [This issue and audit](https://github.com/getaskclaw/amber-workbuddy/blob/main/results/2026-W45.en.md) · [Model page](https://askclaw.dev/en/model/hy4free/)
 
 ## Same score, different shape
 
@@ -64,11 +66,11 @@ Per-axis reading and each lane's numbers: [the ten axes and the completion matri
 
 ## How it works
 
-A private case library plus public scores: the cases never go public, the scores and hashes always do. The grading sheet is frozen before anyone sees the output, and everything is archived.
+A private case library plus public scores: the cases never go public, the scores and hashes always do. The grading sheet is frozen per version and everything is archived; grading problems and task-text revisions found after a freeze are not changed silently but published as corrections (see the list above and the corrections files under [docs/](docs/README.en.md)), and re-issues are recorded in the [hash index](hash-index/v2026-09.md).
 
 ![What is AMBER](docs/images/what-is-amber-2026-10.en.png?v=20261003)
 
-A result is produced like an exam: papers sealed at authoring, sat in a clean room, audited paper by paper, published redacted, checkable by anyone.
+A result is produced like an exam: papers sealed at authoring, sat in a clean room, audited paper by paper, published redacted, hashes public for comparison.
 
 ![How a result is produced](docs/images/trust-chain.en.png?v=20260915b)
 
@@ -80,7 +82,7 @@ Results are public, cases never are. Aliases and bundle hashes are checked case 
 
 [amber-claude](https://github.com/getaskclaw/amber-claude) (Claude) · [amber-gpt](https://github.com/getaskclaw/amber-gpt) (GPT) · [amber-devin](https://github.com/getaskclaw/amber-devin) (Devin) · [amber-kimi](https://github.com/getaskclaw/amber-kimi) (Kimi) · [amber-deepseek](https://github.com/getaskclaw/amber-deepseek) (DeepSeek) · [amber-ollama](https://github.com/getaskclaw/amber-ollama) (Ollama Cloud) · [amber-opencode](https://github.com/getaskclaw/amber-opencode) (OpenCode Go) · [amber-commandcode](https://github.com/getaskclaw/amber-commandcode) (CommandCode) · [amber-workbuddy](https://github.com/getaskclaw/amber-workbuddy) (WorkBuddy) · [amber-doubao](https://github.com/getaskclaw/amber-doubao) (Doubao) · [amber-stepfun](https://github.com/getaskclaw/amber-stepfun) (StepFun) · [amber-nous](https://github.com/getaskclaw/amber-nous) (Nous Portal) · [amber-goldenpotato](https://github.com/getaskclaw/amber-goldenpotato) (community self-hosted Qwen3.8-27B)
 
-Old-board archive (**pre-launch result, not individually verified**; not on the current board above): [gemini-4-argon @ high @ Devin](https://github.com/getaskclaw/amber-devin/blob/main/results/2026-W45-argon-oldboard.md), 2026-11 sittings, strict rule 13/24 (13 pass · 5 fail · 6 NA; only each case's first attempt counts); as-recorded 16/24 for comparison only.
+Old-board archive (**pre-launch result, not individually verified**; old board like the table above; this batch never entered the results ledger, so it is archived separately and not in that table): [gemini-4-argon @ high @ Devin](https://github.com/getaskclaw/amber-devin/blob/main/results/2026-W45-argon-oldboard.md), 2026-11 sittings, strict rule 13/24 (13 pass · 5 fail · 6 NA; only each case's first attempt counts); as-recorded 16/24 for comparison only.
 
 ## FAQ
 
