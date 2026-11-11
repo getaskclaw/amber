@@ -83,6 +83,8 @@ Raised by external review (2026-08); resolve in the milestone that owns them:
    that need the unpublished run-record schemas or the private-channel case
    correspondence remain TBD there, so this question stays open until those
    artefacts land.
+Raised later (2026-11), not part of that review:
+
 5. **Maximum hold period** (M3): a case can be held (counted NA) on some or
    all lanes pending a fix or re-take; two cases have now been held for more
    than a month. No maximum hold period, or rule for what happens when it

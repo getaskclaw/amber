@@ -19,7 +19,7 @@
 
 ![AMBER W45](docs/images/top5-hy4free-w45.en.png?v=20261104)
 
-> ⚠️ **Everything in the table below is old board: pre-launch result, not individually verified.** All 41 lanes were tested before the new board went live (2026-11-10). By the owner's ruling of 2026-11-10 they belong to the **old board**: archived as recorded, not rescored, with no make-up sittings added; held and contested cells are not adjudicated one by one. Read every cell as "pre-launch result, not individually verified". The new board only accepts post-launch sittings that carry a sitting code and complete evidence.
+> ⚠️ **Everything in the table below is old board: pre-launch result, not individually verified.** All 41 lanes were tested before the new board went live (2026-11-10). By the owner's ruling of 2026-11-10 they belong to the **old board**: archived as recorded, not rescored, and no scores added later; held and contested cells are not adjudicated one by one. Read every cell as "pre-launch result, not individually verified". The new board only accepts post-launch sittings that carry a sitting code and complete evidence.
 
 The table below is generated from one results ledger and has 41 published lanes. Equal totals share one row; entries within a tier follow median time. Each week is the test week, and frozen records keep their case count.
 
@@ -66,7 +66,7 @@ Per-axis reading and each lane's numbers: [the ten axes and the completion matri
 
 ## How it works
 
-A private case library plus public scores: the cases never go public, the scores and hashes always do. The grading sheet is frozen per version and everything is archived; grading problems and task-text revisions found after a freeze are not changed silently but published as corrections (see the list above and the corrections files under [docs/](docs/README.en.md)), and re-issues are recorded in the [hash index](hash-index/v2026-09.md).
+A private case library plus public scores: the cases never go public, the scores and hashes always do. The grading sheet is frozen per version and everything is archived; grading problems and task-text revisions found after a freeze are not changed silently but published as corrections (see the list above and the corrections files under [docs/](docs/README.en.md)), and the recorded bundle revisions are noted in the [hash index](hash-index/v2026-09.md).
 
 ![What is AMBER](docs/images/what-is-amber-2026-10.en.png?v=20261003)
 
