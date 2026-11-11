@@ -15,11 +15,11 @@
 > - **[2026-10-07 (second)](docs/corrections-2026-10-07-a-cdc3d11a.en.md)**: one review-axis case, A-cdc3d11a, is now NA on every lane (27 lanes change from a loss, 2 were already NA). The denominator, **totals and rank tiers do not change**, and no sitting is re-run.
 > - Earlier: [2026-09-18](docs/corrections-2026-09-18.en.md) (swe-2-low was actually swe-2-high) · [2026-W38](docs/corrections-2026-W38.en.md) (full-library review, per-repo notices)
 
-## Who leads now
+## Old board: pre-launch results
 
 ![AMBER W45](docs/images/top5-hy4free-w45.en.png?v=20261104)
 
-> ⚠️ **Everything in the table below is old board: pre-launch result, not individually verified.** All 41 lanes were tested before the new board went live (2026-11-10). By the owner's ruling of 2026-11-10 they belong to the **old board**: archived as recorded, not rescored, not topped up; held cells are not adjudicated one by one. Read every cell as "pre-launch result, not individually verified". The new board only takes sittings after launch with complete evidence.
+> ⚠️ **Everything in the table below is old board: pre-launch result, not individually verified.** All 41 lanes were tested before the new board went live (2026-11-10). By the owner's ruling of 2026-11-10 they belong to the **old board**: archived as recorded, not rescored, with no make-up sittings added; held and contested cells are not adjudicated one by one. Read every cell as "pre-launch result, not individually verified". The new board only accepts post-launch sittings that carry a sitting code and complete evidence.
 
 The table below is generated from one results ledger and has 41 published lanes. Equal totals share one row; entries within a tier follow median time. Each week is the test week, and frozen records keep their case count.
 
@@ -82,7 +82,7 @@ Results are public, cases never are. Aliases and bundle hashes are checked case 
 
 [amber-claude](https://github.com/getaskclaw/amber-claude) (Claude) · [amber-gpt](https://github.com/getaskclaw/amber-gpt) (GPT) · [amber-devin](https://github.com/getaskclaw/amber-devin) (Devin) · [amber-kimi](https://github.com/getaskclaw/amber-kimi) (Kimi) · [amber-deepseek](https://github.com/getaskclaw/amber-deepseek) (DeepSeek) · [amber-ollama](https://github.com/getaskclaw/amber-ollama) (Ollama Cloud) · [amber-opencode](https://github.com/getaskclaw/amber-opencode) (OpenCode Go) · [amber-commandcode](https://github.com/getaskclaw/amber-commandcode) (CommandCode) · [amber-workbuddy](https://github.com/getaskclaw/amber-workbuddy) (WorkBuddy) · [amber-doubao](https://github.com/getaskclaw/amber-doubao) (Doubao) · [amber-stepfun](https://github.com/getaskclaw/amber-stepfun) (StepFun) · [amber-nous](https://github.com/getaskclaw/amber-nous) (Nous Portal) · [amber-goldenpotato](https://github.com/getaskclaw/amber-goldenpotato) (community self-hosted Qwen3.8-27B)
 
-Old-board archive (**pre-launch result, not individually verified**; old board like the table above; this batch never entered the results ledger, so it is archived separately and not in that table): [gemini-4-argon @ high @ Devin](https://github.com/getaskclaw/amber-devin/blob/main/results/2026-W45-argon-oldboard.md), 2026-11 sittings, strict rule 13/24 (13 pass · 5 fail · 6 NA; only each case's first attempt counts); as-recorded 16/24 for comparison only.
+Old-board archive (**pre-launch result, not individually verified**; old board, like the table above; this batch never entered the results ledger, so it is archived separately and not in that table): [gemini-4-argon @ high @ Devin](https://github.com/getaskclaw/amber-devin/blob/main/results/2026-W45-argon-oldboard.md), 2026-11 sittings, strict rule 13/24 (13 pass · 5 fail · 6 NA; only each case's first attempt counts); as-recorded 16/24 for comparison only.
 
 ## FAQ
 
