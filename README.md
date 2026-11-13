@@ -15,6 +15,20 @@
 > - **[2026-10-07（另一项）](docs/corrections-2026-10-07-a-cdc3d11a.md)**：审查轴的一案 A-cdc3d11a 在所有车道上改记 NA（27 条车道由「未过」改记，2 条原来就是 NA）。分母不变，**总分和名次档不变**，不重考任何场次。
 > - 更早：[2026-09-18](docs/corrections-2026-09-18.md)（swe-2-low 实为 swe-2-high）· [2026-W38](docs/corrections-2026-W38.md)（全库复核，逐仓特刊）
 
+## 新榜
+
+> **一次性例外。** 下面五道（2026-11-12 考，均 @high）没有场次编号（sitting code），经 owner 2026-11-13 批准，按 launch 账本的证据进新榜。下方旧榜那句新榜规则原文不变，这次不构成先例。新榜与旧榜分开，不合并排名。
+
+| 总分 | 模型 @ 端点 | 注记 |
+|---|---|---|
+| 16'/24 | gpt-6.1-sol @ OpenAI Codex (W46) | 无场次编号（sitting code），来源证据为 launch 账本 |
+| 16'/24 | gpt-6.1-terra @ OpenAI Codex (W46) | 无场次编号（sitting code），来源证据为 launch 账本 |
+| 16'/24 | gpt-6-astra @ OpenAI Codex (W46) | 无场次编号（sitting code），来源证据为 launch 账本 |
+| 15'/24 | gpt-6-sol @ OpenAI Codex (W46) | 无场次编号（sitting code），来源证据为 launch 账本；A-3f2a9cdd（收敛案）经转录适配器修复（main 67d8bf34）后离线重判，合成口径 |
+| 14'/24 | gpt-6-luna @ OpenAI Codex (W46) | 无场次编号（sitting code），来源证据为 launch 账本 |
+
+共 24 案；总分带 ' 表示有挂起题（不计胜负，留在分母里）。逐案成绩：[amber-gpt results/2026-W46](https://github.com/getaskclaw/amber-gpt/blob/main/results/2026-W46.md)。
+
 ## 旧榜：上线前成绩
 
 ![AMBER W45](docs/images/top5-hy4free-w45.png?v=20261104)

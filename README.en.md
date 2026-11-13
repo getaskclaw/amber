@@ -15,6 +15,20 @@
 > - **[2026-10-07 (second)](docs/corrections-2026-10-07-a-cdc3d11a.en.md)**: one review-axis case, A-cdc3d11a, is now NA on every lane (27 lanes change from a loss, 2 were already NA). The denominator, **totals and rank tiers do not change**, and no sitting is re-run.
 > - Earlier: [2026-09-18](docs/corrections-2026-09-18.en.md) (swe-2-low was actually swe-2-high) · [2026-W38](docs/corrections-2026-W38.en.md) (full-library review, per-repo notices)
 
+## New board
+
+> **One-time exception.** The five lanes below (sat 2026-11-12, all @high) carry no sitting code. By owner approval of 2026-11-13 they enter the new board on the evidence in the launch ledger. The new-board rule sentence under the old board below is unchanged, and this is not a precedent. The new board is kept apart from the old board and is not ranked together with it.
+
+| Score | Model @ endpoint | Notes |
+|---|---|---|
+| 16'/24 | gpt-6.1-sol @ OpenAI Codex (W46) | No sitting code; source evidence is the launch ledger |
+| 16'/24 | gpt-6.1-terra @ OpenAI Codex (W46) | No sitting code; source evidence is the launch ledger |
+| 16'/24 | gpt-6-astra @ OpenAI Codex (W46) | No sitting code; source evidence is the launch ledger |
+| 15'/24 | gpt-6-sol @ OpenAI Codex (W46) | No sitting code; source evidence is the launch ledger; A-3f2a9cdd (convergence case) re-judged offline after the transcript-adapter fix (main 67d8bf34), synthesized basis |
+| 14'/24 | gpt-6-luna @ OpenAI Codex (W46) | No sitting code; source evidence is the launch ledger |
+
+24 cases; a ' on a total marks held cases (neither a win nor a loss; they stay in the denominator). Per-case results: [amber-gpt results/2026-W46](https://github.com/getaskclaw/amber-gpt/blob/main/results/2026-W46.en.md).
+
 ## Old board: pre-launch results
 
 ![AMBER W45](docs/images/top5-hy4free-w45.en.png?v=20261104)
